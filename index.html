@@ -1453,6 +1453,104 @@
 
         atualizarTudo();
         console.log('🚀 O.J.V. Professional Plus carregado com sucesso!');
+        // =====================================
+// ENVIAR DADOS AUTOMATICAMENTE AO SUPABASE
+// =====================================
+
+
+// Guardar membro
+const salvarMembroOriginal = window.salvarMembro;
+
+window.salvarMembro = async function() {
+  
+  salvarMembroOriginal();
+  
+  let ultimo = membros[membros.length - 1];
+  
+  if (ultimo) {
+    
+    await supabaseClient
+      .from("membros")
+      .insert([{
+        nome: ultimo.nome,
+        telefone: ultimo.telefone,
+        bi: ultimo.bi,
+        status: ultimo.status,
+        aniversario: ultimo.aniversario
+      }]);
+    
+  }
+  
+};
+
+
+// Guardar transação
+const adicionarTransacaoOriginal = window.adicionarTransacao;
+
+window.adicionarTransacao = async function() {
+  
+  adicionarTransacaoOriginal();
+  
+  let ultima = transacoes[transacoes.length - 1];
+  
+  if (ultima) {
+    
+    await supabaseClient
+      .from("transacoes")
+      .insert([{
+        
+        tipo: ultima.tipo,
+        categoria: ultima.categoria || "",
+        valor: ultima.valor,
+        descricao: ultima.descricao
+        
+      }]);
+    
+  }
+  
+};
+
+
+
+// Guardar evento
+const adicionarEventoOriginal = window.adicionarEvento;
+
+window.adicionarEvento = async function() {
+  
+  adicionarEventoOriginal();
+  
+  let ultimo = eventos[eventos.length - 1];
+  
+  if (ultimo) {
+    
+    await supabaseClient
+      .from("eventos")
+      .insert([{
+        
+        nome: ultimo.nome,
+        data: ultimo.data,
+        hora: ultimo.hora,
+        local: ultimo.local,
+        descricao: ultimo.descricao,
+        status: ultimo.status
+        
+      }]);
+    
+  }
+  
+};
+
+
+// Atualizar meta
+const definirMetaOriginal = window.definirMeta;
+
+window.definirMeta = async function() {
+  
+  definirMetaOriginal();
+  
+  await salvarMetaSupabase();
+  
+};
     </script>
 </body>
 </html>
