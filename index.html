@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, shrink-to-fit=no, viewport-fit=cover">
 
 <title>O.J.V. Professional Plus</title>
 
@@ -33,135 +33,124 @@ button{
     cursor:pointer;
 }
 
-.hidden{
-    display:none!important;
-}
-
 /* LOGIN */
 
-#loginPage{
+#loginTela{
     min-height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
     padding:20px;
-    background:
-        radial-gradient(circle at top,#15395f,#071321 65%);
+    background:linear-gradient(135deg,#071525,#0b1a2e,#123452);
 }
 
 .login-box{
     width:100%;
     max-width:420px;
     background:#fff;
-    border-radius:20px;
     padding:30px 24px;
-    box-shadow:0 20px 60px rgba(0,0,0,.35);
+    border-radius:18px;
+    box-shadow:0 15px 50px rgba(0,0,0,.30);
 }
 
 .login-logo{
-    text-align:center;
-    margin-bottom:20px;
-}
-
-.login-logo img{
     width:90px;
     height:90px;
-    object-fit:cover;
-    border-radius:50%;
-    border:4px solid #eef3f8;
-}
-
-.login-logo h1{
-    margin-top:12px;
-    color:#0b1a2e;
-    font-size:1.5rem;
-}
-
-.login-logo p{
-    color:#777;
-    font-size:.85rem;
-    margin-top:5px;
-}
-
-.login-title{
-    margin:20px 0 15px;
-}
-
-.login-title h2{
-    color:#0b1a2e;
-    font-size:1.3rem;
-}
-
-.login-title p{
-    color:#777;
-    font-size:.85rem;
-    margin-top:5px;
-}
-
-.form-group{
-    margin-bottom:14px;
-}
-
-.form-group label{
     display:block;
-    font-size:.85rem;
-    font-weight:700;
-    margin-bottom:6px;
-    color:#495057;
+    margin:0 auto 15px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid #e9ecef;
 }
 
-.form-group input,
-.form-group select,
-.form-group textarea{
+.login-box h1{
+    text-align:center;
+    color:#0b1a2e;
+    font-size:1.6rem;
+}
+
+.login-box .sub{
+    text-align:center;
+    color:#777;
+    margin:6px 0 22px;
+}
+
+.login-box label{
+    display:block;
+    font-weight:600;
+    margin:12px 0 6px;
+}
+
+.login-box input{
     width:100%;
     padding:14px;
     border:1px solid #ced4da;
     border-radius:8px;
-    outline:none;
     font-size:1rem;
-    background:#fff;
+    outline:none;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
+.login-box input:focus{
     border-color:#1ea5dc;
     box-shadow:0 0 0 3px rgba(30,165,220,.15);
 }
 
-.login-error{
-    background:#f8d7da;
-    color:#721c24;
+.login-btn{
+    width:100%;
+    padding:15px;
+    margin-top:18px;
+    border:0;
     border-radius:8px;
-    padding:11px;
-    margin-bottom:12px;
-    font-size:.85rem;
-    display:none;
+    background:#1ea5dc;
+    color:white;
+    font-size:1rem;
+    font-weight:700;
+}
+
+.login-btn:active{
+    transform:scale(.98);
+}
+
+.login-secondary{
+    width:100%;
+    padding:13px;
+    margin-top:9px;
+    border:2px solid #0b1a2e;
+    border-radius:8px;
+    background:white;
+    color:#0b1a2e;
+    font-weight:700;
 }
 
 .login-info{
     text-align:center;
-    margin-top:15px;
-    font-size:.75rem;
-    color:#888;
+    font-size:.78rem;
+    color:#777;
+    margin-top:16px;
 }
 
-/* HEADER */
+/* APP */
+
+#app{
+    display:none;
+}
 
 header{
     background:#0b1a2e;
     color:#fff;
     padding:12px 16px;
+    display:flex;
+    flex-direction:column;
     position:sticky;
     top:0;
-    z-index:1000;
+    z-index:100;
 }
 
 .topo{
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    gap:10px;
+    align-items:center;
+    width:100%;
 }
 
 .logo{
@@ -171,11 +160,11 @@ header{
 }
 
 .logo img{
-    width:45px;
-    height:45px;
-    object-fit:cover;
+    width:48px;
+    height:48px;
     border-radius:50%;
-    border:2px solid rgba(255,255,255,.25);
+    object-fit:cover;
+    border:2px solid rgba(255,255,255,.3);
 }
 
 .logo h1{
@@ -184,8 +173,8 @@ header{
 
 .logo small{
     display:block;
-    font-size:.7rem;
     opacity:.7;
+    font-size:.72rem;
 }
 
 .acoes{
@@ -195,24 +184,25 @@ header{
 }
 
 .acoes button{
-    border:1px solid rgba(255,255,255,.25);
     background:transparent;
-    color:white;
-    border-radius:8px;
-    padding:9px 11px;
+    border:1px solid rgba(255,255,255,.3);
+    color:#fff;
+    padding:8px 10px;
+    border-radius:7px;
 }
 
 .menu-toggle{
     background:#fff!important;
     color:#0b1a2e!important;
-    border:none!important;
+    border:0!important;
     font-weight:700;
 }
 
 nav{
+    background:#0b1a2e;
     display:none;
     flex-direction:column;
-    margin-top:10px;
+    padding:10px 0;
     border-top:1px solid rgba(255,255,255,.1);
 }
 
@@ -221,37 +211,33 @@ nav.aberto{
 }
 
 nav button{
+    padding:12px 16px;
     border:0;
     background:transparent;
     color:rgba(255,255,255,.75);
-    padding:13px 10px;
     text-align:left;
-    font-size:.95rem;
-    border-bottom:1px solid rgba(255,255,255,.06);
+    font-size:1rem;
 }
 
 nav button.ativo{
-    color:white;
-    background:rgba(255,255,255,.08);
+    background:rgba(255,255,255,.1);
+    color:#fff;
     border-left:4px solid #1ea5dc;
 }
 
-/* CONTAINER */
-
 .container{
-    width:100%;
-    max-width:760px;
+    max-width:750px;
     margin:auto;
-    padding:15px;
+    padding:16px;
 }
 
 section{
     display:none;
     background:#fff;
     padding:20px;
-    border-radius:14px;
-    margin-bottom:18px;
-    box-shadow:0 4px 15px rgba(0,0,0,.05);
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,.05);
+    margin-bottom:20px;
 }
 
 section.ativo{
@@ -265,10 +251,9 @@ section h2{
 
 .subtitulo{
     color:#777;
-    font-size:.85rem;
-    padding-bottom:12px;
-    margin-top:5px;
-    margin-bottom:15px;
+    font-size:.9rem;
+    margin:5px 0 17px;
+    padding-bottom:10px;
     border-bottom:2px solid #f0f0f0;
 }
 
@@ -283,29 +268,40 @@ section h2{
 .card{
     background:#f8f9fc;
     border:1px solid #e9ecef;
-    border-radius:10px;
+    border-radius:9px;
     padding:15px;
     text-align:center;
 }
 
-.numero{
+.card .numero{
     display:block;
-    font-size:1.55rem;
+    font-size:1.7rem;
     font-weight:800;
 }
 
-.rotulo{
+.card .rotulo{
     display:block;
-    margin-top:4px;
-    font-size:.7rem;
     color:#6c757d;
+    font-size:.7rem;
     text-transform:uppercase;
+    margin-top:4px;
 }
 
-.verde .numero{color:#28a745}
-.vermelho .numero{color:#dc3545}
-.azul .numero{color:#0b1a2e}
-.ouro .numero{color:#d39e00}
+.card.verde .numero{
+    color:#28a745;
+}
+
+.card.vermelho .numero{
+    color:#dc3545;
+}
+
+.card.azul .numero{
+    color:#0b1a2e;
+}
+
+.card.ouro .numero{
+    color:#d39e00;
+}
 
 /* FORM */
 
@@ -313,22 +309,24 @@ section h2{
     display:flex;
     flex-direction:column;
     gap:10px;
-    margin:12px 0;
+    margin:14px 0;
 }
 
 .grupo-form label{
-    font-size:.85rem;
-    font-weight:700;
+    font-weight:600;
+    font-size:.9rem;
 }
 
 .grupo-form input,
 .grupo-form select,
 .grupo-form textarea{
     width:100%;
-    padding:13px;
+    padding:14px;
     border:1px solid #ced4da;
     border-radius:7px;
     font-size:1rem;
+    background:#fff;
+    color:#1e2a3a;
     outline:none;
 }
 
@@ -336,51 +334,60 @@ section h2{
 .grupo-form select:focus,
 .grupo-form textarea:focus{
     border-color:#1ea5dc;
+    box-shadow:0 0 0 3px rgba(30,165,220,.15);
 }
-
-/* BUTTONS */
 
 .btn{
     width:100%;
     min-height:50px;
-    padding:13px;
+    padding:14px;
     border:0;
     border-radius:7px;
-    font-weight:700;
-    font-size:.95rem;
     color:#fff;
     background:#1ea5dc;
+    font-size:1rem;
+    font-weight:700;
     margin:3px 0;
+}
+
+.btn-success{
+    background:#28a745;
+}
+
+.btn-danger{
+    background:#dc3545;
+}
+
+.btn-ouro{
+    background:#d39e00;
+    color:#1e2a3a;
+}
+
+.btn-outline{
+    background:#fff;
+    color:#0b1a2e;
+    border:2px solid #0b1a2e;
 }
 
 .btn:active{
     transform:scale(.98);
 }
 
-.btn-success{background:#28a745}
-.btn-danger{background:#dc3545}
-.btn-ouro{background:#d39e00;color:#1e2a3a}
-
-.btn-outline{
-    background:white;
-    color:#0b1a2e;
-    border:2px solid #0b1a2e;
-}
-
-/* TABELAS */
+/* TABLE */
 
 .tabela-wrapper{
     width:100%;
     overflow-x:auto;
     border:1px solid #dee2e6;
     border-radius:8px;
+    margin-top:12px;
 }
 
 table{
     width:100%;
-    min-width:430px;
+    min-width:480px;
     border-collapse:collapse;
-    font-size:.82rem;
+    font-size:.84rem;
 }
 
 th{
@@ -395,15 +402,11 @@ td{
     border-bottom:1px solid #f1f3f5;
 }
 
-tr:last-child td{
-    border-bottom:none;
-}
-
 .badge{
     display:inline-block;
     padding:4px 10px;
-    border-radius:30px;
-    font-size:.68rem;
+    border-radius:50px;
+    font-size:.7rem;
     font-weight:700;
 }
 
@@ -430,120 +433,30 @@ tr:last-child td{
 .grupo-acoes .btn{
     width:auto;
     min-height:34px;
-    padding:7px 10px;
+    padding:7px 9px;
     font-size:.75rem;
-}
-
-/* DASHBOARD */
-
-.dashboard-box{
-    background:#f8f9fc;
-    padding:15px;
-    border-radius:9px;
-    border:1px solid #e9ecef;
-    margin-top:13px;
-}
-
-.dashboard-box h4{
-    margin-bottom:9px;
-}
-
-.linha-resumo{
-    display:flex;
-    justify-content:space-between;
-    padding:8px 0;
-    border-bottom:1px solid #e5e5e5;
-    font-size:.82rem;
-}
-
-.linha-resumo:last-child{
-    border-bottom:0;
-}
-
-/* GRAFICO */
-
-.grafico-barras{
-    display:flex;
-    align-items:flex-end;
-    gap:15px;
-    height:130px;
-    padding:20px 10px 0;
-}
-
-.barra{
-    flex:1;
-    min-height:8px;
-    border-radius:5px 5px 0 0;
-    position:relative;
-    transition:.5s;
-}
-
-.barra.receita{background:#28a745}
-.barra.despesa{background:#dc3545}
-.barra.saldo{background:#0b1a2e}
-
-.barra .valor{
-    position:absolute;
-    top:-20px;
-    left:50%;
-    transform:translateX(-50%);
-    font-size:.65rem;
-    font-weight:700;
-    white-space:nowrap;
-}
-
-/* META */
-
-.meta-container{
-    background:#f8f9fc;
-    border:1px solid #e9ecef;
-    padding:16px;
-    border-radius:10px;
-}
-
-.meta-topo{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    font-size:.82rem;
-    font-weight:700;
-}
-
-.barra-progresso{
-    height:13px;
-    background:#e9ecef;
-    border-radius:20px;
-    overflow:hidden;
-    margin:12px 0;
-}
-
-.preenchimento{
-    height:100%;
-    background:linear-gradient(90deg,#1ea5dc,#007bff);
-    border-radius:20px;
-    transition:.7s;
 }
 
 /* PAGINAÇÃO */
 
 .paginacao{
     display:flex;
-    justify-content:center;
     gap:5px;
+    justify-content:center;
     margin-top:12px;
 }
 
 .paginacao button{
     min-width:38px;
     min-height:38px;
-    background:white;
     border:1px solid #ddd;
-    border-radius:6px;
+    background:#fff;
+    border-radius:5px;
 }
 
 .paginacao button.ativo{
     background:#0b1a2e;
-    color:white;
+    color:#fff;
 }
 
 /* MODAL */
@@ -552,8 +465,8 @@ tr:last-child td{
     display:none;
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.6);
-    z-index:3000;
+    background:rgba(0,0,0,.55);
+    z-index:2000;
     align-items:center;
     justify-content:center;
     padding:15px;
@@ -564,18 +477,18 @@ tr:last-child td{
 }
 
 .modal-conteudo{
-    width:100%;
-    max-width:470px;
-    max-height:90vh;
-    overflow-y:auto;
     background:#fff;
-    border-radius:15px;
-    padding:22px;
+    width:100%;
+    max-width:480px;
+    max-height:90vh;
+    overflow:auto;
+    padding:24px;
+    border-radius:13px;
 }
 
 .modal-conteudo h3{
     color:#0b1a2e;
-    margin-bottom:15px;
+    margin-bottom:10px;
 }
 
 /* TOAST */
@@ -585,49 +498,110 @@ tr:last-child td{
     bottom:20px;
     left:15px;
     right:15px;
-    z-index:5000;
-    display:flex;
-    flex-direction:column;
-    gap:6px;
+    z-index:4000;
     max-width:450px;
     margin:auto;
 }
 
 .toast{
     background:#0b1a2e;
-    color:white;
-    padding:13px 16px;
+    color:#fff;
+    padding:14px;
     border-radius:8px;
+    margin-top:6px;
     border-left:4px solid #1ea5dc;
     box-shadow:0 5px 20px rgba(0,0,0,.2);
-    font-size:.85rem;
 }
 
-.toast.sucesso{border-left-color:#28a745}
-.toast.erro{border-left-color:#dc3545}
-.toast.atencao{border-left-color:#ffc107}
+.toast.sucesso{
+    border-left-color:#28a745;
+}
+
+.toast.erro{
+    border-left-color:#dc3545;
+}
+
+.toast.atencao{
+    border-left-color:#ffc107;
+}
+
+/* META */
+
+.meta-container{
+    background:#f8f9fc;
+    padding:16px;
+    border:1px solid #e9ecef;
+    border-radius:8px;
+}
+
+.barra-progresso{
+    height:13px;
+    background:#e9ecef;
+    border-radius:20px;
+    overflow:hidden;
+    margin:10px 0;
+}
+
+.preenchimento{
+    height:100%;
+    background:linear-gradient(90deg,#1ea5dc,#007bff);
+}
+
+/* DASH */
+
+.bloco-dashboard{
+    background:#f8f9fc;
+    padding:16px;
+    border-radius:8px;
+    border:1px solid #e9ecef;
+    margin-top:12px;
+}
+
+.grafico-barras{
+    display:flex;
+    gap:12px;
+    align-items:flex-end;
+    height:120px;
+    margin-top:20px;
+}
+
+.barra{
+    flex:1;
+    min-height:8px;
+    border-radius:5px 5px 0 0;
+    position:relative;
+}
+
+.barra .valor{
+    position:absolute;
+    top:-22px;
+    width:100%;
+    text-align:center;
+    font-size:.7rem;
+    font-weight:700;
+}
 
 /* FOOTER */
 
 footer{
     text-align:center;
-    color:#999;
-    font-size:.7rem;
-    padding:20px;
+    padding:15px;
+    color:#adb5bd;
+    font-size:.75rem;
 }
 
 /* DARK */
 
 body.escuro{
-    background:#111;
+    background:#121212;
     color:#eee;
 }
 
 body.escuro section,
 body.escuro .card,
-body.escuro .dashboard-box,
-body.escuro .meta-container,
-body.escuro .modal-conteudo{
+body.escuro .modal-conteudo,
+body.escuro .bloco-dashboard,
+body.escuro .meta-container{
     background:#1e1e1e;
     color:#eee;
     border-color:#333;
@@ -638,138 +612,148 @@ body.escuro .modal-conteudo h3{
     color:#fff;
 }
 
-body.escuro .grupo-form input,
-body.escuro .grupo-form select,
-body.escuro .grupo-form textarea{
-    background:#292929;
-    color:#fff;
+body.escuro input,
+body.escuro select,
+body.escuro textarea{
+    background:#2d2d2d;
+    color:#eee;
     border-color:#444;
 }
 
 body.escuro th{
-    background:#292929;
-    color:#eee;
+    background:#252525;
+    color:#fff;
 }
 
 body.escuro td{
-    color:#ddd;
     border-color:#333;
 }
 
 body.escuro .btn-outline{
-    background:transparent;
+    background:#1e1e1e;
     color:#fff;
     border-color:#777;
 }
 
-body.escuro .login-box{
-    background:#1e1e1e;
-    color:#eee;
-}
+/* RESPONSIVE */
 
-body.escuro .login-logo h1,
-body.escuro .login-title h2{
-    color:#fff;
-}
+@media(max-width:600px){
 
-body.escuro .form-group label{
-    color:#ddd;
-}
+    .container{
+        padding:11px;
+    }
 
-body.escuro .form-group input{
-    background:#292929;
-    color:#fff;
-    border-color:#444;
+    section{
+        padding:16px;
+    }
+
+    .logo img{
+        width:40px;
+        height:40px;
+    }
+
+    .logo h1{
+        font-size:1rem;
+    }
+
+    .cards{
+        gap:7px;
+    }
+
 }
 
 @media(max-width:380px){
+
     .cards{
         grid-template-columns:1fr;
     }
+
 }
 
-@media(min-width:700px){
-    .container{
-        padding:25px;
+/* PRINT */
+
+@media print{
+
+    header,
+    nav,
+    .btn,
+    .toast-container,
+    footer{
+        display:none!important;
     }
+
+    section{
+        display:block!important;
+        box-shadow:none!important;
+    }
+
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= LOGIN ================= -->
+<!-- =========================================================
+     LOGIN
+========================================================= -->
 
-<div id="loginPage">
+<div id="loginTela">
 
     <div class="login-box">
 
-        <div class="login-logo">
+        <img
+            src="logo.png"
+            class="login-logo"
+            onerror="this.style.display='none'"
+        >
 
-            <img
-                src="logo.png"
-                alt="O.J.V."
-                onerror="this.style.display='none';"
-            >
+        <h1>O.J.V.</h1>
 
-            <h1>O.J.V. Professional Plus</h1>
-
-            <p>Sistema de gestão</p>
-
+        <div class="sub">
+            Professional Plus
         </div>
 
-        <div class="login-title">
+        <label>E-mail</label>
 
-            <h2>🔐 Entrar</h2>
+        <input
+            id="loginEmail"
+            type="email"
+            placeholder="seu@email.com"
+            autocomplete="email"
+        >
 
-            <p>Use o seu e-mail e palavra-passe.</p>
+        <label>Palavra-passe</label>
 
-        </div>
+        <input
+            id="loginPassword"
+            type="password"
+            placeholder="Palavra-passe"
+            autocomplete="current-password"
+        >
 
-        <div id="loginErro" class="login-error"></div>
+        <button
+            class="login-btn"
+            onclick="entrar()"
+        >
+            🔐 Entrar
+        </button>
 
-        <form id="loginForm">
+        <button
+            class="login-secondary"
+            onclick="registar()"
+        >
+            Criar conta
+        </button>
 
-            <div class="form-group">
-
-                <label>E-mail</label>
-
-                <input
-                    id="loginEmail"
-                    type="email"
-                    placeholder="seu@email.com"
-                    autocomplete="email"
-                    required
-                >
-
-            </div>
-
-            <div class="form-group">
-
-                <label>Palavra-passe</label>
-
-                <input
-                    id="loginPassword"
-                    type="password"
-                    placeholder="••••••••"
-                    autocomplete="current-password"
-                    required
-                >
-
-            </div>
-
-            <button
-                type="submit"
-                class="btn"
-                id="btnLogin"
-            >
-                🔐 Entrar
-            </button>
-
-        </form>
+        <button
+            class="login-secondary"
+            onclick="recuperarSenha()"
+        >
+            Esqueci a palavra-passe
+        </button>
 
         <div class="login-info">
-            Acesso protegido pelo Supabase Authentication.
+            Acesso protegido pelo Supabase
         </div>
 
     </div>
@@ -777,9 +761,11 @@ body.escuro .form-group input{
 </div>
 
 
-<!-- ================= APP ================= -->
+<!-- =========================================================
+     APLICAÇÃO
+========================================================= -->
 
-<div id="app" class="hidden">
+<div id="app">
 
 <header>
 
@@ -790,22 +776,25 @@ body.escuro .form-group input{
             <img
                 src="logo.png"
                 alt="O.J.V."
-                onerror="this.style.display='none';"
+                onerror="this.style.display='none'"
             >
 
             <div>
-
-                <h1>O.J.V. <small>Professional Plus</small></h1>
-
+                <h1>O.J.V.</h1>
+                <small>Professional Plus</small>
             </div>
 
         </div>
 
         <div class="acoes">
 
-            <button onclick="alternarTema()">🌓</button>
+            <button onclick="alternarTema()">
+                🌓
+            </button>
 
-            <button onclick="sair()">🚪</button>
+            <button onclick="sair()">
+                🚪
+            </button>
 
             <button
                 class="menu-toggle"
@@ -818,7 +807,6 @@ body.escuro .form-group input{
 
     </div>
 
-
     <nav id="menuNav">
 
         <button
@@ -830,7 +818,10 @@ body.escuro .form-group input{
 
         <button onclick="abrir('membros')">
             👥 Membros
-            <span class="badge" id="navMembros">0</span>
+            <span
+                class="badge badge-info"
+                id="navMembros"
+            >0</span>
         </button>
 
         <button onclick="abrir('financeiro')">
@@ -849,6 +840,10 @@ body.escuro .form-group input{
             🎯 Meta
         </button>
 
+        <button onclick="gerarPDF()">
+            📄 Gerar PDF
+        </button>
+
     </nav>
 
 </header>
@@ -856,490 +851,580 @@ body.escuro .form-group input{
 
 <div class="container">
 
-
-<!-- ================= PAINEL ================= -->
+<!-- =========================================================
+     PAINEL
+========================================================= -->
 
 <section id="inicio" class="ativo">
 
-    <h2>Painel</h2>
+<h2>Painel</h2>
 
-    <p class="subtitulo">
-        Visão geral da organização
-    </p>
+<p class="subtitulo">
+Resumo geral da organização
+</p>
 
-    <div
-        class="cards"
-        id="cardsDashboard"
-    ></div>
-
-
-    <div class="dashboard-box">
-
-        <h4>📈 Últimas transações</h4>
-
-        <div id="ultimasTransacoes">
-            Carregando...
-        </div>
-
-    </div>
+<div
+    class="cards"
+    id="cardsDashboard"
+></div>
 
 
-    <div class="dashboard-box">
+<div class="bloco-dashboard">
 
-        <h4>📅 Próximos eventos</h4>
+<h4>📈 Últimas transações</h4>
 
-        <div id="proximosEventos">
-            Carregando...
-        </div>
+<div id="ultimasTransacoes"></div>
 
-    </div>
+</div>
 
 
-    <div class="dashboard-box">
+<div class="bloco-dashboard">
 
-        <h4>📊 Resumo financeiro</h4>
+<h4>📅 Próximos eventos</h4>
 
-        <div
-            class="grafico-barras"
-            id="graficoBarras"
-        ></div>
+<div id="proximosEventos"></div>
 
-    </div>
+</div>
+
+
+<div class="bloco-dashboard">
+
+<h4>📊 Resumo financeiro</h4>
+
+<div
+    class="grafico-barras"
+    id="graficoBarras"
+></div>
+
+</div>
+
+
+<div style="margin-top:12px">
+
+<button
+    class="btn"
+    onclick="gerarPDF()"
+>
+📄 Gerar Relatório PDF
+</button>
+
+</div>
 
 </section>
 
 
-<!-- ================= MEMBROS ================= -->
+<!-- =========================================================
+     MEMBROS
+========================================================= -->
 
 <section id="membros">
 
-    <h2>Membros</h2>
+<h2>Membros</h2>
 
-    <p class="subtitulo">
-        Cadastre e gerencie os membros
-    </p>
+<p class="subtitulo">
+Cadastre e gerencie os membros
+</p>
 
-    <div style="display:flex;gap:8px;">
+<div
+    style="display:flex;gap:8px;margin-bottom:12px"
+>
 
-        <button
-            class="btn btn-success"
-            onclick="abrirModal()"
-            style="flex:2"
-        >
-            ➕ Novo Membro
-        </button>
+<button
+    class="btn btn-success"
+    onclick="abrirModal()"
+    style="flex:2"
+>
+➕ Novo Membro
+</button>
 
-        <button
-            class="btn btn-outline"
-            onclick="exportarMembrosCSV()"
-            style="flex:1"
-        >
-            📤 CSV
-        </button>
+<button
+    class="btn btn-outline"
+    onclick="exportarMembrosCSV()"
+    style="flex:1"
+>
+📤 CSV
+</button>
 
-    </div>
-
-
-    <input
-        id="buscaMembro"
-        placeholder="🔍 Buscar membro..."
-        style="width:100%;padding:13px;margin:12px 0;border:1px solid #ced4da;border-radius:7px;font-size:1rem;"
-        oninput="filtrarMembros()"
-    >
+</div>
 
 
-    <div class="tabela-wrapper">
-
-        <table>
-
-            <thead>
-
-                <tr>
-                    <th>Nome</th>
-                    <th>Status</th>
-                    <th>Ações</th>
-                </tr>
-
-            </thead>
-
-            <tbody id="listaMembros"></tbody>
-
-        </table>
-
-    </div>
+<input
+    id="buscaMembro"
+    placeholder="🔍 Buscar nome, telefone ou e-mail"
+    oninput="filtrarMembros()"
+    style="
+        width:100%;
+        padding:13px;
+        border:1px solid #ced4da;
+        border-radius:7px;
+        margin-bottom:12px;
+    "
+>
 
 
-    <div
-        class="paginacao"
-        id="pagMembros"
-    ></div>
+<div class="tabela-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Nome</th>
+<th>Contacto</th>
+<th>Status</th>
+<th>Ações</th>
+</tr>
+
+</thead>
+
+<tbody id="listaMembros"></tbody>
+
+</table>
+
+</div>
 
 
-    <p style="margin-top:10px;font-size:.85rem">
+<div
+    class="paginacao"
+    id="pagMembros"
+></div>
 
-        Total:
-        <strong id="totalMembros">0</strong>
 
-        · Ativos:
-        <strong
-            id="ativosCount"
-            style="color:#28a745"
-        >
-            0
-        </strong>
+<p style="margin-top:10px">
 
-    </p>
+Total:
+<strong id="totalMembros">0</strong>
+
+&nbsp;|&nbsp;
+
+Ativos:
+<strong
+    id="ativosCount"
+    style="color:#28a745"
+>
+0
+</strong>
+
+</p>
 
 </section>
 
 
-<!-- ================= FINANCEIRO ================= -->
+<!-- =========================================================
+     FINANCEIRO
+========================================================= -->
 
 <section id="financeiro">
 
-    <h2>Finanças</h2>
+<h2>Finanças</h2>
 
-    <p class="subtitulo">
-        Registre receitas e despesas
-    </p>
-
-
-    <div
-        style="display:flex;gap:7px;margin-bottom:15px;"
-    >
-
-        <div class="card verde" style="flex:1">
-            <span
-                class="numero"
-                id="finReceitas"
-            >
-                0
-            </span>
-            <span class="rotulo">Receitas</span>
-        </div>
-
-        <div class="card vermelho" style="flex:1">
-            <span
-                class="numero"
-                id="finDespesas"
-            >
-                0
-            </span>
-            <span class="rotulo">Despesas</span>
-        </div>
-
-        <div class="card azul" style="flex:1">
-            <span
-                class="numero"
-                id="finSaldo"
-            >
-                0
-            </span>
-            <span class="rotulo">Saldo</span>
-        </div>
-
-    </div>
+<p class="subtitulo">
+Registre receitas e despesas
+</p>
 
 
-    <div class="grupo-form">
+<div
+    style="
+    display:flex;
+    gap:7px;
+    margin-bottom:14px;
+    "
+>
 
-        <select id="tipoTransacao">
+<div
+    style="
+    flex:1;
+    background:#f8f9fc;
+    padding:12px;
+    border-radius:8px;
+    text-align:center;
+    "
+>
 
-            <option value="receita">
-                💰 Receita
-            </option>
+<div style="font-size:.7rem">
+Receitas
+</div>
 
-            <option value="despesa">
-                💸 Despesa
-            </option>
+<strong
+    id="finReceitas"
+    style="color:#28a745"
+>
+0 Kz
+</strong>
 
-        </select>
-
-
-        <select id="categoriaTransacao">
-
-            <option value="Mensalidade">Mensalidade</option>
-            <option value="Doação">Doação</option>
-            <option value="Evento">Evento</option>
-            <option value="Material">Material</option>
-            <option value="Transporte">Transporte</option>
-            <option value="Outro">Outro</option>
-
-        </select>
-
-
-        <input
-            id="valorTransacao"
-            type="number"
-            step="0.01"
-            placeholder="Valor (Kz)"
-        >
+</div>
 
 
-        <input
-            id="descricaoTransacao"
-            placeholder="Descrição"
-        >
+<div
+    style="
+    flex:1;
+    background:#f8f9fc;
+    padding:12px;
+    border-radius:8px;
+    text-align:center;
+    "
+>
+
+<div style="font-size:.7rem">
+Despesas
+</div>
+
+<strong
+    id="finDespesas"
+    style="color:#dc3545"
+>
+0 Kz
+</strong>
+
+</div>
 
 
-        <button
-            class="btn btn-success"
-            onclick="adicionarTransacao()"
-        >
-            ➕ Registrar Transação
-        </button>
+<div
+    style="
+    flex:1;
+    background:#0b1a2e;
+    color:#fff;
+    padding:12px;
+    border-radius:8px;
+    text-align:center;
+    "
+>
 
-    </div>
+<div style="font-size:.7rem">
+Saldo
+</div>
+
+<strong id="finSaldo">
+0 Kz
+</strong>
+
+</div>
+
+</div>
+
+
+<div class="grupo-form">
+
+<select id="tipoTransacao">
+
+<option value="receita">
+💰 Receita
+</option>
+
+<option value="despesa">
+💸 Despesa
+</option>
+
+</select>
+
+
+<select id="categoriaTransacao">
+
+<option>Mensalidade</option>
+<option>Doação</option>
+<option>Evento</option>
+<option>Material</option>
+<option>Transporte</option>
+<option>Outro</option>
+
+</select>
+
+
+<input
+    id="valorTransacao"
+    type="number"
+    step="0.01"
+    placeholder="Valor em Kz"
+>
+
+
+<input
+    id="descricaoTransacao"
+    placeholder="Descrição"
+>
+
+
+<button
+    class="btn btn-success"
+    onclick="adicionarTransacao()"
+>
+➕ Registrar Transação
+</button>
+
+</div>
 
 </section>
 
 
-<!-- ================= TRANSAÇÕES ================= -->
+<!-- =========================================================
+     TRANSAÇÕES
+========================================================= -->
 
 <section id="transacoes">
 
-    <h2>Histórico</h2>
+<h2>Transações</h2>
 
-    <p class="subtitulo">
-        Movimentações financeiras
-    </p>
-
-
-    <input
-        id="buscaTransacao"
-        placeholder="🔍 Buscar..."
-        style="width:100%;padding:13px;border:1px solid #ced4da;border-radius:7px;margin-bottom:8px;"
-        oninput="filtrarTransacoes()"
-    >
+<p class="subtitulo">
+Histórico financeiro
+</p>
 
 
-    <div style="display:flex;gap:8px;">
-
-        <select
-            id="filtroTipo"
-            onchange="filtrarTransacoes()"
-            style="flex:1;padding:12px;border:1px solid #ced4da;border-radius:7px;"
-        >
-
-            <option value="">
-                Todas
-            </option>
-
-            <option value="receita">
-                💰 Receitas
-            </option>
-
-            <option value="despesa">
-                💸 Despesas
-            </option>
-
-        </select>
+<input
+    id="buscaTransacao"
+    placeholder="🔍 Buscar transação"
+    oninput="filtrarTransacoes()"
+    style="
+    width:100%;
+    padding:13px;
+    border:1px solid #ced4da;
+    border-radius:7px;
+    margin-bottom:8px;
+    "
+>
 
 
-        <button
-            class="btn btn-outline"
-            onclick="exportarTransacoesCSV()"
-            style="flex:1"
-        >
-            📤 CSV
-        </button>
+<select
+    id="filtroTipo"
+    onchange="filtrarTransacoes()"
+    style="
+    width:100%;
+    padding:13px;
+    border:1px solid #ced4da;
+    border-radius:7px;
+    margin-bottom:10px;
+    "
+>
 
-    </div>
+<option value="">
+Todos
+</option>
 
+<option value="receita">
+Receitas
+</option>
 
-    <div
-        class="tabela-wrapper"
-        style="margin-top:12px"
-    >
+<option value="despesa">
+Despesas
+</option>
 
-        <table>
-
-            <thead>
-
-                <tr>
-                    <th>Data</th>
-                    <th>Descrição</th>
-                    <th>Valor</th>
-                </tr>
-
-            </thead>
-
-            <tbody id="listaTransacoes"></tbody>
-
-        </table>
-
-    </div>
+</select>
 
 
-    <div
-        class="paginacao"
-        id="pagTransacoes"
-    ></div>
+<button
+    class="btn btn-outline"
+    onclick="exportarTransacoesCSV()"
+>
+📤 Exportar CSV
+</button>
+
+
+<div class="tabela-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Data</th>
+<th>Descrição</th>
+<th>Valor</th>
+<th>Ação</th>
+
+</tr>
+
+</thead>
+
+<tbody id="listaTransacoes"></tbody>
+
+</table>
+
+</div>
+
+
+<div
+    class="paginacao"
+    id="pagTransacoes"
+></div>
 
 </section>
 
 
-<!-- ================= EVENTOS ================= -->
+<!-- =========================================================
+     EVENTOS
+========================================================= -->
 
 <section id="eventos">
 
-    <h2>Eventos</h2>
+<h2>Eventos</h2>
 
-    <p class="subtitulo">
-        Organize os eventos
-    </p>
-
-
-    <div class="grupo-form">
-
-        <input
-            id="eventoNome"
-            placeholder="Nome do evento"
-        >
-
-        <input
-            id="eventoData"
-            type="date"
-        >
-
-        <input
-            id="eventoLocal"
-            placeholder="Local"
-        >
-
-        <button
-            class="btn btn-success"
-            onclick="adicionarEvento()"
-        >
-            📅 Criar Evento
-        </button>
-
-    </div>
+<p class="subtitulo">
+Organize os eventos
+</p>
 
 
-    <div class="tabela-wrapper">
+<div class="grupo-form">
 
-        <table>
+<input
+    id="eventoNome"
+    placeholder="Nome do evento"
+>
 
-            <thead>
+<input
+    id="eventoData"
+    type="date"
+>
 
-                <tr>
-                    <th>Evento</th>
-                    <th>Data</th>
-                    <th>Status</th>
-                </tr>
+<input
+    id="eventoLocal"
+    placeholder="Local"
+>
 
-            </thead>
 
-            <tbody id="listaEventos"></tbody>
+<button
+    class="btn btn-success"
+    onclick="adicionarEvento()"
+>
+📅 Criar Evento
+</button>
 
-        </table>
+</div>
 
-    </div>
+
+<div class="tabela-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+<th>Evento</th>
+<th>Data</th>
+<th>Status</th>
+<th>Ação</th>
+</tr>
+
+</thead>
+
+<tbody id="listaEventos"></tbody>
+
+</table>
+
+</div>
 
 </section>
 
 
-<!-- ================= META ================= -->
+<!-- =========================================================
+     META
+========================================================= -->
 
 <section id="meta">
 
-    <h2>Meta de Poupança</h2>
+<h2>Meta de Poupança</h2>
 
-    <p class="subtitulo">
-        Acompanhe o seu objetivo
-    </p>
-
-
-    <div class="meta-container">
-
-        <div class="meta-topo">
-
-            <span>
-                Meta:
-                <span id="metaValorExibido">
-                    0 Kz
-                </span>
-            </span>
-
-            <span>
-                Guardado:
-                <span id="metaGuardadoExibido">
-                    0 Kz
-                </span>
-            </span>
-
-        </div>
+<p class="subtitulo">
+Acompanhe o objetivo financeiro
+</p>
 
 
-        <div class="barra-progresso">
+<div class="meta-container">
 
-            <div
-                class="preenchimento"
-                id="metaBarra"
-                style="width:0%"
-            ></div>
+<div
+    style="
+    display:flex;
+    justify-content:space-between;
+    "
+>
 
-        </div>
+<span>
+Meta:
+<strong id="metaValorExibido">
+0 Kz
+</strong>
+</span>
 
+<span>
+Guardado:
+<strong id="metaGuardadoExibido">
+0 Kz
+</strong>
+</span>
 
-        <div style="display:flex;justify-content:space-between;font-size:.8rem;color:#777">
-
-            <span>
-                Progresso:
-                <strong id="metaProgresso">
-                    0%
-                </strong>
-            </span>
-
-            <span>
-                Falta:
-                <strong id="metaFalta">
-                    0 Kz
-                </strong>
-            </span>
-
-        </div>
-
-    </div>
+</div>
 
 
-    <div class="grupo-form">
+<div class="barra-progresso">
 
-        <input
-            id="metaValorInput"
-            type="number"
-            step="0.01"
-            placeholder="Valor da meta (Kz)"
-        >
+<div
+    class="preenchimento"
+    id="metaBarra"
+    style="width:0%"
+></div>
 
-        <button
-            class="btn btn-ouro"
-            onclick="definirMeta()"
-        >
-            🎯 Definir Meta
-        </button>
-
-    </div>
+</div>
 
 
-    <div class="grupo-form">
+<div
+    style="
+    display:flex;
+    justify-content:space-between;
+    "
+>
 
-        <input
-            id="metaGuardarInput"
-            type="number"
-            step="0.01"
-            placeholder="Quanto guardar agora? (Kz)"
-        >
+<span>
+Progresso:
+<strong id="metaProgresso">
+0%
+</strong>
+</span>
 
-        <button
-            class="btn btn-success"
-            onclick="guardarParaMeta()"
-        >
-            💰 Guardar para Meta
-        </button>
+<span>
+Falta:
+<strong id="metaFalta">
+0 Kz
+</strong>
+</span>
 
-    </div>
+</div>
+
+</div>
+
+
+<div class="grupo-form">
+
+<input
+    id="metaValorInput"
+    type="number"
+    placeholder="Valor da meta"
+>
+
+<button
+    class="btn btn-ouro"
+    onclick="definirMeta()"
+>
+🎯 Definir Meta
+</button>
+
+</div>
+
+
+<div class="grupo-form">
+
+<input
+    id="metaGuardarInput"
+    type="number"
+    placeholder="Valor a guardar"
+>
+
+<button
+    class="btn btn-success"
+    onclick="guardarParaMeta()"
+>
+💰 Guardar para Meta
+</button>
+
+</div>
 
 </section>
 
@@ -1347,94 +1432,116 @@ body.escuro .form-group input{
 
 
 <footer>
-    © 2026 O.J.V. Professional Plus
+© 2026 O.J.V. Professional Plus
 </footer>
 
-</div>
 
-
-<!-- ================= MODAL MEMBRO ================= -->
+<!-- =========================================================
+     MODAL MEMBRO
+========================================================= -->
 
 <div
     class="modal"
     id="modal"
 >
 
-    <div class="modal-conteudo">
+<div class="modal-conteudo">
 
-        <h3 id="modalTitulo">
-            📝 Novo Membro
-        </h3>
-
-
-        <div class="grupo-form">
-
-            <label>Nome completo</label>
-
-            <input
-                id="modalNome"
-                placeholder="Ex: João Silva"
-            >
+<h3 id="modalTitulo">
+📝 Novo Membro
+</h3>
 
 
-            <label>Telefone</label>
+<div class="grupo-form">
 
-            <input
-                id="modalTelefone"
-                placeholder="+244 9XX XXX XXX"
-            >
+<label>
+Nome completo
+</label>
 
-
-            <label>
-                Data de Nascimento
-            </label>
-
-            <input
-                id="modalAniversario"
-                placeholder="DD/MM/AAAA"
-                maxlength="10"
-                inputmode="numeric"
-            >
+<input
+    id="modalNome"
+    placeholder="Nome completo"
+>
 
 
-            <label>Status</label>
+<label>
+E-mail do membro
+</label>
 
-            <select id="modalStatus">
-
-                <option value="Ativo">
-                    ✅ Ativo
-                </option>
-
-                <option value="Inativo">
-                    ❌ Inativo
-                </option>
-
-            </select>
-
-        </div>
+<input
+    id="modalEmail"
+    type="email"
+    placeholder="email@exemplo.com"
+>
 
 
-        <div style="display:flex;gap:8px">
+<label>
+Telefone
+</label>
 
-            <button
-                class="btn btn-outline"
-                onclick="fecharModal()"
-                style="flex:1"
-            >
-                Cancelar
-            </button>
+<input
+    id="modalTelefone"
+    placeholder="+244 9XX XXX XXX"
+>
 
-            <button
-                class="btn btn-success"
-                onclick="salvarMembro()"
-                style="flex:2"
-            >
-                💾 Salvar
-            </button>
 
-        </div>
+<label>
+Data de nascimento
+</label>
 
-    </div>
+<input
+    id="modalAniversario"
+    placeholder="DD/MM/AAAA"
+    maxlength="10"
+    inputmode="numeric"
+>
+
+
+<label>
+Status
+</label>
+
+<select id="modalStatus">
+
+<option value="Ativo">
+✅ Ativo
+</option>
+
+<option value="Inativo">
+❌ Inativo
+</option>
+
+</select>
+
+</div>
+
+
+<div
+    style="
+    display:flex;
+    gap:8px;
+    "
+>
+
+<button
+    class="btn btn-outline"
+    onclick="fecharModal()"
+    style="flex:1"
+>
+Cancelar
+</button>
+
+<button
+    class="btn btn-success"
+    onclick="salvarMembro()"
+    style="flex:2"
+>
+💾 Salvar
+</button>
+
+</div>
+
+</div>
 
 </div>
 
@@ -1447,49 +1554,37 @@ body.escuro .form-group input{
 
 <script>
 
-/* =====================================================
+/* =========================================================
    SUPABASE
-===================================================== */
+========================================================= */
 
 const SUPABASE_URL =
-    "https://zytbddkoddcmreyvjmkz.supabase.co";
+"https://zytbddkoddcmreyvjmkz.supabase.co";
 
 const SUPABASE_KEY =
-    "sb_publishable_KkrrmpUmwMguZCNvZiclSg_zFJCOj50";
+"sb_publishable_KkrrmpUmwMguZCNvZiclSg_zFJCOj50";
 
 const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY,
-        {
-            auth:{
-                autoRefreshToken:true,
-                persistSession:true,
-                detectSessionInUrl:true
-            }
-        }
-    );
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 
-/* =====================================================
-   ESTADO
-===================================================== */
-
-let usuario = null;
+/* =========================================================
+   DADOS
+========================================================= */
 
 let membros = [];
 let transacoes = [];
 let eventos = [];
+
 let meta = {
-    id:null,
     valor:0,
     guardado:0
 };
 
-let editandoId = null;
-
-let membrosFiltrados = [];
-let transacoesFiltradas = [];
+let editandoIndex = -1;
 
 let paginaAtual = {
     membros:1,
@@ -1498,10 +1593,13 @@ let paginaAtual = {
 
 const POR_PAGINA = 5;
 
+let membrosFiltrados = [];
+let transacoesFiltradas = [];
 
-/* =====================================================
+
+/* =========================================================
    AUXILIARES
-===================================================== */
+========================================================= */
 
 function $(id){
     return document.getElementById(id);
@@ -1513,28 +1611,38 @@ function mostrarToast(
     tipo="sucesso"
 ){
 
-    const container =
+    const c =
         $("toastContainer");
 
-    const toast =
+    const t =
         document.createElement("div");
 
-    toast.className =
+    t.className =
         "toast " + tipo;
 
-    toast.textContent =
+    t.textContent =
         mensagem;
 
-    container.appendChild(toast);
+    c.appendChild(t);
 
-    setTimeout(()=>{
-        toast.style.opacity="0";
+    setTimeout(
+        ()=>{
+            t.remove();
+        },
+        3500
+    );
+}
 
-        setTimeout(()=>{
-            toast.remove();
-        },300);
 
-    },3000);
+function formatarNumero(
+    valor
+){
+
+    return Number(
+        valor || 0
+    ).toLocaleString(
+        "pt-PT"
+    );
 }
 
 
@@ -1553,24 +1661,9 @@ function escaparHTML(texto){
 }
 
 
-function numero(valor){
-
-    return Number(valor || 0);
-}
-
-
-function dinheiro(valor){
-
-    return numero(valor)
-        .toLocaleString("pt-AO",{
-            maximumFractionDigits:0
-        }) + " Kz";
-}
-
-
-/* =====================================================
+/* =========================================================
    LOGIN
-===================================================== */
+========================================================= */
 
 async function verificarSessao(){
 
@@ -1578,25 +1671,24 @@ async function verificarSessao(){
         data,
         error
     } =
-    await supabaseClient
-        .auth
-        .getSession();
+    await supabaseClient.auth.getSession();
 
     if(error){
 
         console.error(error);
 
-        mostrarLogin();
+        mostrarToast(
+            "Erro ao verificar login.",
+            "erro"
+        );
 
         return;
+
     }
 
     if(data.session){
 
-        usuario =
-            data.session.user;
-
-        mostrarApp();
+        mostrarAplicacao();
 
     }else{
 
@@ -1608,35 +1700,28 @@ async function verificarSessao(){
 
 function mostrarLogin(){
 
-    $("loginPage")
-        .classList
-        .remove("hidden");
+    $("loginTela").style.display =
+        "flex";
 
-    $("app")
-        .classList
-        .add("hidden");
+    $("app").style.display =
+        "none";
 }
 
 
-async function mostrarApp(){
+function mostrarAplicacao(){
 
-    $("loginPage")
-        .classList
-        .add("hidden");
+    $("loginTela").style.display =
+        "none";
 
-    $("app")
-        .classList
-        .remove("hidden");
+    $("app").style.display =
+        "block";
 
-    await carregarDados();
+    carregarDados();
 
-    atualizarTudo();
 }
 
 
-async function fazerLogin(event){
-
-    event.preventDefault();
+async function entrar(){
 
     const email =
         $("loginEmail")
@@ -1647,345 +1732,300 @@ async function fazerLogin(event){
         $("loginPassword")
         .value;
 
-    const erro =
-        $("loginErro");
+    if(!email ||
+       !password){
 
-    const botao =
-        $("btnLogin");
-
-    erro.style.display="none";
-
-    if(!email || !password){
-
-        erro.textContent =
-            "Informe o e-mail e a palavra-passe.";
-
-        erro.style.display="block";
+        mostrarToast(
+            "Informe o e-mail e a palavra-passe.",
+            "atencao"
+        );
 
         return;
     }
 
-    botao.disabled=true;
-
-    botao.textContent =
-        "⏳ A entrar...";
 
     const {
         data,
         error
     } =
-    await supabaseClient
-        .auth
-        .signInWithPassword({
-            email,
-            password
-        });
+    await supabaseClient.auth.signInWithPassword({
+
+        email:email,
+
+        password:password
+
+    });
+
 
     if(error){
 
+        mostrarToast(
+            "E-mail ou palavra-passe incorretos.",
+            "erro"
+        );
+
         console.error(error);
-
-        erro.textContent =
-            traduzirErroLogin(error);
-
-        erro.style.display="block";
-
-        botao.disabled=false;
-
-        botao.textContent =
-            "🔐 Entrar";
 
         return;
     }
 
-    usuario =
-        data.user;
-
-    botao.disabled=false;
-
-    botao.textContent =
-        "🔐 Entrar";
 
     mostrarToast(
-        "✅ Login efetuado!",
+        "Login efetuado com sucesso.",
         "sucesso"
     );
 
-    await mostrarApp();
+    mostrarAplicacao();
 }
 
 
-function traduzirErroLogin(error){
+async function registar(){
 
-    const msg =
-        (error.message || "")
-        .toLowerCase();
+    const email =
+        $("loginEmail")
+        .value
+        .trim();
 
-    if(msg.includes("invalid login credentials"))
-        return "E-mail ou palavra-passe incorretos.";
+    const password =
+        $("loginPassword")
+        .value;
 
-    if(msg.includes("email not confirmed"))
-        return "O e-mail ainda não foi confirmado no Supabase.";
 
-    if(msg.includes("rate limit"))
-        return "Muitas tentativas. Aguarde alguns minutos.";
+    if(!email ||
+       !password){
 
-    if(msg.includes("network"))
-        return "Erro de ligação à Internet.";
+        mostrarToast(
+            "Informe o e-mail e a palavra-passe.",
+            "atencao"
+        );
 
-    return error.message ||
-        "Não foi possível entrar.";
+        return;
+    }
+
+
+    if(password.length < 6){
+
+        mostrarToast(
+            "A palavra-passe deve ter pelo menos 6 caracteres.",
+            "atencao"
+        );
+
+        return;
+    }
+
+
+    const {
+        error
+    } =
+    await supabaseClient.auth.signUp({
+
+        email:email,
+
+        password:password
+
+    });
+
+
+    if(error){
+
+        mostrarToast(
+            error.message,
+            "erro"
+        );
+
+        return;
+    }
+
+
+    mostrarToast(
+        "Conta criada. Verifique o seu e-mail se a confirmação estiver ativa.",
+        "sucesso"
+    );
+}
+
+
+async function recuperarSenha(){
+
+    const email =
+        $("loginEmail")
+        .value
+        .trim();
+
+
+    if(!email){
+
+        mostrarToast(
+            "Digite primeiro o seu e-mail.",
+            "atencao"
+        );
+
+        return;
+    }
+
+
+    const {
+        error
+    } =
+    await supabaseClient.auth.resetPasswordForEmail(
+        email,
+        {
+            redirectTo:
+            window.location.href
+        }
+    );
+
+
+    if(error){
+
+        mostrarToast(
+            error.message,
+            "erro"
+        );
+
+        return;
+    }
+
+
+    mostrarToast(
+        "E-mail de recuperação enviado.",
+        "sucesso"
+    );
 }
 
 
 async function sair(){
 
-    const {
-        error
-    } =
-    await supabaseClient
-        .auth
-        .signOut();
+    await supabaseClient.auth.signOut();
 
-    if(error){
-
-        mostrarToast(
-            "Erro ao sair.",
-            "erro"
-        );
-
-        return;
-    }
-
-    usuario=null;
-
-    membros=[];
-    transacoes=[];
-    eventos=[];
+    membros = [];
+    transacoes = [];
+    eventos = [];
 
     mostrarLogin();
 }
 
 
-/* =====================================================
-   AUTH LISTENER
-===================================================== */
-
-supabaseClient
-    .auth
-    .onAuthStateChange(
-        (event,session)=>{
-
-            if(session){
-
-                usuario =
-                    session.user;
-
-                mostrarApp();
-
-            }else{
-
-                usuario=null;
-
-                mostrarLogin();
-
-            }
-
-        }
-    );
-
-
-/* =====================================================
-   CARREGAR MEMBROS
-===================================================== */
-
-async function carregarMembros(){
-
-    const {
-        data,
-        error
-    } =
-    await supabaseClient
-        .from("membros")
-        .select("*")
-        .order("id",{ascending:false});
-
-    if(error){
-
-        console.error(
-            "Erro membros:",
-            error
-        );
-
-        mostrarToast(
-            "Erro ao carregar membros: " +
-            error.message,
-            "erro"
-        );
-
-        membros=[];
-
-        return;
-    }
-
-    membros =
-        data || [];
-}
-
-
-/* =====================================================
-   CARREGAR TRANSAÇÕES
-===================================================== */
-
-async function carregarTransacoes(){
-
-    const {
-        data,
-        error
-    } =
-    await supabaseClient
-        .from("transacoes")
-        .select("*")
-        .order("id",{ascending:false});
-
-    if(error){
-
-        console.error(
-            "Erro transações:",
-            error
-        );
-
-        mostrarToast(
-            "Erro ao carregar transações.",
-            "erro"
-        );
-
-        transacoes=[];
-
-        return;
-    }
-
-    transacoes =
-        data || [];
-}
-
-
-/* =====================================================
-   CARREGAR EVENTOS
-===================================================== */
-
-async function carregarEventos(){
-
-    const {
-        data,
-        error
-    } =
-    await supabaseClient
-        .from("eventos")
-        .select("*")
-        .order("id",{ascending:false});
-
-    if(error){
-
-        console.error(
-            "Erro eventos:",
-            error
-        );
-
-        mostrarToast(
-            "Erro ao carregar eventos.",
-            "erro"
-        );
-
-        eventos=[];
-
-        return;
-    }
-
-    eventos =
-        data || [];
-}
-
-
-/* =====================================================
-   CARREGAR META
-===================================================== */
-
-async function carregarMeta(){
-
-    const {
-        data,
-        error
-    } =
-    await supabaseClient
-        .from("meta")
-        .select("*")
-        .limit(1);
-
-    if(error){
-
-        console.error(
-            "Erro meta:",
-            error
-        );
-
-        return;
-    }
-
-    if(data && data.length){
-
-        const m =
-            data[0];
-
-        meta = {
-            id:m.id,
-            valor:numero(
-                m.valor
-            ),
-            guardado:numero(
-                m.guardado
-            )
-        };
-
-    }else{
-
-        meta={
-            id:null,
-            valor:0,
-            guardado:0
-        };
-
-    }
-}
-
-
-/* =====================================================
-   CARREGAR TUDO
-===================================================== */
+/* =========================================================
+   CARREGAR DADOS SUPABASE
+========================================================= */
 
 async function carregarDados(){
 
-    if(!usuario)
-        return;
+    try{
 
-    await Promise.all([
-        carregarMembros(),
-        carregarTransacoes(),
-        carregarEventos(),
-        carregarMeta()
-    ]);
+        const resultadoMembros =
+            await supabaseClient
+            .from("membros")
+            .select("*")
+            .order("created_at",{ascending:false});
+
+
+        if(resultadoMembros.error){
+
+            console.error(
+                resultadoMembros.error
+            );
+
+            mostrarToast(
+                "Erro ao carregar membros.",
+                "erro"
+            );
+
+        }else{
+
+            membros =
+                resultadoMembros.data || [];
+
+        }
+
+
+        const resultadoTransacoes =
+            await supabaseClient
+            .from("transacoes")
+            .select("*")
+            .order("created_at",{ascending:false});
+
+
+        if(resultadoTransacoes.error){
+
+            console.error(
+                resultadoTransacoes.error
+            );
+
+        }else{
+
+            transacoes =
+                resultadoTransacoes.data || [];
+
+        }
+
+
+        const resultadoEventos =
+            await supabaseClient
+            .from("eventos")
+            .select("*")
+            .order("data",{ascending:true});
+
+
+        if(resultadoEventos.error){
+
+            console.error(
+                resultadoEventos.error
+            );
+
+        }else{
+
+            eventos =
+                resultadoEventos.data || [];
+
+        }
+
+
+        const resultadoMeta =
+            await supabaseClient
+            .from("meta")
+            .select("*")
+            .limit(1);
+
+
+        if(
+            !resultadoMeta.error &&
+            resultadoMeta.data &&
+            resultadoMeta.data.length
+        ){
+
+            meta = resultadoMeta.data[0];
+
+        }
+
+
+        atualizarTudo();
+
+
+    }catch(e){
+
+        console.error(e);
+
+        mostrarToast(
+            "Erro de ligação ao Supabase.",
+            "erro"
+        );
+
+    }
+
 }
 
 
-/* =====================================================
+/* =========================================================
    MENU
-===================================================== */
+========================================================= */
 
 function alternarMenu(){
 
     $("menuNav")
         .classList
         .toggle("aberto");
+
 }
 
 
@@ -1993,63 +2033,69 @@ function abrir(id){
 
     document
         .querySelectorAll("section")
-        .forEach(section=>{
-            section.classList
-                .remove("ativo");
-        });
+        .forEach(
+            s=>s.classList.remove("ativo")
+        );
 
-    const secao =
+
+    const sec =
         $(id);
 
-    if(secao)
-        secao.classList
-            .add("ativo");
+    if(sec)
+        sec.classList.add("ativo");
+
 
     document
         .querySelectorAll("nav button")
-        .forEach(btn=>{
-            btn.classList
-                .remove("ativo");
-        });
+        .forEach(
+            b=>b.classList.remove("ativo")
+        );
 
-    document
-        .querySelectorAll("nav button")
-        .forEach(btn=>{
 
-            if(
-                btn.getAttribute(
-                    "onclick"
-                )?.includes(
-                    "'" + id + "'"
-                )
-            ){
+    const botao =
+        document.querySelector(
+            'nav button[onclick*="' +
+            id +
+            '"]'
+        );
 
-                btn.classList
-                    .add("ativo");
 
-            }
+    if(botao)
+        botao.classList.add("ativo");
 
-        });
 
     $("menuNav")
         .classList
         .remove("aberto");
 
-    atualizarTudo();
 }
 
 
-/* =====================================================
+/* =========================================================
    TEMA
-===================================================== */
+========================================================= */
+
+function alternarTema(){
+
+    const escuro =
+        document.body
+        .classList
+        .toggle("escuro");
+
+    localStorage.setItem(
+        "ojv_tema",
+        escuro ? "true" : "false"
+    );
+
+}
+
 
 function carregarTema(){
 
     if(
-        localStorage
-        .getItem(
+        localStorage.getItem(
             "ojv_tema"
-        ) === "escuro"
+        ) === "true"
     ){
 
         document.body
@@ -2061,26 +2107,98 @@ function carregarTema(){
 }
 
 
-function alternarTema(){
+/* =========================================================
+   PAGINAÇÃO
+========================================================= */
 
-    const escuro =
-        document.body
-            .classList
-            .toggle("escuro");
+function criarPagina(
+    tipo,
+    dados
+){
 
-    localStorage.setItem(
-        "ojv_tema",
-        escuro
-            ? "escuro"
-            : "claro"
-    );
+    const total =
+        dados.length;
+
+    const paginas =
+        Math.ceil(
+            total / POR_PAGINA
+        ) || 1;
+
+
+    if(
+        paginaAtual[tipo] >
+        paginas
+    ){
+
+        paginaAtual[tipo] =
+            paginas;
+
+    }
+
+
+    const inicio =
+        (paginaAtual[tipo]-1)
+        * POR_PAGINA;
+
+
+    return {
+
+        dados:dados.slice(
+            inicio,
+            inicio + POR_PAGINA
+        ),
+
+        inicio:inicio,
+
+        paginas:paginas
+
+    };
 
 }
 
 
-/* =====================================================
-   PAGINAÇÃO
-===================================================== */
+function desenharPaginacao(
+    tipo,
+    total,
+    elemento
+){
+
+    const el =
+        $(elemento);
+
+    if(total <= 1){
+
+        el.innerHTML="";
+        return;
+
+    }
+
+
+    let html="";
+
+
+    for(
+        let i=1;
+        i<=total;
+        i++
+    ){
+
+        html +=
+        `<button
+            class="${i===paginaAtual[tipo]?'ativo':''}"
+            onclick="paginar('${tipo}',${i})"
+        >
+        ${i}
+        </button>`;
+
+    }
+
+
+    el.innerHTML =
+        html;
+
+}
+
 
 function paginar(
     tipo,
@@ -2091,104 +2209,24 @@ function paginar(
         pagina;
 
     atualizarTudo();
+
 }
 
 
-function paginaDados(
-    dados,
-    tipo
-){
-
-    const totalPaginas =
-        Math.max(
-            1,
-            Math.ceil(
-                dados.length /
-                POR_PAGINA
-            )
-        );
-
-    if(
-        paginaAtual[tipo] >
-        totalPaginas
-    ){
-
-        paginaAtual[tipo] =
-            totalPaginas;
-
-    }
-
-    const inicio =
-        (
-            paginaAtual[tipo]-1
-        ) * POR_PAGINA;
-
-    return {
-        dados:dados.slice(
-            inicio,
-            inicio+POR_PAGINA
-        ),
-        inicio,
-        totalPaginas
-    };
-}
-
-
-function criarPaginacao(
-    tipo,
-    totalPaginas,
-    elemento
-){
-
-    const div =
-        $(elemento);
-
-    if(!div)
-        return;
-
-    if(totalPaginas<=1){
-
-        div.innerHTML="";
-
-        return;
-    }
-
-    let html="";
-
-    for(
-        let i=1;
-        i<=totalPaginas;
-        i++
-    ){
-
-        html +=
-            `<button
-                class="${i===paginaAtual[tipo]?"ativo":""}"
-                onclick="paginar('${tipo}',${i})"
-            >
-                ${i}
-            </button>`;
-
-    }
-
-    div.innerHTML =
-        html;
-}
-
-
-/* =====================================================
+/* =========================================================
    MEMBROS
-===================================================== */
+========================================================= */
 
 function abrirModal(){
 
-    editandoId=null;
+    editandoIndex=-1;
 
     $("modalTitulo")
         .textContent =
         "📝 Novo Membro";
 
     $("modalNome").value="";
+    $("modalEmail").value="";
     $("modalTelefone").value="";
     $("modalAniversario").value="";
     $("modalStatus").value="Ativo";
@@ -2196,6 +2234,7 @@ function abrirModal(){
     $("modal")
         .classList
         .add("aberto");
+
 }
 
 
@@ -2204,52 +2243,56 @@ function fecharModal(){
     $("modal")
         .classList
         .remove("aberto");
+
 }
 
 
-function mascaraData(){
+function aplicarMascaraData(){
 
     const input =
         $("modalAniversario");
 
-    let valor =
-        input.value
-        .replace(/\D/g,"")
-        .slice(0,8);
+    input.oninput =
+    function(){
 
-    if(valor.length>4){
+        let v =
+            this.value
+            .replace(/\D/g,"")
+            .slice(0,8);
 
-        valor =
-            valor.slice(0,2)
-            +"/"+
-            valor.slice(2,4)
-            +"/"+
-            valor.slice(4);
 
-    }else if(valor.length>2){
+        if(v.length>4){
 
-        valor =
-            valor.slice(0,2)
-            +"/"+
-            valor.slice(2);
+            v =
+                v.slice(0,2)+"/"+
+                v.slice(2,4)+"/"+
+                v.slice(4);
 
-    }
+        }else if(v.length>2){
 
-    input.value=valor;
+            v =
+                v.slice(0,2)+"/"+
+                v.slice(2);
+
+        }
+
+
+        this.value=v;
+
+    };
+
 }
-
-
-$("modalAniversario")
-    .addEventListener(
-        "input",
-        mascaraData
-    );
 
 
 async function salvarMembro(){
 
     const nome =
         $("modalNome")
+        .value
+        .trim();
+
+    const email =
+        $("modalEmail")
         .value
         .trim();
 
@@ -2267,6 +2310,7 @@ async function salvarMembro(){
         $("modalStatus")
         .value;
 
+
     if(!nome){
 
         mostrarToast(
@@ -2277,143 +2321,190 @@ async function salvarMembro(){
         return;
     }
 
-    let dados = {
-        nome,
-        telefone,
-        aniversario,
-        status
-    };
 
-    let resposta;
-
-    if(editandoId){
-
-        resposta =
-            await supabaseClient
-                .from("membros")
-                .update(dados)
-                .eq(
-                    "id",
-                    editandoId
-                );
-
-    }else{
-
-        resposta =
-            await supabaseClient
-                .from("membros")
-                .insert([dados]);
-
-    }
-
-    if(resposta.error){
-
-        console.error(
-            resposta.error
-        );
+    if(
+        aniversario &&
+        aniversario.length !== 10
+    ){
 
         mostrarToast(
-            "Erro ao guardar membro: "+
-            resposta.error.message,
+            "Data deve estar no formato DD/MM/AAAA.",
+            "atencao"
+        );
+
+        return;
+    }
+
+
+    const dados = {
+
+        nome:nome,
+
+        email:email,
+
+        telefone:telefone,
+
+        aniversario:aniversario,
+
+        status:status
+
+    };
+
+
+    try{
+
+        if(editandoIndex === -1){
+
+            const {
+                error
+            } =
+            await supabaseClient
+            .from("membros")
+            .insert([dados]);
+
+
+            if(error)
+                throw error;
+
+
+            mostrarToast(
+                "Membro adicionado.",
+                "sucesso"
+            );
+
+
+        }else{
+
+            const membro =
+                membros[editandoIndex];
+
+
+            const {
+                error
+            } =
+            await supabaseClient
+            .from("membros")
+            .update(dados)
+            .eq("id",membro.id);
+
+
+            if(error)
+                throw error;
+
+
+            mostrarToast(
+                "Membro atualizado.",
+                "sucesso"
+            );
+
+        }
+
+
+        fecharModal();
+
+        await carregarDados();
+
+
+    }catch(e){
+
+        console.error(e);
+
+        mostrarToast(
+            "Erro ao guardar membro. Verifique as colunas da tabela membros.",
             "erro"
         );
 
-        return;
     }
 
-    mostrarToast(
-        editandoId
-        ? "✅ Membro atualizado!"
-        : "✅ Membro adicionado!",
-        "sucesso"
-    );
-
-    fecharModal();
-
-    await carregarMembros();
-
-    atualizarTudo();
 }
 
 
-function editarMembro(id){
+function editarMembro(i){
 
-    const membro =
-        membros.find(
-            m=>String(m.id)===String(id)
+    const m =
+        membrosFiltrados[i];
+
+    const indiceReal =
+        membros.findIndex(
+            x=>x.id===m.id
         );
 
-    if(!membro)
-        return;
 
-    editandoId =
-        membro.id;
+    editandoIndex =
+        indiceReal;
+
 
     $("modalTitulo")
         .textContent =
         "✏️ Editar Membro";
 
     $("modalNome").value =
-        membro.nome || "";
+        m.nome || "";
+
+    $("modalEmail").value =
+        m.email || "";
 
     $("modalTelefone").value =
-        membro.telefone || "";
+        m.telefone || "";
 
     $("modalAniversario").value =
-        membro.aniversario || "";
+        m.aniversario || "";
 
     $("modalStatus").value =
-        membro.status || "Ativo";
+        m.status || "Ativo";
+
 
     $("modal")
         .classList
         .add("aberto");
+
 }
 
 
-async function excluirMembro(id){
+async function excluirMembro(i){
 
-    const membro =
-        membros.find(
-            m=>String(m.id)===String(id)
-        );
+    const m =
+        membrosFiltrados[i];
 
-    if(!membro)
-        return;
 
     if(
         !confirm(
-            `Excluir "${membro.nome}"?`
+            'Eliminar o membro "' +
+            (m.nome || "") +
+            '"?'
         )
     )
         return;
+
 
     const {
         error
     } =
     await supabaseClient
-        .from("membros")
-        .delete()
-        .eq("id",id);
+    .from("membros")
+    .delete()
+    .eq("id",m.id);
+
 
     if(error){
 
         mostrarToast(
-            "Erro ao excluir membro.",
+            "Erro ao eliminar membro.",
             "erro"
         );
 
         return;
     }
 
+
     mostrarToast(
-        "🗑️ Membro excluído.",
-        "atencao"
+        "Membro eliminado.",
+        "sucesso"
     );
 
-    await carregarMembros();
 
-    atualizarTudo();
+    await carregarDados();
+
 }
 
 
@@ -2425,88 +2516,57 @@ function filtrarMembros(){
             .value || ""
         ).toLowerCase();
 
+
     membrosFiltrados =
-        membros.filter(m=>{
+        membros.filter(
+            m=>
+                (m.nome||"")
+                .toLowerCase()
+                .includes(termo)
 
-            const nome =
-                String(
-                    m.nome || ""
-                ).toLowerCase();
+                ||
 
-            const telefone =
-                String(
-                    m.telefone || ""
-                ).toLowerCase();
+                (m.telefone||"")
+                .toLowerCase()
+                .includes(termo)
 
-            return (
-                nome.includes(termo) ||
-                telefone.includes(termo)
-            );
+                ||
 
-        });
+                (m.email||"")
+                .toLowerCase()
+                .includes(termo)
+        );
+
 
     paginaAtual.membros=1;
 
     atualizarTudo();
+
 }
 
 
-function exportarMembrosCSV(){
-
-    if(!membros.length){
-
-        mostrarToast(
-            "Nenhum membro.",
-            "atencao"
-        );
-
-        return;
-    }
-
-    let csv =
-        "Nome,Telefone,Aniversario,Status\n";
-
-    membros.forEach(m=>{
-
-        csv +=
-            `"${m.nome||""}",`+
-            `"${m.telefone||""}",`+
-            `"${m.aniversario||""}",`+
-            `"${m.status||""}"\n`;
-
-    });
-
-    baixarCSV(
-        csv,
-        "membros_ojv.csv"
-    );
-}
-
-
-/* =====================================================
+/* =========================================================
    TRANSAÇÕES
-===================================================== */
+========================================================= */
 
 async function adicionarTransacao(){
 
     const tipo =
-        $("tipoTransacao")
-        .value;
+        $("tipoTransacao").value;
 
     const categoria =
-        $("categoriaTransacao")
-        .value;
+        $("categoriaTransacao").value;
 
     const valor =
         parseFloat(
-            $("valorTransacao")
-            .value
+            $("valorTransacao").value
         );
 
     const descricao =
         $("descricaoTransacao")
         .value
         .trim();
+
 
     if(
         !valor ||
@@ -2521,6 +2581,7 @@ async function adicionarTransacao(){
         return;
     }
 
+
     if(!descricao){
 
         mostrarToast(
@@ -2531,59 +2592,101 @@ async function adicionarTransacao(){
         return;
     }
 
-    const dados = {
 
-        tipo,
+    const dados={
 
-        categoria,
+        tipo:tipo,
 
-        descricao,
+        categoria:categoria,
 
         valor:
             tipo==="despesa"
             ? -valor
             : valor,
 
+        descricao:descricao,
+
         data:
             new Date()
-            .toISOString()
+            .toLocaleString("pt-PT")
 
     };
+
 
     const {
         error
     } =
     await supabaseClient
-        .from("transacoes")
-        .insert([dados]);
+    .from("transacoes")
+    .insert([dados]);
+
 
     if(error){
 
         console.error(error);
 
         mostrarToast(
-            "Erro ao registrar transação: "+
-            error.message,
+            "Erro ao registrar transação.",
             "erro"
         );
 
         return;
     }
 
-    $("valorTransacao")
-        .value="";
 
-    $("descricaoTransacao")
-        .value="";
+    $("valorTransacao").value="";
+    $("descricaoTransacao").value="";
+
 
     mostrarToast(
-        "✅ Transação registrada!",
+        "Transação registrada.",
         "sucesso"
     );
 
-    await carregarTransacoes();
 
-    atualizarTudo();
+    await carregarDados();
+
+}
+
+
+async function excluirTransacao(id){
+
+    if(
+        !confirm(
+            "Eliminar esta transação?"
+        )
+    )
+        return;
+
+
+    const {
+        error
+    } =
+    await supabaseClient
+    .from("transacoes")
+    .delete()
+    .eq("id",id);
+
+
+    if(error){
+
+        mostrarToast(
+            "Erro ao eliminar transação.",
+            "erro"
+        );
+
+        return;
+    }
+
+
+    mostrarToast(
+        "Transação eliminada.",
+        "sucesso"
+    );
+
+
+    await carregarDados();
+
 }
 
 
@@ -2596,107 +2699,37 @@ function filtrarTransacoes(){
         ).toLowerCase();
 
     const tipo =
-        $("filtroTipo")
-        .value;
+        $("filtroTipo").value;
+
 
     transacoesFiltradas =
-        transacoes.filter(t=>{
+        transacoes.filter(
+            t=>
+                (
+                    t.descricao||""
+                )
+                .toLowerCase()
+                .includes(termo)
 
-            const descricao =
-                String(
-                    t.descricao || ""
-                ).toLowerCase();
+                &&
 
-            return (
-                descricao.includes(termo) &&
                 (
                     !tipo ||
                     t.tipo===tipo
                 )
-            );
+        );
 
-        });
 
     paginaAtual.transacoes=1;
 
     atualizarTudo();
+
 }
 
 
-function exportarTransacoesCSV(){
-
-    if(!transacoes.length){
-
-        mostrarToast(
-            "Nenhuma transação.",
-            "atencao"
-        );
-
-        return;
-    }
-
-    let csv =
-        "Data,Tipo,Categoria,Descricao,Valor\n";
-
-    transacoes.forEach(t=>{
-
-        csv +=
-            `"${t.data||""}",`+
-            `"${t.tipo||""}",`+
-            `"${t.categoria||""}",`+
-            `"${t.descricao||""}",`+
-            `"${t.valor||0}"\n`;
-
-    });
-
-    baixarCSV(
-        csv,
-        "transacoes_ojv.csv"
-    );
-}
-
-
-function baixarCSV(
-    conteudo,
-    nome
-){
-
-    const blob =
-        new Blob(
-            ["\ufeff"+conteudo],
-            {
-                type:
-                    "text/csv;charset=utf-8;"
-            }
-        );
-
-    const url =
-        URL.createObjectURL(blob);
-
-    const a =
-        document.createElement("a");
-
-    a.href=url;
-    a.download=nome;
-
-    document.body.appendChild(a);
-
-    a.click();
-
-    a.remove();
-
-    URL.revokeObjectURL(url);
-
-    mostrarToast(
-        "📤 CSV exportado!",
-        "sucesso"
-    );
-}
-
-
-/* =====================================================
+/* =========================================================
    EVENTOS
-===================================================== */
+========================================================= */
 
 async function adicionarEvento(){
 
@@ -2706,13 +2739,13 @@ async function adicionarEvento(){
         .trim();
 
     const data =
-        $("eventoData")
-        .value;
+        $("eventoData").value;
 
     const local =
         $("eventoLocal")
         .value
         .trim();
+
 
     if(!nome || !data){
 
@@ -2724,58 +2757,106 @@ async function adicionarEvento(){
         return;
     }
 
+
     const {
         error
     } =
     await supabaseClient
-        .from("eventos")
-        .insert([{
-            nome,
-            data,
-            local:
-                local || "Não definido",
-            status:"Agendado"
-        }]);
+    .from("eventos")
+    .insert([{
+
+        nome:nome,
+
+        data:data,
+
+        local:local,
+
+        status:"Agendado"
+
+    }]);
+
 
     if(error){
 
         console.error(error);
 
         mostrarToast(
-            "Erro ao criar evento: "+
-            error.message,
+            "Erro ao criar evento.",
             "erro"
         );
 
         return;
     }
 
+
     $("eventoNome").value="";
     $("eventoData").value="";
     $("eventoLocal").value="";
 
+
     mostrarToast(
-        "📅 Evento criado!",
+        "Evento criado.",
         "sucesso"
     );
 
-    await carregarEventos();
 
-    atualizarTudo();
+    await carregarDados();
+
 }
 
 
-/* =====================================================
+async function excluirEvento(id){
+
+    if(
+        !confirm(
+            "Eliminar este evento?"
+        )
+    )
+        return;
+
+
+    const {
+        error
+    } =
+    await supabaseClient
+    .from("eventos")
+    .delete()
+    .eq("id",id);
+
+
+    if(error){
+
+        mostrarToast(
+            "Erro ao eliminar evento.",
+            "erro"
+        );
+
+        return;
+    }
+
+
+    mostrarToast(
+        "Evento eliminado.",
+        "sucesso"
+    );
+
+
+    await carregarDados();
+
+}
+
+
+/* =========================================================
    META
-===================================================== */
+========================================================= */
 
 async function definirMeta(){
 
     const valor =
         parseFloat(
-            $("metaValorInput")
-            .value
+            $("metaValorInput").value
         );
+
 
     if(
         !valor ||
@@ -2790,61 +2871,88 @@ async function definirMeta(){
         return;
     }
 
-    let resposta;
 
-    if(meta.id){
+    try{
 
-        resposta =
+        const existente =
             await supabaseClient
-                .from("meta")
-                .update({
-                    valor,
-                    guardado:0
-                })
-                .eq(
-                    "id",
-                    meta.id
-                );
+            .from("meta")
+            .select("id")
+            .limit(1);
 
-    }else{
 
-        resposta =
+        if(
+            existente.data &&
+            existente.data.length
+        ){
+
+            const {
+                error
+            } =
             await supabaseClient
-                .from("meta")
-                .insert([{
-                    valor,
-                    guardado:0
-                }])
-                .select();
+            .from("meta")
+            .update({
 
-    }
+                valor:valor,
 
-    if(resposta.error){
+                guardado:0
 
-        console.error(
-            resposta.error
-        );
+            })
+            .eq(
+                "id",
+                existente.data[0].id
+            );
+
+
+            if(error)
+                throw error;
+
+
+        }else{
+
+            const {
+                error
+            } =
+            await supabaseClient
+            .from("meta")
+            .insert([{
+
+                valor:valor,
+
+                guardado:0
+
+            }]);
+
+
+            if(error)
+                throw error;
+
+        }
+
+
+        $("metaValorInput").value="";
+
 
         mostrarToast(
-            "Erro ao definir meta: "+
-            resposta.error.message,
+            "Meta definida.",
+            "sucesso"
+        );
+
+
+        await carregarDados();
+
+
+    }catch(e){
+
+        console.error(e);
+
+        mostrarToast(
+            "Erro ao guardar meta.",
             "erro"
         );
 
-        return;
     }
 
-    $("metaValorInput")
-        .value="";
-
-    await carregarMeta();
-
-    mostrarToast(
-        "🎯 Meta definida!",
-        "sucesso"
-    );
-
-    atualizarTudo();
 }
 
 
@@ -2852,9 +2960,9 @@ async function guardarParaMeta(){
 
     const valor =
         parseFloat(
-            $("metaGuardarInput")
-            .value
+            $("metaGuardarInput").value
         );
+
 
     if(
         !valor ||
@@ -2869,203 +2977,338 @@ async function guardarParaMeta(){
         return;
     }
 
+
     if(!meta.id){
 
         mostrarToast(
-            "Defina primeiro uma meta.",
+            "Defina uma meta primeiro.",
             "atencao"
         );
 
         return;
     }
 
-    const novoGuardado =
+
+    const novo =
         Math.min(
-            meta.guardado + valor,
-            meta.valor
+            Number(meta.valor),
+            Number(meta.guardado||0)+valor
         );
+
 
     const {
         error
     } =
     await supabaseClient
-        .from("meta")
-        .update({
-            guardado:
-                novoGuardado
-        })
-        .eq(
-            "id",
-            meta.id
-        );
+    .from("meta")
+    .update({
+        guardado:novo
+    })
+    .eq("id",meta.id);
+
 
     if(error){
 
         mostrarToast(
-            "Erro ao guardar para a meta.",
+            "Erro ao atualizar meta.",
             "erro"
         );
 
         return;
     }
 
-    $("metaGuardarInput")
-        .value="";
 
-    await carregarMeta();
+    $("metaGuardarInput").value="";
+
 
     mostrarToast(
-        novoGuardado>=meta.valor
-        ? "🎉 Meta atingida!"
-        : "💰 Valor guardado!",
+        "Valor guardado na meta.",
         "sucesso"
     );
 
-    atualizarTudo();
+
+    await carregarDados();
+
 }
 
 
-/* =====================================================
-   ATUALIZAR TUDO
-===================================================== */
+/* =========================================================
+   CSV
+========================================================= */
+
+function baixarCSV(
+    nome,
+    conteudo
+){
+
+    const blob =
+        new Blob(
+            [conteudo],
+            {type:"text/csv;charset=utf-8"}
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+    const a =
+        document.createElement("a");
+
+    a.href=url;
+
+    a.download=nome;
+
+    a.click();
+
+    URL.revokeObjectURL(url);
+
+}
+
+
+function exportarMembrosCSV(){
+
+    if(!membros.length){
+
+        mostrarToast(
+            "Não há membros.",
+            "atencao"
+        );
+
+        return;
+    }
+
+
+    let csv =
+        "Nome,E-mail,Telefone,Aniversario,Status\n";
+
+
+    membros.forEach(m=>{
+
+        csv +=
+            `"${m.nome||""}",`+
+            `"${m.email||""}",`+
+            `"${m.telefone||""}",`+
+            `"${m.aniversario||""}",`+
+            `"${m.status||""}"\n`;
+
+    });
+
+
+    baixarCSV(
+        "membros_ojv.csv",
+        csv
+    );
+
+}
+
+
+function exportarTransacoesCSV(){
+
+    let csv =
+        "Data,Tipo,Categoria,Descricao,Valor\n";
+
+
+    transacoes.forEach(t=>{
+
+        csv +=
+            `"${t.data||""}",`+
+            `"${t.tipo||""}",`+
+            `"${t.categoria||""}",`+
+            `"${t.descricao||""}",`+
+            `"${t.valor||0}"\n`;
+
+    });
+
+
+    baixarCSV(
+        "transacoes_ojv.csv",
+        csv
+    );
+
+}
+
+
+/* =========================================================
+   ATUALIZAR INTERFACE
+========================================================= */
 
 function atualizarTudo(){
 
-    if(!usuario)
-        return;
+    membrosFiltrados =
+        membrosFiltrados.length ||
+        $("buscaMembro")?.value
+        ? membros.filter(m=>{
+
+            const termo =
+                (
+                    $("buscaMembro")?.value ||
+                    ""
+                ).toLowerCase();
+
+            return (
+                (m.nome||"")
+                .toLowerCase()
+                .includes(termo)
+
+                ||
+
+                (m.email||"")
+                .toLowerCase()
+                .includes(termo)
+
+                ||
+
+                (m.telefone||"")
+                .toLowerCase()
+                .includes(termo)
+            );
+
+        })
+        : membros.slice();
+
+
+    if(
+        $("buscaTransacao") &&
+        (
+            $("buscaTransacao").value ||
+            $("filtroTipo").value
+        )
+    ){
+
+        filtrarTransacoes();
+
+    }else{
+
+        transacoesFiltradas =
+            transacoes.slice();
+
+    }
+
+
+    const pM =
+        criarPagina(
+            "membros",
+            membrosFiltrados
+        );
+
+
+    const pT =
+        criarPagina(
+            "transacoes",
+            transacoesFiltradas
+        );
 
 
     /* MEMBROS */
 
-    const termoM =
-        (
-            $("buscaMembro")
-            ?.value || ""
-        ).toLowerCase();
-
-    membrosFiltrados =
-        membros.filter(m=>{
-
-            return (
-                String(
-                    m.nome || ""
-                ).toLowerCase()
-                .includes(termoM)
-                ||
-                String(
-                    m.telefone || ""
-                ).toLowerCase()
-                .includes(termoM)
-            );
-
-        });
-
-
-    const pm =
-        paginaDados(
-            membrosFiltrados,
-            "membros"
-        );
-
-
-    criarPaginacao(
+    desenharPaginacao(
         "membros",
-        pm.totalPaginas,
+        pM.paginas,
         "pagMembros"
     );
 
 
     let htmlM="";
 
-    pm.dados.forEach(m=>{
 
-        const status =
-            m.status || "Ativo";
+    pM.dados.forEach(
+        (m,i)=>{
 
-        const classe =
-            status==="Ativo"
-            ? "badge-sucesso"
-            : "badge-perigo";
-
-        htmlM += `
-
-        <tr>
-
-            <td>
-
-                <strong>
-                    ${escaparHTML(m.nome)}
-                </strong>
-
-                <br>
-
-                <small>
-                    ${escaparHTML(
-                        m.telefone || ""
-                    )}
-                </small>
-
-            </td>
-
-            <td>
-
-                <span class="badge ${classe}">
-                    ${escaparHTML(status)}
-                </span>
-
-            </td>
-
-            <td>
-
-                <div class="grupo-acoes">
-
-                    <button
-                        class="btn btn-outline"
-                        onclick="editarMembro('${m.id}')"
-                    >
-                        ✏️
-                    </button>
-
-                    <button
-                        class="btn btn-danger"
-                        onclick="excluirMembro('${m.id}')"
-                    >
-                        🗑️
-                    </button>
-
-                </div>
-
-            </td>
-
-        </tr>
-
-        `;
-
-    });
+            const real =
+                pM.inicio+i;
 
 
-    $("listaMembros")
-        .innerHTML =
+            const classe =
+                m.status==="Ativo"
+                ? "badge-sucesso"
+                : "badge-perigo";
+
+
+            htmlM += `
+
+<tr>
+
+<td>
+
+<strong>
+${escaparHTML(m.nome)}
+</strong>
+
+<br>
+
+<span style="font-size:.7rem;color:#777">
+${escaparHTML(m.email||"")}
+</span>
+
+</td>
+
+
+<td>
+${escaparHTML(m.telefone||"")}
+</td>
+
+
+<td>
+
+<span class="badge ${classe}">
+${escaparHTML(m.status||"Ativo")}
+</span>
+
+</td>
+
+
+<td>
+
+<div class="grupo-acoes">
+
+<button
+class="btn btn-outline"
+onclick="editarMembro(${real})"
+>
+✏️
+</button>
+
+<button
+class="btn btn-danger"
+onclick="excluirMembro(${real})"
+>
+🗑️
+</button>
+
+</div>
+
+</td>
+
+</tr>
+
+`;
+
+        }
+    );
+
+
+    $("listaMembros").innerHTML =
         htmlM ||
         `
-        <tr>
-            <td colspan="3"
-                style="text-align:center;padding:20px">
-                Nenhum membro cadastrado.
-            </td>
-        </tr>
-        `;
+<tr>
+<td colspan="4" style="text-align:center">
+Nenhum membro cadastrado.
+</td>
+</tr>
+`;
 
 
     $("totalMembros")
         .textContent =
         membros.length;
 
+
     $("ativosCount")
         .textContent =
         membros.filter(
             m=>m.status==="Ativo"
         ).length;
+
 
     $("navMembros")
         .textContent =
@@ -3074,196 +3317,169 @@ function atualizarTudo(){
 
     /* TRANSAÇÕES */
 
-    const termoT =
-        (
-            $("buscaTransacao")
-            ?.value || ""
-        ).toLowerCase();
-
-    const filtroT =
-        $("filtroTipo")
-        ?.value || "";
-
-
-    transacoesFiltradas =
-        transacoes.filter(t=>{
-
-            return (
-                String(
-                    t.descricao || ""
-                ).toLowerCase()
-                .includes(termoT)
-                &&
-                (
-                    !filtroT ||
-                    t.tipo===filtroT
-                )
-            );
-
-        });
-
-
-    const pt =
-        paginaDados(
-            transacoesFiltradas,
-            "transacoes"
-        );
-
-
-    criarPaginacao(
+    desenharPaginacao(
         "transacoes",
-        pt.totalPaginas,
+        pT.paginas,
         "pagTransacoes"
     );
 
 
     let htmlT="";
 
-    pt.dados.forEach(t=>{
+
+    pT.dados.forEach(t=>{
 
         const valor =
-            numero(t.valor);
+            Number(t.valor||0);
+
 
         const cor =
             valor>=0
             ? "#28a745"
             : "#dc3545";
 
-        let data="";
-
-        if(t.data){
-
-            try{
-
-                data =
-                    new Date(t.data)
-                    .toLocaleString(
-                        "pt-AO"
-                    );
-
-            }catch(e){
-
-                data=t.data;
-
-            }
-
-        }
 
         htmlT += `
 
-        <tr>
+<tr>
 
-            <td>
-                ${escaparHTML(data)}
-            </td>
+<td style="font-size:.7rem">
+${escaparHTML(t.data||"")}
+</td>
 
-            <td>
-                ${escaparHTML(
-                    t.descricao || ""
-                )}
-            </td>
+<td>
 
-            <td
-                style="
-                    font-weight:700;
-                    color:${cor}
-                "
-            >
-                ${valor>=0?"+":""}
-                ${dinheiro(valor)}
-            </td>
+<strong>
+${escaparHTML(t.descricao||"")}
+</strong>
 
-        </tr>
+<br>
 
-        `;
+<span style="font-size:.7rem;color:#777">
+${escaparHTML(t.categoria||"")}
+</span>
+
+</td>
+
+<td
+style="
+font-weight:700;
+color:${cor}
+"
+>
+
+${valor>=0?"+":""}
+${formatarNumero(valor)}
+ Kz
+
+</td>
+
+
+<td>
+
+<button
+class="btn btn-danger"
+style="
+width:auto;
+min-height:34px;
+padding:7px;
+font-size:.72rem;
+"
+onclick="excluirTransacao('${t.id}')"
+>
+🗑️
+</button>
+
+</td>
+
+</tr>
+
+`;
 
     });
 
 
-    $("listaTransacoes")
-        .innerHTML =
+    $("listaTransacoes").innerHTML =
         htmlT ||
         `
-        <tr>
-            <td colspan="3"
-                style="text-align:center;padding:20px">
-                Nenhuma transação.
-            </td>
-        </tr>
-        `;
+<tr>
+<td colspan="4" style="text-align:center">
+Nenhuma transação.
+</td>
+</tr>
+`;
 
 
     /* EVENTOS */
 
     let htmlE="";
 
-    eventos
-        .slice(0,20)
-        .forEach(e=>{
 
-            const classe =
-                e.status==="Agendado"
-                ? "badge-info"
-                : "badge-sucesso";
+    eventos.forEach(e=>{
 
-            htmlE += `
+        htmlE += `
 
-            <tr>
+<tr>
 
-                <td>
+<td>
 
-                    <strong>
-                        ${escaparHTML(
-                            e.nome || ""
-                        )}
-                    </strong>
+<strong>
+${escaparHTML(e.nome||"")}
+</strong>
 
-                    <br>
+<br>
 
-                    <small>
-                        ${escaparHTML(
-                            e.local || ""
-                        )}
-                    </small>
+<span style="font-size:.7rem;color:#777">
+${escaparHTML(e.local||"")}
+</span>
 
-                </td>
+</td>
 
-                <td>
-                    ${escaparHTML(
-                        e.data || ""
-                    )}
-                </td>
+<td>
+${escaparHTML(e.data||"")}
+</td>
 
-                <td>
+<td>
 
-                    <span
-                        class="badge ${classe}"
-                    >
-                        ${escaparHTML(
-                            e.status || ""
-                        )}
-                    </span>
+<span class="badge badge-info">
+${escaparHTML(e.status||"Agendado")}
+</span>
 
-                </td>
+</td>
 
-            </tr>
+<td>
 
-            `;
+<button
+class="btn btn-danger"
+style="
+width:auto;
+min-height:34px;
+padding:7px;
+font-size:.72rem;
+"
+onclick="excluirEvento('${e.id}')"
+>
+🗑️
+</button>
 
-        });
+</td>
+
+</tr>
+
+`;
+
+    });
 
 
-    $("listaEventos")
-        .innerHTML =
+    $("listaEventos").innerHTML =
         htmlE ||
         `
-        <tr>
-            <td colspan="3"
-                style="text-align:center;padding:20px">
-                Nenhum evento.
-            </td>
-        </tr>
-        `;
+<tr>
+<td colspan="4" style="text-align:center">
+Nenhum evento.
+</td>
+</tr>
+`;
 
 
     /* FINANÇAS */
@@ -3274,13 +3490,14 @@ function atualizarTudo(){
 
     transacoes.forEach(t=>{
 
-        const valor =
-            numero(t.valor);
+        const v =
+            Number(t.valor||0);
 
-        if(valor>0)
-            receitas += valor;
+
+        if(v>=0)
+            receitas+=v;
         else
-            despesas += Math.abs(valor);
+            despesas+=Math.abs(v);
 
     });
 
@@ -3291,153 +3508,154 @@ function atualizarTudo(){
 
     $("finReceitas")
         .textContent =
-        dinheiro(receitas);
+        formatarNumero(receitas)+" Kz";
+
 
     $("finDespesas")
         .textContent =
-        dinheiro(despesas);
+        formatarNumero(despesas)+" Kz";
+
 
     $("finSaldo")
         .textContent =
-        dinheiro(saldo);
+        formatarNumero(saldo)+" Kz";
 
 
     /* DASHBOARD */
 
-    $("cardsDashboard")
-        .innerHTML = `
+    $("cardsDashboard").innerHTML = `
 
-        <div class="card">
+<div class="card">
 
-            <span class="numero">
-                ${membros.length}
-            </span>
+<span class="numero">
+${membros.length}
+</span>
 
-            <span class="rotulo">
-                Membros
-            </span>
+<span class="rotulo">
+Membros
+</span>
 
-        </div>
+</div>
 
-        <div class="card verde">
 
-            <span class="numero">
-                ${dinheiro(receitas)}
-            </span>
+<div class="card verde">
 
-            <span class="rotulo">
-                Receitas
-            </span>
+<span class="numero">
+${formatarNumero(receitas)}
+</span>
 
-        </div>
+<span class="rotulo">
+Receitas
+</span>
 
-        <div class="card vermelho">
+</div>
 
-            <span class="numero">
-                ${dinheiro(despesas)}
-            </span>
 
-            <span class="rotulo">
-                Despesas
-            </span>
+<div class="card vermelho">
 
-        </div>
+<span class="numero">
+${formatarNumero(despesas)}
+</span>
 
-        <div class="card azul">
+<span class="rotulo">
+Despesas
+</span>
 
-            <span class="numero">
-                ${dinheiro(saldo)}
-            </span>
+</div>
 
-            <span class="rotulo">
-                Saldo
-            </span>
 
-        </div>
+<div class="card azul">
 
-        `;
+<span class="numero">
+${formatarNumero(saldo)}
+</span>
+
+<span class="rotulo">
+Saldo
+</span>
+
+</div>
+
+`;
 
 
     /* ÚLTIMAS TRANSAÇÕES */
 
     const ult =
         transacoes
-            .slice(0,3);
+        .slice(0,3);
 
 
-    $("ultimasTransacoes")
-        .innerHTML =
+    $("ultimasTransacoes").innerHTML =
         ult.length
-        ? ult.map(t=>{
+        ? ult.map(t=>`
 
-            const v =
-                numero(t.valor);
+<div
+style="
+display:flex;
+justify-content:space-between;
+padding:7px 0;
+border-bottom:1px solid #eee;
+"
+>
 
-            return `
+<span>
+${escaparHTML(t.descricao||"")}
+</span>
 
-            <div class="linha-resumo">
+<strong
+style="
+color:${Number(t.valor)>=0?"#28a745":"#dc3545"}
+"
+>
 
-                <span>
-                    ${escaparHTML(
-                        t.descricao || ""
-                    )}
-                </span>
+${Number(t.valor)>=0?"+":""}
+${formatarNumero(t.valor)}
+ Kz
 
-                <strong
-                    style="
-                        color:${v>=0
-                            ? "#28a745"
-                            : "#dc3545"}
-                    "
-                >
-                    ${v>=0?"+":""}
-                    ${dinheiro(v)}
-                </strong>
+</strong>
 
-            </div>
+</div>
 
-            `;
-
-        }).join("")
+`).join("")
         : "Nenhuma transação.";
 
 
     /* EVENTOS */
 
-    const proximos =
+    const prox =
         eventos
-            .filter(
-                e=>e.status==="Agendado"
-            )
-            .slice(0,3);
+        .filter(e=>
+            !e.status ||
+            e.status==="Agendado"
+        )
+        .slice(0,3);
 
 
-    $("proximosEventos")
-        .innerHTML =
-        proximos.length
-        ? proximos.map(e=>{
+    $("proximosEventos").innerHTML =
+        prox.length
+        ? prox.map(e=>`
 
-            return `
+<div
+style="
+display:flex;
+justify-content:space-between;
+padding:7px 0;
+border-bottom:1px solid #eee;
+"
+>
 
-            <div class="linha-resumo">
+<span>
+${escaparHTML(e.nome||"")}
+</span>
 
-                <span>
-                    ${escaparHTML(
-                        e.nome || ""
-                    )}
-                </span>
+<strong>
+${escaparHTML(e.data||"")}
+</strong>
 
-                <strong>
-                    ${escaparHTML(
-                        e.data || ""
-                    )}
-                </strong>
+</div>
 
-            </div>
-
-            `;
-
-        }).join("")
+`).join("")
         : "Nenhum evento agendado.";
 
 
@@ -3452,143 +3670,663 @@ function atualizarTudo(){
         );
 
 
-    $("graficoBarras")
-        .innerHTML = `
+    $("graficoBarras").innerHTML = `
 
-        <div
-            class="barra receita"
-            style="
-                height:${Math.max(
-                    10,
-                    receitas/max*90
-                )}px
-            "
-        >
-            <span class="valor">
-                ${dinheiro(receitas)}
-            </span>
-        </div>
+<div
+class="barra"
+style="
+height:${(receitas/max)*90+10}px;
+background:#28a745;
+"
+>
 
-        <div
-            class="barra despesa"
-            style="
-                height:${Math.max(
-                    10,
-                    despesas/max*90
-                )}px
-            "
-        >
-            <span class="valor">
-                ${dinheiro(despesas)}
-            </span>
-        </div>
+<span class="valor">
+${formatarNumero(receitas)}
+</span>
 
-        <div
-            class="barra saldo"
-            style="
-                height:${Math.max(
-                    10,
-                    Math.abs(saldo)/max*90
-                )}px
-            "
-        >
-            <span class="valor">
-                ${dinheiro(saldo)}
-            </span>
-        </div>
+</div>
 
-        `;
+
+<div
+class="barra"
+style="
+height:${(despesas/max)*90+10}px;
+background:#dc3545;
+"
+>
+
+<span class="valor">
+${formatarNumero(despesas)}
+</span>
+
+</div>
+
+
+<div
+class="barra"
+style="
+height:${(Math.abs(saldo)/max)*90+10}px;
+background:#0b1a2e;
+"
+>
+
+<span class="valor">
+${formatarNumero(saldo)}
+</span>
+
+</div>
+
+`;
 
 
     /* META */
 
+    const valorMeta =
+        Number(meta.valor||0);
+
+    const guardado =
+        Number(meta.guardado||0);
+
+
     const percentual =
-        meta.valor>0
-        ? (
-            meta.guardado /
-            meta.valor
-        )*100
+        valorMeta>0
+        ? Math.min(
+            100,
+            guardado/valorMeta*100
+        )
         : 0;
 
 
     $("metaValorExibido")
         .textContent =
-        dinheiro(meta.valor);
+        formatarNumero(valorMeta)+" Kz";
+
 
     $("metaGuardadoExibido")
         .textContent =
-        dinheiro(meta.guardado);
+        formatarNumero(guardado)+" Kz";
+
 
     $("metaBarra")
         .style.width =
-        Math.min(
-            percentual,
-            100
-        )+"%";
+        percentual+"%";
+
 
     $("metaProgresso")
         .textContent =
         percentual.toFixed(0)+"%";
 
+
     $("metaFalta")
         .textContent =
-        dinheiro(
+        formatarNumero(
             Math.max(
                 0,
-                meta.valor-
-                meta.guardado
+                valorMeta-guardado
             )
-        );
+        )+" Kz";
+
 }
 
 
-/* =====================================================
-   EVENTOS DE INTERFACE
-===================================================== */
+/* =========================================================
+   PDF PROFISSIONAL
+========================================================= */
 
-$("loginForm")
-    .addEventListener(
-        "submit",
-        fazerLogin
-    );
+async function gerarPDF(){
+
+    if(
+        typeof window.jspdf ===
+        "undefined"
+    ){
+
+        mostrarToast(
+            "Biblioteca PDF não carregada.",
+            "erro"
+        );
+
+        return;
+
+    }
 
 
-$("modal")
-    .addEventListener(
-        "click",
-        function(event){
+    const {
+        jsPDF
+    } =
+    window.jspdf;
 
-            if(
-                event.target === this
-            ){
 
-                fecharModal();
+    const pdf =
+        new jsPDF({
+            orientation:"portrait",
+            unit:"mm",
+            format:"a4"
+        });
+
+
+    const largura=210;
+    const altura=297;
+
+
+    let y=18;
+
+
+    /* LOGO */
+
+    try{
+
+        const img =
+            new Image();
+
+        img.src =
+            "logo.png";
+
+
+        await new Promise(
+            resolve=>{
+
+                img.onload=resolve;
+
+                img.onerror=resolve;
 
             }
+        );
+
+
+        if(
+            img.complete &&
+            img.naturalWidth>0
+        ){
+
+            pdf.addImage(
+                img,
+                "PNG",
+                17,
+                10,
+                30,
+                30
+            );
 
         }
+
+    }catch(e){
+
+        console.log(
+            "Logo não carregado."
+        );
+
+    }
+
+
+    /* CABEÇALHO */
+
+    pdf.setTextColor(
+        11,26,46
     );
 
 
-document.addEventListener(
-    "keydown",
-    function(event){
+    pdf.setFont(
+        "helvetica",
+        "bold"
+    );
 
-        if(
-            event.key==="Escape"
-        ){
 
+    pdf.setFontSize(18);
+
+
+    pdf.text(
+        "O.J.V. - Jovens Visionários",
+        54,
+        21
+    );
+
+
+    pdf.setFont(
+        "helvetica",
+        "normal"
+    );
+
+
+    pdf.setFontSize(11);
+
+
+    pdf.text(
+        "Relatório Geral",
+        54,
+        29
+    );
+
+
+    pdf.setFontSize(9);
+
+
+    pdf.text(
+        "Data: "+
+        new Date()
+        .toLocaleDateString(
+            "pt-PT"
+        ),
+        54,
+        36
+    );
+
+
+    pdf.setDrawColor(
+        100,100,100
+    );
+
+
+    pdf.line(
+        17,
+        44,
+        193,
+        44
+    );
+
+
+    y=57;
+
+
+    function titulo(
+        texto
+    ){
+
+        pdf.setFont(
+            "helvetica",
+            "bold"
+        );
+
+        pdf.setFontSize(12);
+
+        pdf.setTextColor(
+            11,26,46
+        );
+
+        pdf.text(
+            texto,
+            18,
+            y
+        );
+
+        y+=8;
+
+    }
+
+
+    function linha(
+        texto
+    ){
+
+        pdf.setFont(
+            "helvetica",
+            "normal"
+        );
+
+        pdf.setFontSize(10);
+
+        pdf.setTextColor(
+            40,40,40
+        );
+
+        pdf.text(
+            String(texto),
+            21,
+            y
+        );
+
+        y+=6;
+
+    }
+
+
+    /* FINANCEIRO */
+
+    let receitas=0;
+    let despesas=0;
+
+
+    transacoes.forEach(t=>{
+
+        const valor =
+            Number(t.valor||0);
+
+
+        if(valor>=0)
+            receitas+=valor;
+        else
+            despesas+=Math.abs(valor);
+
+    });
+
+
+    const saldo =
+        receitas-despesas;
+
+
+    titulo("FINANCEIRO");
+
+
+    linha(
+        "Receitas: "+
+        formatarNumero(receitas)+
+        " Kz"
+    );
+
+
+    linha(
+        "Despesas: "+
+        formatarNumero(despesas)+
+        " Kz"
+    );
+
+
+    linha(
+        "Saldo: "+
+        formatarNumero(saldo)+
+        " Kz"
+    );
+
+
+    y+=7;
+
+
+    /* MEMBROS */
+
+    const ativos =
+        membros.filter(
+            m=>m.status==="Ativo"
+        ).length;
+
+
+    const inativos =
+        membros.length-ativos;
+
+
+    titulo("MEMBROS");
+
+
+    linha(
+        "Total: "+
+        membros.length+
+        " | Ativos: "+
+        ativos+
+        " | Inativos: "+
+        inativos
+    );
+
+
+    y+=7;
+
+
+    /* EVENTOS */
+
+    const agendados =
+        eventos.filter(
+            e=>
+                !e.status ||
+                e.status==="Agendado"
+        ).length;
+
+
+    titulo("EVENTOS");
+
+
+    linha(
+        "Total: "+
+        eventos.length+
+        " | Agendados: "+
+        agendados
+    );
+
+
+    y+=7;
+
+
+    /* META */
+
+    const metaValor =
+        Number(meta.valor||0);
+
+    const metaGuardado =
+        Number(meta.guardado||0);
+
+
+    const metaPercentual =
+        metaValor>0
+        ? Math.min(
+            100,
+            metaGuardado/metaValor*100
+        )
+        : 0;
+
+
+    titulo("META");
+
+
+    linha(
+        "Guardado: "+
+        formatarNumero(metaGuardado)+
+        " / "+
+        formatarNumero(metaValor)+
+        " Kz ("+
+        metaPercentual.toFixed(0)+
+        "%)"
+    );
+
+
+    /* BARRA META */
+
+    y+=4;
+
+
+    pdf.setFillColor(
+        230,230,230
+    );
+
+
+    pdf.roundedRect(
+        20,
+        y,
+        170,
+        6,
+        3,
+        3,
+        "F"
+    );
+
+
+    if(metaPercentual>0){
+
+        pdf.setFillColor(
+            30,165,220
+        );
+
+
+        pdf.roundedRect(
+            20,
+            y,
+            170*(metaPercentual/100),
+            6,
+            3,
+            3,
+            "F"
+        );
+
+    }
+
+
+    y+=20;
+
+
+    /* ASSINATURAS */
+
+    titulo("ASSINATURAS");
+
+
+    y+=14;
+
+
+    pdf.setDrawColor(
+        60,60,60
+    );
+
+
+    /* PRESIDENTE */
+
+    pdf.line(
+        18,
+        y,
+        88,
+        y
+    );
+
+
+    /* DIRECTOR */
+
+    pdf.line(
+        122,
+        y,
+        192,
+        y
+    );
+
+
+    pdf.setFont(
+        "helvetica",
+        "normal"
+    );
+
+
+    pdf.setFontSize(9);
+
+
+    pdf.text(
+        "Presidente",
+        53,
+        y+6,
+        {align:"center"}
+    );
+
+
+    pdf.text(
+        "Director",
+        157,
+        y+6,
+        {align:"center"}
+    );
+
+
+    y+=31;
+
+
+    /* FINANCEIRO */
+
+    pdf.line(
+        18,
+        y,
+        88,
+        y
+    );
+
+
+    /* DESENVOLVEDOR */
+
+    pdf.line(
+        122,
+        y,
+        192,
+        y
+    );
+
+
+    pdf.text(
+        "Financeiro",
+        53,
+        y+6,
+        {align:"center"}
+    );
+
+
+    pdf.text(
+        "Desenvolvedor",
+        157,
+        y+6,
+        {align:"center"}
+    );
+
+
+    /* RODAPÉ */
+
+    pdf.setFontSize(8);
+
+    pdf.setTextColor(
+        100,100,100
+    );
+
+
+    pdf.text(
+        "O.J.V. Professional Plus - 2026",
+        largura/2,
+        286,
+        {align:"center"}
+    );
+
+
+    /* SALVAR */
+
+    const data =
+        new Date()
+        .toISOString()
+        .slice(0,10);
+
+
+    pdf.save(
+        "OJV_Relatorio_"+data+".pdf"
+    );
+
+
+    mostrarToast(
+        "PDF gerado com sucesso.",
+        "sucesso"
+    );
+
+}
+
+
+/* =========================================================
+   EVENTOS DO MODAL
+========================================================= */
+
+$("modal")
+.addEventListener(
+    "click",
+    function(e){
+
+        if(e.target===this)
             fecharModal();
-
-        }
 
     }
 );
 
 
 document.addEventListener(
+    "keydown",
+    function(e){
+
+        if(e.key==="Escape")
+            fecharModal();
+
+    }
+);
+
+
+/* =========================================================
+   FECHAR MENU
+========================================================= */
+
+document.addEventListener(
     "click",
-    function(event){
+    function(e){
 
         const nav =
             $("menuNav");
@@ -3598,14 +4336,15 @@ document.addEventListener(
                 ".menu-toggle"
             );
 
+
         if(
-            nav &&
             nav.classList.contains(
                 "aberto"
             ) &&
-            !nav.contains(event.target) &&
-            toggle &&
-            !toggle.contains(event.target)
+
+            !nav.contains(e.target) &&
+
+            !toggle.contains(e.target)
         ){
 
             nav.classList.remove(
@@ -3618,13 +4357,71 @@ document.addEventListener(
 );
 
 
-/* =====================================================
+/* =========================================================
+   SUPABASE AUTH
+========================================================= */
+
+supabaseClient.auth.onAuthStateChange(
+    function(event,session){
+
+        if(session){
+
+            mostrarAplicacao();
+
+        }else{
+
+            mostrarLogin();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
    INICIALIZAÇÃO
-===================================================== */
+========================================================= */
 
 carregarTema();
 
+aplicarMascaraData();
+
 verificarSessao();
+
+
+/* FUNÇÕES GLOBAIS */
+
+window.entrar=entrar;
+window.registar=registar;
+window.recuperarSenha=recuperarSenha;
+window.sair=sair;
+
+window.alternarTema=alternarTema;
+window.alternarMenu=alternarMenu;
+window.abrir=abrir;
+
+window.abrirModal=abrirModal;
+window.fecharModal=fecharModal;
+window.salvarMembro=salvarMembro;
+window.editarMembro=editarMembro;
+window.excluirMembro=excluirMembro;
+window.filtrarMembros=filtrarMembros;
+
+window.adicionarTransacao=adicionarTransacao;
+window.excluirTransacao=excluirTransacao;
+window.filtrarTransacoes=filtrarTransacoes;
+
+window.adicionarEvento=adicionarEvento;
+window.excluirEvento=excluirEvento;
+
+window.definirMeta=definirMeta;
+window.guardarParaMeta=guardarParaMeta;
+
+window.exportarMembrosCSV=exportarMembrosCSV;
+window.exportarTransacoesCSV=exportarTransacoesCSV;
+
+window.paginar=paginar;
+window.gerarPDF=gerarPDF;
 
 </script>
 
