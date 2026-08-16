@@ -273,6 +273,10 @@
         .btn-ouro:active { background: #d68910; }
         .btn-imprimir { background: #2d3436; }
         .btn-imprimir:active { background: #1a1a2e; }
+        .btn-login { background: #6c5ce7; }
+        .btn-login:active { background: #5a4bd1; }
+        .btn-logout { background: #e17055; }
+        .btn-logout:active { background: #d63031; }
         .tabela-wrapper {
             overflow-x: auto;
             margin-top: 12px;
@@ -312,6 +316,7 @@
         .badge-perigo { background: #f8d7da; color: #721c24; }
         .badge-atencao { background: #fff3cd; color: #856404; }
         .badge-info { background: #d1ecf1; color: #0c5460; }
+        .badge-admin { background: #6c5ce7; color: #fff; }
         .grupo-acoes {
             display: flex;
             gap: 6px;
@@ -470,6 +475,78 @@
             font-size: 0.9rem;
             font-weight: 600;
         }
+        .login-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .login-overlay.hidden {
+            display: none;
+        }
+        .login-box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        .login-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #16213e;
+        }
+        .login-box .logo-login {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            font-size: 1rem;
+            margin-bottom: 12px;
+            outline: none;
+            transition: 0.2s;
+        }
+        .login-box input:focus {
+            border-color: #16213e;
+            box-shadow: 0 0 0 4px rgba(22,33,62,0.1);
+        }
+        .login-box .btn {
+            width: 100%;
+            margin-top: 8px;
+        }
+        .login-box .erro-login {
+            color: #e94560;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
+        }
+        .login-box .erro-login.visible {
+            display: block;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.8);
+        }
+        .user-info .badge-admin {
+            background: #6c5ce7;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+        }
         footer {
             text-align: center;
             padding: 16px;
@@ -483,12 +560,14 @@
             color: #eee;
         }
         body.escuro section, body.escuro .card, body.escuro .modal-conteudo,
-        body.escuro .toast, body.escuro .paginacao button, body.escuro .tabela-wrapper {
+        body.escuro .toast, body.escuro .paginacao button, body.escuro .tabela-wrapper,
+        body.escuro .login-box {
             background: #2d2d44;
             color: #eee;
             border-color: #444;
         }
-        body.escuro .grupo-form input, body.escuro .grupo-form select, body.escuro .grupo-form textarea {
+        body.escuro .grupo-form input, body.escuro .grupo-form select, body.escuro .grupo-form textarea,
+        body.escuro .login-box input {
             background: #3a3a55;
             color: #eee;
             border-color: #555;
@@ -498,21 +577,36 @@
         body.escuro .btn-outline:active { background: #888; color: #fff; }
         body.escuro header, body.escuro nav { background: #0f0f1f; }
         body.escuro .subtitulo { color: #aaa; }
+        body.escuro .login-box h2 { color: #eee; }
         @media (max-width: 480px) {
             html { font-size: 18px; }
             header .logo img { width: 55px; height: 55px; }
             .cards { grid-template-columns: 1fr 1fr; gap: 8px; }
             .card .numero { font-size: 1.3rem; }
             .btn { font-size: 0.9rem; padding: 12px 14px; min-height: 48px; }
+            .login-box { padding: 20px; }
         }
         @media print {
-            header, nav, .btn, .toast-container, .paginacao { display: none !important; }
+            header, nav, .btn, .toast-container, .paginacao, .login-overlay { display: none !important; }
             body { background: #fff !important; color: #000 !important; padding: 20px !important; }
             section { display: block !important; background: #fff !important; box-shadow: none !important; }
         }
     </style>
 </head>
 <body>
+
+    <!-- TELA DE LOGIN -->
+    <div class="login-overlay" id="loginOverlay">
+        <div class="login-box">
+            <div class="logo-login">🔐</div>
+            <h2>O.J.V. Professional Plus</h2>
+            <p style="text-align:center;color:#666;margin-bottom:20px;">Acesso Restrito - Administrador</p>
+            <input type="password" id="senhaLogin" placeholder="Digite a senha de administrador" onkeydown="if(event.key==='Enter') fazerLogin()">
+            <button class="btn btn-login" onclick="fazerLogin()">🔑 Entrar</button>
+            <div class="erro-login" id="erroLogin">❌ Senha incorreta! Tente novamente.</div>
+            <p style="text-align:center;margin-top:15px;font-size:0.75rem;color:#999;">Apenas o administrador autorizado tem acesso.</p>
+        </div>
+    </div>
 
     <header>
         <div class="topo">
@@ -524,9 +618,14 @@
                 </div>
             </div>
             <div class="acoes">
+                <div class="user-info" id="userInfo" style="display:none;">
+                    <span>👤 Admin</span>
+                    <span class="badge-admin">ADMIN</span>
+                </div>
                 <button onclick="alternarTema()" title="Alternar tema">🌓</button>
                 <button onclick="fazerBackup()" title="Fazer backup">💾</button>
                 <button onclick="sincronizarSupabase()" title="Sincronizar com Supabase">☁️</button>
+                <button onclick="logout()" title="Sair" class="btn-logout" style="background:rgba(225,112,85,0.3);">🚪</button>
                 <button class="menu-toggle" onclick="alternarMenu()">☰</button>
             </div>
         </div>
@@ -572,10 +671,10 @@
                 <button class="btn btn-success" onclick="abrirModal()" style="flex:2;">➕ Novo Membro</button>
                 <button class="btn btn-outline" onclick="exportarMembrosCSV()" style="flex:1;">📤 CSV</button>
             </div>
-            <input id="buscaMembro" placeholder="🔍 Buscar por nome, telefone ou BI..." style="padding:14px; border:2px solid #ddd; border-radius:12px; font-size:1rem; width:100%; margin-bottom:14px;" oninput="filtrarMembros()">
+            <input id="buscaMembro" placeholder="🔍 Buscar por nome, BI ou telefone..." style="padding:14px; border:2px solid #ddd; border-radius:12px; font-size:1rem; width:100%; margin-bottom:14px;" oninput="filtrarMembros()">
             <div class="tabela-wrapper">
                 <table>
-                    <thead><tr><th>Nome</th><th>Telefone</th><th>Status</th><th>Aniversário</th><th>Ações</th></tr></thead>
+                    <thead><tr><th>Nome</th><th>BI</th><th>Telefone</th><th>Status</th><th>Ações</th></tr></thead>
                     <tbody id="listaMembros"></tbody>
                 </table>
             </div>
@@ -626,7 +725,7 @@
             </div>
             <div class="tabela-wrapper">
                 <table>
-                    <thead><tr><th>Data</th><th>Tipo</th><th>Descrição</th><th>Valor</th><th>Ação</th></tr></thead>
+                    <thead><tr><th>Data</th><th>Descrição</th><th>Valor</th></tr></thead>
                     <tbody id="listaTransacoes"></tbody>
                 </table>
             </div>
@@ -646,7 +745,7 @@
             </div>
             <div class="tabela-wrapper">
                 <table>
-                    <thead><tr><th>Evento</th><th>Data</th><th>Status</th><th>Ações</th></tr></thead>
+                    <thead><tr><th>Evento</th><th>Data</th><th>Status</th></tr></thead>
                     <tbody id="listaEventos"></tbody>
                 </table>
             </div>
@@ -735,9 +834,9 @@
             <h3 id="modalTitulo">📝 Novo Membro</h3>
             <div class="grupo-form">
                 <input id="modalNome" placeholder="Nome completo">
+                <input id="modalBI" placeholder="Bilhete de Identidade (BI)">
                 <input id="modalTelefone" placeholder="Telefone">
-                <input id="modalBI" placeholder="Bilhete de identidade">
-                <input id="modalAniversario" type="text" placeholder="DD/MM/AAAA" maxlength="10" oninput="mascaraData(this)">
+                <input id="modalAniversario" type="text" placeholder="DD/MM/AAAA" oninput="aplicarMascaraData(this)">
                 <select id="modalStatus"><option value="Ativo">✅ Ativo</option><option value="Inativo">❌ Inativo</option><option value="Suspenso">⏸️ Suspenso</option></select>
             </div>
             <div class="modal-acoes">
@@ -749,938 +848,1315 @@
 
     <div class="toast-container" id="toastContainer"></div>
     <footer>&copy; 2026 O.J.V. Professional Plus — Todos os direitos reservados</footer>
+    
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <script>
-    // ================================
-    // CONFIGURAÇÃO SUPABASE O.J.V.
-    // ================================
+    /* =========================================================
+       O.J.V. PROFESSIONAL PLUS
+       CONEXÃO SUPABASE
+       ========================================================= */
 
-    // ⚠️ ATENÇÃO: Coloque aqui as suas credenciais do Supabase
-    const SUPABASE_URL = "https://vawzshjcyrbnkynsctbt.supabase.co";
-    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZhd3pzaGpjeXJibmt5bnNjdGJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI5NTg3MzAsImV4cCI6MjA1ODUzNDczMH0.5rTEZ7fHp2_TtBQhZLh70ElZzF9UtyAS2_C7CbnPpLk";
+    const SUPABASE_URL = "https://twbrhphttgezkcvtftgy.supabase.co";
+    const SUPABASE_KEY = "sb_publishable_udyTdQ6bENac-naUp8R_Vw_HlyK5Vbw";
 
-    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const supabaseClient = supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
-    // ===== DADOS =====
-    function obter(chave, padrao) {
-        try { var d = localStorage.getItem(chave); return d ? JSON.parse(d) : padrao; } catch(e) { return padrao; }
+    /* =========================================================
+       SISTEMA DE LOGIN
+       ========================================================= */
+
+    const SENHA_ADMIN = "admin123"; // Altere esta senha
+    let estaLogado = false;
+
+    function fazerLogin() {
+        var senha = document.getElementById('senhaLogin').value;
+        var erro = document.getElementById('erroLogin');
+
+        if (senha === SENHA_ADMIN) {
+            estaLogado = true;
+            localStorage.setItem('ojv_logado', 'true');
+            document.getElementById('loginOverlay').classList.add('hidden');
+            document.getElementById('userInfo').style.display = 'flex';
+            erro.classList.remove('visible');
+            mostrarToast('✅ Login realizado com sucesso!', 'sucesso');
+            carregarTudoDoSupabase();
+        } else {
+            erro.classList.add('visible');
+            document.getElementById('senhaLogin').value = '';
+            document.getElementById('senhaLogin').focus();
+            mostrarToast('❌ Senha incorreta!', 'erro');
+        }
     }
-    function guardar(chave, dados) {
-        try { localStorage.setItem(chave, JSON.stringify(dados)); } catch(e) {}
+
+    function logout() {
+        if (confirm('Tem certeza que deseja sair?')) {
+            estaLogado = false;
+            localStorage.removeItem('ojv_logado');
+            document.getElementById('loginOverlay').classList.remove('hidden');
+            document.getElementById('userInfo').style.display = 'none';
+            mostrarToast('🚪 Sessão encerrada.', 'atencao');
+        }
     }
 
-    var membros = obter('ojv_membros', []);
-    var transacoes = obter('ojv_transacoes', []);
-    var eventos = obter('ojv_eventos', []);
-    var meta = obter('ojv_meta', { valor: 0, guardado: 0 });
-    var editandoIndex = -1;
-    var paginaAtual = { membros: 1, transacoes: 1, eventos: 1 };
-    var POR_PAGINA = 5;
+    function verificarLogin() {
+        if (localStorage.getItem('ojv_logado') === 'true') {
+            estaLogado = true;
+            document.getElementById('loginOverlay').classList.add('hidden');
+            document.getElementById('userInfo').style.display = 'flex';
+            carregarTudoDoSupabase();
+        }
+    }
 
-    // ===== TEMA =====
+    /* =========================================================
+       DADOS LOCAIS
+       ========================================================= */
+
+    let membros = [];
+    let transacoes = [];
+    let eventos = [];
+    let meta = { valor: 0, guardado: 0 };
+
+    let editandoIndex = -1;
+    let paginaAtual = {
+        membros: 1,
+        transacoes: 1,
+        eventos: 1
+    };
+
+    const POR_PAGINA = 5;
+    let membrosFiltrados = [];
+    let transacoesFiltradas = [];
+
+    /* =========================================================
+       AUXILIARES
+       ========================================================= */
+
+    function $(id) {
+        return document.getElementById(id);
+    }
+
+    function mostrarToast(msg, tipo) {
+        tipo = tipo || 'sucesso';
+
+        var container = $('toastContainer');
+        if (!container) return;
+
+        var toast = document.createElement('div');
+        toast.className = 'toast ' + tipo;
+
+        var icones = {
+            sucesso: '✅',
+            erro: '❌',
+            atencao: '⚠️'
+        };
+
+        toast.innerHTML =
+            '<span>' +
+            (icones[tipo] || 'ℹ️') +
+            '</span><span class="msg">' +
+            msg +
+            '</span>';
+
+        container.appendChild(toast);
+
+        setTimeout(function () {
+            toast.style.opacity = '0';
+
+            setTimeout(function () {
+                if (toast.parentNode) toast.remove();
+            }, 300);
+        }, 3000);
+    }
+
+    function escaparHTML(valor) {
+        if (valor === null || valor === undefined) return '';
+
+        return String(valor)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    function formatarNumero(valor) {
+        return Number(valor || 0).toLocaleString('pt-AO', {
+            maximumFractionDigits: 0
+        });
+    }
+
+    function dataHoje() {
+        return new Date().toISOString().split('T')[0];
+    }
+
+    function dataBancoParaTela(data) {
+        if (!data) return '';
+
+        var partes = String(data).split('-');
+
+        if (partes.length === 3) {
+            return partes[2] + '/' + partes[1] + '/' + partes[0];
+        }
+
+        return data;
+    }
+
+    function dataTelaParaBanco(data) {
+        if (!data || data.length !== 10) return null;
+
+        var partes = data.split('/');
+
+        if (partes.length !== 3) return null;
+
+        return partes[2] + '-' + partes[1] + '-' + partes[0];
+    }
+
+    function aplicarMascaraData(input) {
+        if (!input) return;
+
+        var value = input.value.replace(/\D/g, '');
+
+        if (value.length > 8) {
+            value = value.slice(0, 8);
+        }
+
+        if (value.length > 4) {
+            value = value.slice(0, 2) + '/' + value.slice(2, 4) + '/' + value.slice(4);
+        } else if (value.length > 2) {
+            value = value.slice(0, 2) + '/' + value.slice(2);
+        }
+
+        input.value = value;
+    }
+
+    /* =========================================================
+       AUTENTICAÇÃO SUPABASE
+       ========================================================= */
+
+    async function verificarSessao() {
+        try {
+            var resultado = await supabaseClient.auth.getSession();
+
+            if (resultado.error) {
+                console.error(resultado.error);
+                return false;
+            }
+
+            if (!resultado.data.session) {
+                console.warn('Nenhuma sessão autenticada encontrada.');
+                return false;
+            }
+
+            console.log('Supabase autenticado:', resultado.data.session.user.email);
+            return true;
+
+        } catch (erro) {
+            console.error(erro);
+            return false;
+        }
+    }
+
+    /* =========================================================
+       CARREGAR MEMBROS
+       ========================================================= */
+
+    async function carregarMembros() {
+        var resultado = await supabaseClient
+            .from('membros')
+            .select('*')
+            .order('data_registo', {
+                ascending: false
+            });
+
+        if (resultado.error) {
+            console.error('Erro ao carregar membros:', resultado.error);
+            mostrarToast('Erro ao carregar membros.', 'erro');
+            return;
+        }
+
+        membros = (resultado.data || []).map(function (m) {
+            return {
+                id: m.id,
+                nome: m.nome || '',
+                bi: m.bi || '',
+                telefone: m.telefone || '',
+                status: m.status || 'Ativo',
+                aniversario: dataBancoParaTela(m.data_nascimento),
+                dataEntrada: m.data_registo
+                    ? dataBancoParaTela(String(m.data_registo).substring(0, 10))
+                    : ''
+            };
+        });
+
+        membrosFiltrados = membros.slice();
+    }
+
+    /* =========================================================
+       CARREGAR TRANSAÇÕES
+       ========================================================= */
+
+    async function carregarTransacoes() {
+        var resultado = await supabaseClient
+            .from('transacoes')
+            .select('*')
+            .order('data_transacao', {
+                ascending: false
+            });
+
+        if (resultado.error) {
+            console.error('Erro ao carregar transações:', resultado.error);
+            mostrarToast('Erro ao carregar transações.', 'erro');
+            return;
+        }
+
+        transacoes = (resultado.data || []).map(function (t) {
+            var valor = Number(t.valor || 0);
+
+            if (t.tipo === 'despesa' && valor > 0) {
+                valor = -valor;
+            }
+
+            return {
+                id: t.id,
+                tipo: t.tipo || 'receita',
+                categoria: t.categoria || '',
+                descricao: t.descricao || '',
+                valor: valor,
+                data: t.data_transacao || ''
+            };
+        });
+
+        transacoesFiltradas = transacoes.slice();
+    }
+
+    /* =========================================================
+       CARREGAR EVENTOS
+       ========================================================= */
+
+    async function carregarEventos() {
+        var resultado = await supabaseClient
+            .from('eventos')
+            .select('*')
+            .order('data_evento', {
+                ascending: true
+            });
+
+        if (resultado.error) {
+            console.error('Erro ao carregar eventos:', resultado.error);
+            mostrarToast('Erro ao carregar eventos.', 'erro');
+            return;
+        }
+
+        eventos = (resultado.data || []).map(function (e) {
+            return {
+                id: e.id,
+                nome: e.titulo || '',
+                descricao: e.descricao || '',
+                data: e.data_evento || '',
+                local: e.local || '',
+                responsavel: e.responsavel || '',
+                status: 'Agendado'
+            };
+        });
+    }
+
+    /* =========================================================
+       CARREGAR META
+       ========================================================= */
+
+    async function carregarMeta() {
+        var resultado = await supabaseClient
+            .from('metas_financeiras')
+            .select('*')
+            .order('criado_em', {
+                ascending: false
+            })
+            .limit(1);
+
+        if (resultado.error) {
+            console.error('Erro ao carregar meta:', resultado.error);
+            mostrarToast('Erro ao carregar meta.', 'erro');
+            return;
+        }
+
+        if (resultado.data && resultado.data.length) {
+            var m = resultado.data[0];
+            meta = {
+                id: m.id,
+                valor: Number(m.valor_objetivo || 0),
+                guardado: Number(m.valor_atual || 0),
+                nome: m.nome_meta || 'Meta O.J.V.'
+            };
+        } else {
+            meta = {
+                valor: 0,
+                guardado: 0
+            };
+        }
+    }
+
+    /* =========================================================
+       CARREGAR TUDO DO SUPABASE
+       ========================================================= */
+
+    async function carregarTudoDoSupabase() {
+        if (!estaLogado) return;
+
+        var autenticado = await verificarSessao();
+
+        if (!autenticado) {
+            mostrarToast('⚠️ Conecte-se ao Supabase para sincronizar.', 'atencao');
+            atualizarTudo();
+            return;
+        }
+
+        await Promise.all([
+            carregarMembros(),
+            carregarTransacoes(),
+            carregarEventos(),
+            carregarMeta()
+        ]);
+
+        atualizarTudo();
+        console.log('🚀 Dados carregados do Supabase!');
+    }
+
+    /* =========================================================
+       TEMA
+       ========================================================= */
+
     function carregarTema() {
-        if(localStorage.getItem('ojv_tema_escuro') === 'true') document.body.classList.add('escuro');
+        if (localStorage.getItem('ojv_tema_escuro') === 'true') {
+            document.body.classList.add('escuro');
+        }
     }
+
     function alternarTema() {
         var isDark = document.body.classList.toggle('escuro');
         localStorage.setItem('ojv_tema_escuro', isDark ? 'true' : 'false');
         mostrarToast(isDark ? '🌙 Tema escuro ativado' : '☀️ Tema claro ativado', 'sucesso');
     }
 
-    // ===== DADOS DE EXEMPLO =====
-    if(membros.length === 0 && transacoes.length === 0 && eventos.length === 0) {
-        membros = [
-            { nome: 'João Silva', telefone: '+244 923 456 789', bi: 'BI 01-234-5678', status: 'Ativo', dataEntrada: new Date().toLocaleDateString(), aniversario: '1990-05-15' },
-            { nome: 'Maria Santos', telefone: '+244 934 567 890', bi: 'BI 02-345-6789', status: 'Ativo', dataEntrada: new Date().toLocaleDateString(), aniversario: '1988-12-03' },
-            { nome: 'Pedro Costa', telefone: '+244 945 678 901', bi: 'BI 03-456-7890', status: 'Inativo', dataEntrada: new Date().toLocaleDateString(), aniversario: '1995-08-22' }
-        ];
-        transacoes = [
-            { tipo: 'receita', valor: 5000, descricao: 'Mensalidade João', categoria: 'Mensalidade', data: new Date().toLocaleString() },
-            { tipo: 'receita', valor: 5000, descricao: 'Mensalidade Maria', categoria: 'Mensalidade', data: new Date().toLocaleString() },
-            { tipo: 'despesa', valor: -2000, descricao: 'Compra de material', categoria: 'Material', data: new Date().toLocaleString() }
-        ];
-        var amanha = new Date();
-        amanha.setDate(amanha.getDate() + 1);
-        eventos = [
-            { nome: 'Reunião Geral', data: amanha.toISOString().split('T')[0], hora: '15:00', local: 'Sala Principal', descricao: 'Reunião mensal', status: 'Agendado' }
-        ];
-        meta = { valor: 20000, guardado: 5000 };
-        guardar('ojv_membros', membros);
-        guardar('ojv_transacoes', transacoes);
-        guardar('ojv_eventos', eventos);
-        guardar('ojv_meta', meta);
-    }
+    /* =========================================================
+       MENU
+       ========================================================= */
 
-    // ===== AUXILIARES =====
-    function $(id) { return document.getElementById(id); }
-    function mostrarToast(msg, tipo) {
-        tipo = tipo || 'sucesso';
-        var container = $('toastContainer');
-        if(!container) return;
-        var toast = document.createElement('div');
-        toast.className = 'toast ' + tipo;
-        var icones = { sucesso: '✅', erro: '❌', atencao: '⚠️' };
-        toast.innerHTML = '<span>' + (icones[tipo] || 'ℹ️') + '</span><span class="msg">' + msg + '</span>';
-        container.appendChild(toast);
-        setTimeout(function() {
-            toast.style.opacity = '0';
-            toast.style.transform = 'translateY(10px)';
-            setTimeout(function() { if(toast.parentNode) toast.remove(); }, 300);
-        }, 3000);
-    }
-
-    // ===== MÁSCARA E CONVERSÃO DE DATA =====
-    function mascaraData(input) {
-        var valor = input.value.replace(/\D/g, '');
-        if (valor.length > 2) valor = valor.slice(0,2) + '/' + valor.slice(2);
-        if (valor.length > 5) valor = valor.slice(0,5) + '/' + valor.slice(5);
-        input.value = valor.slice(0,10);
-    }
-    function dataParaISO(dataBr) {
-        if (!dataBr || dataBr.length < 10) return '';
-        var partes = dataBr.split('/');
-        if (partes.length === 3) {
-            return partes[2] + '-' + partes[1] + '-' + partes[0];
-        }
-        return '';
-    }
-    function dataParaBR(dataISO) {
-        if (!dataISO) return '';
-        var partes = dataISO.split('-');
-        if (partes.length === 3) {
-            return partes[2] + '/' + partes[1] + '/' + partes[0];
-        }
-        return dataISO;
-    }
-
-    // ===== MENU =====
     function alternarMenu() {
         var nav = $('menuNav');
-        if(nav) nav.classList.toggle('aberto');
+        if (nav) {
+            nav.classList.toggle('aberto');
+        }
     }
+
     function abrir(id) {
-        document.querySelectorAll('section').forEach(function(s) { s.classList.remove('ativo'); });
+        document.querySelectorAll('section').forEach(function (s) {
+            s.classList.remove('ativo');
+        });
+
         var sec = $(id);
-        if(sec) sec.classList.add('ativo');
-        document.querySelectorAll('nav button').forEach(function(b) { b.classList.remove('ativo'); });
+        if (sec) {
+            sec.classList.add('ativo');
+        }
+
+        document.querySelectorAll('nav button').forEach(function (b) {
+            b.classList.remove('ativo');
+        });
+
         var target = document.querySelector('nav button[onclick*="' + id + '"]');
-        if(target) target.classList.add('ativo');
+        if (target) {
+            target.classList.add('ativo');
+        }
+
         var nav = $('menuNav');
-        if(nav) nav.classList.remove('aberto');
+        if (nav) {
+            nav.classList.remove('aberto');
+        }
+
         atualizarTudo();
     }
 
-    // ===== BACKUP / RESTAURAR =====
-    function fazerBackup() {
-        var dados = { membros: membros, transacoes: transacoes, eventos: eventos, meta: meta };
-        var blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
-        var a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'backup_ojv_' + new Date().toISOString().slice(0,10) + '.json';
-        a.click();
-        mostrarToast('💾 Backup criado com sucesso!', 'sucesso');
-    }
+    /* =========================================================
+       PAGINAÇÃO
+       ========================================================= */
 
-    // ===== PAGINAÇÃO =====
     function renderizarPagina(tipo, dados) {
         var total = dados.length;
         var totalPaginas = Math.ceil(total / POR_PAGINA) || 1;
-        if(paginaAtual[tipo] > totalPaginas) paginaAtual[tipo] = totalPaginas;
+
+        if (paginaAtual[tipo] > totalPaginas) {
+            paginaAtual[tipo] = totalPaginas;
+        }
+
         var inicio = (paginaAtual[tipo] - 1) * POR_PAGINA;
-        return { pagina: dados.slice(inicio, inicio + POR_PAGINA), inicio: inicio, total: total, totalPaginas: totalPaginas };
+
+        return {
+            pagina: dados.slice(inicio, inicio + POR_PAGINA),
+            inicio: inicio,
+            total: total,
+            totalPaginas: totalPaginas
+        };
     }
+
     function criarPaginacao(tipo, totalPaginas, containerId) {
         var div = $(containerId);
-        if(!div) return;
-        if(totalPaginas <= 1) { div.innerHTML = ''; return; }
+        if (!div) return;
+
+        if (totalPaginas <= 1) {
+            div.innerHTML = '';
+            return;
+        }
+
         var html = '';
-        for(var i = 1; i <= totalPaginas; i++) {
+        for (var i = 1; i <= totalPaginas; i++) {
             html += '<button class="' + (i === paginaAtual[tipo] ? 'ativo' : '') + '" onclick="paginar(\'' + tipo + '\',' + i + ')">' + i + '</button>';
         }
+
         div.innerHTML = html;
     }
-    function paginar(tipo, pagina) { paginaAtual[tipo] = pagina; atualizarTudo(); }
 
-    // ===== MEMBROS =====
-    var membrosFiltrados = [];
+    function paginar(tipo, pagina) {
+        paginaAtual[tipo] = pagina;
+        atualizarTudo();
+    }
+
+    /* =========================================================
+       MEMBROS
+       ========================================================= */
+
     function abrirModal() {
+        if (!estaLogado) {
+            mostrarToast('⚠️ Faça login para cadastrar membros.', 'atencao');
+            return;
+        }
+
         $('modalTitulo').textContent = '📝 Novo Membro';
         $('modalNome').value = '';
-        $('modalTelefone').value = '';
         $('modalBI').value = '';
+        $('modalTelefone').value = '';
         $('modalAniversario').value = '';
         $('modalStatus').value = 'Ativo';
         editandoIndex = -1;
         $('modal').classList.add('aberto');
     }
-    function fecharModal() { $('modal').classList.remove('aberto'); }
-    function salvarMembro() {
-        var nome = $('modalNome').value.trim();
-        var telefone = $('modalTelefone').value.trim();
-        var bi = $('modalBI').value.trim();
-        var aniversario = dataParaISO($('modalAniversario').value);
-        var status = $('modalStatus').value;
-        if(!nome) { mostrarToast('⚠️ Informe o nome do membro', 'atencao'); return; }
-        if(editandoIndex === -1) {
-            membros.push({ nome: nome, telefone: telefone, bi: bi, status: status, dataEntrada: new Date().toLocaleDateString(), aniversario: aniversario });
-            mostrarToast('✅ Membro "' + nome + '" adicionado!', 'sucesso');
-        } else {
-            membros[editandoIndex] = { ...membros[editandoIndex], nome: nome, telefone: telefone, bi: bi, status: status, aniversario: aniversario };
-            mostrarToast('✅ Membro "' + nome + '" atualizado!', 'sucesso');
-        }
-        guardar('ojv_membros', membros);
-        fecharModal();
-        atualizarTudo();
-        sincronizarMembros();
+
+    function fecharModal() {
+        $('modal').classList.remove('aberto');
     }
+
+    async function salvarMembro() {
+        if (!estaLogado) {
+            mostrarToast('⚠️ Faça login para salvar membros.', 'atencao');
+            return;
+        }
+
+        var nome = $('modalNome').value.trim();
+        var bi = $('modalBI').value.trim();
+        var telefone = $('modalTelefone').value.trim();
+        var aniversario = $('modalAniversario').value.trim();
+        var status = $('modalStatus').value;
+
+        if (!nome) {
+            mostrarToast('⚠️ Informe o nome do membro', 'atencao');
+            return;
+        }
+
+        if (!bi) {
+            mostrarToast('⚠️ Informe o Bilhete de Identidade (BI)', 'atencao');
+            return;
+        }
+
+        if (aniversario && aniversario.length !== 10) {
+            mostrarToast('⚠️ Data deve estar no formato DD/MM/AAAA', 'atencao');
+            return;
+        }
+
+        // Verificar se BI já existe
+        var biExistente = membros.find(function(m) {
+            return m.bi === bi && (editandoIndex === -1 || m.id !== membros[editandoIndex]?.id);
+        });
+
+        if (biExistente) {
+            mostrarToast('⚠️ Este BI já está cadastrado para outro membro.', 'atencao');
+            return;
+        }
+
+        var dataNascimento = aniversario ? dataTelaParaBanco(aniversario) : null;
+
+        try {
+            if (editandoIndex === -1) {
+                var inserir = await supabaseClient
+                    .from('membros')
+                    .insert([{
+                        nome: nome,
+                        bi: bi,
+                        telefone: telefone,
+                        data_nascimento: dataNascimento,
+                        status: status
+                    }])
+                    .select()
+                    .single();
+
+                if (inserir.error) throw inserir.error;
+                mostrarToast('✅ Membro "' + nome + '" adicionado!', 'sucesso');
+            } else {
+                var membro = membros[editandoIndex];
+                var atualizar = await supabaseClient
+                    .from('membros')
+                    .update({
+                        nome: nome,
+                        bi: bi,
+                        telefone: telefone,
+                        data_nascimento: dataNascimento,
+                        status: status
+                    })
+                    .eq('id', membro.id)
+                    .select()
+                    .single();
+
+                if (atualizar.error) throw atualizar.error;
+                mostrarToast('✅ Membro "' + nome + '" atualizado!', 'sucesso');
+            }
+
+            fecharModal();
+            await carregarMembros();
+            atualizarTudo();
+
+        } catch (erro) {
+            console.error(erro);
+            mostrarToast('❌ Não foi possível salvar o membro.', 'erro');
+        }
+    }
+
     function editarMembro(i) {
+        if (!estaLogado) {
+            mostrarToast('⚠️ Faça login para editar membros.', 'atencao');
+            return;
+        }
+
         var m = membros[i];
+        if (!m) return;
+
         $('modalTitulo').textContent = '✏️ Editar Membro';
-        $('modalNome').value = m.nome;
-        $('modalTelefone').value = m.telefone || '';
+        $('modalNome').value = m.nome || '';
         $('modalBI').value = m.bi || '';
-        $('modalAniversario').value = dataParaBR(m.aniversario || '');
+        $('modalTelefone').value = m.telefone || '';
+        $('modalAniversario').value = m.aniversario || '';
         $('modalStatus').value = m.status || 'Ativo';
         editandoIndex = i;
         $('modal').classList.add('aberto');
     }
-    function excluirMembro(i) {
-        if(!confirm('Tem certeza que deseja excluir "' + membros[i].nome + '"?')) return;
-        mostrarToast('🗑️ Membro "' + membros[i].nome + '" removido', 'atencao');
-        membros.splice(i, 1);
-        guardar('ojv_membros', membros);
-        atualizarTudo();
+
+    async function excluirMembro(i) {
+        if (!estaLogado) {
+            mostrarToast('⚠️ Faça login para excluir membros.', 'atencao');
+            return;
+        }
+
+        var m = membros[i];
+        if (!m) return;
+
+        if (!confirm('Tem certeza que deseja excluir "' + m.nome + '"?')) {
+            return;
+        }
+
+        try {
+            var resultado = await supabaseClient
+                .from('membros')
+                .delete()
+                .eq('id', m.id);
+
+            if (resultado.error) throw resultado.error;
+            mostrarToast('🗑️ Membro "' + m.nome + '" removido', 'atencao');
+            await carregarMembros();
+            atualizarTudo();
+
+        } catch (erro) {
+            console.error(erro);
+            mostrarToast('❌ Não foi possível excluir o membro.', 'erro');
+        }
     }
+
     function filtrarMembros() {
         var termo = ($('buscaMembro') ? $('buscaMembro').value : '').toLowerCase();
-        membrosFiltrados = membros.filter(function(m) {
-            return m.nome.toLowerCase().includes(termo) || (m.telefone || '').includes(termo) || (m.bi || '').toLowerCase().includes(termo);
+
+        membrosFiltrados = membros.filter(function (m) {
+            return (m.nome || '').toLowerCase().includes(termo) ||
+                   (m.bi || '').toLowerCase().includes(termo) ||
+                   (m.telefone || '').includes(termo);
         });
+
         paginaAtual.membros = 1;
         atualizarTudo();
     }
+
     function exportarMembrosCSV() {
-        if(!membros.length) { mostrarToast('⚠️ Nenhum membro para exportar', 'atencao'); return; }
-        var csv = 'Nome,Telefone,BI,Status,Entrada,Aniversário\n';
-        membros.forEach(function(m) { csv += m.nome + ',' + (m.telefone||'') + ',' + (m.bi||'') + ',' + (m.status||'Ativo') + ',' + (m.dataEntrada||'') + ',' + dataParaBR(m.aniversario||'') + '\n'; });
-        var blob = new Blob([csv], { type: 'text/csv' });
+        if (!membros.length) {
+            mostrarToast('⚠️ Nenhum membro para exportar', 'atencao');
+            return;
+        }
+
+        var csv = 'Nome,BI,Telefone,Status,Entrada,Aniversário\n';
+        membros.forEach(function (m) {
+            csv += '"' + (m.nome || '') + '","' + (m.bi || '') + '","' + (m.telefone || '') + '","' + (m.status || '') + '","' + (m.dataEntrada || '') + '","' + (m.aniversario || '') + '"\n';
+        });
+
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
         var a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
         a.download = 'membros_ojv.csv';
         a.click();
+
         mostrarToast('📤 CSV exportado!', 'sucesso');
     }
 
-    // ===== TRANSAÇÕES =====
-    var transacoesFiltradas = [];
-    function adicionarTransacao() {
+    /* =========================================================
+       TRANSAÇÕES
+       ========================================================= */
+
+    async function adicionarTransacao() {
+        if (!estaLogado) {
+            mostrarToast('⚠️ Faça login para registrar transações.', 'atencao');
+            return;
+        }
+
         var tipo = $('tipoTransacao').value;
         var valor = parseFloat($('valorTransacao').value);
         var descricao = $('descricaoTransacao').value.trim();
         var categoria = $('categoriaTransacao').value;
-        if(!valor || valor <= 0) { mostrarToast('⚠️ Informe um valor válido', 'atencao'); return; }
-        if(!descricao) { mostrarToast('⚠️ Descreva a transação', 'atencao'); return; }
-        transacoes.push({
-            tipo: tipo,
-            valor: tipo === 'despesa' ? -valor : valor,
-            descricao: descricao,
-            categoria: categoria,
-            data: new Date().toLocaleString()
-        });
-        guardar('ojv_transacoes', transacoes);
-        $('valorTransacao').value = '';
-        $('descricaoTransacao').value = '';
-        mostrarToast('✅ Transação registrada!', 'sucesso');
-        atualizarTudo();
-        sincronizarTransacoes();
+
+        if (!valor || valor <= 0) {
+            mostrarToast('⚠️ Informe um valor válido', 'atencao');
+            return;
+        }
+
+        if (!descricao) {
+            mostrarToast('⚠️ Descreva a transação', 'atencao');
+            return;
+        }
+
+        var valorBanco = tipo === 'despesa' ? -valor : valor;
+
+        try {
+            var resultado = await supabaseClient
+                .from('transacoes')
+                .insert([{
+                    tipo: tipo,
+                    categoria: categoria,
+                    descricao: descricao,
+                    valor: valorBanco,
+                    data_transacao: dataHoje()
+                }])
+                .select()
+                .single();
+
+            if (resultado.error) throw resultado.error;
+
+            $('valorTransacao').value = '';
+            $('descricaoTransacao').value = '';
+
+            mostrarToast('✅ Transação registrada!', 'sucesso');
+            await carregarTransacoes();
+            atualizarTudo();
+
+        } catch (erro) {
+            console.error(erro);
+            mostrarToast('❌ Não foi possível registrar a transação.', 'erro');
+        }
     }
-    function excluirTransacao(i) {
-        if(!confirm('Excluir esta transação?')) return;
-        transacoes.splice(i, 1);
-        guardar('ojv_transacoes', transacoes);
-        mostrarToast('🗑️ Transação removida', 'atencao');
-        atualizarTudo();
-    }
-    function limparTransacoes() {
-        if(!confirm('⚠️ Tem certeza que deseja limpar TODO o histórico de transações?')) return;
-        transacoes = [];
-        guardar('ojv_transacoes', transacoes);
-        mostrarToast('🗑️ Histórico limpo!', 'atencao');
-        atualizarTudo();
-    }
+
     function filtrarTransacoes() {
         var termo = ($('buscaTransacao') ? $('buscaTransacao').value : '').toLowerCase();
         var tipo = $('filtroTipo') ? $('filtroTipo').value : '';
-        transacoesFiltradas = transacoes.filter(function(t) {
-            return (t.descricao || '').toLowerCase().includes(termo) && (!tipo || t.tipo === tipo);
+
+        transacoesFiltradas = transacoes.filter(function (t) {
+            return (t.descricao || '').toLowerCase().includes(termo) &&
+                   (!tipo || t.tipo === tipo);
         });
+
         paginaAtual.transacoes = 1;
         atualizarTudo();
     }
+
     function exportarTransacoesCSV() {
-        if(!transacoes.length) { mostrarToast('⚠️ Nenhuma transação', 'atencao'); return; }
+        if (!transacoes.length) {
+            mostrarToast('⚠️ Nenhuma transação', 'atencao');
+            return;
+        }
+
         var csv = 'Data,Tipo,Categoria,Descrição,Valor\n';
-        transacoes.forEach(function(t) { csv += t.data + ',' + t.tipo + ',' + (t.categoria||'') + ',' + t.descricao + ',' + t.valor + '\n'; });
-        var blob = new Blob([csv], { type: 'text/csv' });
+        transacoes.forEach(function (t) {
+            csv += '"' + (t.data || '') + '","' + (t.tipo || '') + '","' + (t.categoria || '') + '","' + (t.descricao || '') + '","' + (t.valor || 0) + '"\n';
+        });
+
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
         var a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
         a.download = 'transacoes_ojv.csv';
         a.click();
+
         mostrarToast('📤 CSV exportado!', 'sucesso');
     }
 
-    // ===== EVENTOS =====
-    function adicionarEvento() {
+    async function limparTransacoes() {
+        if (!estaLogado) {
+            mostrarToast('⚠️ Faça login para limpar transações.', 'atencao');
+            return;
+        }
+
+        if (!confirm('Tem certeza que deseja limpar todas as transações?')) {
+            return;
+        }
+
+        try {
+            var resultado = await supabaseClient
+                .from('transacoes')
+                .delete()
+                .neq('id', '0');
+
+            if (resultado.error) throw resultado.error;
+
+            mostrarToast('🗑️ Transações limpas!', 'atencao');
+            await carregarTransacoes();
+            atualizarTudo();
+
+        } catch (erro) {
+            console.error(erro);
+            mostrarToast('❌ Não foi possível limpar as transações.', 'erro');
+        }
+    }
+
+    /* =========================================================
+       EVENTOS
+       ========================================================= */
+
+    async function adicionarEvento() {
+        if (!estaLogado) {
+            mostrarToast('⚠️ Faça login para criar eventos.', 'atencao');
+            return;
+        }
+
         var nome = $('eventoNome').value.trim();
         var data = $('eventoData').value;
-        var hora = $('eventoHora').value;
         var local = $('eventoLocal').value.trim();
-        var descricao = $('eventoDescricao').value.trim();
-        if(!nome || !data) { mostrarToast('⚠️ Nome e data são obrigatórios', 'atencao'); return; }
-        eventos.push({
-            nome: nome,
-            data: data,
-            hora: hora || '--:--',
-            local: local || 'Não definido',
-            descricao: descricao || 'Sem descrição',
-            status: 'Agendado'
-        });
-        guardar('ojv_eventos', eventos);
-        $('eventoNome').value = '';
-        $('eventoData').value = '';
-        $('eventoHora').value = '';
-        $('eventoLocal').value = '';
-        $('eventoDescricao').value = '';
-        mostrarToast('✅ Evento "' + nome + '" criado!', 'sucesso');
-        atualizarTudo();
-        sincronizarEventos();
-    }
-    function excluirEvento(i) {
-        if(!confirm('Excluir evento "' + eventos[i].nome + '"?')) return;
-        mostrarToast('🗑️ Evento removido', 'atencao');
-        eventos.splice(i, 1);
-        guardar('ojv_eventos', eventos);
-        atualizarTudo();
-    }
-    function concluirEvento(i) {
-        eventos[i].status = 'Concluído';
-        guardar('ojv_eventos', eventos);
-        mostrarToast('✅ Evento concluído!', 'sucesso');
-        atualizarTudo();
-        sincronizarEventos();
-    }
 
-    // ===== META =====
-    function definirMeta() {
-        var valor = parseFloat($('metaValorInput').value);
-        if(!valor || valor <= 0) { mostrarToast('⚠️ Valor inválido', 'atencao'); return; }
-        meta.valor = valor;
-        meta.guardado = 0;
-        guardar('ojv_meta', meta);
-        $('metaValorInput').value = '';
-        mostrarToast('🎯 Meta definida: ' + valor.toFixed(0) + ' Kz', 'sucesso');
-        atualizarTudo();
-        sincronizarMeta();
-    }
-    function guardarParaMeta() {
-        var valor = parseFloat($('metaGuardarInput').value);
-        if(!valor || valor <= 0) { mostrarToast('⚠️ Valor inválido', 'atencao'); return; }
-        if(meta.valor === 0) { mostrarToast('⚠️ Defina uma meta primeiro', 'atencao'); return; }
-        var novoGuardado = meta.guardado + valor;
-        if(novoGuardado >= meta.valor) {
-            meta.guardado = meta.valor;
-            mostrarToast('🎉 Meta atingida! Parabéns!', 'sucesso');
-        } else {
-            meta.guardado = novoGuardado;
-            mostrarToast('💰 ' + valor.toFixed(0) + ' Kz guardados!', 'sucesso');
+        if (!nome || !data) {
+            mostrarToast('⚠️ Nome e data são obrigatórios', 'atencao');
+            return;
         }
-        guardar('ojv_meta', meta);
-        $('metaGuardarInput').value = '';
-        atualizarTudo();
-        sincronizarMeta();
-    }
-    function resetarMeta() {
-        if(!confirm('Resetar a meta de poupança?')) return;
-        meta = { valor: 0, guardado: 0 };
-        guardar('ojv_meta', meta);
-        mostrarToast('🔄 Meta resetada', 'atencao');
-        atualizarTudo();
-        sincronizarMeta();
+
+        try {
+            var resultado = await supabaseClient
+                .from('eventos')
+                .insert([{
+                    titulo: nome,
+                    descricao: '',
+                    local: local || 'Não definido',
+                    data_evento: data,
+                    responsavel: ''
+                }])
+                .select()
+                .single();
+
+            if (resultado.error) throw resultado.error;
+
+            $('eventoNome').value = '';
+            $('eventoData').value = '';
+            $('eventoLocal').value = '';
+
+            mostrarToast('✅ Evento "' + nome + '" criado!', 'sucesso');
+            await carregarEventos();
+            atualizarTudo();
+
+        } catch (erro) {
+            console.error(erro);
+            mostrarToast('❌ Não foi possível criar o evento.', 'erro');
+        }
     }
 
-    // ===== RELATÓRIOS =====
+    /* =========================================================
+       META FINANCEIRA
+       ========================================================= */
+
+    async function definirMeta() {
+        if (!estaLogado) {
+            mostrarToast('⚠️ Faça login para definir meta.', 'atencao');
+            return;
+        }
+
+        var valor = parseFloat($('metaValorInput').value);
+
+        if (!valor || valor <= 0) {
+            mostrarToast('⚠️ Valor inválido', 'atencao');
+            return;
+        }
+
+        try {
+            if (meta.id) {
+                var atualizar = await supabaseClient
+                    .from('metas_financeiras')
+                    .update({
+                        valor_objetivo: valor,
+                        valor_atual: 0
+                    })
+                    .eq('id', meta.id);
+
+                if (atualizar.error) throw atualizar.error;
+            } else {
+                var inserir = await supabaseClient
+                    .from('metas_financeiras')
+                    .insert([{
+                        nome_meta: 'Meta O.J.V.',
+                        valor_objetivo: valor,
+                        valor_atual: 0
+                    }])
+                    .select()
+                    .single();
+
+                if (inserir.error) throw inserir.error;
+            }
+
+            $('metaValorInput').value = '';
+            mostrarToast('🎯 Meta definida: ' + formatarNumero(valor) + ' Kz', 'sucesso');
+            await carregarMeta();
+            atualizarTudo();
+
+        } catch (erro) {
+            console.error(erro);
+            mostrarToast('❌ Não foi possível definir a meta.', 'erro');
+        }
+    }
+
+    async function guardarParaMeta() {
+        if (!estaLogado) {
+            mostrarToast('⚠️ Faça login para guardar na meta.', 'atencao');
+            return;
+        }
+
+        var valor = parseFloat($('metaGuardarInput').value);
+
+        if (!valor || valor <= 0) {
+            mostrarToast('⚠️ Valor inválido', 'atencao');
+            return;
+        }
+
+        if (!meta.id || meta.valor <= 0) {
+            mostrarToast('⚠️ Defina uma meta primeiro', 'atencao');
+            return;
+        }
+
+        var novoGuardado = meta.guardado + valor;
+        if (novoGuardado >= meta.valor) {
+            novoGuardado = meta.valor;
+        }
+
+        try {
+            var resultado = await supabaseClient
+                .from('metas_financeiras')
+                .update({
+                    valor_atual: novoGuardado
+                })
+                .eq('id', meta.id);
+
+            if (resultado.error) throw resultado.error;
+
+            $('metaGuardarInput').value = '';
+
+            if (novoGuardado >= meta.valor) {
+                mostrarToast('🎉 Meta atingida! Parabéns!', 'sucesso');
+            } else {
+                mostrarToast('💰 ' + formatarNumero(valor) + ' Kz guardados!', 'sucesso');
+            }
+
+            await carregarMeta();
+            atualizarTudo();
+
+        } catch (erro) {
+            console.error(erro);
+            mostrarToast('❌ Não foi possível atualizar a meta.', 'erro');
+        }
+    }
+
+    async function resetarMeta() {
+        if (!estaLogado) {
+            mostrarToast('⚠️ Faça login para resetar a meta.', 'atencao');
+            return;
+        }
+
+        if (!confirm('Tem certeza que deseja resetar a meta?')) {
+            return;
+        }
+
+        try {
+            if (meta.id) {
+                var resultado = await supabaseClient
+                    .from('metas_financeiras')
+                    .update({
+                        valor_atual: 0,
+                        valor_objetivo: 0
+                    })
+                    .eq('id', meta.id);
+
+                if (resultado.error) throw resultado.error;
+            }
+
+            mostrarToast('🔄 Meta resetada!', 'atencao');
+            await carregarMeta();
+            atualizarTudo();
+
+        } catch (erro) {
+            console.error(erro);
+            mostrarToast('❌ Não foi possível resetar a meta.', 'erro');
+        }
+    }
+
+    /* =========================================================
+       FUNÇÕES DE RELATÓRIO
+       ========================================================= */
+
     function gerarRelatorio() {
         var div = $('relatorioDetalhado');
+        if (!div) return;
+
         var totalR = 0, totalD = 0;
-        for(var i = 0; i < transacoes.length; i++) {
-            if(transacoes[i].valor > 0) totalR += transacoes[i].valor;
-            else totalD += Math.abs(transacoes[i].valor);
-        }
+        transacoes.forEach(function (t) {
+            if (Number(t.valor) > 0) totalR += Number(t.valor);
+            else totalD += Math.abs(Number(t.valor));
+        });
+
         var saldo = totalR - totalD;
-        var ativos = membros.filter(function(m) { return m.status === 'Ativo'; }).length;
-        var inativos = membros.filter(function(m) { return m.status === 'Inativo'; }).length;
-        var hoje = new Date();
-        var eventosMes = eventos.filter(function(e) {
-            var d = new Date(e.data);
-            return d.getMonth() === hoje.getMonth() && d.getFullYear() === hoje.getFullYear();
-        });
-        var proximos = eventos.filter(function(e) { return e.status === 'Agendado'; });
-        var aniversariantes = membros.filter(function(m) {
-            if(!m.aniversario) return false;
-            return new Date(m.aniversario).getMonth() === hoje.getMonth();
-        });
-        var progresso = meta.valor > 0 ? (meta.guardado/meta.valor)*100 : 0;
-        div.innerHTML = '<h4 style="margin-bottom:8px;">📋 Resumo Completo</h4>' +
-            '<p><strong>Membros:</strong> ' + membros.length + ' (Ativos: ' + ativos + ', Inativos: ' + inativos + ')</p>' +
-            '<p><strong>Receitas:</strong> ' + totalR.toFixed(0) + ' Kz</p>' +
-            '<p><strong>Despesas:</strong> ' + totalD.toFixed(0) + ' Kz</p>' +
-            '<p><strong>Saldo:</strong> ' + saldo.toFixed(0) + ' Kz</p>' +
-            '<p><strong>Eventos:</strong> ' + eventos.length + ' (Este mês: ' + eventosMes.length + ', Próximos: ' + proximos.length + ')</p>' +
-            '<p><strong>Aniversariantes do mês:</strong> ' + aniversariantes.length + '</p>' +
-            '<p><strong>Meta:</strong> ' + meta.guardado.toFixed(0) + ' / ' + meta.valor.toFixed(0) + ' Kz (' + progresso.toFixed(0) + '%)</p>' +
-            '<p style="margin-top:8px;"><strong>Data do relatório:</strong> ' + new Date().toLocaleString() + '</p>';
+        var ativos = membros.filter(function (m) { return m.status === 'Ativo'; }).length;
+        var proximos = eventos.filter(function (e) { return e.status === 'Agendado'; }).length;
+
         div.style.display = 'block';
+        div.innerHTML = `
+            <h4>📊 Resumo Completo</h4>
+            <p><strong>💰 Finanças:</strong></p>
+            <p>Receitas: ${formatarNumero(totalR)} Kz</p>
+            <p>Despesas: ${formatarNumero(totalD)} Kz</p>
+            <p>Saldo: ${formatarNumero(saldo)} Kz</p>
+            <hr>
+            <p><strong>👥 Membros:</strong></p>
+            <p>Total: ${membros.length}</p>
+            <p>Ativos: ${ativos}</p>
+            <p>Inativos: ${membros.length - ativos}</p>
+            <hr>
+            <p><strong>📅 Eventos:</strong></p>
+            <p>Total: ${eventos.length}</p>
+            <p>Próximos: ${proximos}</p>
+            <p><strong>🎯 Meta:</strong></p>
+            <p>Meta: ${formatarNumero(meta.valor)} Kz</p>
+            <p>Guardado: ${formatarNumero(meta.guardado)} Kz</p>
+            <p>Progresso: ${meta.valor > 0 ? ((meta.guardado / meta.valor) * 100).toFixed(1) : 0}%</p>
+        `;
+
         mostrarToast('📊 Relatório gerado!', 'sucesso');
     }
+
     function exportarRelatorioCSV() {
-        var totalR = 0, totalD = 0;
-        for(var i = 0; i < transacoes.length; i++) {
-            if(transacoes[i].valor > 0) totalR += transacoes[i].valor;
-            else totalD += Math.abs(transacoes[i].valor);
+        if (!membros.length && !transacoes.length && !eventos.length) {
+            mostrarToast('⚠️ Sem dados para exportar', 'atencao');
+            return;
         }
-        var csv = 'RELATÓRIO O.J.V. PROFESSIONAL PLUS\n';
-        csv += 'Data,' + new Date().toLocaleDateString() + '\n\n';
-        csv += 'Membros,' + membros.length + '\n';
-        csv += 'Receitas,' + totalR.toFixed(0) + ' Kz\n';
-        csv += 'Despesas,' + totalD.toFixed(0) + ' Kz\n';
-        csv += 'Saldo,' + (totalR-totalD).toFixed(0) + ' Kz\n';
-        csv += 'Eventos,' + eventos.length + '\n';
-        csv += 'Meta,' + meta.guardado.toFixed(0) + ' / ' + meta.valor.toFixed(0) + ' Kz\n';
-        var blob = new Blob([csv], { type: 'text/csv' });
+
+        var csv = 'Relatório O.J.V.\n\n';
+        csv += 'MEMBROS\nNome,BI,Telefone,Status,Aniversário\n';
+        membros.forEach(function (m) {
+            csv += '"' + (m.nome || '') + '","' + (m.bi || '') + '","' + (m.telefone || '') + '","' + (m.status || '') + '","' + (m.aniversario || '') + '"\n';
+        });
+
+        csv += '\nTRANSAÇÕES\nData,Descrição,Valor\n';
+        transacoes.forEach(function (t) {
+            csv += '"' + (t.data || '') + '","' + (t.descricao || '') + '","' + (t.valor || 0) + '"\n';
+        });
+
+        csv += '\nEVENTOS\nNome,Data,Local\n';
+        eventos.forEach(function (e) {
+            csv += '"' + (e.nome || '') + '","' + (e.data || '') + '","' + (e.local || '') + '"\n';
+        });
+
+        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
         var a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
         a.download = 'relatorio_ojv.csv';
         a.click();
-        mostrarToast('📤 Relatório CSV exportado!', 'sucesso');
+
+        mostrarToast('📤 Relatório exportado!', 'sucesso');
     }
+
     function imprimirSistema() {
         window.print();
+        mostrarToast('🖨️ Impressão iniciada!', 'sucesso');
     }
 
-    // ===== PDF COM LOGO E ASSINATURAS =====
     function exportarPDF() {
-        if(typeof window.jspdf === 'undefined') {
-            mostrarToast('⏳ Carregando biblioteca PDF...', 'atencao');
-            var script = document.createElement('script');
-            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-            script.onload = function() { gerarPDF(); };
-            document.head.appendChild(script);
+        try {
+            var doc = new jspdf.jsPDF('p', 'mm', 'a4');
+            
+            doc.setFontSize(20);
+            doc.text('O.J.V. Professional Plus', 20, 20);
+            
+            doc.setFontSize(14);
+            doc.text('Relatório de Dados', 20, 35);
+            
+            var y = 45;
+            
+            doc.setFontSize(12);
+            doc.text('Membros: ' + membros.length, 20, y);
+            y += 8;
+            
+            var ativos = membros.filter(function(m) { return m.status === 'Ativo'; }).length;
+            doc.text('Ativos: ' + ativos, 20, y);
+            y += 8;
+            
+            var totalR = 0, totalD = 0;
+            transacoes.forEach(function (t) {
+                if (Number(t.valor) > 0) totalR += Number(t.valor);
+                else totalD += Math.abs(Number(t.valor));
+            });
+            
+            doc.text('Receitas: ' + formatarNumero(totalR) + ' Kz', 20, y);
+            y += 8;
+            doc.text('Despesas: ' + formatarNumero(totalD) + ' Kz', 20, y);
+            y += 8;
+            doc.text('Saldo: ' + formatarNumero(totalR - totalD) + ' Kz', 20, y);
+            y += 8;
+            
+            doc.text('Eventos: ' + eventos.length, 20, y);
+            y += 8;
+            
+            if (meta.valor > 0) {
+                doc.text('Meta: ' + formatarNumero(meta.valor) + ' Kz', 20, y);
+                y += 8;
+                doc.text('Guardado: ' + formatarNumero(meta.guardado) + ' Kz', 20, y);
+                y += 8;
+                doc.text('Progresso: ' + ((meta.guardado / meta.valor) * 100).toFixed(1) + '%', 20, y);
+            }
+            
+            doc.save('relatorio_ojv.pdf');
+            mostrarToast('📄 PDF gerado com sucesso!', 'sucesso');
+            
+        } catch (erro) {
+            console.error(erro);
+            mostrarToast('❌ Erro ao gerar PDF', 'erro');
+        }
+    }
+
+    /* =========================================================
+       BACKUP E SINCRONIZAÇÃO
+       ========================================================= */
+
+    function fazerBackup() {
+        try {
+            var dados = {
+                membros: membros,
+                transacoes: transacoes,
+                eventos: eventos,
+                meta: meta,
+                data_backup: new Date().toISOString()
+            };
+
+            var blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
+            var a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'backup_ojv_' + dataHoje() + '.json';
+            a.click();
+
+            mostrarToast('💾 Backup salvo com sucesso!', 'sucesso');
+        } catch (erro) {
+            console.error(erro);
+            mostrarToast('❌ Erro ao fazer backup', 'erro');
+        }
+    }
+
+    function sincronizarSupabase() {
+        if (!estaLogado) {
+            mostrarToast('⚠️ Faça login para sincronizar.', 'atencao');
             return;
         }
-        gerarPDF();
+        carregarTudoDoSupabase();
+        mostrarToast('☁️ Sincronizando dados com Supabase...', 'atencao');
     }
 
-    function gerarPDF() {
-        try {
-            var doc = new window.jspdf.jsPDF('p', 'mm', 'a4');
-            var totalR = 0, totalD = 0;
-            for(var i = 0; i < transacoes.length; i++) {
-                if(transacoes[i].valor > 0) totalR += transacoes[i].valor;
-                else totalD += Math.abs(transacoes[i].valor);
-            }
-            var saldo = totalR - totalD;
-            var ativos = membros.filter(function(m) { return m.status === 'Ativo'; }).length;
-            var pMeta = meta.valor > 0 ? (meta.guardado/meta.valor)*100 : 0;
+    /* =========================================================
+       ATUALIZAR TUDO NA TELA
+       ========================================================= */
 
-            function adicionarLogo(callback) {
-                var img = new Image();
-                img.src = 'logo.png';
-                img.onload = function() {
-                    var canvas = document.createElement('canvas');
-                    canvas.width = 200;
-                    canvas.height = 200;
-                    var ctx = canvas.getContext('2d');
-                    ctx.beginPath();
-                    ctx.arc(100, 100, 95, 0, Math.PI*2);
-                    ctx.closePath();
-                    ctx.clip();
-                    ctx.drawImage(img, 5, 5, 190, 190);
-                    doc.addImage(canvas.toDataURL('image/png'), 'PNG', 12, 12, 30, 30);
-                    callback();
-                };
-                img.onerror = function() {
-                    doc.setFillColor(22, 33, 62);
-                    doc.circle(27, 27, 14, 'F');
-                    doc.setFontSize(18);
-                    doc.setTextColor(255, 215, 0);
-                    doc.text('OJV', 27, 31, { align: 'center' });
-                    callback();
-                };
-            }
-
-            adicionarLogo(function() {
-                doc.setFontSize(24);
-                doc.setTextColor(22, 33, 62);
-                doc.text('O.J.V. - Jovens Visionarios', 105, 25, { align: 'center' });
-                doc.setFontSize(14);
-                doc.setTextColor(100);
-                doc.text('Relatorio Geral', 105, 34, { align: 'center' });
-                doc.setFontSize(10);
-                doc.text('Data: ' + new Date().toLocaleDateString('pt-PT'), 105, 40, { align: 'center' });
-
-                doc.setDrawColor(233, 69, 96);
-                doc.setLineWidth(1.2);
-                doc.line(15, 45, 195, 45);
-
-                var y = 55;
-                var secoes = [
-                    { titulo: 'FINANCEIRO', linhas: [
-                        'Receitas: ' + totalR.toFixed(0) + ' Kz',
-                        'Despesas: ' + totalD.toFixed(0) + ' Kz',
-                        'Saldo: ' + saldo.toFixed(0) + ' Kz'
-                    ]},
-                    { titulo: 'MEMBROS', linhas: [
-                        'Total: ' + membros.length + ' | Ativos: ' + ativos + ' | Inativos: ' + (membros.length - ativos)
-                    ]},
-                    { titulo: 'EVENTOS', linhas: [
-                        'Total: ' + eventos.length + ' | Agendados: ' + eventos.filter(function(e) { return e.status === 'Agendado'; }).length
-                    ]},
-                    { titulo: 'META', linhas: [
-                        'Guardado: ' + meta.guardado.toFixed(0) + ' / ' + meta.valor.toFixed(0) + ' Kz (' + pMeta.toFixed(0) + '%)'
-                    ]}
-                ];
-
-                secoes.forEach(function(sec) {
-                    doc.setFillColor(240, 240, 245);
-                    doc.rect(15, y-6, 180, 10, 'F');
-                    doc.setFontSize(14);
-                    doc.setTextColor(22, 33, 62);
-                    doc.text(sec.titulo, 20, y);
-                    y += 12;
-                    doc.setFontSize(11);
-                    doc.setTextColor(60);
-                    sec.linhas.forEach(function(linha) {
-                        doc.text(linha, 20, y);
-                        y += 7;
-                    });
-                    y += 6;
-                });
-
-                doc.setDrawColor(22, 33, 62);
-                doc.setLineWidth(0.8);
-                doc.line(15, y, 195, y);
-                y += 12;
-
-                doc.setFontSize(15);
-                doc.setTextColor(22, 33, 62);
-                doc.text('ASSINATURAS', 105, y, { align: 'center' });
-                y += 15;
-
-                var cargos = ['Presidente', 'Director', 'Tesoureiro', 'Programador'];
-                for(var c = 0; c < 4; c += 2) {
-                    doc.setDrawColor(0);
-                    doc.setLineWidth(0.4);
-                    doc.line(15, y, 85, y);
-                    doc.line(125, y, 195, y);
-                    y += 6;
-                    doc.setFontSize(10);
-                    doc.setTextColor(60);
-                    doc.text(cargos[c], 50, y, { align: 'center' });
-                    doc.text(cargos[c+1], 160, y, { align: 'center' });
-                    y += 15;
-                }
-
-                doc.setFontSize(9);
-                doc.setTextColor(150);
-                doc.text('O.J.V. Professional Plus - ' + new Date().getFullYear(), 105, 285, { align: 'center' });
-
-                doc.save('OJV_Relatorio_' + new Date().toISOString().slice(0,10) + '.pdf');
-                mostrarToast('📄 PDF gerado com sucesso!', 'sucesso');
-            });
-
-        } catch(e) {
-            console.error(e);
-            mostrarToast('❌ Erro ao gerar PDF: ' + e.message, 'erro');
-        }
-    }
-
-    // =====================================
-    // FUNÇÕES DE SINCRONIZAÇÃO COM SUPABASE
-    // =====================================
-
-    async function sincronizarMembros() {
-        try {
-            // Buscar todos os membros do Supabase
-            const { data: membrosDB, error: erroBusca } = await supabaseClient
-                .from('membros')
-                .select('*');
-
-            if (erroBusca) {
-                console.error('Erro ao buscar membros:', erroBusca);
-                return;
-            }
-
-            // Se não houver dados no Supabase, enviar todos os membros locais
-            if (!membrosDB || membrosDB.length === 0) {
-                if (membros.length > 0) {
-                    const { error: erroInsert } = await supabaseClient
-                        .from('membros')
-                        .insert(membros.map(m => ({
-                            nome: m.nome,
-                            telefone: m.telefone,
-                            bi: m.bi,
-                            status: m.status,
-                            aniversario: m.aniversario
-                        })));
-
-                    if (erroInsert) {
-                        console.error('Erro ao inserir membros:', erroInsert);
-                    } else {
-                        console.log('✅ Membros sincronizados com Supabase');
-                    }
-                }
-                return;
-            }
-
-            // Verificar se há membros locais que não estão no Supabase
-            const idsExistentes = new Set(membrosDB.map(m => m.nome + m.telefone));
-            const novosMembros = membros.filter(m => !idsExistentes.has(m.nome + m.telefone));
-
-            if (novosMembros.length > 0) {
-                const { error: erroInsert } = await supabaseClient
-                    .from('membros')
-                    .insert(novosMembros.map(m => ({
-                        nome: m.nome,
-                        telefone: m.telefone,
-                        bi: m.bi,
-                        status: m.status,
-                        aniversario: m.aniversario
-                    })));
-
-                if (erroInsert) {
-                    console.error('Erro ao inserir novos membros:', erroInsert);
-                } else {
-                    console.log(`✅ ${novosMembros.length} novos membros sincronizados`);
-                }
-            }
-
-        } catch (erro) {
-            console.error('Erro na sincronização de membros:', erro);
-        }
-    }
-
-    async function sincronizarTransacoes() {
-        try {
-            const { data: transacoesDB, error: erroBusca } = await supabaseClient
-                .from('transacoes')
-                .select('*');
-
-            if (erroBusca) {
-                console.error('Erro ao buscar transações:', erroBusca);
-                return;
-            }
-
-            if (!transacoesDB || transacoesDB.length === 0) {
-                if (transacoes.length > 0) {
-                    const { error: erroInsert } = await supabaseClient
-                        .from('transacoes')
-                        .insert(transacoes.map(t => ({
-                            tipo: t.tipo,
-                            categoria: t.categoria || '',
-                            valor: t.valor,
-                            descricao: t.descricao,
-                            data: t.data
-                        })));
-
-                    if (erroInsert) {
-                        console.error('Erro ao inserir transações:', erroInsert);
-                    } else {
-                        console.log('✅ Transações sincronizadas com Supabase');
-                    }
-                }
-                return;
-            }
-
-            const idsExistentes = new Set(transacoesDB.map(t => t.descricao + t.valor + t.data));
-            const novasTransacoes = transacoes.filter(t => !idsExistentes.has(t.descricao + t.valor + t.data));
-
-            if (novasTransacoes.length > 0) {
-                const { error: erroInsert } = await supabaseClient
-                    .from('transacoes')
-                    .insert(novasTransacoes.map(t => ({
-                        tipo: t.tipo,
-                        categoria: t.categoria || '',
-                        valor: t.valor,
-                        descricao: t.descricao,
-                        data: t.data
-                    })));
-
-                if (erroInsert) {
-                    console.error('Erro ao inserir novas transações:', erroInsert);
-                } else {
-                    console.log(`✅ ${novasTransacoes.length} novas transações sincronizadas`);
-                }
-            }
-
-        } catch (erro) {
-            console.error('Erro na sincronização de transações:', erro);
-        }
-    }
-
-    async function sincronizarEventos() {
-        try {
-            const { data: eventosDB, error: erroBusca } = await supabaseClient
-                .from('eventos')
-                .select('*');
-
-            if (erroBusca) {
-                console.error('Erro ao buscar eventos:', erroBusca);
-                return;
-            }
-
-            if (!eventosDB || eventosDB.length === 0) {
-                if (eventos.length > 0) {
-                    const { error: erroInsert } = await supabaseClient
-                        .from('eventos')
-                        .insert(eventos.map(e => ({
-                            nome: e.nome,
-                            data: e.data,
-                            hora: e.hora,
-                            local: e.local,
-                            descricao: e.descricao,
-                            status: e.status
-                        })));
-
-                    if (erroInsert) {
-                        console.error('Erro ao inserir eventos:', erroInsert);
-                    } else {
-                        console.log('✅ Eventos sincronizados com Supabase');
-                    }
-                }
-                return;
-            }
-
-            const idsExistentes = new Set(eventosDB.map(e => e.nome + e.data));
-            const novosEventos = eventos.filter(e => !idsExistentes.has(e.nome + e.data));
-
-            if (novosEventos.length > 0) {
-                const { error: erroInsert } = await supabaseClient
-                    .from('eventos')
-                    .insert(novosEventos.map(e => ({
-                        nome: e.nome,
-                        data: e.data,
-                        hora: e.hora,
-                        local: e.local,
-                        descricao: e.descricao,
-                        status: e.status
-                    })));
-
-                if (erroInsert) {
-                    console.error('Erro ao inserir novos eventos:', erroInsert);
-                } else {
-                    console.log(`✅ ${novosEventos.length} novos eventos sincronizados`);
-                }
-            }
-
-        } catch (erro) {
-            console.error('Erro na sincronização de eventos:', erro);
-        }
-    }
-
-    async function sincronizarMeta() {
-        try {
-            const { data: metaDB, error: erroBusca } = await supabaseClient
-                .from('meta')
-                .select('*')
-                .limit(1);
-
-            if (erroBusca) {
-                console.error('Erro ao buscar meta:', erroBusca);
-                return;
-            }
-
-            if (!metaDB || metaDB.length === 0) {
-                const { error: erroInsert } = await supabaseClient
-                    .from('meta')
-                    .insert([{
-                        valor: meta.valor,
-                        guardado: meta.guardado
-                    }]);
-
-                if (erroInsert) {
-                    console.error('Erro ao inserir meta:', erroInsert);
-                } else {
-                    console.log('✅ Meta sincronizada com Supabase');
-                }
-            } else {
-                const { error: erroUpdate } = await supabaseClient
-                    .from('meta')
-                    .update({
-                        valor: meta.valor,
-                        guardado: meta.guardado
-                    })
-                    .eq('id', metaDB[0].id);
-
-                if (erroUpdate) {
-                    console.error('Erro ao atualizar meta:', erroUpdate);
-                } else {
-                    console.log('✅ Meta atualizada no Supabase');
-                }
-            }
-
-        } catch (erro) {
-            console.error('Erro na sincronização da meta:', erro);
-        }
-    }
-
-    // Função principal de sincronização
-    async function sincronizarSupabase() {
-        mostrarToast('☁️ Sincronizando com Supabase...', 'atencao');
-        
-        try {
-            await Promise.all([
-                sincronizarMembros(),
-                sincronizarTransacoes(),
-                sincronizarEventos(),
-                sincronizarMeta()
-            ]);
-            
-            mostrarToast('✅ Dados sincronizados com sucesso!', 'sucesso');
-        } catch (erro) {
-            console.error('Erro na sincronização geral:', erro);
-            mostrarToast('❌ Erro ao sincronizar com Supabase', 'erro');
-        }
-    }
-
-    // ===== ATUALIZAR TUDO =====
     function atualizarTudo() {
         try {
             var termoM = ($('buscaMembro')?.value || '').toLowerCase();
-            membrosFiltrados = membros.filter(function(m) {
-                return m.nome.toLowerCase().includes(termoM) || (m.telefone||'').includes(termoM) || (m.bi||'').toLowerCase().includes(termoM);
+            membrosFiltrados = membros.filter(function (m) {
+                return (m.nome || '').toLowerCase().includes(termoM) ||
+                       (m.bi || '').toLowerCase().includes(termoM) ||
+                       (m.telefone || '').includes(termoM);
             });
+
             var termoT = ($('buscaTransacao')?.value || '').toLowerCase();
-            var tipoF = ($('filtroTipo')?.value || '');
-            transacoesFiltradas = transacoes.filter(function(t) {
-                return (t.descricao||'').toLowerCase().includes(termoT) && (!tipoF || t.tipo === tipoF);
+            var tipoT = $('filtroTipo') ? $('filtroTipo').value : '';
+
+            transacoesFiltradas = transacoes.filter(function (t) {
+                return (t.descricao || '').toLowerCase().includes(termoT) &&
+                       (!tipoT || t.tipo === tipoT);
             });
 
             var pM = renderizarPagina('membros', membrosFiltrados);
             var pT = renderizarPagina('transacoes', transacoesFiltradas);
             var pE = renderizarPagina('eventos', eventos);
+
             criarPaginacao('membros', pM.totalPaginas, 'pagMembros');
             criarPaginacao('transacoes', pT.totalPaginas, 'pagTransacoes');
             criarPaginacao('eventos', pE.totalPaginas, 'pagEventos');
 
+            /* MEMBROS */
             var htmlM = '';
-            pM.pagina.forEach(function(m, i) {
+            pM.pagina.forEach(function (m, i) {
                 var idx = pM.inicio + i;
-                var cls = m.status === 'Ativo' ? 'badge-sucesso' : m.status === 'Inativo' ? 'badge-perigo' : 'badge-atencao';
-                var aniv = dataParaBR(m.aniversario || '');
-                htmlM += '<tr><td><strong>' + m.nome + '</strong></td><td>' + (m.telefone||'—') + '</td><td><span class="badge ' + cls + '">' + (m.status||'Ativo') + '</span></td><td>' + (aniv || '—') + '</td><td><div class="grupo-acoes"><button class="btn btn-outline btn-pequeno" onclick="editarMembro(' + idx + ')">✏️</button> <button class="btn btn-danger btn-pequeno" onclick="excluirMembro(' + idx + ')">🗑️</button></div></td></tr>';
+                var cls = m.status === 'Ativo' ? 'badge-sucesso' : 'badge-perigo';
+
+                htmlM += '<tr>' +
+                    '<td><strong>' + escaparHTML(m.nome) + '</strong></td>' +
+                    '<td><span style="font-size:0.8rem;">' + escaparHTML(m.bi || '') + '</span></td>' +
+                    '<td><span style="font-size:0.8rem;">' + escaparHTML(m.telefone || '') + '</span></td>' +
+                    '<td><span class="badge ' + cls + '">' + escaparHTML(m.status || 'Ativo') + '</span></td>' +
+                    '<td><div class="grupo-acoes">' +
+                    '<button class="btn btn-outline" onclick="editarMembro(' + idx + ')">✏️</button> ' +
+                    '<button class="btn btn-danger" onclick="excluirMembro(' + idx + ')">🗑️</button>' +
+                    '</div></td></tr>';
             });
-            $('listaMembros').innerHTML = htmlM || '<tr><td colspan="5" style="text-align:center;">Nenhum membro cadastrado</td></tr>';
+
+            $('listaMembros').innerHTML = htmlM || '<tr><td colspan="5" style="text-align:center;padding:20px;">Nenhum membro cadastrado</td></tr>';
             $('totalMembros').textContent = membros.length;
-            $('ativosCount').textContent = membros.filter(function(m) { return m.status === 'Ativo'; }).length;
-            $('inativosCount').textContent = membros.filter(function(m) { return m.status === 'Inativo'; }).length;
+            $('ativosCount').textContent = membros.filter(function (m) { return m.status === 'Ativo'; }).length;
+            $('inativosCount').textContent = membros.filter(function (m) { return m.status !== 'Ativo'; }).length;
             $('navMembros').textContent = membros.length;
 
+            /* TRANSAÇÕES */
             var htmlT = '';
-            pT.pagina.forEach(function(t, i) {
-                var idx = pT.inicio + i;
-                var cls = t.tipo === 'receita' ? 'badge-sucesso' : 'badge-perigo';
-                var cor = t.valor > 0 ? '#00b894' : '#e94560';
-                htmlT += '<tr><td>' + (t.data||'—') + '</td><td><span class="badge ' + cls + '">' + t.tipo + '</span></td><td>' + (t.descricao||'—') + '</td><td style="font-weight:700; color:' + cor + ';">' + (t.valor>0?'+':'') + t.valor.toFixed(0) + ' Kz</td><td><button class="btn btn-danger btn-pequeno" onclick="excluirTransacao(' + idx + ')">🗑️</button></td></tr>';
+            pT.pagina.forEach(function (t) {
+                var cor = t.valor > 0 ? '#28a745' : '#dc3545';
+                htmlT += '<tr>' +
+                    '<td style="font-size:0.75rem;">' + escaparHTML(t.data || '') + '</td>' +
+                    '<td>' + escaparHTML(t.descricao || '') + '</td>' +
+                    '<td style="font-weight:700;color:' + cor + ';">' +
+                    (t.valor > 0 ? '+' : '') + formatarNumero(t.valor) + ' Kz</td></tr>';
             });
-            $('listaTransacoes').innerHTML = htmlT || '<tr><td colspan="5" style="text-align:center;">Nenhuma transação</td></tr>';
 
+            $('listaTransacoes').innerHTML = htmlT || '<tr><td colspan="3" style="text-align:center;padding:20px;">Nenhuma transação</td></tr>';
+
+            /* EVENTOS */
             var htmlE = '';
-            pE.pagina.forEach(function(e, i) {
-                var idx = pE.inicio + i;
-                var cls = e.status === 'Agendado' ? 'badge-info' : e.status === 'Concluído' ? 'badge-sucesso' : 'badge-atencao';
-                var hoje = new Date();
-                var dataE = new Date(e.data);
-                var atrasado = dataE < hoje && e.status !== 'Concluído';
-                htmlE += '<tr><td><strong>' + e.nome + '</strong></td><td>' + e.data + '</td><td><span class="badge ' + cls + '">' + (atrasado ? '🔴 Atrasado' : e.status) + '</span></td><td><div class="grupo-acoes">' + (e.status==='Agendado' ? '<button class="btn btn-success btn-pequeno" onclick="concluirEvento(' + idx + ')">✅</button>' : '') + ' <button class="btn btn-danger btn-pequeno" onclick="excluirEvento(' + idx + ')">🗑️</button></div></td></tr>';
+            pE.pagina.forEach(function (e) {
+                var cls = e.status === 'Agendado' ? 'badge-info' : 'badge-sucesso';
+                htmlE += '<tr>' +
+                    '<td><strong>' + escaparHTML(e.nome) + '</strong><br>' +
+                    '<span style="font-size:0.7rem;color:#6c757d;">' + escaparHTML(e.local || '') + '</span></td>' +
+                    '<td style="font-size:0.75rem;">' + escaparHTML(e.data || '') + '</td>' +
+                    '<td><span class="badge ' + cls + '">' + escaparHTML(e.status) + '</span></td></tr>';
             });
-            $('listaEventos').innerHTML = htmlE || '<tr><td colspan="4" style="text-align:center;">Nenhum evento</td></tr>';
-            $('navEventos').textContent = eventos.filter(function(e) { return e.status === 'Agendado'; }).length;
 
+            $('listaEventos').innerHTML = htmlE || '<tr><td colspan="3" style="text-align:center;padding:20px;">Nenhum evento</td></tr>';
+
+            /* FINANÇAS */
             var totalR = 0, totalD = 0;
-            for(var i = 0; i < transacoes.length; i++) {
-                if(transacoes[i].valor > 0) totalR += transacoes[i].valor;
-                else totalD += Math.abs(transacoes[i].valor);
-            }
-            var saldo = totalR - totalD;
-            var hoje = new Date();
-            var eventosMes = eventos.filter(function(e) {
-                var d = new Date(e.data);
-                return d.getMonth() === hoje.getMonth() && d.getFullYear() === hoje.getFullYear();
+            transacoes.forEach(function (t) {
+                if (Number(t.valor) > 0) totalR += Number(t.valor);
+                else totalD += Math.abs(Number(t.valor));
             });
-            var pMeta = meta.valor > 0 ? (meta.guardado/meta.valor)*100 : 0;
 
+            var saldo = totalR - totalD;
+
+            /* DASHBOARD */
             $('cardsDashboard').innerHTML =
                 '<div class="card"><span class="numero">' + membros.length + '</span><span class="rotulo">Membros</span></div>' +
-                '<div class="card verde"><span class="numero">' + totalR.toFixed(0) + ' Kz</span><span class="rotulo">Receitas</span></div>' +
-                '<div class="card vermelho"><span class="numero">' + totalD.toFixed(0) + ' Kz</span><span class="rotulo">Despesas</span></div>' +
-                '<div class="card laranja"><span class="numero" style="color:' + (saldo>=0?'#00b894':'#e94560') + ';">' + saldo.toFixed(0) + ' Kz</span><span class="rotulo">Saldo</span></div>' +
-                '<div class="card azul"><span class="numero">' + eventosMes.length + '</span><span class="rotulo">Eventos este mês</span></div>' +
-                '<div class="card ouro"><span class="numero">' + pMeta.toFixed(0) + '%</span><span class="rotulo">Progresso da meta</span></div>';
+                '<div class="card verde"><span class="numero">' + formatarNumero(totalR) + '</span><span class="rotulo">Receitas</span></div>' +
+                '<div class="card vermelho"><span class="numero">' + formatarNumero(totalD) + '</span><span class="rotulo">Despesas</span></div>' +
+                '<div class="card azul"><span class="numero">' + formatarNumero(saldo) + '</span><span class="rotulo">Saldo</span></div>';
 
-            $('finReceitas').textContent = totalR.toFixed(0) + ' Kz';
-            $('finDespesas').textContent = totalD.toFixed(0) + ' Kz';
-            $('finSaldo').textContent = saldo.toFixed(0) + ' Kz';
-            $('finSaldo').style.color = saldo >= 0 ? '#00b894' : '#e94560';
+            /* FINANCEIRO */
+            $('finReceitas').textContent = formatarNumero(totalR) + ' Kz';
+            $('finDespesas').textContent = formatarNumero(totalD) + ' Kz';
+            $('finSaldo').textContent = formatarNumero(saldo) + ' Kz';
 
-            $('metaValorExibido').textContent = meta.valor.toFixed(0) + ' Kz';
-            $('metaGuardadoExibido').textContent = meta.guardado.toFixed(0) + ' Kz';
+            /* META */
+            var pMeta = meta.valor > 0 ? (meta.guardado / meta.valor) * 100 : 0;
+            $('metaValorExibido').textContent = formatarNumero(meta.valor) + ' Kz';
+            $('metaGuardadoExibido').textContent = formatarNumero(meta.guardado) + ' Kz';
             $('metaBarra').style.width = Math.min(pMeta, 100) + '%';
             $('metaProgresso').textContent = pMeta.toFixed(0) + '%';
-            $('metaFalta').textContent = Math.max(0, meta.valor - meta.guardado).toFixed(0) + ' Kz';
+            $('metaFalta').textContent = formatarNumero(Math.max(0, meta.valor - meta.guardado)) + ' Kz';
 
+            /* ÚLTIMAS TRANSAÇÕES */
             var ult = $('ultimasTransacoes');
-            if(transacoes.length) {
-                ult.innerHTML = transacoes.slice(-5).reverse().map(function(t) {
-                    return '<div style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #eee;">' + (t.descricao||'Transação') + '<span style="font-weight:700; color:' + (t.valor>0?'#00b894':'#e94560') + ';">' + (t.valor>0?'+':'') + t.valor.toFixed(0) + ' Kz</span></div>';
+            if (transacoes.length) {
+                ult.innerHTML = transacoes.slice(0, 3).map(function (t) {
+                    return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eee;">' +
+                        escaparHTML(t.descricao || '') +
+                        '<span style="font-weight:700;color:' + (t.valor > 0 ? '#28a745' : '#dc3545') + ';">' +
+                        (t.valor > 0 ? '+' : '') + formatarNumero(t.valor) + ' Kz</span></div>';
                 }).join('');
-            } else { ult.innerHTML = 'Nenhuma transação registrada'; }
+            } else {
+                ult.innerHTML = 'Nenhuma transação';
+            }
 
+            /* PRÓXIMOS EVENTOS */
             var prox = $('proximosEventos');
-            var proximos = eventos.filter(function(e) { return e.status === 'Agendado'; }).sort(function(a,b) { return new Date(a.data) - new Date(b.data); });
-            if(proximos.length) {
-                prox.innerHTML = proximos.slice(0,5).map(function(e) {
-                    return '<div style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid #eee;">' + e.nome + '<span style="font-weight:700;">' + e.data + '</span></div>';
+            var proximos = eventos.filter(function (e) { return e.status === 'Agendado'; });
+            if (proximos.length) {
+                prox.innerHTML = proximos.slice(0, 3).map(function (e) {
+                    return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eee;">' +
+                        escaparHTML(e.nome) +
+                        '<span style="font-weight:700;">' + escaparHTML(e.data) + '</span></div>';
                 }).join('');
-            } else { prox.innerHTML = 'Nenhum evento agendado'; }
+            } else {
+                prox.innerHTML = 'Nenhum evento agendado';
+            }
 
+            /* GRÁFICO */
             var chart = $('graficoBarras');
             var maxVal = Math.max(totalR, totalD, 1);
             chart.innerHTML =
-                '<div class="barra" style="height:' + ((totalR/maxVal)*90+10) + 'px; background:#00b894;"><span class="valor">' + totalR.toFixed(0) + '</span></div>' +
-                '<div class="barra" style="height:' + ((totalD/maxVal)*90+10) + 'px; background:#e94560;"><span class="valor">' + totalD.toFixed(0) + '</span></div>' +
-                '<div class="barra" style="height:' + ((Math.abs(saldo)/maxVal)*90+10) + 'px; background:#fdcb6e;"><span class="valor">' + saldo.toFixed(0) + '</span></div>' +
-                '<div style="display:flex; gap:12px; font-size:0.7rem; color:#666; margin-top:6px; justify-content:center;"><span>🟢 Receitas</span><span>🔴 Despesas</span><span>🟡 Saldo</span></div>';
+                '<div class="barra" style="height:' + ((totalR / maxVal) * 80 + 10) + 'px;background:#28a745;">' +
+                '<span class="valor">' + formatarNumero(totalR) + '</span></div>' +
+                '<div class="barra" style="height:' + ((totalD / maxVal) * 80 + 10) + 'px;background:#dc3545;">' +
+                '<span class="valor">' + formatarNumero(totalD) + '</span></div>' +
+                '<div class="barra" style="height:' + ((Math.abs(saldo) / maxVal) * 80 + 10) + 'px;background:#0b1a2e;">' +
+                '<span class="valor">' + formatarNumero(saldo) + '</span></div>';
 
-            $('relReceitas').textContent = totalR.toFixed(0) + ' Kz';
-            $('relDespesas').textContent = totalD.toFixed(0) + ' Kz';
-            $('relSaldo').textContent = saldo.toFixed(0) + ' Kz';
-            $('relSaldo').style.color = saldo >= 0 ? '#00b894' : '#e94560';
+            /* RELATÓRIOS */
+            $('relReceitas').textContent = formatarNumero(totalR) + ' Kz';
+            $('relDespesas').textContent = formatarNumero(totalD) + ' Kz';
+            $('relSaldo').textContent = formatarNumero(saldo) + ' Kz';
             $('relTotalMembros').textContent = membros.length;
-            $('relAtivos').textContent = membros.filter(function(m) { return m.status === 'Ativo'; }).length;
-            $('relInativos').textContent = membros.filter(function(m) { return m.status === 'Inativo'; }).length;
+            $('relAtivos').textContent = membros.filter(function (m) { return m.status === 'Ativo'; }).length;
+            $('relInativos').textContent = membros.filter(function (m) { return m.status !== 'Ativo'; }).length;
             $('relTotalEventos').textContent = eventos.length;
-            $('relEventosMes').textContent = eventosMes.length;
-            $('relEventosProximos').textContent = eventos.filter(function(e) { return e.status === 'Agendado'; }).length;
+            $('relEventosProximos').textContent = proximos.length;
 
-        } catch(e) { console.error(e); }
+            var mesAtual = new Date().getMonth();
+            var eventosMes = eventos.filter(function (e) {
+                if (!e.data) return false;
+                var partes = e.data.split('-');
+                if (partes.length === 3) {
+                    return parseInt(partes[1]) - 1 === mesAtual;
+                }
+                return false;
+            });
+            $('relEventosMes').textContent = eventosMes.length;
+
+        } catch (erro) {
+            console.error('Erro ao atualizar interface:', erro);
+        }
     }
 
-    // ===== EXPORTAR FUNÇÕES GLOBALMENTE =====
+    /* =========================================================
+       EXPORTAR FUNÇÕES PARA OS BOTÕES DO HTML
+       ========================================================= */
+
     window.alternarTema = alternarTema;
     window.alternarMenu = alternarMenu;
     window.abrir = abrir;
-    window.fazerBackup = fazerBackup;
     window.paginar = paginar;
     window.abrirModal = abrirModal;
     window.fecharModal = fecharModal;
@@ -1690,13 +2166,10 @@
     window.filtrarMembros = filtrarMembros;
     window.exportarMembrosCSV = exportarMembrosCSV;
     window.adicionarTransacao = adicionarTransacao;
-    window.excluirTransacao = excluirTransacao;
-    window.limparTransacoes = limparTransacoes;
     window.filtrarTransacoes = filtrarTransacoes;
     window.exportarTransacoesCSV = exportarTransacoesCSV;
+    window.limparTransacoes = limparTransacoes;
     window.adicionarEvento = adicionarEvento;
-    window.excluirEvento = excluirEvento;
-    window.concluirEvento = concluirEvento;
     window.definirMeta = definirMeta;
     window.guardarParaMeta = guardarParaMeta;
     window.resetarMeta = resetarMeta;
@@ -1704,29 +2177,46 @@
     window.exportarRelatorioCSV = exportarRelatorioCSV;
     window.imprimirSistema = imprimirSistema;
     window.exportarPDF = exportarPDF;
-    window.mascaraData = mascaraData;
+    window.fazerBackup = fazerBackup;
     window.sincronizarSupabase = sincronizarSupabase;
+    window.aplicarMascaraData = aplicarMascaraData;
+    window.fazerLogin = fazerLogin;
+    window.logout = logout;
 
-    // ===== INICIALIZAÇÃO =====
+    /* =========================================================
+       INICIALIZAÇÃO
+       ========================================================= */
+
     carregarTema();
-    $('modal').addEventListener('click', function(e) { if(e.target === this) fecharModal(); });
-    document.addEventListener('keydown', function(e) { if(e.key === 'Escape') fecharModal(); });
-    document.addEventListener('click', function(e) {
+
+    if ($('modal')) {
+        $('modal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                fecharModal();
+            }
+        });
+    }
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            fecharModal();
+        }
+    });
+
+    document.addEventListener('click', function (e) {
         var nav = $('menuNav');
         var toggle = document.querySelector('.menu-toggle');
-        if(nav && nav.classList.contains('aberto') && !nav.contains(e.target) && !toggle.contains(e.target)) {
+        if (nav && nav.classList.contains('aberto') && !nav.contains(e.target) &&
+            toggle && !toggle.contains(e.target)) {
             nav.classList.remove('aberto');
         }
     });
 
-    // Sincronização automática ao carregar a página
-    setTimeout(function() {
-        sincronizarSupabase();
-    }, 2000);
+    // Verificar login ao carregar
+    verificarLogin();
 
-    atualizarTudo();
-    console.log('🚀 O.J.V. Professional Plus carregado com sucesso!');
-    console.log('🔗 Conectado ao Supabase');
+    console.log('🚀 O.J.V. Professional Plus conectado ao Supabase!');
+    console.log('🔐 Senha padrão: admin123');
     </script>
 </body>
 </html>
