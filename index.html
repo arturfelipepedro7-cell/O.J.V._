@@ -1,2222 +1,3632 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>O.J.V. Professional Plus</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html { font-size: 20px; }
-        body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background: #f5f7fa;
-            color: #1a1a2e;
-            padding-bottom: 90px;
-            transition: background 0.3s, color 0.3s;
-            min-height: 100vh;
-        }
-        header {
-            background: linear-gradient(135deg, #0f1a2e, #16213e);
-            color: #fff;
-            padding: 15px 14px 12px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 3px 16px rgba(0,0,0,0.3);
-            border-bottom: 3px solid #e94560;
-        }
-        header .topo {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            gap: 10px;
-        }
-        header .logo {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            flex-shrink: 0;
-        }
-        header .logo img {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid rgba(255,255,255,0.4);
-            box-shadow: 0 0 20px rgba(233,69,96,0.6);
-        }
-        header .logo h1 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            line-height: 1.1;
-        }
-        header .logo small {
-            font-size: 0.7rem;
-            opacity: 0.8;
-            display: block;
-            margin-top: -2px;
-        }
-        header .lema {
-            font-size: 0.85rem;
-            font-style: italic;
-            text-align: center;
-            opacity: 0.9;
-            background: rgba(255,255,255,0.08);
-            padding: 6px 16px;
-            border-radius: 30px;
-            margin-top: 8px;
-            border: 1px solid rgba(255,255,255,0.1);
-            width: 100%;
-        }
-        header .lema::before { content: "💡 "; }
-        header .acoes {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-shrink: 0;
-        }
-        header .acoes button {
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: #fff;
-            padding: 8px 10px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: 0.2s;
-            touch-action: manipulation;
-            min-width: 40px;
-            min-height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        header .acoes button:active {
-            transform: scale(0.92);
-            background: rgba(255,255,255,0.25);
-        }
-        .menu-toggle {
-            background: transparent !important;
-            font-size: 1.8rem;
-            padding: 0 8px !important;
-            line-height: 1;
-        }
-        nav {
-            background: #1a1a2e;
-            display: none;
-            flex-direction: column;
-            padding: 10px 14px;
-            gap: 6px;
-            border-bottom: 2px solid #e94560;
-            position: sticky;
-            top: 115px;
-            z-index: 99;
-            max-height: 60vh;
-            overflow-y: auto;
-            width: 100%;
-        }
-        nav.aberto { display: flex; }
-        nav button {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            padding: 14px 16px;
-            border: none;
-            background: transparent;
-            color: rgba(255,255,255,0.75);
-            font-weight: 600;
-            font-size: 1rem;
-            border-radius: 12px;
-            width: 100%;
-            text-align: left;
-            transition: 0.2s;
-            touch-action: manipulation;
-        }
-        nav button:active { background: rgba(255,255,255,0.1); }
-        nav button.ativo { background: #e94560; color: #fff; }
-        nav button .badge {
-            background: #e94560;
-            color: #fff;
-            padding: 2px 12px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            margin-left: auto;
-        }
-        .container {
-            max-width: 700px;
-            margin: 15px auto;
-            padding: 0 12px;
-        }
-        section {
-            display: none;
-            background: #fff;
-            padding: 18px;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            animation: fadeIn 0.2s ease;
-            transition: background 0.3s;
-        }
-        section.ativo { display: block; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        section h2 {
-            font-size: 1.3rem;
-            margin-bottom: 14px;
-            padding-bottom: 6px;
-            border-bottom: 3px solid #e94560;
-            display: inline-block;
-        }
-        .subtitulo {
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 14px;
-        }
-        .cards {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-        .card {
-            background: #f8f9fa;
-            padding: 14px 14px 10px;
-            border-radius: 12px;
-            border-left: 6px solid #16213e;
-        }
-        .card .numero {
-            font-size: 1.5rem;
-            font-weight: 700;
-            display: block;
-            line-height: 1.3;
-        }
-        .card .rotulo {
-            font-size: 0.75rem;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .card.verde { border-left-color: #00b894; }
-        .card.vermelho { border-left-color: #e94560; }
-        .card.laranja { border-left-color: #fdcb6e; }
-        .card.azul { border-left-color: #0984e3; }
-        .card.ouro { border-left-color: #f39c12; }
-        .grupo-form {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 14px 0;
-        }
-        .grupo-form input, .grupo-form select, .grupo-form textarea {
-            padding: 14px 16px;
-            border: 2px solid #ddd;
-            border-radius: 12px;
-            font-size: 1rem;
-            width: 100%;
-            outline: none;
-            transition: 0.2s;
-            background: #fafbfc;
-            min-height: 52px;
-        }
-        .grupo-form input:focus, .grupo-form select:focus, .grupo-form textarea:focus {
-            border-color: #16213e;
-            box-shadow: 0 0 0 4px rgba(22,33,62,0.1);
-        }
-        .grupo-form textarea {
-            resize: vertical;
-            min-height: 60px;
-        }
-        .btn {
-            padding: 14px 18px;
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.2s;
-            touch-action: manipulation;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            width: 100%;
-            background: #16213e;
-            color: #fff;
-            min-height: 54px;
-        }
-        .btn:active { transform: scale(0.96); }
-        .btn-success { background: #00b894; }
-        .btn-success:active { background: #00a381; }
-        .btn-danger { background: #e94560; }
-        .btn-danger:active { background: #c0392b; }
-        .btn-outline {
-            background: transparent;
-            color: #16213e;
-            border: 2px solid #16213e;
-        }
-        .btn-outline:active { background: #16213e; color: #fff; }
-        .btn-pequeno {
-            padding: 10px 14px;
-            font-size: 0.85rem;
-            width: auto;
-            min-height: 38px;
-        }
-        .btn-info { background: #0984e3; }
-        .btn-info:active { background: #0770c4; }
-        .btn-ouro { background: #f39c12; color: #1a1a2e; }
-        .btn-ouro:active { background: #d68910; }
-        .btn-imprimir { background: #2d3436; }
-        .btn-imprimir:active { background: #1a1a2e; }
-        .btn-login { background: #6c5ce7; }
-        .btn-login:active { background: #5a4bd1; }
-        .btn-logout { background: #e17055; }
-        .btn-logout:active { background: #d63031; }
-        .tabela-wrapper {
-            overflow-x: auto;
-            margin-top: 12px;
-            border: 2px solid #eee;
-            border-radius: 12px;
-            -webkit-overflow-scrolling: touch;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-            min-width: 450px;
-        }
-        th {
-            background: #f8f9fa;
-            padding: 12px 8px;
-            text-align: left;
-            border-bottom: 2px solid #eee;
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-        }
-        td {
-            padding: 10px 8px;
-            border-bottom: 1px solid #f0f0f0;
-            vertical-align: middle;
-        }
-        .badge {
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 0.65rem;
-            font-weight: 700;
-            display: inline-block;
-            text-transform: uppercase;
-        }
-        .badge-sucesso { background: #d4edda; color: #155724; }
-        .badge-perigo { background: #f8d7da; color: #721c24; }
-        .badge-atencao { background: #fff3cd; color: #856404; }
-        .badge-info { background: #d1ecf1; color: #0c5460; }
-        .badge-admin { background: #6c5ce7; color: #fff; }
-        .grupo-acoes {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
-        .grupo-acoes .btn {
-            padding: 8px 12px;
-            font-size: 0.75rem;
-            width: auto;
-            border-radius: 8px;
-            min-height: 34px;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 16px;
-        }
-        .modal.aberto { display: flex; }
-        .modal-conteudo {
-            background: #fff;
-            padding: 20px;
-            border-radius: 18px;
-            max-width: 460px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            animation: slideIn 0.2s ease;
-        }
-        @keyframes slideIn {
-            from { opacity: 0; transform: scale(0.95) translateY(10px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        .modal-conteudo h3 {
-            margin-bottom: 16px;
-            border-bottom: 2px solid #e94560;
-            padding-bottom: 8px;
-            font-size: 1.1rem;
-        }
-        .modal-acoes {
-            display: flex;
-            gap: 10px;
-            margin-top: 16px;
-            justify-content: flex-end;
-        }
-        .modal-acoes .btn {
-            width: auto;
-            flex: 1;
-            min-height: 48px;
-        }
-        .toast-container {
-            position: fixed;
-            bottom: 90px;
-            left: 16px;
-            right: 16px;
-            z-index: 3000;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            max-width: 450px;
-            margin: 0 auto;
-        }
-        .toast {
-            padding: 14px 18px;
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-            border-left: 5px solid #16213e;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            animation: sobeToast 0.3s ease;
-            font-size: 0.9rem;
-        }
-        .toast.sucesso { border-left-color: #00b894; }
-        .toast.erro { border-left-color: #e94560; }
-        .toast.atencao { border-left-color: #fdcb6e; }
-        @keyframes sobeToast {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .toast .msg { flex: 1; }
-        .paginacao {
-            display: flex;
-            gap: 6px;
-            justify-content: center;
-            margin-top: 14px;
-            flex-wrap: wrap;
-        }
-        .paginacao button {
-            padding: 8px 14px;
-            border: 2px solid #ddd;
-            background: #fff;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            cursor: pointer;
-            touch-action: manipulation;
-            min-width: 38px;
-            min-height: 38px;
-        }
-        .paginacao button.ativo {
-            background: #16213e;
-            color: #fff;
-            border-color: #16213e;
-        }
-        .grafico-barras {
-            display: flex;
-            gap: 10px;
-            align-items: flex-end;
-            height: 120px;
-            margin: 12px 0;
-            padding: 0 4px;
-        }
-        .barra {
-            flex: 1;
-            border-radius: 6px 6px 0 0;
-            transition: height 0.8s ease;
-            min-height: 8px;
-            position: relative;
-        }
-        .barra .valor {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
-        .meta-container {
-            background: #f8f9fa;
-            padding: 16px;
-            border-radius: 12px;
-            margin: 14px 0;
-        }
-        .meta-container .barra-progresso {
-            width: 100%;
-            height: 14px;
-            background: #ddd;
-            border-radius: 20px;
-            overflow: hidden;
-            margin: 6px 0;
-        }
-        .meta-container .barra-progresso .preenchimento {
-            height: 100%;
-            background: linear-gradient(90deg, #f39c12, #e67e22);
-            border-radius: 20px;
-            transition: width 0.8s ease;
-        }
-        .meta-container .info-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        .login-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.85);
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        .login-overlay.hidden {
-            display: none;
-        }
-        .login-box {
-            background: #fff;
-            padding: 30px;
-            border-radius: 20px;
-            max-width: 400px;
-            width: 100%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-        }
-        .login-box h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #16213e;
-        }
-        .login-box .logo-login {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-        .login-box input {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #ddd;
-            border-radius: 12px;
-            font-size: 1rem;
-            margin-bottom: 12px;
-            outline: none;
-            transition: 0.2s;
-        }
-        .login-box input:focus {
-            border-color: #16213e;
-            box-shadow: 0 0 0 4px rgba(22,33,62,0.1);
-        }
-        .login-box .btn {
-            width: 100%;
-            margin-top: 8px;
-        }
-        .login-box .erro-login {
-            color: #e94560;
-            font-size: 0.85rem;
-            text-align: center;
-            margin-top: 10px;
-            display: none;
-        }
-        .login-box .erro-login.visible {
-            display: block;
-        }
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.8);
-        }
-        .user-info .badge-admin {
-            background: #6c5ce7;
-            padding: 2px 10px;
-            border-radius: 20px;
-            font-size: 0.65rem;
-        }
-        footer {
-            text-align: center;
-            padding: 16px;
-            color: #888;
-            font-size: 0.75rem;
-            border-top: 1px solid #eee;
-            margin-top: 20px;
-        }
-        body.escuro {
-            background: #1a1a2e;
-            color: #eee;
-        }
-        body.escuro section, body.escuro .card, body.escuro .modal-conteudo,
-        body.escuro .toast, body.escuro .paginacao button, body.escuro .tabela-wrapper,
-        body.escuro .login-box {
-            background: #2d2d44;
-            color: #eee;
-            border-color: #444;
-        }
-        body.escuro .grupo-form input, body.escuro .grupo-form select, body.escuro .grupo-form textarea,
-        body.escuro .login-box input {
-            background: #3a3a55;
-            color: #eee;
-            border-color: #555;
-        }
-        body.escuro th, body.escuro td { color: #ccc; }
-        body.escuro .btn-outline { color: #eee; border-color: #888; }
-        body.escuro .btn-outline:active { background: #888; color: #fff; }
-        body.escuro header, body.escuro nav { background: #0f0f1f; }
-        body.escuro .subtitulo { color: #aaa; }
-        body.escuro .login-box h2 { color: #eee; }
-        @media (max-width: 480px) {
-            html { font-size: 18px; }
-            header .logo img { width: 55px; height: 55px; }
-            .cards { grid-template-columns: 1fr 1fr; gap: 8px; }
-            .card .numero { font-size: 1.3rem; }
-            .btn { font-size: 0.9rem; padding: 12px 14px; min-height: 48px; }
-            .login-box { padding: 20px; }
-        }
-        @media print {
-            header, nav, .btn, .toast-container, .paginacao, .login-overlay { display: none !important; }
-            body { background: #fff !important; color: #000 !important; padding: 20px !important; }
-            section { display: block !important; background: #fff !important; box-shadow: none !important; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+
+<title>O.J.V. Professional Plus</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:#f4f6f9;
+    color:#1e2a3a;
+    min-height:100vh;
+    padding-bottom:70px;
+}
+
+button,input,select,textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* LOGIN */
+
+#loginPage{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:
+        radial-gradient(circle at top,#15395f,#071321 65%);
+}
+
+.login-box{
+    width:100%;
+    max-width:420px;
+    background:#fff;
+    border-radius:20px;
+    padding:30px 24px;
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+.login-logo{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.login-logo img{
+    width:90px;
+    height:90px;
+    object-fit:cover;
+    border-radius:50%;
+    border:4px solid #eef3f8;
+}
+
+.login-logo h1{
+    margin-top:12px;
+    color:#0b1a2e;
+    font-size:1.5rem;
+}
+
+.login-logo p{
+    color:#777;
+    font-size:.85rem;
+    margin-top:5px;
+}
+
+.login-title{
+    margin:20px 0 15px;
+}
+
+.login-title h2{
+    color:#0b1a2e;
+    font-size:1.3rem;
+}
+
+.login-title p{
+    color:#777;
+    font-size:.85rem;
+    margin-top:5px;
+}
+
+.form-group{
+    margin-bottom:14px;
+}
+
+.form-group label{
+    display:block;
+    font-size:.85rem;
+    font-weight:700;
+    margin-bottom:6px;
+    color:#495057;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    padding:14px;
+    border:1px solid #ced4da;
+    border-radius:8px;
+    outline:none;
+    font-size:1rem;
+    background:#fff;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:#1ea5dc;
+    box-shadow:0 0 0 3px rgba(30,165,220,.15);
+}
+
+.login-error{
+    background:#f8d7da;
+    color:#721c24;
+    border-radius:8px;
+    padding:11px;
+    margin-bottom:12px;
+    font-size:.85rem;
+    display:none;
+}
+
+.login-info{
+    text-align:center;
+    margin-top:15px;
+    font-size:.75rem;
+    color:#888;
+}
+
+/* HEADER */
+
+header{
+    background:#0b1a2e;
+    color:#fff;
+    padding:12px 16px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.topo{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo img{
+    width:45px;
+    height:45px;
+    object-fit:cover;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.25);
+}
+
+.logo h1{
+    font-size:1.15rem;
+}
+
+.logo small{
+    display:block;
+    font-size:.7rem;
+    opacity:.7;
+}
+
+.acoes{
+    display:flex;
+    gap:7px;
+    align-items:center;
+}
+
+.acoes button{
+    border:1px solid rgba(255,255,255,.25);
+    background:transparent;
+    color:white;
+    border-radius:8px;
+    padding:9px 11px;
+}
+
+.menu-toggle{
+    background:#fff!important;
+    color:#0b1a2e!important;
+    border:none!important;
+    font-weight:700;
+}
+
+nav{
+    display:none;
+    flex-direction:column;
+    margin-top:10px;
+    border-top:1px solid rgba(255,255,255,.1);
+}
+
+nav.aberto{
+    display:flex;
+}
+
+nav button{
+    border:0;
+    background:transparent;
+    color:rgba(255,255,255,.75);
+    padding:13px 10px;
+    text-align:left;
+    font-size:.95rem;
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+nav button.ativo{
+    color:white;
+    background:rgba(255,255,255,.08);
+    border-left:4px solid #1ea5dc;
+}
+
+/* CONTAINER */
+
+.container{
+    width:100%;
+    max-width:760px;
+    margin:auto;
+    padding:15px;
+}
+
+section{
+    display:none;
+    background:#fff;
+    padding:20px;
+    border-radius:14px;
+    margin-bottom:18px;
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+section.ativo{
+    display:block;
+}
+
+section h2{
+    color:#0b1a2e;
+    font-size:1.4rem;
+}
+
+.subtitulo{
+    color:#777;
+    font-size:.85rem;
+    padding-bottom:12px;
+    margin-top:5px;
+    margin-bottom:15px;
+    border-bottom:2px solid #f0f0f0;
+}
+
+/* CARDS */
+
+.cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.card{
+    background:#f8f9fc;
+    border:1px solid #e9ecef;
+    border-radius:10px;
+    padding:15px;
+    text-align:center;
+}
+
+.numero{
+    display:block;
+    font-size:1.55rem;
+    font-weight:800;
+}
+
+.rotulo{
+    display:block;
+    margin-top:4px;
+    font-size:.7rem;
+    color:#6c757d;
+    text-transform:uppercase;
+}
+
+.verde .numero{color:#28a745}
+.vermelho .numero{color:#dc3545}
+.azul .numero{color:#0b1a2e}
+.ouro .numero{color:#d39e00}
+
+/* FORM */
+
+.grupo-form{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin:12px 0;
+}
+
+.grupo-form label{
+    font-size:.85rem;
+    font-weight:700;
+}
+
+.grupo-form input,
+.grupo-form select,
+.grupo-form textarea{
+    width:100%;
+    padding:13px;
+    border:1px solid #ced4da;
+    border-radius:7px;
+    font-size:1rem;
+    outline:none;
+}
+
+.grupo-form input:focus,
+.grupo-form select:focus,
+.grupo-form textarea:focus{
+    border-color:#1ea5dc;
+}
+
+/* BUTTONS */
+
+.btn{
+    width:100%;
+    min-height:50px;
+    padding:13px;
+    border:0;
+    border-radius:7px;
+    font-weight:700;
+    font-size:.95rem;
+    color:#fff;
+    background:#1ea5dc;
+    margin:3px 0;
+}
+
+.btn:active{
+    transform:scale(.98);
+}
+
+.btn-success{background:#28a745}
+.btn-danger{background:#dc3545}
+.btn-ouro{background:#d39e00;color:#1e2a3a}
+
+.btn-outline{
+    background:white;
+    color:#0b1a2e;
+    border:2px solid #0b1a2e;
+}
+
+/* TABELAS */
+
+.tabela-wrapper{
+    width:100%;
+    overflow-x:auto;
+    border:1px solid #dee2e6;
+    border-radius:8px;
+}
+
+table{
+    width:100%;
+    min-width:430px;
+    border-collapse:collapse;
+    font-size:.82rem;
+}
+
+th{
+    background:#f8f9fa;
+    padding:11px 8px;
+    text-align:left;
+    border-bottom:2px solid #dee2e6;
+}
+
+td{
+    padding:11px 8px;
+    border-bottom:1px solid #f1f3f5;
+}
+
+tr:last-child td{
+    border-bottom:none;
+}
+
+.badge{
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:30px;
+    font-size:.68rem;
+    font-weight:700;
+}
+
+.badge-sucesso{
+    background:#d4edda;
+    color:#155724;
+}
+
+.badge-perigo{
+    background:#f8d7da;
+    color:#721c24;
+}
+
+.badge-info{
+    background:#d1ecf1;
+    color:#0c5460;
+}
+
+.grupo-acoes{
+    display:flex;
+    gap:5px;
+}
+
+.grupo-acoes .btn{
+    width:auto;
+    min-height:34px;
+    padding:7px 10px;
+    font-size:.75rem;
+}
+
+/* DASHBOARD */
+
+.dashboard-box{
+    background:#f8f9fc;
+    padding:15px;
+    border-radius:9px;
+    border:1px solid #e9ecef;
+    margin-top:13px;
+}
+
+.dashboard-box h4{
+    margin-bottom:9px;
+}
+
+.linha-resumo{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    border-bottom:1px solid #e5e5e5;
+    font-size:.82rem;
+}
+
+.linha-resumo:last-child{
+    border-bottom:0;
+}
+
+/* GRAFICO */
+
+.grafico-barras{
+    display:flex;
+    align-items:flex-end;
+    gap:15px;
+    height:130px;
+    padding:20px 10px 0;
+}
+
+.barra{
+    flex:1;
+    min-height:8px;
+    border-radius:5px 5px 0 0;
+    position:relative;
+    transition:.5s;
+}
+
+.barra.receita{background:#28a745}
+.barra.despesa{background:#dc3545}
+.barra.saldo{background:#0b1a2e}
+
+.barra .valor{
+    position:absolute;
+    top:-20px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:.65rem;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+/* META */
+
+.meta-container{
+    background:#f8f9fc;
+    border:1px solid #e9ecef;
+    padding:16px;
+    border-radius:10px;
+}
+
+.meta-topo{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    font-size:.82rem;
+    font-weight:700;
+}
+
+.barra-progresso{
+    height:13px;
+    background:#e9ecef;
+    border-radius:20px;
+    overflow:hidden;
+    margin:12px 0;
+}
+
+.preenchimento{
+    height:100%;
+    background:linear-gradient(90deg,#1ea5dc,#007bff);
+    border-radius:20px;
+    transition:.7s;
+}
+
+/* PAGINAÇÃO */
+
+.paginacao{
+    display:flex;
+    justify-content:center;
+    gap:5px;
+    margin-top:12px;
+}
+
+.paginacao button{
+    min-width:38px;
+    min-height:38px;
+    background:white;
+    border:1px solid #ddd;
+    border-radius:6px;
+}
+
+.paginacao button.ativo{
+    background:#0b1a2e;
+    color:white;
+}
+
+/* MODAL */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.6);
+    z-index:3000;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+.modal.aberto{
+    display:flex;
+}
+
+.modal-conteudo{
+    width:100%;
+    max-width:470px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:#fff;
+    border-radius:15px;
+    padding:22px;
+}
+
+.modal-conteudo h3{
+    color:#0b1a2e;
+    margin-bottom:15px;
+}
+
+/* TOAST */
+
+.toast-container{
+    position:fixed;
+    bottom:20px;
+    left:15px;
+    right:15px;
+    z-index:5000;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    max-width:450px;
+    margin:auto;
+}
+
+.toast{
+    background:#0b1a2e;
+    color:white;
+    padding:13px 16px;
+    border-radius:8px;
+    border-left:4px solid #1ea5dc;
+    box-shadow:0 5px 20px rgba(0,0,0,.2);
+    font-size:.85rem;
+}
+
+.toast.sucesso{border-left-color:#28a745}
+.toast.erro{border-left-color:#dc3545}
+.toast.atencao{border-left-color:#ffc107}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    color:#999;
+    font-size:.7rem;
+    padding:20px;
+}
+
+/* DARK */
+
+body.escuro{
+    background:#111;
+    color:#eee;
+}
+
+body.escuro section,
+body.escuro .card,
+body.escuro .dashboard-box,
+body.escuro .meta-container,
+body.escuro .modal-conteudo{
+    background:#1e1e1e;
+    color:#eee;
+    border-color:#333;
+}
+
+body.escuro section h2,
+body.escuro .modal-conteudo h3{
+    color:#fff;
+}
+
+body.escuro .grupo-form input,
+body.escuro .grupo-form select,
+body.escuro .grupo-form textarea{
+    background:#292929;
+    color:#fff;
+    border-color:#444;
+}
+
+body.escuro th{
+    background:#292929;
+    color:#eee;
+}
+
+body.escuro td{
+    color:#ddd;
+    border-color:#333;
+}
+
+body.escuro .btn-outline{
+    background:transparent;
+    color:#fff;
+    border-color:#777;
+}
+
+body.escuro .login-box{
+    background:#1e1e1e;
+    color:#eee;
+}
+
+body.escuro .login-logo h1,
+body.escuro .login-title h2{
+    color:#fff;
+}
+
+body.escuro .form-group label{
+    color:#ddd;
+}
+
+body.escuro .form-group input{
+    background:#292929;
+    color:#fff;
+    border-color:#444;
+}
+
+@media(max-width:380px){
+    .cards{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(min-width:700px){
+    .container{
+        padding:25px;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <!-- TELA DE LOGIN -->
-    <div class="login-overlay" id="loginOverlay">
-        <div class="login-box">
-            <div class="logo-login">🔐</div>
-            <h2>O.J.V. Professional Plus</h2>
-            <p style="text-align:center;color:#666;margin-bottom:20px;">Acesso Restrito - Administrador</p>
-            <input type="password" id="senhaLogin" placeholder="Digite a senha de administrador" onkeydown="if(event.key==='Enter') fazerLogin()">
-            <button class="btn btn-login" onclick="fazerLogin()">🔑 Entrar</button>
-            <div class="erro-login" id="erroLogin">❌ Senha incorreta! Tente novamente.</div>
-            <p style="text-align:center;margin-top:15px;font-size:0.75rem;color:#999;">Apenas o administrador autorizado tem acesso.</p>
+<!-- ================= LOGIN ================= -->
+
+<div id="loginPage">
+
+    <div class="login-box">
+
+        <div class="login-logo">
+
+            <img
+                src="logo.png"
+                alt="O.J.V."
+                onerror="this.style.display='none';"
+            >
+
+            <h1>O.J.V. Professional Plus</h1>
+
+            <p>Sistema de gestão</p>
+
         </div>
+
+        <div class="login-title">
+
+            <h2>🔐 Entrar</h2>
+
+            <p>Use o seu e-mail e palavra-passe.</p>
+
+        </div>
+
+        <div id="loginErro" class="login-error"></div>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+
+                <label>E-mail</label>
+
+                <input
+                    id="loginEmail"
+                    type="email"
+                    placeholder="seu@email.com"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Palavra-passe</label>
+
+                <input
+                    id="loginPassword"
+                    type="password"
+                    placeholder="••••••••"
+                    autocomplete="current-password"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="btn"
+                id="btnLogin"
+            >
+                🔐 Entrar
+            </button>
+
+        </form>
+
+        <div class="login-info">
+            Acesso protegido pelo Supabase Authentication.
+        </div>
+
     </div>
 
-    <header>
-        <div class="topo">
-            <div class="logo">
-                <img src="logo.png" alt="O.J.V. Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                <div class="logo-fallback" style="display:none; width:70px; height:70px; background: linear-gradient(135deg, #e94560, #f39c12); border-radius:50%; align-items:center; justify-content:center; font-size:2rem; font-weight:800; color:#fff; text-shadow:1px 1px 3px rgba(0,0,0,0.3);">OJV</div>
-                <div>
-                    <h1>O.J.V. <small>Plus</small></h1>
-                </div>
+</div>
+
+
+<!-- ================= APP ================= -->
+
+<div id="app" class="hidden">
+
+<header>
+
+    <div class="topo">
+
+        <div class="logo">
+
+            <img
+                src="logo.png"
+                alt="O.J.V."
+                onerror="this.style.display='none';"
+            >
+
+            <div>
+
+                <h1>O.J.V. <small>Professional Plus</small></h1>
+
             </div>
-            <div class="acoes">
-                <div class="user-info" id="userInfo" style="display:none;">
-                    <span>👤 Admin</span>
-                    <span class="badge-admin">ADMIN</span>
-                </div>
-                <button onclick="alternarTema()" title="Alternar tema">🌓</button>
-                <button onclick="fazerBackup()" title="Fazer backup">💾</button>
-                <button onclick="sincronizarSupabase()" title="Sincronizar com Supabase">☁️</button>
-                <button onclick="logout()" title="Sair" class="btn-logout" style="background:rgba(225,112,85,0.3);">🚪</button>
-                <button class="menu-toggle" onclick="alternarMenu()">☰</button>
-            </div>
+
         </div>
-        <div class="lema">O objectivo não é ser rico, mas é não deixar a carteira vazia.</div>
-    </header>
+
+        <div class="acoes">
+
+            <button onclick="alternarTema()">🌓</button>
+
+            <button onclick="sair()">🚪</button>
+
+            <button
+                class="menu-toggle"
+                onclick="alternarMenu()"
+            >
+                ☰ Menu
+            </button>
+
+        </div>
+
+    </div>
+
 
     <nav id="menuNav">
-        <button class="ativo" onclick="abrir('inicio')"><span>📊</span> Painel</button>
-        <button onclick="abrir('membros')"><span>👥</span> Membros <span class="badge" id="navMembros">0</span></button>
-        <button onclick="abrir('financeiro')"><span>💰</span> Finanças</button>
-        <button onclick="abrir('transacoes')"><span>📋</span> Transações</button>
-        <button onclick="abrir('eventos')"><span>📅</span> Eventos</button>
-        <button onclick="abrir('meta')"><span>🎯</span> Meta</button>
-        <button onclick="abrir('relatorios')"><span>📈</span> Relatórios</button>
-        <button onclick="abrir('estatuto')"><span>📜</span> Estatuto</button>
+
+        <button
+            class="ativo"
+            onclick="abrir('inicio')"
+        >
+            📊 Painel
+        </button>
+
+        <button onclick="abrir('membros')">
+            👥 Membros
+            <span class="badge" id="navMembros">0</span>
+        </button>
+
+        <button onclick="abrir('financeiro')">
+            💰 Finanças
+        </button>
+
+        <button onclick="abrir('transacoes')">
+            📋 Transações
+        </button>
+
+        <button onclick="abrir('eventos')">
+            📅 Eventos
+        </button>
+
+        <button onclick="abrir('meta')">
+            🎯 Meta
+        </button>
+
     </nav>
 
-    <div class="container">
-        <section id="inicio" class="ativo">
-            <h2>📊 Painel</h2>
-            <p class="subtitulo">Visão geral da sua organização</p>
-            <div class="cards" id="cardsDashboard"></div>
-            <div style="display:flex; flex-direction:column; gap:14px;">
-                <div style="background:#f8f9fa; padding:14px; border-radius:12px;">
-                    <h4 style="margin-bottom:6px; font-size:1rem;">📈 Últimas transações</h4>
-                    <div id="ultimasTransacoes" style="font-size:0.85rem; color:#666;"></div>
-                </div>
-                <div style="background:#f8f9fa; padding:14px; border-radius:12px;">
-                    <h4 style="margin-bottom:6px; font-size:1rem;">🎯 Próximos eventos</h4>
-                    <div id="proximosEventos" style="font-size:0.85rem; color:#666;"></div>
-                </div>
-            </div>
-            <div style="margin-top:14px; background:#f8f9fa; padding:14px; border-radius:12px;">
-                <h4 style="margin-bottom:6px; font-size:1rem;">📊 Resumo financeiro (Kz)</h4>
-                <div class="grafico-barras" id="graficoBarras"></div>
-            </div>
-        </section>
+</header>
 
-        <section id="membros">
-            <h2>👥 Membros</h2>
-            <p class="subtitulo">Cadastre e gerencie todos os membros</p>
-            <div style="display:flex; gap:8px; margin-bottom:14px;">
-                <button class="btn btn-success" onclick="abrirModal()" style="flex:2;">➕ Novo Membro</button>
-                <button class="btn btn-outline" onclick="exportarMembrosCSV()" style="flex:1;">📤 CSV</button>
-            </div>
-            <input id="buscaMembro" placeholder="🔍 Buscar por nome, BI ou telefone..." style="padding:14px; border:2px solid #ddd; border-radius:12px; font-size:1rem; width:100%; margin-bottom:14px;" oninput="filtrarMembros()">
-            <div class="tabela-wrapper">
-                <table>
-                    <thead><tr><th>Nome</th><th>BI</th><th>Telefone</th><th>Status</th><th>Ações</th></tr></thead>
-                    <tbody id="listaMembros"></tbody>
-                </table>
-            </div>
-            <div class="paginacao" id="pagMembros"></div>
-            <p style="margin-top:8px; font-size:0.85rem;">Total: <strong id="totalMembros">0</strong> &middot; Ativos: <strong id="ativosCount" style="color:#00b894;">0</strong> &middot; Inativos: <strong id="inativosCount" style="color:#e94560;">0</strong></p>
-        </section>
 
-        <section id="financeiro">
-            <h2>💰 Finanças</h2>
-            <p class="subtitulo">Registre receitas e despesas</p>
-            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-bottom:14px;">
-                <div style="background:#f8f9fa; padding:12px; border-radius:10px; text-align:center;">
-                    <div style="font-size:0.7rem; color:#666;">Receitas</div>
-                    <div style="font-size:1.2rem; font-weight:700; color:#00b894;" id="finReceitas">0</div>
-                </div>
-                <div style="background:#f8f9fa; padding:12px; border-radius:10px; text-align:center;">
-                    <div style="font-size:0.7rem; color:#666;">Despesas</div>
-                    <div style="font-size:1.2rem; font-weight:700; color:#e94560;" id="finDespesas">0</div>
-                </div>
-                <div style="background:#f8f9fa; padding:12px; border-radius:10px; text-align:center; border:2px solid #16213e;">
-                    <div style="font-size:0.7rem; color:#16213e; font-weight:700;">Saldo</div>
-                    <div style="font-size:1.2rem; font-weight:700;" id="finSaldo">0</div>
-                </div>
-            </div>
-            <div class="grupo-form">
-                <select id="tipoTransacao"><option value="receita">💰 Receita</option><option value="despesa">💸 Despesa</option></select>
-                <select id="categoriaTransacao"><option value="Mensalidade">Mensalidade</option><option value="Doação">Doação</option><option value="Evento">Evento</option><option value="Material">Material</option><option value="Transporte">Transporte</option><option value="Alimentação">Alimentação</option><option value="Outro">Outro</option></select>
-                <input id="valorTransacao" type="number" placeholder="Valor (Kz)" step="0.01">
-                <input id="descricaoTransacao" placeholder="Descrição">
-                <button class="btn btn-success" onclick="adicionarTransacao()">➕ Registrar Transação</button>
-            </div>
-        </section>
+<div class="container">
 
-        <section id="transacoes">
-            <h2>📋 Histórico</h2>
-            <p class="subtitulo">Todas as movimentações financeiras</p>
-            <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:14px;">
-                <input id="buscaTransacao" placeholder="🔍 Buscar transação..." style="padding:14px; border:2px solid #ddd; border-radius:12px; font-size:1rem; width:100%;" oninput="filtrarTransacoes()">
-                <div style="display:flex; gap:8px; flex-wrap:wrap;">
-                    <select id="filtroTipo" style="flex:2; padding:14px; border:2px solid #ddd; border-radius:12px; font-size:1rem; background:#fff;" onchange="filtrarTransacoes()">
-                        <option value="">Todos os tipos</option>
-                        <option value="receita">💰 Receitas</option>
-                        <option value="despesa">💸 Despesas</option>
-                    </select>
-                    <button class="btn btn-outline" onclick="exportarTransacoesCSV()" style="flex:1;">📤 CSV</button>
-                    <button class="btn btn-danger" onclick="limparTransacoes()" style="flex:1;">🗑️ Limpar</button>
-                </div>
-            </div>
-            <div class="tabela-wrapper">
-                <table>
-                    <thead><tr><th>Data</th><th>Descrição</th><th>Valor</th></tr></thead>
-                    <tbody id="listaTransacoes"></tbody>
-                </table>
-            </div>
-            <div class="paginacao" id="pagTransacoes"></div>
-        </section>
 
-        <section id="eventos">
-            <h2>📅 Eventos</h2>
-            <p class="subtitulo">Organize e acompanhe os eventos</p>
-            <div class="grupo-form">
-                <input id="eventoNome" placeholder="Nome do evento">
-                <input id="eventoData" type="date">
-                <input id="eventoHora" type="time">
-                <input id="eventoLocal" placeholder="Local">
-                <textarea id="eventoDescricao" placeholder="Descrição (opcional)"></textarea>
-                <button class="btn btn-success" onclick="adicionarEvento()">📅 Criar Evento</button>
-            </div>
-            <div class="tabela-wrapper">
-                <table>
-                    <thead><tr><th>Evento</th><th>Data</th><th>Status</th></tr></thead>
-                    <tbody id="listaEventos"></tbody>
-                </table>
-            </div>
-            <div class="paginacao" id="pagEventos"></div>
-        </section>
+<!-- ================= PAINEL ================= -->
 
-        <section id="meta">
-            <h2>🎯 Meta de Poupança</h2>
-            <p class="subtitulo">Defina e acompanhe o seu objectivo financeiro</p>
-            <div class="meta-container">
-                <div class="info-meta">
-                    <span>💎 Meta: <strong id="metaValorExibido">0 Kz</strong></span>
-                    <span>Guardado: <strong id="metaGuardadoExibido">0 Kz</strong></span>
-                </div>
-                <div class="barra-progresso">
-                    <div class="preenchimento" id="metaBarra" style="width:0%;"></div>
-                </div>
-                <div class="info-meta">
-                    <span>Progresso: <strong id="metaProgresso">0%</strong></span>
-                    <span>Falta: <strong id="metaFalta">0 Kz</strong></span>
-                </div>
-            </div>
-            <div class="grupo-form">
-                <input id="metaValorInput" type="number" placeholder="Valor da meta (Kz)" step="0.01">
-                <button class="btn btn-ouro" onclick="definirMeta()">🎯 Definir Meta</button>
-            </div>
-            <div class="grupo-form">
-                <input id="metaGuardarInput" type="number" placeholder="Quanto quer guardar agora? (Kz)" step="0.01">
-                <button class="btn btn-success" onclick="guardarParaMeta()">💰 Guardar para Meta</button>
-            </div>
-            <button class="btn btn-danger" onclick="resetarMeta()" style="margin-top:8px;">🔄 Resetar Meta</button>
-        </section>
+<section id="inicio" class="ativo">
 
-        <section id="relatorios">
-            <h2>📈 Relatórios</h2>
-            <p class="subtitulo">Análise completa dos dados</p>
-            <div style="display:flex; flex-direction:column; gap:10px;">
-                <div style="background:#f8f9fa; padding:14px; border-radius:12px;">
-                    <h4 style="font-size:1rem;">💰 Financeiro</h4>
-                    <div style="display:flex; justify-content:space-between; padding:3px 0; font-size:0.9rem;"><span>Receitas</span><span style="color:#00b894; font-weight:700;" id="relReceitas">0</span></div>
-                    <div style="display:flex; justify-content:space-between; padding:3px 0; font-size:0.9rem;"><span>Despesas</span><span style="color:#e94560; font-weight:700;" id="relDespesas">0</span></div>
-                    <div style="display:flex; justify-content:space-between; padding:3px 0; border-top:2px solid #ddd; margin-top:6px; padding-top:6px; font-size:0.9rem;"><span>Saldo</span><span style="font-weight:700;" id="relSaldo">0</span></div>
-                </div>
-                <div style="background:#f8f9fa; padding:14px; border-radius:12px;">
-                    <h4 style="font-size:1rem;">👥 Membros</h4>
-                    <div style="display:flex; justify-content:space-between; padding:3px 0; font-size:0.9rem;"><span>Total</span><span id="relTotalMembros">0</span></div>
-                    <div style="display:flex; justify-content:space-between; padding:3px 0; font-size:0.9rem;"><span>Ativos</span><span style="color:#00b894;" id="relAtivos">0</span></div>
-                    <div style="display:flex; justify-content:space-between; padding:3px 0; font-size:0.9rem;"><span>Inativos</span><span style="color:#e94560;" id="relInativos">0</span></div>
-                </div>
-                <div style="background:#f8f9fa; padding:14px; border-radius:12px;">
-                    <h4 style="font-size:1rem;">📅 Eventos</h4>
-                    <div style="display:flex; justify-content:space-between; padding:3px 0; font-size:0.9rem;"><span>Total</span><span id="relTotalEventos">0</span></div>
-                    <div style="display:flex; justify-content:space-between; padding:3px 0; font-size:0.9rem;"><span>Este mês</span><span id="relEventosMes">0</span></div>
-                    <div style="display:flex; justify-content:space-between; padding:3px 0; font-size:0.9rem;"><span>Próximos</span><span id="relEventosProximos">0</span></div>
-                </div>
-            </div>
-            <div style="display:flex; gap:8px; flex-wrap:wrap; margin:14px 0;">
-                <button class="btn btn-info" onclick="gerarRelatorio()" style="flex:1;">📊 Gerar Resumo</button>
-                <button class="btn btn-success" onclick="exportarRelatorioCSV()" style="flex:1;">📤 Exportar CSV</button>
-                <button class="btn btn-imprimir" onclick="imprimirSistema()" style="flex:1;">🖨️ Imprimir</button>
-                <button class="btn btn-ouro" onclick="exportarPDF()" style="flex:1;">📄 Gerar PDF</button>
-            </div>
-            <div id="relatorioDetalhado" style="display:none; background:#f8f9fa; padding:14px; border-radius:12px; font-size:0.9rem;"></div>
-        </section>
+    <h2>Painel</h2>
 
-        <section id="estatuto">
-            <h2>📜 Estatuto</h2>
-            <p class="subtitulo">Princípios e valores da O.J.V.</p>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:14px 0;">
-                <div style="background:#f8f9fa; padding:12px; border-radius:10px; border-left:5px solid #16213e;"><strong style="font-size:0.95rem;">✔ Honestidade</strong><p style="font-size:0.75rem; color:#666;">Transparência</p></div>
-                <div style="background:#f8f9fa; padding:12px; border-radius:10px; border-left:5px solid #00b894;"><strong style="font-size:0.95rem;">✔ Disciplina</strong><p style="font-size:0.75rem; color:#666;">Compromisso</p></div>
-                <div style="background:#f8f9fa; padding:12px; border-radius:10px; border-left:5px solid #fdcb6e;"><strong style="font-size:0.95rem;">✔ Respeito</strong><p style="font-size:0.75rem; color:#666;">Diversidade</p></div>
-                <div style="background:#f8f9fa; padding:12px; border-radius:10px; border-left:5px solid #8b5cf6;"><strong style="font-size:0.95rem;">✔ União</strong><p style="font-size:0.75rem; color:#666;">Equipa</p></div>
-                <div style="background:#f8f9fa; padding:12px; border-radius:10px; border-left:5px solid #e94560;"><strong style="font-size:0.95rem;">✔ Responsabilidade</strong><p style="font-size:0.75rem; color:#666;">Compromissos</p></div>
-                <div style="background:#f8f9fa; padding:12px; border-radius:10px; border-left:5px solid #0984e3;"><strong style="font-size:0.95rem;">✔ Empreendedorismo</strong><p style="font-size:0.75rem; color:#666;">Inovação</p></div>
-            </div>
-            <div style="background:#16213e; color:#fff; padding:18px; border-radius:12px; text-align:center;">
-                <p style="font-style:italic; font-size:1rem;">"O objectivo não é ser rico, mas é não deixar a carteira vazia."</p>
-                <p style="opacity:0.7; font-size:0.75rem; margin-top:6px;">— Organização Jovens Visionários</p>
-            </div>
-        </section>
-    </div>
+    <p class="subtitulo">
+        Visão geral da organização
+    </p>
 
-    <div class="modal" id="modal">
-        <div class="modal-conteudo">
-            <h3 id="modalTitulo">📝 Novo Membro</h3>
-            <div class="grupo-form">
-                <input id="modalNome" placeholder="Nome completo">
-                <input id="modalBI" placeholder="Bilhete de Identidade (BI)">
-                <input id="modalTelefone" placeholder="Telefone">
-                <input id="modalAniversario" type="text" placeholder="DD/MM/AAAA" oninput="aplicarMascaraData(this)">
-                <select id="modalStatus"><option value="Ativo">✅ Ativo</option><option value="Inativo">❌ Inativo</option><option value="Suspenso">⏸️ Suspenso</option></select>
-            </div>
-            <div class="modal-acoes">
-                <button class="btn btn-outline" onclick="fecharModal()">Cancelar</button>
-                <button class="btn btn-success" onclick="salvarMembro()">💾 Salvar</button>
-            </div>
+    <div
+        class="cards"
+        id="cardsDashboard"
+    ></div>
+
+
+    <div class="dashboard-box">
+
+        <h4>📈 Últimas transações</h4>
+
+        <div id="ultimasTransacoes">
+            Carregando...
         </div>
+
     </div>
 
-    <div class="toast-container" id="toastContainer"></div>
-    <footer>&copy; 2026 O.J.V. Professional Plus — Todos os direitos reservados</footer>
-    
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-    /* =========================================================
-       O.J.V. PROFESSIONAL PLUS
-       CONEXÃO SUPABASE
-       ========================================================= */
 
-    const SUPABASE_URL = "https://twbrhphttgezkcvtftgy.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_udyTdQ6bENac-naUp8R_Vw_HlyK5Vbw";
+    <div class="dashboard-box">
 
-    const supabaseClient = supabase.createClient(
+        <h4>📅 Próximos eventos</h4>
+
+        <div id="proximosEventos">
+            Carregando...
+        </div>
+
+    </div>
+
+
+    <div class="dashboard-box">
+
+        <h4>📊 Resumo financeiro</h4>
+
+        <div
+            class="grafico-barras"
+            id="graficoBarras"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MEMBROS ================= -->
+
+<section id="membros">
+
+    <h2>Membros</h2>
+
+    <p class="subtitulo">
+        Cadastre e gerencie os membros
+    </p>
+
+    <div style="display:flex;gap:8px;">
+
+        <button
+            class="btn btn-success"
+            onclick="abrirModal()"
+            style="flex:2"
+        >
+            ➕ Novo Membro
+        </button>
+
+        <button
+            class="btn btn-outline"
+            onclick="exportarMembrosCSV()"
+            style="flex:1"
+        >
+            📤 CSV
+        </button>
+
+    </div>
+
+
+    <input
+        id="buscaMembro"
+        placeholder="🔍 Buscar membro..."
+        style="width:100%;padding:13px;margin:12px 0;border:1px solid #ced4da;border-radius:7px;font-size:1rem;"
+        oninput="filtrarMembros()"
+    >
+
+
+    <div class="tabela-wrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Nome</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="listaMembros"></tbody>
+
+        </table>
+
+    </div>
+
+
+    <div
+        class="paginacao"
+        id="pagMembros"
+    ></div>
+
+
+    <p style="margin-top:10px;font-size:.85rem">
+
+        Total:
+        <strong id="totalMembros">0</strong>
+
+        · Ativos:
+        <strong
+            id="ativosCount"
+            style="color:#28a745"
+        >
+            0
+        </strong>
+
+    </p>
+
+</section>
+
+
+<!-- ================= FINANCEIRO ================= -->
+
+<section id="financeiro">
+
+    <h2>Finanças</h2>
+
+    <p class="subtitulo">
+        Registre receitas e despesas
+    </p>
+
+
+    <div
+        style="display:flex;gap:7px;margin-bottom:15px;"
+    >
+
+        <div class="card verde" style="flex:1">
+            <span
+                class="numero"
+                id="finReceitas"
+            >
+                0
+            </span>
+            <span class="rotulo">Receitas</span>
+        </div>
+
+        <div class="card vermelho" style="flex:1">
+            <span
+                class="numero"
+                id="finDespesas"
+            >
+                0
+            </span>
+            <span class="rotulo">Despesas</span>
+        </div>
+
+        <div class="card azul" style="flex:1">
+            <span
+                class="numero"
+                id="finSaldo"
+            >
+                0
+            </span>
+            <span class="rotulo">Saldo</span>
+        </div>
+
+    </div>
+
+
+    <div class="grupo-form">
+
+        <select id="tipoTransacao">
+
+            <option value="receita">
+                💰 Receita
+            </option>
+
+            <option value="despesa">
+                💸 Despesa
+            </option>
+
+        </select>
+
+
+        <select id="categoriaTransacao">
+
+            <option value="Mensalidade">Mensalidade</option>
+            <option value="Doação">Doação</option>
+            <option value="Evento">Evento</option>
+            <option value="Material">Material</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Outro">Outro</option>
+
+        </select>
+
+
+        <input
+            id="valorTransacao"
+            type="number"
+            step="0.01"
+            placeholder="Valor (Kz)"
+        >
+
+
+        <input
+            id="descricaoTransacao"
+            placeholder="Descrição"
+        >
+
+
+        <button
+            class="btn btn-success"
+            onclick="adicionarTransacao()"
+        >
+            ➕ Registrar Transação
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= TRANSAÇÕES ================= -->
+
+<section id="transacoes">
+
+    <h2>Histórico</h2>
+
+    <p class="subtitulo">
+        Movimentações financeiras
+    </p>
+
+
+    <input
+        id="buscaTransacao"
+        placeholder="🔍 Buscar..."
+        style="width:100%;padding:13px;border:1px solid #ced4da;border-radius:7px;margin-bottom:8px;"
+        oninput="filtrarTransacoes()"
+    >
+
+
+    <div style="display:flex;gap:8px;">
+
+        <select
+            id="filtroTipo"
+            onchange="filtrarTransacoes()"
+            style="flex:1;padding:12px;border:1px solid #ced4da;border-radius:7px;"
+        >
+
+            <option value="">
+                Todas
+            </option>
+
+            <option value="receita">
+                💰 Receitas
+            </option>
+
+            <option value="despesa">
+                💸 Despesas
+            </option>
+
+        </select>
+
+
+        <button
+            class="btn btn-outline"
+            onclick="exportarTransacoesCSV()"
+            style="flex:1"
+        >
+            📤 CSV
+        </button>
+
+    </div>
+
+
+    <div
+        class="tabela-wrapper"
+        style="margin-top:12px"
+    >
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Data</th>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="listaTransacoes"></tbody>
+
+        </table>
+
+    </div>
+
+
+    <div
+        class="paginacao"
+        id="pagTransacoes"
+    ></div>
+
+</section>
+
+
+<!-- ================= EVENTOS ================= -->
+
+<section id="eventos">
+
+    <h2>Eventos</h2>
+
+    <p class="subtitulo">
+        Organize os eventos
+    </p>
+
+
+    <div class="grupo-form">
+
+        <input
+            id="eventoNome"
+            placeholder="Nome do evento"
+        >
+
+        <input
+            id="eventoData"
+            type="date"
+        >
+
+        <input
+            id="eventoLocal"
+            placeholder="Local"
+        >
+
+        <button
+            class="btn btn-success"
+            onclick="adicionarEvento()"
+        >
+            📅 Criar Evento
+        </button>
+
+    </div>
+
+
+    <div class="tabela-wrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Evento</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="listaEventos"></tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- ================= META ================= -->
+
+<section id="meta">
+
+    <h2>Meta de Poupança</h2>
+
+    <p class="subtitulo">
+        Acompanhe o seu objetivo
+    </p>
+
+
+    <div class="meta-container">
+
+        <div class="meta-topo">
+
+            <span>
+                Meta:
+                <span id="metaValorExibido">
+                    0 Kz
+                </span>
+            </span>
+
+            <span>
+                Guardado:
+                <span id="metaGuardadoExibido">
+                    0 Kz
+                </span>
+            </span>
+
+        </div>
+
+
+        <div class="barra-progresso">
+
+            <div
+                class="preenchimento"
+                id="metaBarra"
+                style="width:0%"
+            ></div>
+
+        </div>
+
+
+        <div style="display:flex;justify-content:space-between;font-size:.8rem;color:#777">
+
+            <span>
+                Progresso:
+                <strong id="metaProgresso">
+                    0%
+                </strong>
+            </span>
+
+            <span>
+                Falta:
+                <strong id="metaFalta">
+                    0 Kz
+                </strong>
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="grupo-form">
+
+        <input
+            id="metaValorInput"
+            type="number"
+            step="0.01"
+            placeholder="Valor da meta (Kz)"
+        >
+
+        <button
+            class="btn btn-ouro"
+            onclick="definirMeta()"
+        >
+            🎯 Definir Meta
+        </button>
+
+    </div>
+
+
+    <div class="grupo-form">
+
+        <input
+            id="metaGuardarInput"
+            type="number"
+            step="0.01"
+            placeholder="Quanto guardar agora? (Kz)"
+        >
+
+        <button
+            class="btn btn-success"
+            onclick="guardarParaMeta()"
+        >
+            💰 Guardar para Meta
+        </button>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<footer>
+    © 2026 O.J.V. Professional Plus
+</footer>
+
+</div>
+
+
+<!-- ================= MODAL MEMBRO ================= -->
+
+<div
+    class="modal"
+    id="modal"
+>
+
+    <div class="modal-conteudo">
+
+        <h3 id="modalTitulo">
+            📝 Novo Membro
+        </h3>
+
+
+        <div class="grupo-form">
+
+            <label>Nome completo</label>
+
+            <input
+                id="modalNome"
+                placeholder="Ex: João Silva"
+            >
+
+
+            <label>Telefone</label>
+
+            <input
+                id="modalTelefone"
+                placeholder="+244 9XX XXX XXX"
+            >
+
+
+            <label>
+                Data de Nascimento
+            </label>
+
+            <input
+                id="modalAniversario"
+                placeholder="DD/MM/AAAA"
+                maxlength="10"
+                inputmode="numeric"
+            >
+
+
+            <label>Status</label>
+
+            <select id="modalStatus">
+
+                <option value="Ativo">
+                    ✅ Ativo
+                </option>
+
+                <option value="Inativo">
+                    ❌ Inativo
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div style="display:flex;gap:8px">
+
+            <button
+                class="btn btn-outline"
+                onclick="fecharModal()"
+                style="flex:1"
+            >
+                Cancelar
+            </button>
+
+            <button
+                class="btn btn-success"
+                onclick="salvarMembro()"
+                style="flex:2"
+            >
+                💾 Salvar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    class="toast-container"
+    id="toastContainer"
+></div>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+    "https://zytbddkoddcmreyvjmkz.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_KkrrmpUmwMguZCNvZiclSg_zFJCOj50";
+
+const supabaseClient =
+    window.supabase.createClient(
         SUPABASE_URL,
-        SUPABASE_KEY
+        SUPABASE_KEY,
+        {
+            auth:{
+                autoRefreshToken:true,
+                persistSession:true,
+                detectSessionInUrl:true
+            }
+        }
     );
 
-    /* =========================================================
-       SISTEMA DE LOGIN
-       ========================================================= */
 
-    const SENHA_ADMIN = "admin123"; // Altere esta senha
-    let estaLogado = false;
+/* =====================================================
+   ESTADO
+===================================================== */
 
-    function fazerLogin() {
-        var senha = document.getElementById('senhaLogin').value;
-        var erro = document.getElementById('erroLogin');
+let usuario = null;
 
-        if (senha === SENHA_ADMIN) {
-            estaLogado = true;
-            localStorage.setItem('ojv_logado', 'true');
-            document.getElementById('loginOverlay').classList.add('hidden');
-            document.getElementById('userInfo').style.display = 'flex';
-            erro.classList.remove('visible');
-            mostrarToast('✅ Login realizado com sucesso!', 'sucesso');
-            carregarTudoDoSupabase();
-        } else {
-            erro.classList.add('visible');
-            document.getElementById('senhaLogin').value = '';
-            document.getElementById('senhaLogin').focus();
-            mostrarToast('❌ Senha incorreta!', 'erro');
-        }
+let membros = [];
+let transacoes = [];
+let eventos = [];
+let meta = {
+    id:null,
+    valor:0,
+    guardado:0
+};
+
+let editandoId = null;
+
+let membrosFiltrados = [];
+let transacoesFiltradas = [];
+
+let paginaAtual = {
+    membros:1,
+    transacoes:1
+};
+
+const POR_PAGINA = 5;
+
+
+/* =====================================================
+   AUXILIARES
+===================================================== */
+
+function $(id){
+    return document.getElementById(id);
+}
+
+
+function mostrarToast(
+    mensagem,
+    tipo="sucesso"
+){
+
+    const container =
+        $("toastContainer");
+
+    const toast =
+        document.createElement("div");
+
+    toast.className =
+        "toast " + tipo;
+
+    toast.textContent =
+        mensagem;
+
+    container.appendChild(toast);
+
+    setTimeout(()=>{
+        toast.style.opacity="0";
+
+        setTimeout(()=>{
+            toast.remove();
+        },300);
+
+    },3000);
+}
+
+
+function escaparHTML(texto){
+
+    if(texto === null ||
+       texto === undefined)
+        return "";
+
+    return String(texto)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+
+function numero(valor){
+
+    return Number(valor || 0);
+}
+
+
+function dinheiro(valor){
+
+    return numero(valor)
+        .toLocaleString("pt-AO",{
+            maximumFractionDigits:0
+        }) + " Kz";
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+async function verificarSessao(){
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .auth
+        .getSession();
+
+    if(error){
+
+        console.error(error);
+
+        mostrarLogin();
+
+        return;
     }
 
-    function logout() {
-        if (confirm('Tem certeza que deseja sair?')) {
-            estaLogado = false;
-            localStorage.removeItem('ojv_logado');
-            document.getElementById('loginOverlay').classList.remove('hidden');
-            document.getElementById('userInfo').style.display = 'none';
-            mostrarToast('🚪 Sessão encerrada.', 'atencao');
-        }
+    if(data.session){
+
+        usuario =
+            data.session.user;
+
+        mostrarApp();
+
+    }else{
+
+        mostrarLogin();
+
+    }
+}
+
+
+function mostrarLogin(){
+
+    $("loginPage")
+        .classList
+        .remove("hidden");
+
+    $("app")
+        .classList
+        .add("hidden");
+}
+
+
+async function mostrarApp(){
+
+    $("loginPage")
+        .classList
+        .add("hidden");
+
+    $("app")
+        .classList
+        .remove("hidden");
+
+    await carregarDados();
+
+    atualizarTudo();
+}
+
+
+async function fazerLogin(event){
+
+    event.preventDefault();
+
+    const email =
+        $("loginEmail")
+        .value
+        .trim();
+
+    const password =
+        $("loginPassword")
+        .value;
+
+    const erro =
+        $("loginErro");
+
+    const botao =
+        $("btnLogin");
+
+    erro.style.display="none";
+
+    if(!email || !password){
+
+        erro.textContent =
+            "Informe o e-mail e a palavra-passe.";
+
+        erro.style.display="block";
+
+        return;
     }
 
-    function verificarLogin() {
-        if (localStorage.getItem('ojv_logado') === 'true') {
-            estaLogado = true;
-            document.getElementById('loginOverlay').classList.add('hidden');
-            document.getElementById('userInfo').style.display = 'flex';
-            carregarTudoDoSupabase();
-        }
+    botao.disabled=true;
+
+    botao.textContent =
+        "⏳ A entrar...";
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .auth
+        .signInWithPassword({
+            email,
+            password
+        });
+
+    if(error){
+
+        console.error(error);
+
+        erro.textContent =
+            traduzirErroLogin(error);
+
+        erro.style.display="block";
+
+        botao.disabled=false;
+
+        botao.textContent =
+            "🔐 Entrar";
+
+        return;
     }
 
-    /* =========================================================
-       DADOS LOCAIS
-       ========================================================= */
+    usuario =
+        data.user;
 
-    let membros = [];
-    let transacoes = [];
-    let eventos = [];
-    let meta = { valor: 0, guardado: 0 };
+    botao.disabled=false;
 
-    let editandoIndex = -1;
-    let paginaAtual = {
-        membros: 1,
-        transacoes: 1,
-        eventos: 1
+    botao.textContent =
+        "🔐 Entrar";
+
+    mostrarToast(
+        "✅ Login efetuado!",
+        "sucesso"
+    );
+
+    await mostrarApp();
+}
+
+
+function traduzirErroLogin(error){
+
+    const msg =
+        (error.message || "")
+        .toLowerCase();
+
+    if(msg.includes("invalid login credentials"))
+        return "E-mail ou palavra-passe incorretos.";
+
+    if(msg.includes("email not confirmed"))
+        return "O e-mail ainda não foi confirmado no Supabase.";
+
+    if(msg.includes("rate limit"))
+        return "Muitas tentativas. Aguarde alguns minutos.";
+
+    if(msg.includes("network"))
+        return "Erro de ligação à Internet.";
+
+    return error.message ||
+        "Não foi possível entrar.";
+}
+
+
+async function sair(){
+
+    const {
+        error
+    } =
+    await supabaseClient
+        .auth
+        .signOut();
+
+    if(error){
+
+        mostrarToast(
+            "Erro ao sair.",
+            "erro"
+        );
+
+        return;
+    }
+
+    usuario=null;
+
+    membros=[];
+    transacoes=[];
+    eventos=[];
+
+    mostrarLogin();
+}
+
+
+/* =====================================================
+   AUTH LISTENER
+===================================================== */
+
+supabaseClient
+    .auth
+    .onAuthStateChange(
+        (event,session)=>{
+
+            if(session){
+
+                usuario =
+                    session.user;
+
+                mostrarApp();
+
+            }else{
+
+                usuario=null;
+
+                mostrarLogin();
+
+            }
+
+        }
+    );
+
+
+/* =====================================================
+   CARREGAR MEMBROS
+===================================================== */
+
+async function carregarMembros(){
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .from("membros")
+        .select("*")
+        .order("id",{ascending:false});
+
+    if(error){
+
+        console.error(
+            "Erro membros:",
+            error
+        );
+
+        mostrarToast(
+            "Erro ao carregar membros: " +
+            error.message,
+            "erro"
+        );
+
+        membros=[];
+
+        return;
+    }
+
+    membros =
+        data || [];
+}
+
+
+/* =====================================================
+   CARREGAR TRANSAÇÕES
+===================================================== */
+
+async function carregarTransacoes(){
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .from("transacoes")
+        .select("*")
+        .order("id",{ascending:false});
+
+    if(error){
+
+        console.error(
+            "Erro transações:",
+            error
+        );
+
+        mostrarToast(
+            "Erro ao carregar transações.",
+            "erro"
+        );
+
+        transacoes=[];
+
+        return;
+    }
+
+    transacoes =
+        data || [];
+}
+
+
+/* =====================================================
+   CARREGAR EVENTOS
+===================================================== */
+
+async function carregarEventos(){
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .from("eventos")
+        .select("*")
+        .order("id",{ascending:false});
+
+    if(error){
+
+        console.error(
+            "Erro eventos:",
+            error
+        );
+
+        mostrarToast(
+            "Erro ao carregar eventos.",
+            "erro"
+        );
+
+        eventos=[];
+
+        return;
+    }
+
+    eventos =
+        data || [];
+}
+
+
+/* =====================================================
+   CARREGAR META
+===================================================== */
+
+async function carregarMeta(){
+
+    const {
+        data,
+        error
+    } =
+    await supabaseClient
+        .from("meta")
+        .select("*")
+        .limit(1);
+
+    if(error){
+
+        console.error(
+            "Erro meta:",
+            error
+        );
+
+        return;
+    }
+
+    if(data && data.length){
+
+        const m =
+            data[0];
+
+        meta = {
+            id:m.id,
+            valor:numero(
+                m.valor
+            ),
+            guardado:numero(
+                m.guardado
+            )
+        };
+
+    }else{
+
+        meta={
+            id:null,
+            valor:0,
+            guardado:0
+        };
+
+    }
+}
+
+
+/* =====================================================
+   CARREGAR TUDO
+===================================================== */
+
+async function carregarDados(){
+
+    if(!usuario)
+        return;
+
+    await Promise.all([
+        carregarMembros(),
+        carregarTransacoes(),
+        carregarEventos(),
+        carregarMeta()
+    ]);
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+function alternarMenu(){
+
+    $("menuNav")
+        .classList
+        .toggle("aberto");
+}
+
+
+function abrir(id){
+
+    document
+        .querySelectorAll("section")
+        .forEach(section=>{
+            section.classList
+                .remove("ativo");
+        });
+
+    const secao =
+        $(id);
+
+    if(secao)
+        secao.classList
+            .add("ativo");
+
+    document
+        .querySelectorAll("nav button")
+        .forEach(btn=>{
+            btn.classList
+                .remove("ativo");
+        });
+
+    document
+        .querySelectorAll("nav button")
+        .forEach(btn=>{
+
+            if(
+                btn.getAttribute(
+                    "onclick"
+                )?.includes(
+                    "'" + id + "'"
+                )
+            ){
+
+                btn.classList
+                    .add("ativo");
+
+            }
+
+        });
+
+    $("menuNav")
+        .classList
+        .remove("aberto");
+
+    atualizarTudo();
+}
+
+
+/* =====================================================
+   TEMA
+===================================================== */
+
+function carregarTema(){
+
+    if(
+        localStorage
+        .getItem(
+            "ojv_tema"
+        ) === "escuro"
+    ){
+
+        document.body
+            .classList
+            .add("escuro");
+
+    }
+
+}
+
+
+function alternarTema(){
+
+    const escuro =
+        document.body
+            .classList
+            .toggle("escuro");
+
+    localStorage.setItem(
+        "ojv_tema",
+        escuro
+            ? "escuro"
+            : "claro"
+    );
+
+}
+
+
+/* =====================================================
+   PAGINAÇÃO
+===================================================== */
+
+function paginar(
+    tipo,
+    pagina
+){
+
+    paginaAtual[tipo] =
+        pagina;
+
+    atualizarTudo();
+}
+
+
+function paginaDados(
+    dados,
+    tipo
+){
+
+    const totalPaginas =
+        Math.max(
+            1,
+            Math.ceil(
+                dados.length /
+                POR_PAGINA
+            )
+        );
+
+    if(
+        paginaAtual[tipo] >
+        totalPaginas
+    ){
+
+        paginaAtual[tipo] =
+            totalPaginas;
+
+    }
+
+    const inicio =
+        (
+            paginaAtual[tipo]-1
+        ) * POR_PAGINA;
+
+    return {
+        dados:dados.slice(
+            inicio,
+            inicio+POR_PAGINA
+        ),
+        inicio,
+        totalPaginas
+    };
+}
+
+
+function criarPaginacao(
+    tipo,
+    totalPaginas,
+    elemento
+){
+
+    const div =
+        $(elemento);
+
+    if(!div)
+        return;
+
+    if(totalPaginas<=1){
+
+        div.innerHTML="";
+
+        return;
+    }
+
+    let html="";
+
+    for(
+        let i=1;
+        i<=totalPaginas;
+        i++
+    ){
+
+        html +=
+            `<button
+                class="${i===paginaAtual[tipo]?"ativo":""}"
+                onclick="paginar('${tipo}',${i})"
+            >
+                ${i}
+            </button>`;
+
+    }
+
+    div.innerHTML =
+        html;
+}
+
+
+/* =====================================================
+   MEMBROS
+===================================================== */
+
+function abrirModal(){
+
+    editandoId=null;
+
+    $("modalTitulo")
+        .textContent =
+        "📝 Novo Membro";
+
+    $("modalNome").value="";
+    $("modalTelefone").value="";
+    $("modalAniversario").value="";
+    $("modalStatus").value="Ativo";
+
+    $("modal")
+        .classList
+        .add("aberto");
+}
+
+
+function fecharModal(){
+
+    $("modal")
+        .classList
+        .remove("aberto");
+}
+
+
+function mascaraData(){
+
+    const input =
+        $("modalAniversario");
+
+    let valor =
+        input.value
+        .replace(/\D/g,"")
+        .slice(0,8);
+
+    if(valor.length>4){
+
+        valor =
+            valor.slice(0,2)
+            +"/"+
+            valor.slice(2,4)
+            +"/"+
+            valor.slice(4);
+
+    }else if(valor.length>2){
+
+        valor =
+            valor.slice(0,2)
+            +"/"+
+            valor.slice(2);
+
+    }
+
+    input.value=valor;
+}
+
+
+$("modalAniversario")
+    .addEventListener(
+        "input",
+        mascaraData
+    );
+
+
+async function salvarMembro(){
+
+    const nome =
+        $("modalNome")
+        .value
+        .trim();
+
+    const telefone =
+        $("modalTelefone")
+        .value
+        .trim();
+
+    const aniversario =
+        $("modalAniversario")
+        .value
+        .trim();
+
+    const status =
+        $("modalStatus")
+        .value;
+
+    if(!nome){
+
+        mostrarToast(
+            "Informe o nome.",
+            "atencao"
+        );
+
+        return;
+    }
+
+    let dados = {
+        nome,
+        telefone,
+        aniversario,
+        status
     };
 
-    const POR_PAGINA = 5;
-    let membrosFiltrados = [];
-    let transacoesFiltradas = [];
+    let resposta;
 
-    /* =========================================================
-       AUXILIARES
-       ========================================================= */
+    if(editandoId){
 
-    function $(id) {
-        return document.getElementById(id);
+        resposta =
+            await supabaseClient
+                .from("membros")
+                .update(dados)
+                .eq(
+                    "id",
+                    editandoId
+                );
+
+    }else{
+
+        resposta =
+            await supabaseClient
+                .from("membros")
+                .insert([dados]);
+
     }
 
-    function mostrarToast(msg, tipo) {
-        tipo = tipo || 'sucesso';
+    if(resposta.error){
 
-        var container = $('toastContainer');
-        if (!container) return;
+        console.error(
+            resposta.error
+        );
 
-        var toast = document.createElement('div');
-        toast.className = 'toast ' + tipo;
+        mostrarToast(
+            "Erro ao guardar membro: "+
+            resposta.error.message,
+            "erro"
+        );
 
-        var icones = {
-            sucesso: '✅',
-            erro: '❌',
-            atencao: '⚠️'
-        };
-
-        toast.innerHTML =
-            '<span>' +
-            (icones[tipo] || 'ℹ️') +
-            '</span><span class="msg">' +
-            msg +
-            '</span>';
-
-        container.appendChild(toast);
-
-        setTimeout(function () {
-            toast.style.opacity = '0';
-
-            setTimeout(function () {
-                if (toast.parentNode) toast.remove();
-            }, 300);
-        }, 3000);
+        return;
     }
 
-    function escaparHTML(valor) {
-        if (valor === null || valor === undefined) return '';
+    mostrarToast(
+        editandoId
+        ? "✅ Membro atualizado!"
+        : "✅ Membro adicionado!",
+        "sucesso"
+    );
 
-        return String(valor)
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
+    fecharModal();
+
+    await carregarMembros();
+
+    atualizarTudo();
+}
+
+
+function editarMembro(id){
+
+    const membro =
+        membros.find(
+            m=>String(m.id)===String(id)
+        );
+
+    if(!membro)
+        return;
+
+    editandoId =
+        membro.id;
+
+    $("modalTitulo")
+        .textContent =
+        "✏️ Editar Membro";
+
+    $("modalNome").value =
+        membro.nome || "";
+
+    $("modalTelefone").value =
+        membro.telefone || "";
+
+    $("modalAniversario").value =
+        membro.aniversario || "";
+
+    $("modalStatus").value =
+        membro.status || "Ativo";
+
+    $("modal")
+        .classList
+        .add("aberto");
+}
+
+
+async function excluirMembro(id){
+
+    const membro =
+        membros.find(
+            m=>String(m.id)===String(id)
+        );
+
+    if(!membro)
+        return;
+
+    if(
+        !confirm(
+            `Excluir "${membro.nome}"?`
+        )
+    )
+        return;
+
+    const {
+        error
+    } =
+    await supabaseClient
+        .from("membros")
+        .delete()
+        .eq("id",id);
+
+    if(error){
+
+        mostrarToast(
+            "Erro ao excluir membro.",
+            "erro"
+        );
+
+        return;
     }
 
-    function formatarNumero(valor) {
-        return Number(valor || 0).toLocaleString('pt-AO', {
-            maximumFractionDigits: 0
+    mostrarToast(
+        "🗑️ Membro excluído.",
+        "atencao"
+    );
+
+    await carregarMembros();
+
+    atualizarTudo();
+}
+
+
+function filtrarMembros(){
+
+    const termo =
+        (
+            $("buscaMembro")
+            .value || ""
+        ).toLowerCase();
+
+    membrosFiltrados =
+        membros.filter(m=>{
+
+            const nome =
+                String(
+                    m.nome || ""
+                ).toLowerCase();
+
+            const telefone =
+                String(
+                    m.telefone || ""
+                ).toLowerCase();
+
+            return (
+                nome.includes(termo) ||
+                telefone.includes(termo)
+            );
+
         });
+
+    paginaAtual.membros=1;
+
+    atualizarTudo();
+}
+
+
+function exportarMembrosCSV(){
+
+    if(!membros.length){
+
+        mostrarToast(
+            "Nenhum membro.",
+            "atencao"
+        );
+
+        return;
     }
 
-    function dataHoje() {
-        return new Date().toISOString().split('T')[0];
+    let csv =
+        "Nome,Telefone,Aniversario,Status\n";
+
+    membros.forEach(m=>{
+
+        csv +=
+            `"${m.nome||""}",`+
+            `"${m.telefone||""}",`+
+            `"${m.aniversario||""}",`+
+            `"${m.status||""}"\n`;
+
+    });
+
+    baixarCSV(
+        csv,
+        "membros_ojv.csv"
+    );
+}
+
+
+/* =====================================================
+   TRANSAÇÕES
+===================================================== */
+
+async function adicionarTransacao(){
+
+    const tipo =
+        $("tipoTransacao")
+        .value;
+
+    const categoria =
+        $("categoriaTransacao")
+        .value;
+
+    const valor =
+        parseFloat(
+            $("valorTransacao")
+            .value
+        );
+
+    const descricao =
+        $("descricaoTransacao")
+        .value
+        .trim();
+
+    if(
+        !valor ||
+        valor<=0
+    ){
+
+        mostrarToast(
+            "Informe um valor válido.",
+            "atencao"
+        );
+
+        return;
     }
 
-    function dataBancoParaTela(data) {
-        if (!data) return '';
+    if(!descricao){
 
-        var partes = String(data).split('-');
+        mostrarToast(
+            "Informe a descrição.",
+            "atencao"
+        );
 
-        if (partes.length === 3) {
-            return partes[2] + '/' + partes[1] + '/' + partes[0];
-        }
-
-        return data;
+        return;
     }
 
-    function dataTelaParaBanco(data) {
-        if (!data || data.length !== 10) return null;
+    const dados = {
 
-        var partes = data.split('/');
+        tipo,
 
-        if (partes.length !== 3) return null;
+        categoria,
 
-        return partes[2] + '-' + partes[1] + '-' + partes[0];
+        descricao,
+
+        valor:
+            tipo==="despesa"
+            ? -valor
+            : valor,
+
+        data:
+            new Date()
+            .toISOString()
+
+    };
+
+    const {
+        error
+    } =
+    await supabaseClient
+        .from("transacoes")
+        .insert([dados]);
+
+    if(error){
+
+        console.error(error);
+
+        mostrarToast(
+            "Erro ao registrar transação: "+
+            error.message,
+            "erro"
+        );
+
+        return;
     }
 
-    function aplicarMascaraData(input) {
-        if (!input) return;
+    $("valorTransacao")
+        .value="";
 
-        var value = input.value.replace(/\D/g, '');
+    $("descricaoTransacao")
+        .value="";
 
-        if (value.length > 8) {
-            value = value.slice(0, 8);
-        }
+    mostrarToast(
+        "✅ Transação registrada!",
+        "sucesso"
+    );
 
-        if (value.length > 4) {
-            value = value.slice(0, 2) + '/' + value.slice(2, 4) + '/' + value.slice(4);
-        } else if (value.length > 2) {
-            value = value.slice(0, 2) + '/' + value.slice(2);
-        }
+    await carregarTransacoes();
 
-        input.value = value;
+    atualizarTudo();
+}
+
+
+function filtrarTransacoes(){
+
+    const termo =
+        (
+            $("buscaTransacao")
+            .value || ""
+        ).toLowerCase();
+
+    const tipo =
+        $("filtroTipo")
+        .value;
+
+    transacoesFiltradas =
+        transacoes.filter(t=>{
+
+            const descricao =
+                String(
+                    t.descricao || ""
+                ).toLowerCase();
+
+            return (
+                descricao.includes(termo) &&
+                (
+                    !tipo ||
+                    t.tipo===tipo
+                )
+            );
+
+        });
+
+    paginaAtual.transacoes=1;
+
+    atualizarTudo();
+}
+
+
+function exportarTransacoesCSV(){
+
+    if(!transacoes.length){
+
+        mostrarToast(
+            "Nenhuma transação.",
+            "atencao"
+        );
+
+        return;
     }
 
-    /* =========================================================
-       AUTENTICAÇÃO SUPABASE
-       ========================================================= */
+    let csv =
+        "Data,Tipo,Categoria,Descricao,Valor\n";
 
-    async function verificarSessao() {
-        try {
-            var resultado = await supabaseClient.auth.getSession();
+    transacoes.forEach(t=>{
 
-            if (resultado.error) {
-                console.error(resultado.error);
-                return false;
+        csv +=
+            `"${t.data||""}",`+
+            `"${t.tipo||""}",`+
+            `"${t.categoria||""}",`+
+            `"${t.descricao||""}",`+
+            `"${t.valor||0}"\n`;
+
+    });
+
+    baixarCSV(
+        csv,
+        "transacoes_ojv.csv"
+    );
+}
+
+
+function baixarCSV(
+    conteudo,
+    nome
+){
+
+    const blob =
+        new Blob(
+            ["\ufeff"+conteudo],
+            {
+                type:
+                    "text/csv;charset=utf-8;"
             }
+        );
 
-            if (!resultado.data.session) {
-                console.warn('Nenhuma sessão autenticada encontrada.');
-                return false;
-            }
+    const url =
+        URL.createObjectURL(blob);
 
-            console.log('Supabase autenticado:', resultado.data.session.user.email);
-            return true;
+    const a =
+        document.createElement("a");
 
-        } catch (erro) {
-            console.error(erro);
-            return false;
-        }
+    a.href=url;
+    a.download=nome;
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    a.remove();
+
+    URL.revokeObjectURL(url);
+
+    mostrarToast(
+        "📤 CSV exportado!",
+        "sucesso"
+    );
+}
+
+
+/* =====================================================
+   EVENTOS
+===================================================== */
+
+async function adicionarEvento(){
+
+    const nome =
+        $("eventoNome")
+        .value
+        .trim();
+
+    const data =
+        $("eventoData")
+        .value;
+
+    const local =
+        $("eventoLocal")
+        .value
+        .trim();
+
+    if(!nome || !data){
+
+        mostrarToast(
+            "Nome e data são obrigatórios.",
+            "atencao"
+        );
+
+        return;
     }
 
-    /* =========================================================
-       CARREGAR MEMBROS
-       ========================================================= */
+    const {
+        error
+    } =
+    await supabaseClient
+        .from("eventos")
+        .insert([{
+            nome,
+            data,
+            local:
+                local || "Não definido",
+            status:"Agendado"
+        }]);
 
-    async function carregarMembros() {
-        var resultado = await supabaseClient
-            .from('membros')
-            .select('*')
-            .order('data_registo', {
-                ascending: false
-            });
+    if(error){
 
-        if (resultado.error) {
-            console.error('Erro ao carregar membros:', resultado.error);
-            mostrarToast('Erro ao carregar membros.', 'erro');
-            return;
-        }
+        console.error(error);
 
-        membros = (resultado.data || []).map(function (m) {
-            return {
-                id: m.id,
-                nome: m.nome || '',
-                bi: m.bi || '',
-                telefone: m.telefone || '',
-                status: m.status || 'Ativo',
-                aniversario: dataBancoParaTela(m.data_nascimento),
-                dataEntrada: m.data_registo
-                    ? dataBancoParaTela(String(m.data_registo).substring(0, 10))
-                    : ''
-            };
-        });
+        mostrarToast(
+            "Erro ao criar evento: "+
+            error.message,
+            "erro"
+        );
 
-        membrosFiltrados = membros.slice();
+        return;
     }
 
-    /* =========================================================
-       CARREGAR TRANSAÇÕES
-       ========================================================= */
+    $("eventoNome").value="";
+    $("eventoData").value="";
+    $("eventoLocal").value="";
 
-    async function carregarTransacoes() {
-        var resultado = await supabaseClient
-            .from('transacoes')
-            .select('*')
-            .order('data_transacao', {
-                ascending: false
-            });
+    mostrarToast(
+        "📅 Evento criado!",
+        "sucesso"
+    );
 
-        if (resultado.error) {
-            console.error('Erro ao carregar transações:', resultado.error);
-            mostrarToast('Erro ao carregar transações.', 'erro');
-            return;
-        }
+    await carregarEventos();
 
-        transacoes = (resultado.data || []).map(function (t) {
-            var valor = Number(t.valor || 0);
+    atualizarTudo();
+}
 
-            if (t.tipo === 'despesa' && valor > 0) {
-                valor = -valor;
-            }
 
-            return {
-                id: t.id,
-                tipo: t.tipo || 'receita',
-                categoria: t.categoria || '',
-                descricao: t.descricao || '',
-                valor: valor,
-                data: t.data_transacao || ''
-            };
-        });
+/* =====================================================
+   META
+===================================================== */
 
-        transacoesFiltradas = transacoes.slice();
+async function definirMeta(){
+
+    const valor =
+        parseFloat(
+            $("metaValorInput")
+            .value
+        );
+
+    if(
+        !valor ||
+        valor<=0
+    ){
+
+        mostrarToast(
+            "Informe uma meta válida.",
+            "atencao"
+        );
+
+        return;
     }
 
-    /* =========================================================
-       CARREGAR EVENTOS
-       ========================================================= */
+    let resposta;
 
-    async function carregarEventos() {
-        var resultado = await supabaseClient
-            .from('eventos')
-            .select('*')
-            .order('data_evento', {
-                ascending: true
-            });
+    if(meta.id){
 
-        if (resultado.error) {
-            console.error('Erro ao carregar eventos:', resultado.error);
-            mostrarToast('Erro ao carregar eventos.', 'erro');
-            return;
-        }
-
-        eventos = (resultado.data || []).map(function (e) {
-            return {
-                id: e.id,
-                nome: e.titulo || '',
-                descricao: e.descricao || '',
-                data: e.data_evento || '',
-                local: e.local || '',
-                responsavel: e.responsavel || '',
-                status: 'Agendado'
-            };
-        });
-    }
-
-    /* =========================================================
-       CARREGAR META
-       ========================================================= */
-
-    async function carregarMeta() {
-        var resultado = await supabaseClient
-            .from('metas_financeiras')
-            .select('*')
-            .order('criado_em', {
-                ascending: false
-            })
-            .limit(1);
-
-        if (resultado.error) {
-            console.error('Erro ao carregar meta:', resultado.error);
-            mostrarToast('Erro ao carregar meta.', 'erro');
-            return;
-        }
-
-        if (resultado.data && resultado.data.length) {
-            var m = resultado.data[0];
-            meta = {
-                id: m.id,
-                valor: Number(m.valor_objetivo || 0),
-                guardado: Number(m.valor_atual || 0),
-                nome: m.nome_meta || 'Meta O.J.V.'
-            };
-        } else {
-            meta = {
-                valor: 0,
-                guardado: 0
-            };
-        }
-    }
-
-    /* =========================================================
-       CARREGAR TUDO DO SUPABASE
-       ========================================================= */
-
-    async function carregarTudoDoSupabase() {
-        if (!estaLogado) return;
-
-        var autenticado = await verificarSessao();
-
-        if (!autenticado) {
-            mostrarToast('⚠️ Conecte-se ao Supabase para sincronizar.', 'atencao');
-            atualizarTudo();
-            return;
-        }
-
-        await Promise.all([
-            carregarMembros(),
-            carregarTransacoes(),
-            carregarEventos(),
-            carregarMeta()
-        ]);
-
-        atualizarTudo();
-        console.log('🚀 Dados carregados do Supabase!');
-    }
-
-    /* =========================================================
-       TEMA
-       ========================================================= */
-
-    function carregarTema() {
-        if (localStorage.getItem('ojv_tema_escuro') === 'true') {
-            document.body.classList.add('escuro');
-        }
-    }
-
-    function alternarTema() {
-        var isDark = document.body.classList.toggle('escuro');
-        localStorage.setItem('ojv_tema_escuro', isDark ? 'true' : 'false');
-        mostrarToast(isDark ? '🌙 Tema escuro ativado' : '☀️ Tema claro ativado', 'sucesso');
-    }
-
-    /* =========================================================
-       MENU
-       ========================================================= */
-
-    function alternarMenu() {
-        var nav = $('menuNav');
-        if (nav) {
-            nav.classList.toggle('aberto');
-        }
-    }
-
-    function abrir(id) {
-        document.querySelectorAll('section').forEach(function (s) {
-            s.classList.remove('ativo');
-        });
-
-        var sec = $(id);
-        if (sec) {
-            sec.classList.add('ativo');
-        }
-
-        document.querySelectorAll('nav button').forEach(function (b) {
-            b.classList.remove('ativo');
-        });
-
-        var target = document.querySelector('nav button[onclick*="' + id + '"]');
-        if (target) {
-            target.classList.add('ativo');
-        }
-
-        var nav = $('menuNav');
-        if (nav) {
-            nav.classList.remove('aberto');
-        }
-
-        atualizarTudo();
-    }
-
-    /* =========================================================
-       PAGINAÇÃO
-       ========================================================= */
-
-    function renderizarPagina(tipo, dados) {
-        var total = dados.length;
-        var totalPaginas = Math.ceil(total / POR_PAGINA) || 1;
-
-        if (paginaAtual[tipo] > totalPaginas) {
-            paginaAtual[tipo] = totalPaginas;
-        }
-
-        var inicio = (paginaAtual[tipo] - 1) * POR_PAGINA;
-
-        return {
-            pagina: dados.slice(inicio, inicio + POR_PAGINA),
-            inicio: inicio,
-            total: total,
-            totalPaginas: totalPaginas
-        };
-    }
-
-    function criarPaginacao(tipo, totalPaginas, containerId) {
-        var div = $(containerId);
-        if (!div) return;
-
-        if (totalPaginas <= 1) {
-            div.innerHTML = '';
-            return;
-        }
-
-        var html = '';
-        for (var i = 1; i <= totalPaginas; i++) {
-            html += '<button class="' + (i === paginaAtual[tipo] ? 'ativo' : '') + '" onclick="paginar(\'' + tipo + '\',' + i + ')">' + i + '</button>';
-        }
-
-        div.innerHTML = html;
-    }
-
-    function paginar(tipo, pagina) {
-        paginaAtual[tipo] = pagina;
-        atualizarTudo();
-    }
-
-    /* =========================================================
-       MEMBROS
-       ========================================================= */
-
-    function abrirModal() {
-        if (!estaLogado) {
-            mostrarToast('⚠️ Faça login para cadastrar membros.', 'atencao');
-            return;
-        }
-
-        $('modalTitulo').textContent = '📝 Novo Membro';
-        $('modalNome').value = '';
-        $('modalBI').value = '';
-        $('modalTelefone').value = '';
-        $('modalAniversario').value = '';
-        $('modalStatus').value = 'Ativo';
-        editandoIndex = -1;
-        $('modal').classList.add('aberto');
-    }
-
-    function fecharModal() {
-        $('modal').classList.remove('aberto');
-    }
-
-    async function salvarMembro() {
-        if (!estaLogado) {
-            mostrarToast('⚠️ Faça login para salvar membros.', 'atencao');
-            return;
-        }
-
-        var nome = $('modalNome').value.trim();
-        var bi = $('modalBI').value.trim();
-        var telefone = $('modalTelefone').value.trim();
-        var aniversario = $('modalAniversario').value.trim();
-        var status = $('modalStatus').value;
-
-        if (!nome) {
-            mostrarToast('⚠️ Informe o nome do membro', 'atencao');
-            return;
-        }
-
-        if (!bi) {
-            mostrarToast('⚠️ Informe o Bilhete de Identidade (BI)', 'atencao');
-            return;
-        }
-
-        if (aniversario && aniversario.length !== 10) {
-            mostrarToast('⚠️ Data deve estar no formato DD/MM/AAAA', 'atencao');
-            return;
-        }
-
-        // Verificar se BI já existe
-        var biExistente = membros.find(function(m) {
-            return m.bi === bi && (editandoIndex === -1 || m.id !== membros[editandoIndex]?.id);
-        });
-
-        if (biExistente) {
-            mostrarToast('⚠️ Este BI já está cadastrado para outro membro.', 'atencao');
-            return;
-        }
-
-        var dataNascimento = aniversario ? dataTelaParaBanco(aniversario) : null;
-
-        try {
-            if (editandoIndex === -1) {
-                var inserir = await supabaseClient
-                    .from('membros')
-                    .insert([{
-                        nome: nome,
-                        bi: bi,
-                        telefone: telefone,
-                        data_nascimento: dataNascimento,
-                        status: status
-                    }])
-                    .select()
-                    .single();
-
-                if (inserir.error) throw inserir.error;
-                mostrarToast('✅ Membro "' + nome + '" adicionado!', 'sucesso');
-            } else {
-                var membro = membros[editandoIndex];
-                var atualizar = await supabaseClient
-                    .from('membros')
-                    .update({
-                        nome: nome,
-                        bi: bi,
-                        telefone: telefone,
-                        data_nascimento: dataNascimento,
-                        status: status
-                    })
-                    .eq('id', membro.id)
-                    .select()
-                    .single();
-
-                if (atualizar.error) throw atualizar.error;
-                mostrarToast('✅ Membro "' + nome + '" atualizado!', 'sucesso');
-            }
-
-            fecharModal();
-            await carregarMembros();
-            atualizarTudo();
-
-        } catch (erro) {
-            console.error(erro);
-            mostrarToast('❌ Não foi possível salvar o membro.', 'erro');
-        }
-    }
-
-    function editarMembro(i) {
-        if (!estaLogado) {
-            mostrarToast('⚠️ Faça login para editar membros.', 'atencao');
-            return;
-        }
-
-        var m = membros[i];
-        if (!m) return;
-
-        $('modalTitulo').textContent = '✏️ Editar Membro';
-        $('modalNome').value = m.nome || '';
-        $('modalBI').value = m.bi || '';
-        $('modalTelefone').value = m.telefone || '';
-        $('modalAniversario').value = m.aniversario || '';
-        $('modalStatus').value = m.status || 'Ativo';
-        editandoIndex = i;
-        $('modal').classList.add('aberto');
-    }
-
-    async function excluirMembro(i) {
-        if (!estaLogado) {
-            mostrarToast('⚠️ Faça login para excluir membros.', 'atencao');
-            return;
-        }
-
-        var m = membros[i];
-        if (!m) return;
-
-        if (!confirm('Tem certeza que deseja excluir "' + m.nome + '"?')) {
-            return;
-        }
-
-        try {
-            var resultado = await supabaseClient
-                .from('membros')
-                .delete()
-                .eq('id', m.id);
-
-            if (resultado.error) throw resultado.error;
-            mostrarToast('🗑️ Membro "' + m.nome + '" removido', 'atencao');
-            await carregarMembros();
-            atualizarTudo();
-
-        } catch (erro) {
-            console.error(erro);
-            mostrarToast('❌ Não foi possível excluir o membro.', 'erro');
-        }
-    }
-
-    function filtrarMembros() {
-        var termo = ($('buscaMembro') ? $('buscaMembro').value : '').toLowerCase();
-
-        membrosFiltrados = membros.filter(function (m) {
-            return (m.nome || '').toLowerCase().includes(termo) ||
-                   (m.bi || '').toLowerCase().includes(termo) ||
-                   (m.telefone || '').includes(termo);
-        });
-
-        paginaAtual.membros = 1;
-        atualizarTudo();
-    }
-
-    function exportarMembrosCSV() {
-        if (!membros.length) {
-            mostrarToast('⚠️ Nenhum membro para exportar', 'atencao');
-            return;
-        }
-
-        var csv = 'Nome,BI,Telefone,Status,Entrada,Aniversário\n';
-        membros.forEach(function (m) {
-            csv += '"' + (m.nome || '') + '","' + (m.bi || '') + '","' + (m.telefone || '') + '","' + (m.status || '') + '","' + (m.dataEntrada || '') + '","' + (m.aniversario || '') + '"\n';
-        });
-
-        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        var a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'membros_ojv.csv';
-        a.click();
-
-        mostrarToast('📤 CSV exportado!', 'sucesso');
-    }
-
-    /* =========================================================
-       TRANSAÇÕES
-       ========================================================= */
-
-    async function adicionarTransacao() {
-        if (!estaLogado) {
-            mostrarToast('⚠️ Faça login para registrar transações.', 'atencao');
-            return;
-        }
-
-        var tipo = $('tipoTransacao').value;
-        var valor = parseFloat($('valorTransacao').value);
-        var descricao = $('descricaoTransacao').value.trim();
-        var categoria = $('categoriaTransacao').value;
-
-        if (!valor || valor <= 0) {
-            mostrarToast('⚠️ Informe um valor válido', 'atencao');
-            return;
-        }
-
-        if (!descricao) {
-            mostrarToast('⚠️ Descreva a transação', 'atencao');
-            return;
-        }
-
-        var valorBanco = tipo === 'despesa' ? -valor : valor;
-
-        try {
-            var resultado = await supabaseClient
-                .from('transacoes')
-                .insert([{
-                    tipo: tipo,
-                    categoria: categoria,
-                    descricao: descricao,
-                    valor: valorBanco,
-                    data_transacao: dataHoje()
-                }])
-                .select()
-                .single();
-
-            if (resultado.error) throw resultado.error;
-
-            $('valorTransacao').value = '';
-            $('descricaoTransacao').value = '';
-
-            mostrarToast('✅ Transação registrada!', 'sucesso');
-            await carregarTransacoes();
-            atualizarTudo();
-
-        } catch (erro) {
-            console.error(erro);
-            mostrarToast('❌ Não foi possível registrar a transação.', 'erro');
-        }
-    }
-
-    function filtrarTransacoes() {
-        var termo = ($('buscaTransacao') ? $('buscaTransacao').value : '').toLowerCase();
-        var tipo = $('filtroTipo') ? $('filtroTipo').value : '';
-
-        transacoesFiltradas = transacoes.filter(function (t) {
-            return (t.descricao || '').toLowerCase().includes(termo) &&
-                   (!tipo || t.tipo === tipo);
-        });
-
-        paginaAtual.transacoes = 1;
-        atualizarTudo();
-    }
-
-    function exportarTransacoesCSV() {
-        if (!transacoes.length) {
-            mostrarToast('⚠️ Nenhuma transação', 'atencao');
-            return;
-        }
-
-        var csv = 'Data,Tipo,Categoria,Descrição,Valor\n';
-        transacoes.forEach(function (t) {
-            csv += '"' + (t.data || '') + '","' + (t.tipo || '') + '","' + (t.categoria || '') + '","' + (t.descricao || '') + '","' + (t.valor || 0) + '"\n';
-        });
-
-        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        var a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'transacoes_ojv.csv';
-        a.click();
-
-        mostrarToast('📤 CSV exportado!', 'sucesso');
-    }
-
-    async function limparTransacoes() {
-        if (!estaLogado) {
-            mostrarToast('⚠️ Faça login para limpar transações.', 'atencao');
-            return;
-        }
-
-        if (!confirm('Tem certeza que deseja limpar todas as transações?')) {
-            return;
-        }
-
-        try {
-            var resultado = await supabaseClient
-                .from('transacoes')
-                .delete()
-                .neq('id', '0');
-
-            if (resultado.error) throw resultado.error;
-
-            mostrarToast('🗑️ Transações limpas!', 'atencao');
-            await carregarTransacoes();
-            atualizarTudo();
-
-        } catch (erro) {
-            console.error(erro);
-            mostrarToast('❌ Não foi possível limpar as transações.', 'erro');
-        }
-    }
-
-    /* =========================================================
-       EVENTOS
-       ========================================================= */
-
-    async function adicionarEvento() {
-        if (!estaLogado) {
-            mostrarToast('⚠️ Faça login para criar eventos.', 'atencao');
-            return;
-        }
-
-        var nome = $('eventoNome').value.trim();
-        var data = $('eventoData').value;
-        var local = $('eventoLocal').value.trim();
-
-        if (!nome || !data) {
-            mostrarToast('⚠️ Nome e data são obrigatórios', 'atencao');
-            return;
-        }
-
-        try {
-            var resultado = await supabaseClient
-                .from('eventos')
-                .insert([{
-                    titulo: nome,
-                    descricao: '',
-                    local: local || 'Não definido',
-                    data_evento: data,
-                    responsavel: ''
-                }])
-                .select()
-                .single();
-
-            if (resultado.error) throw resultado.error;
-
-            $('eventoNome').value = '';
-            $('eventoData').value = '';
-            $('eventoLocal').value = '';
-
-            mostrarToast('✅ Evento "' + nome + '" criado!', 'sucesso');
-            await carregarEventos();
-            atualizarTudo();
-
-        } catch (erro) {
-            console.error(erro);
-            mostrarToast('❌ Não foi possível criar o evento.', 'erro');
-        }
-    }
-
-    /* =========================================================
-       META FINANCEIRA
-       ========================================================= */
-
-    async function definirMeta() {
-        if (!estaLogado) {
-            mostrarToast('⚠️ Faça login para definir meta.', 'atencao');
-            return;
-        }
-
-        var valor = parseFloat($('metaValorInput').value);
-
-        if (!valor || valor <= 0) {
-            mostrarToast('⚠️ Valor inválido', 'atencao');
-            return;
-        }
-
-        try {
-            if (meta.id) {
-                var atualizar = await supabaseClient
-                    .from('metas_financeiras')
-                    .update({
-                        valor_objetivo: valor,
-                        valor_atual: 0
-                    })
-                    .eq('id', meta.id);
-
-                if (atualizar.error) throw atualizar.error;
-            } else {
-                var inserir = await supabaseClient
-                    .from('metas_financeiras')
-                    .insert([{
-                        nome_meta: 'Meta O.J.V.',
-                        valor_objetivo: valor,
-                        valor_atual: 0
-                    }])
-                    .select()
-                    .single();
-
-                if (inserir.error) throw inserir.error;
-            }
-
-            $('metaValorInput').value = '';
-            mostrarToast('🎯 Meta definida: ' + formatarNumero(valor) + ' Kz', 'sucesso');
-            await carregarMeta();
-            atualizarTudo();
-
-        } catch (erro) {
-            console.error(erro);
-            mostrarToast('❌ Não foi possível definir a meta.', 'erro');
-        }
-    }
-
-    async function guardarParaMeta() {
-        if (!estaLogado) {
-            mostrarToast('⚠️ Faça login para guardar na meta.', 'atencao');
-            return;
-        }
-
-        var valor = parseFloat($('metaGuardarInput').value);
-
-        if (!valor || valor <= 0) {
-            mostrarToast('⚠️ Valor inválido', 'atencao');
-            return;
-        }
-
-        if (!meta.id || meta.valor <= 0) {
-            mostrarToast('⚠️ Defina uma meta primeiro', 'atencao');
-            return;
-        }
-
-        var novoGuardado = meta.guardado + valor;
-        if (novoGuardado >= meta.valor) {
-            novoGuardado = meta.valor;
-        }
-
-        try {
-            var resultado = await supabaseClient
-                .from('metas_financeiras')
+        resposta =
+            await supabaseClient
+                .from("meta")
                 .update({
-                    valor_atual: novoGuardado
+                    valor,
+                    guardado:0
                 })
-                .eq('id', meta.id);
+                .eq(
+                    "id",
+                    meta.id
+                );
 
-            if (resultado.error) throw resultado.error;
+    }else{
 
-            $('metaGuardarInput').value = '';
+        resposta =
+            await supabaseClient
+                .from("meta")
+                .insert([{
+                    valor,
+                    guardado:0
+                }])
+                .select();
 
-            if (novoGuardado >= meta.valor) {
-                mostrarToast('🎉 Meta atingida! Parabéns!', 'sucesso');
-            } else {
-                mostrarToast('💰 ' + formatarNumero(valor) + ' Kz guardados!', 'sucesso');
-            }
-
-            await carregarMeta();
-            atualizarTudo();
-
-        } catch (erro) {
-            console.error(erro);
-            mostrarToast('❌ Não foi possível atualizar a meta.', 'erro');
-        }
     }
 
-    async function resetarMeta() {
-        if (!estaLogado) {
-            mostrarToast('⚠️ Faça login para resetar a meta.', 'atencao');
-            return;
-        }
+    if(resposta.error){
 
-        if (!confirm('Tem certeza que deseja resetar a meta?')) {
-            return;
-        }
+        console.error(
+            resposta.error
+        );
 
-        try {
-            if (meta.id) {
-                var resultado = await supabaseClient
-                    .from('metas_financeiras')
-                    .update({
-                        valor_atual: 0,
-                        valor_objetivo: 0
-                    })
-                    .eq('id', meta.id);
+        mostrarToast(
+            "Erro ao definir meta: "+
+            resposta.error.message,
+            "erro"
+        );
 
-                if (resultado.error) throw resultado.error;
-            }
-
-            mostrarToast('🔄 Meta resetada!', 'atencao');
-            await carregarMeta();
-            atualizarTudo();
-
-        } catch (erro) {
-            console.error(erro);
-            mostrarToast('❌ Não foi possível resetar a meta.', 'erro');
-        }
+        return;
     }
 
-    /* =========================================================
-       FUNÇÕES DE RELATÓRIO
-       ========================================================= */
+    $("metaValorInput")
+        .value="";
 
-    function gerarRelatorio() {
-        var div = $('relatorioDetalhado');
-        if (!div) return;
+    await carregarMeta();
 
-        var totalR = 0, totalD = 0;
-        transacoes.forEach(function (t) {
-            if (Number(t.valor) > 0) totalR += Number(t.valor);
-            else totalD += Math.abs(Number(t.valor));
+    mostrarToast(
+        "🎯 Meta definida!",
+        "sucesso"
+    );
+
+    atualizarTudo();
+}
+
+
+async function guardarParaMeta(){
+
+    const valor =
+        parseFloat(
+            $("metaGuardarInput")
+            .value
+        );
+
+    if(
+        !valor ||
+        valor<=0
+    ){
+
+        mostrarToast(
+            "Informe um valor válido.",
+            "atencao"
+        );
+
+        return;
+    }
+
+    if(!meta.id){
+
+        mostrarToast(
+            "Defina primeiro uma meta.",
+            "atencao"
+        );
+
+        return;
+    }
+
+    const novoGuardado =
+        Math.min(
+            meta.guardado + valor,
+            meta.valor
+        );
+
+    const {
+        error
+    } =
+    await supabaseClient
+        .from("meta")
+        .update({
+            guardado:
+                novoGuardado
+        })
+        .eq(
+            "id",
+            meta.id
+        );
+
+    if(error){
+
+        mostrarToast(
+            "Erro ao guardar para a meta.",
+            "erro"
+        );
+
+        return;
+    }
+
+    $("metaGuardarInput")
+        .value="";
+
+    await carregarMeta();
+
+    mostrarToast(
+        novoGuardado>=meta.valor
+        ? "🎉 Meta atingida!"
+        : "💰 Valor guardado!",
+        "sucesso"
+    );
+
+    atualizarTudo();
+}
+
+
+/* =====================================================
+   ATUALIZAR TUDO
+===================================================== */
+
+function atualizarTudo(){
+
+    if(!usuario)
+        return;
+
+
+    /* MEMBROS */
+
+    const termoM =
+        (
+            $("buscaMembro")
+            ?.value || ""
+        ).toLowerCase();
+
+    membrosFiltrados =
+        membros.filter(m=>{
+
+            return (
+                String(
+                    m.nome || ""
+                ).toLowerCase()
+                .includes(termoM)
+                ||
+                String(
+                    m.telefone || ""
+                ).toLowerCase()
+                .includes(termoM)
+            );
+
         });
 
-        var saldo = totalR - totalD;
-        var ativos = membros.filter(function (m) { return m.status === 'Ativo'; }).length;
-        var proximos = eventos.filter(function (e) { return e.status === 'Agendado'; }).length;
 
-        div.style.display = 'block';
-        div.innerHTML = `
-            <h4>📊 Resumo Completo</h4>
-            <p><strong>💰 Finanças:</strong></p>
-            <p>Receitas: ${formatarNumero(totalR)} Kz</p>
-            <p>Despesas: ${formatarNumero(totalD)} Kz</p>
-            <p>Saldo: ${formatarNumero(saldo)} Kz</p>
-            <hr>
-            <p><strong>👥 Membros:</strong></p>
-            <p>Total: ${membros.length}</p>
-            <p>Ativos: ${ativos}</p>
-            <p>Inativos: ${membros.length - ativos}</p>
-            <hr>
-            <p><strong>📅 Eventos:</strong></p>
-            <p>Total: ${eventos.length}</p>
-            <p>Próximos: ${proximos}</p>
-            <p><strong>🎯 Meta:</strong></p>
-            <p>Meta: ${formatarNumero(meta.valor)} Kz</p>
-            <p>Guardado: ${formatarNumero(meta.guardado)} Kz</p>
-            <p>Progresso: ${meta.valor > 0 ? ((meta.guardado / meta.valor) * 100).toFixed(1) : 0}%</p>
+    const pm =
+        paginaDados(
+            membrosFiltrados,
+            "membros"
+        );
+
+
+    criarPaginacao(
+        "membros",
+        pm.totalPaginas,
+        "pagMembros"
+    );
+
+
+    let htmlM="";
+
+    pm.dados.forEach(m=>{
+
+        const status =
+            m.status || "Ativo";
+
+        const classe =
+            status==="Ativo"
+            ? "badge-sucesso"
+            : "badge-perigo";
+
+        htmlM += `
+
+        <tr>
+
+            <td>
+
+                <strong>
+                    ${escaparHTML(m.nome)}
+                </strong>
+
+                <br>
+
+                <small>
+                    ${escaparHTML(
+                        m.telefone || ""
+                    )}
+                </small>
+
+            </td>
+
+            <td>
+
+                <span class="badge ${classe}">
+                    ${escaparHTML(status)}
+                </span>
+
+            </td>
+
+            <td>
+
+                <div class="grupo-acoes">
+
+                    <button
+                        class="btn btn-outline"
+                        onclick="editarMembro('${m.id}')"
+                    >
+                        ✏️
+                    </button>
+
+                    <button
+                        class="btn btn-danger"
+                        onclick="excluirMembro('${m.id}')"
+                    >
+                        🗑️
+                    </button>
+
+                </div>
+
+            </td>
+
+        </tr>
+
         `;
 
-        mostrarToast('📊 Relatório gerado!', 'sucesso');
-    }
+    });
 
-    function exportarRelatorioCSV() {
-        if (!membros.length && !transacoes.length && !eventos.length) {
-            mostrarToast('⚠️ Sem dados para exportar', 'atencao');
-            return;
-        }
 
-        var csv = 'Relatório O.J.V.\n\n';
-        csv += 'MEMBROS\nNome,BI,Telefone,Status,Aniversário\n';
-        membros.forEach(function (m) {
-            csv += '"' + (m.nome || '') + '","' + (m.bi || '') + '","' + (m.telefone || '') + '","' + (m.status || '') + '","' + (m.aniversario || '') + '"\n';
+    $("listaMembros")
+        .innerHTML =
+        htmlM ||
+        `
+        <tr>
+            <td colspan="3"
+                style="text-align:center;padding:20px">
+                Nenhum membro cadastrado.
+            </td>
+        </tr>
+        `;
+
+
+    $("totalMembros")
+        .textContent =
+        membros.length;
+
+    $("ativosCount")
+        .textContent =
+        membros.filter(
+            m=>m.status==="Ativo"
+        ).length;
+
+    $("navMembros")
+        .textContent =
+        membros.length;
+
+
+    /* TRANSAÇÕES */
+
+    const termoT =
+        (
+            $("buscaTransacao")
+            ?.value || ""
+        ).toLowerCase();
+
+    const filtroT =
+        $("filtroTipo")
+        ?.value || "";
+
+
+    transacoesFiltradas =
+        transacoes.filter(t=>{
+
+            return (
+                String(
+                    t.descricao || ""
+                ).toLowerCase()
+                .includes(termoT)
+                &&
+                (
+                    !filtroT ||
+                    t.tipo===filtroT
+                )
+            );
+
         });
 
-        csv += '\nTRANSAÇÕES\nData,Descrição,Valor\n';
-        transacoes.forEach(function (t) {
-            csv += '"' + (t.data || '') + '","' + (t.descricao || '') + '","' + (t.valor || 0) + '"\n';
+
+    const pt =
+        paginaDados(
+            transacoesFiltradas,
+            "transacoes"
+        );
+
+
+    criarPaginacao(
+        "transacoes",
+        pt.totalPaginas,
+        "pagTransacoes"
+    );
+
+
+    let htmlT="";
+
+    pt.dados.forEach(t=>{
+
+        const valor =
+            numero(t.valor);
+
+        const cor =
+            valor>=0
+            ? "#28a745"
+            : "#dc3545";
+
+        let data="";
+
+        if(t.data){
+
+            try{
+
+                data =
+                    new Date(t.data)
+                    .toLocaleString(
+                        "pt-AO"
+                    );
+
+            }catch(e){
+
+                data=t.data;
+
+            }
+
+        }
+
+        htmlT += `
+
+        <tr>
+
+            <td>
+                ${escaparHTML(data)}
+            </td>
+
+            <td>
+                ${escaparHTML(
+                    t.descricao || ""
+                )}
+            </td>
+
+            <td
+                style="
+                    font-weight:700;
+                    color:${cor}
+                "
+            >
+                ${valor>=0?"+":""}
+                ${dinheiro(valor)}
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+
+    $("listaTransacoes")
+        .innerHTML =
+        htmlT ||
+        `
+        <tr>
+            <td colspan="3"
+                style="text-align:center;padding:20px">
+                Nenhuma transação.
+            </td>
+        </tr>
+        `;
+
+
+    /* EVENTOS */
+
+    let htmlE="";
+
+    eventos
+        .slice(0,20)
+        .forEach(e=>{
+
+            const classe =
+                e.status==="Agendado"
+                ? "badge-info"
+                : "badge-sucesso";
+
+            htmlE += `
+
+            <tr>
+
+                <td>
+
+                    <strong>
+                        ${escaparHTML(
+                            e.nome || ""
+                        )}
+                    </strong>
+
+                    <br>
+
+                    <small>
+                        ${escaparHTML(
+                            e.local || ""
+                        )}
+                    </small>
+
+                </td>
+
+                <td>
+                    ${escaparHTML(
+                        e.data || ""
+                    )}
+                </td>
+
+                <td>
+
+                    <span
+                        class="badge ${classe}"
+                    >
+                        ${escaparHTML(
+                            e.status || ""
+                        )}
+                    </span>
+
+                </td>
+
+            </tr>
+
+            `;
+
         });
 
-        csv += '\nEVENTOS\nNome,Data,Local\n';
-        eventos.forEach(function (e) {
-            csv += '"' + (e.nome || '') + '","' + (e.data || '') + '","' + (e.local || '') + '"\n';
-        });
 
-        var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-        var a = document.createElement('a');
-        a.href = URL.createObjectURL(blob);
-        a.download = 'relatorio_ojv.csv';
-        a.click();
+    $("listaEventos")
+        .innerHTML =
+        htmlE ||
+        `
+        <tr>
+            <td colspan="3"
+                style="text-align:center;padding:20px">
+                Nenhum evento.
+            </td>
+        </tr>
+        `;
 
-        mostrarToast('📤 Relatório exportado!', 'sucesso');
-    }
 
-    function imprimirSistema() {
-        window.print();
-        mostrarToast('🖨️ Impressão iniciada!', 'sucesso');
-    }
+    /* FINANÇAS */
 
-    function exportarPDF() {
-        try {
-            var doc = new jspdf.jsPDF('p', 'mm', 'a4');
-            
-            doc.setFontSize(20);
-            doc.text('O.J.V. Professional Plus', 20, 20);
-            
-            doc.setFontSize(14);
-            doc.text('Relatório de Dados', 20, 35);
-            
-            var y = 45;
-            
-            doc.setFontSize(12);
-            doc.text('Membros: ' + membros.length, 20, y);
-            y += 8;
-            
-            var ativos = membros.filter(function(m) { return m.status === 'Ativo'; }).length;
-            doc.text('Ativos: ' + ativos, 20, y);
-            y += 8;
-            
-            var totalR = 0, totalD = 0;
-            transacoes.forEach(function (t) {
-                if (Number(t.valor) > 0) totalR += Number(t.valor);
-                else totalD += Math.abs(Number(t.valor));
-            });
-            
-            doc.text('Receitas: ' + formatarNumero(totalR) + ' Kz', 20, y);
-            y += 8;
-            doc.text('Despesas: ' + formatarNumero(totalD) + ' Kz', 20, y);
-            y += 8;
-            doc.text('Saldo: ' + formatarNumero(totalR - totalD) + ' Kz', 20, y);
-            y += 8;
-            
-            doc.text('Eventos: ' + eventos.length, 20, y);
-            y += 8;
-            
-            if (meta.valor > 0) {
-                doc.text('Meta: ' + formatarNumero(meta.valor) + ' Kz', 20, y);
-                y += 8;
-                doc.text('Guardado: ' + formatarNumero(meta.guardado) + ' Kz', 20, y);
-                y += 8;
-                doc.text('Progresso: ' + ((meta.guardado / meta.valor) * 100).toFixed(1) + '%', 20, y);
-            }
-            
-            doc.save('relatorio_ojv.pdf');
-            mostrarToast('📄 PDF gerado com sucesso!', 'sucesso');
-            
-        } catch (erro) {
-            console.error(erro);
-            mostrarToast('❌ Erro ao gerar PDF', 'erro');
-        }
-    }
+    let receitas=0;
+    let despesas=0;
 
-    /* =========================================================
-       BACKUP E SINCRONIZAÇÃO
-       ========================================================= */
 
-    function fazerBackup() {
-        try {
-            var dados = {
-                membros: membros,
-                transacoes: transacoes,
-                eventos: eventos,
-                meta: meta,
-                data_backup: new Date().toISOString()
-            };
+    transacoes.forEach(t=>{
 
-            var blob = new Blob([JSON.stringify(dados, null, 2)], { type: 'application/json' });
-            var a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'backup_ojv_' + dataHoje() + '.json';
-            a.click();
+        const valor =
+            numero(t.valor);
 
-            mostrarToast('💾 Backup salvo com sucesso!', 'sucesso');
-        } catch (erro) {
-            console.error(erro);
-            mostrarToast('❌ Erro ao fazer backup', 'erro');
-        }
-    }
+        if(valor>0)
+            receitas += valor;
+        else
+            despesas += Math.abs(valor);
 
-    function sincronizarSupabase() {
-        if (!estaLogado) {
-            mostrarToast('⚠️ Faça login para sincronizar.', 'atencao');
-            return;
-        }
-        carregarTudoDoSupabase();
-        mostrarToast('☁️ Sincronizando dados com Supabase...', 'atencao');
-    }
+    });
 
-    /* =========================================================
-       ATUALIZAR TUDO NA TELA
-       ========================================================= */
 
-    function atualizarTudo() {
-        try {
-            var termoM = ($('buscaMembro')?.value || '').toLowerCase();
-            membrosFiltrados = membros.filter(function (m) {
-                return (m.nome || '').toLowerCase().includes(termoM) ||
-                       (m.bi || '').toLowerCase().includes(termoM) ||
-                       (m.telefone || '').includes(termoM);
-            });
+    const saldo =
+        receitas-despesas;
 
-            var termoT = ($('buscaTransacao')?.value || '').toLowerCase();
-            var tipoT = $('filtroTipo') ? $('filtroTipo').value : '';
 
-            transacoesFiltradas = transacoes.filter(function (t) {
-                return (t.descricao || '').toLowerCase().includes(termoT) &&
-                       (!tipoT || t.tipo === tipoT);
-            });
+    $("finReceitas")
+        .textContent =
+        dinheiro(receitas);
 
-            var pM = renderizarPagina('membros', membrosFiltrados);
-            var pT = renderizarPagina('transacoes', transacoesFiltradas);
-            var pE = renderizarPagina('eventos', eventos);
+    $("finDespesas")
+        .textContent =
+        dinheiro(despesas);
 
-            criarPaginacao('membros', pM.totalPaginas, 'pagMembros');
-            criarPaginacao('transacoes', pT.totalPaginas, 'pagTransacoes');
-            criarPaginacao('eventos', pE.totalPaginas, 'pagEventos');
+    $("finSaldo")
+        .textContent =
+        dinheiro(saldo);
 
-            /* MEMBROS */
-            var htmlM = '';
-            pM.pagina.forEach(function (m, i) {
-                var idx = pM.inicio + i;
-                var cls = m.status === 'Ativo' ? 'badge-sucesso' : 'badge-perigo';
 
-                htmlM += '<tr>' +
-                    '<td><strong>' + escaparHTML(m.nome) + '</strong></td>' +
-                    '<td><span style="font-size:0.8rem;">' + escaparHTML(m.bi || '') + '</span></td>' +
-                    '<td><span style="font-size:0.8rem;">' + escaparHTML(m.telefone || '') + '</span></td>' +
-                    '<td><span class="badge ' + cls + '">' + escaparHTML(m.status || 'Ativo') + '</span></td>' +
-                    '<td><div class="grupo-acoes">' +
-                    '<button class="btn btn-outline" onclick="editarMembro(' + idx + ')">✏️</button> ' +
-                    '<button class="btn btn-danger" onclick="excluirMembro(' + idx + ')">🗑️</button>' +
-                    '</div></td></tr>';
-            });
+    /* DASHBOARD */
 
-            $('listaMembros').innerHTML = htmlM || '<tr><td colspan="5" style="text-align:center;padding:20px;">Nenhum membro cadastrado</td></tr>';
-            $('totalMembros').textContent = membros.length;
-            $('ativosCount').textContent = membros.filter(function (m) { return m.status === 'Ativo'; }).length;
-            $('inativosCount').textContent = membros.filter(function (m) { return m.status !== 'Ativo'; }).length;
-            $('navMembros').textContent = membros.length;
+    $("cardsDashboard")
+        .innerHTML = `
 
-            /* TRANSAÇÕES */
-            var htmlT = '';
-            pT.pagina.forEach(function (t) {
-                var cor = t.valor > 0 ? '#28a745' : '#dc3545';
-                htmlT += '<tr>' +
-                    '<td style="font-size:0.75rem;">' + escaparHTML(t.data || '') + '</td>' +
-                    '<td>' + escaparHTML(t.descricao || '') + '</td>' +
-                    '<td style="font-weight:700;color:' + cor + ';">' +
-                    (t.valor > 0 ? '+' : '') + formatarNumero(t.valor) + ' Kz</td></tr>';
-            });
+        <div class="card">
 
-            $('listaTransacoes').innerHTML = htmlT || '<tr><td colspan="3" style="text-align:center;padding:20px;">Nenhuma transação</td></tr>';
+            <span class="numero">
+                ${membros.length}
+            </span>
 
-            /* EVENTOS */
-            var htmlE = '';
-            pE.pagina.forEach(function (e) {
-                var cls = e.status === 'Agendado' ? 'badge-info' : 'badge-sucesso';
-                htmlE += '<tr>' +
-                    '<td><strong>' + escaparHTML(e.nome) + '</strong><br>' +
-                    '<span style="font-size:0.7rem;color:#6c757d;">' + escaparHTML(e.local || '') + '</span></td>' +
-                    '<td style="font-size:0.75rem;">' + escaparHTML(e.data || '') + '</td>' +
-                    '<td><span class="badge ' + cls + '">' + escaparHTML(e.status) + '</span></td></tr>';
-            });
+            <span class="rotulo">
+                Membros
+            </span>
 
-            $('listaEventos').innerHTML = htmlE || '<tr><td colspan="3" style="text-align:center;padding:20px;">Nenhum evento</td></tr>';
+        </div>
 
-            /* FINANÇAS */
-            var totalR = 0, totalD = 0;
-            transacoes.forEach(function (t) {
-                if (Number(t.valor) > 0) totalR += Number(t.valor);
-                else totalD += Math.abs(Number(t.valor));
-            });
+        <div class="card verde">
 
-            var saldo = totalR - totalD;
+            <span class="numero">
+                ${dinheiro(receitas)}
+            </span>
 
-            /* DASHBOARD */
-            $('cardsDashboard').innerHTML =
-                '<div class="card"><span class="numero">' + membros.length + '</span><span class="rotulo">Membros</span></div>' +
-                '<div class="card verde"><span class="numero">' + formatarNumero(totalR) + '</span><span class="rotulo">Receitas</span></div>' +
-                '<div class="card vermelho"><span class="numero">' + formatarNumero(totalD) + '</span><span class="rotulo">Despesas</span></div>' +
-                '<div class="card azul"><span class="numero">' + formatarNumero(saldo) + '</span><span class="rotulo">Saldo</span></div>';
+            <span class="rotulo">
+                Receitas
+            </span>
 
-            /* FINANCEIRO */
-            $('finReceitas').textContent = formatarNumero(totalR) + ' Kz';
-            $('finDespesas').textContent = formatarNumero(totalD) + ' Kz';
-            $('finSaldo').textContent = formatarNumero(saldo) + ' Kz';
+        </div>
 
-            /* META */
-            var pMeta = meta.valor > 0 ? (meta.guardado / meta.valor) * 100 : 0;
-            $('metaValorExibido').textContent = formatarNumero(meta.valor) + ' Kz';
-            $('metaGuardadoExibido').textContent = formatarNumero(meta.guardado) + ' Kz';
-            $('metaBarra').style.width = Math.min(pMeta, 100) + '%';
-            $('metaProgresso').textContent = pMeta.toFixed(0) + '%';
-            $('metaFalta').textContent = formatarNumero(Math.max(0, meta.valor - meta.guardado)) + ' Kz';
+        <div class="card vermelho">
 
-            /* ÚLTIMAS TRANSAÇÕES */
-            var ult = $('ultimasTransacoes');
-            if (transacoes.length) {
-                ult.innerHTML = transacoes.slice(0, 3).map(function (t) {
-                    return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eee;">' +
-                        escaparHTML(t.descricao || '') +
-                        '<span style="font-weight:700;color:' + (t.valor > 0 ? '#28a745' : '#dc3545') + ';">' +
-                        (t.valor > 0 ? '+' : '') + formatarNumero(t.valor) + ' Kz</span></div>';
-                }).join('');
-            } else {
-                ult.innerHTML = 'Nenhuma transação';
-            }
+            <span class="numero">
+                ${dinheiro(despesas)}
+            </span>
 
-            /* PRÓXIMOS EVENTOS */
-            var prox = $('proximosEventos');
-            var proximos = eventos.filter(function (e) { return e.status === 'Agendado'; });
-            if (proximos.length) {
-                prox.innerHTML = proximos.slice(0, 3).map(function (e) {
-                    return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #eee;">' +
-                        escaparHTML(e.nome) +
-                        '<span style="font-weight:700;">' + escaparHTML(e.data) + '</span></div>';
-                }).join('');
-            } else {
-                prox.innerHTML = 'Nenhum evento agendado';
-            }
+            <span class="rotulo">
+                Despesas
+            </span>
 
-            /* GRÁFICO */
-            var chart = $('graficoBarras');
-            var maxVal = Math.max(totalR, totalD, 1);
-            chart.innerHTML =
-                '<div class="barra" style="height:' + ((totalR / maxVal) * 80 + 10) + 'px;background:#28a745;">' +
-                '<span class="valor">' + formatarNumero(totalR) + '</span></div>' +
-                '<div class="barra" style="height:' + ((totalD / maxVal) * 80 + 10) + 'px;background:#dc3545;">' +
-                '<span class="valor">' + formatarNumero(totalD) + '</span></div>' +
-                '<div class="barra" style="height:' + ((Math.abs(saldo) / maxVal) * 80 + 10) + 'px;background:#0b1a2e;">' +
-                '<span class="valor">' + formatarNumero(saldo) + '</span></div>';
+        </div>
 
-            /* RELATÓRIOS */
-            $('relReceitas').textContent = formatarNumero(totalR) + ' Kz';
-            $('relDespesas').textContent = formatarNumero(totalD) + ' Kz';
-            $('relSaldo').textContent = formatarNumero(saldo) + ' Kz';
-            $('relTotalMembros').textContent = membros.length;
-            $('relAtivos').textContent = membros.filter(function (m) { return m.status === 'Ativo'; }).length;
-            $('relInativos').textContent = membros.filter(function (m) { return m.status !== 'Ativo'; }).length;
-            $('relTotalEventos').textContent = eventos.length;
-            $('relEventosProximos').textContent = proximos.length;
+        <div class="card azul">
 
-            var mesAtual = new Date().getMonth();
-            var eventosMes = eventos.filter(function (e) {
-                if (!e.data) return false;
-                var partes = e.data.split('-');
-                if (partes.length === 3) {
-                    return parseInt(partes[1]) - 1 === mesAtual;
-                }
-                return false;
-            });
-            $('relEventosMes').textContent = eventosMes.length;
+            <span class="numero">
+                ${dinheiro(saldo)}
+            </span>
 
-        } catch (erro) {
-            console.error('Erro ao atualizar interface:', erro);
-        }
-    }
+            <span class="rotulo">
+                Saldo
+            </span>
 
-    /* =========================================================
-       EXPORTAR FUNÇÕES PARA OS BOTÕES DO HTML
-       ========================================================= */
+        </div>
 
-    window.alternarTema = alternarTema;
-    window.alternarMenu = alternarMenu;
-    window.abrir = abrir;
-    window.paginar = paginar;
-    window.abrirModal = abrirModal;
-    window.fecharModal = fecharModal;
-    window.salvarMembro = salvarMembro;
-    window.editarMembro = editarMembro;
-    window.excluirMembro = excluirMembro;
-    window.filtrarMembros = filtrarMembros;
-    window.exportarMembrosCSV = exportarMembrosCSV;
-    window.adicionarTransacao = adicionarTransacao;
-    window.filtrarTransacoes = filtrarTransacoes;
-    window.exportarTransacoesCSV = exportarTransacoesCSV;
-    window.limparTransacoes = limparTransacoes;
-    window.adicionarEvento = adicionarEvento;
-    window.definirMeta = definirMeta;
-    window.guardarParaMeta = guardarParaMeta;
-    window.resetarMeta = resetarMeta;
-    window.gerarRelatorio = gerarRelatorio;
-    window.exportarRelatorioCSV = exportarRelatorioCSV;
-    window.imprimirSistema = imprimirSistema;
-    window.exportarPDF = exportarPDF;
-    window.fazerBackup = fazerBackup;
-    window.sincronizarSupabase = sincronizarSupabase;
-    window.aplicarMascaraData = aplicarMascaraData;
-    window.fazerLogin = fazerLogin;
-    window.logout = logout;
+        `;
 
-    /* =========================================================
-       INICIALIZAÇÃO
-       ========================================================= */
 
-    carregarTema();
+    /* ÚLTIMAS TRANSAÇÕES */
 
-    if ($('modal')) {
-        $('modal').addEventListener('click', function (e) {
-            if (e.target === this) {
+    const ult =
+        transacoes
+            .slice(0,3);
+
+
+    $("ultimasTransacoes")
+        .innerHTML =
+        ult.length
+        ? ult.map(t=>{
+
+            const v =
+                numero(t.valor);
+
+            return `
+
+            <div class="linha-resumo">
+
+                <span>
+                    ${escaparHTML(
+                        t.descricao || ""
+                    )}
+                </span>
+
+                <strong
+                    style="
+                        color:${v>=0
+                            ? "#28a745"
+                            : "#dc3545"}
+                    "
+                >
+                    ${v>=0?"+":""}
+                    ${dinheiro(v)}
+                </strong>
+
+            </div>
+
+            `;
+
+        }).join("")
+        : "Nenhuma transação.";
+
+
+    /* EVENTOS */
+
+    const proximos =
+        eventos
+            .filter(
+                e=>e.status==="Agendado"
+            )
+            .slice(0,3);
+
+
+    $("proximosEventos")
+        .innerHTML =
+        proximos.length
+        ? proximos.map(e=>{
+
+            return `
+
+            <div class="linha-resumo">
+
+                <span>
+                    ${escaparHTML(
+                        e.nome || ""
+                    )}
+                </span>
+
+                <strong>
+                    ${escaparHTML(
+                        e.data || ""
+                    )}
+                </strong>
+
+            </div>
+
+            `;
+
+        }).join("")
+        : "Nenhum evento agendado.";
+
+
+    /* GRÁFICO */
+
+    const max =
+        Math.max(
+            receitas,
+            despesas,
+            Math.abs(saldo),
+            1
+        );
+
+
+    $("graficoBarras")
+        .innerHTML = `
+
+        <div
+            class="barra receita"
+            style="
+                height:${Math.max(
+                    10,
+                    receitas/max*90
+                )}px
+            "
+        >
+            <span class="valor">
+                ${dinheiro(receitas)}
+            </span>
+        </div>
+
+        <div
+            class="barra despesa"
+            style="
+                height:${Math.max(
+                    10,
+                    despesas/max*90
+                )}px
+            "
+        >
+            <span class="valor">
+                ${dinheiro(despesas)}
+            </span>
+        </div>
+
+        <div
+            class="barra saldo"
+            style="
+                height:${Math.max(
+                    10,
+                    Math.abs(saldo)/max*90
+                )}px
+            "
+        >
+            <span class="valor">
+                ${dinheiro(saldo)}
+            </span>
+        </div>
+
+        `;
+
+
+    /* META */
+
+    const percentual =
+        meta.valor>0
+        ? (
+            meta.guardado /
+            meta.valor
+        )*100
+        : 0;
+
+
+    $("metaValorExibido")
+        .textContent =
+        dinheiro(meta.valor);
+
+    $("metaGuardadoExibido")
+        .textContent =
+        dinheiro(meta.guardado);
+
+    $("metaBarra")
+        .style.width =
+        Math.min(
+            percentual,
+            100
+        )+"%";
+
+    $("metaProgresso")
+        .textContent =
+        percentual.toFixed(0)+"%";
+
+    $("metaFalta")
+        .textContent =
+        dinheiro(
+            Math.max(
+                0,
+                meta.valor-
+                meta.guardado
+            )
+        );
+}
+
+
+/* =====================================================
+   EVENTOS DE INTERFACE
+===================================================== */
+
+$("loginForm")
+    .addEventListener(
+        "submit",
+        fazerLogin
+    );
+
+
+$("modal")
+    .addEventListener(
+        "click",
+        function(event){
+
+            if(
+                event.target === this
+            ){
+
                 fecharModal();
+
             }
-        });
-    }
 
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
+        }
+    );
+
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key==="Escape"
+        ){
+
             fecharModal();
+
         }
-    });
 
-    document.addEventListener('click', function (e) {
-        var nav = $('menuNav');
-        var toggle = document.querySelector('.menu-toggle');
-        if (nav && nav.classList.contains('aberto') && !nav.contains(e.target) &&
-            toggle && !toggle.contains(e.target)) {
-            nav.classList.remove('aberto');
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const nav =
+            $("menuNav");
+
+        const toggle =
+            document.querySelector(
+                ".menu-toggle"
+            );
+
+        if(
+            nav &&
+            nav.classList.contains(
+                "aberto"
+            ) &&
+            !nav.contains(event.target) &&
+            toggle &&
+            !toggle.contains(event.target)
+        ){
+
+            nav.classList.remove(
+                "aberto"
+            );
+
         }
-    });
 
-    // Verificar login ao carregar
-    verificarLogin();
+    }
+);
 
-    console.log('🚀 O.J.V. Professional Plus conectado ao Supabase!');
-    console.log('🔐 Senha padrão: admin123');
-    </script>
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+
+carregarTema();
+
+verificarSessao();
+
+</script>
+
 </body>
 </html>
