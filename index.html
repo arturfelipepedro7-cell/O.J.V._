@@ -54,18 +54,25 @@ nav button{
  background:transparent;color:#ddd;border:0;
  padding:13px;text-align:left;border-bottom:1px solid #ffffff0d
 }
-nav button.ativo{background:#ffffff12;color:white;border-left:4px solid #1ea5dc}
+nav button.ativo{
+ background:#ffffff12;color:white;
+ border-left:4px solid #1ea5dc
+}
 
 .container{max-width:760px;margin:auto;padding:15px}
+
 section{
  display:none;background:white;border-radius:12px;
  padding:20px;margin-bottom:15px;
  box-shadow:0 3px 15px #0000000b
 }
 section.ativo{display:block}
+
 h2{color:#0b1a2e;margin-bottom:5px}
+
 .subtitulo{
- color:#777;font-size:13px;border-bottom:2px solid #eee;
+ color:#777;font-size:13px;
+ border-bottom:2px solid #eee;
  padding-bottom:10px;margin-bottom:15px
 }
 
@@ -73,156 +80,314 @@ h2{color:#0b1a2e;margin-bottom:5px}
  display:grid;grid-template-columns:1fr 1fr;
  gap:10px;margin-bottom:15px
 }
+
 .card{
- padding:16px;border-radius:9px;text-align:center;
- background:#f8f9fb;border:1px solid #e6e9ed
+ padding:16px;border-radius:9px;
+ text-align:center;background:#f8f9fb;
+ border:1px solid #e6e9ed
 }
-.card .numero{display:block;font-size:25px;font-weight:bold}
+
+.card .numero{
+ display:block;font-size:25px;font-weight:bold
+}
+
 .card .rotulo{
  display:block;font-size:11px;color:#6c757d;
  margin-top:4px;text-transform:uppercase
 }
+
 .verde .numero{color:#28a745}
 .vermelho .numero{color:#dc3545}
 .azul .numero{color:#0b1a2e}
 .ouro .numero{color:#d39e00}
 
-.form{display:flex;flex-direction:column;gap:10px;margin:14px 0}
-.form label{font-size:13px;font-weight:bold;color:#495057}
+.form{
+ display:flex;flex-direction:column;
+ gap:10px;margin:14px 0
+}
+
+.form label{
+ font-size:13px;font-weight:bold;color:#495057
+}
+
 input,select,textarea{
- width:100%;padding:13px;border:1px solid #ced4da;
- border-radius:7px;background:white;color:#182536;outline:none
+ width:100%;padding:13px;
+ border:1px solid #ced4da;
+ border-radius:7px;background:white;
+ color:#182536;outline:none
 }
+
 input:focus,select:focus,textarea:focus{
- border-color:#1ea5dc;box-shadow:0 0 0 3px #1ea5dc22
+ border-color:#1ea5dc;
+ box-shadow:0 0 0 3px #1ea5dc22
 }
+
 .btn{
- width:100%;padding:14px;border:0;border-radius:7px;
- background:#1ea5dc;color:white;font-weight:bold;
+ width:100%;padding:14px;border:0;
+ border-radius:7px;background:#1ea5dc;
+ color:white;font-weight:bold;
  margin:3px 0;min-height:48px
 }
+
 .btn-success{background:#28a745}
 .btn-danger{background:#dc3545}
 .btn-dark{background:#0b1a2e}
 .btn-gold{background:#d39e00;color:#17202c}
-.btn-outline{background:white;color:#0b1a2e;border:2px solid #0b1a2e}
+.btn-outline{
+ background:white;color:#0b1a2e;
+ border:2px solid #0b1a2e
+}
 
-.toolbar{display:flex;gap:8px;margin-bottom:12px}
+.toolbar{
+ display:flex;gap:8px;margin-bottom:12px
+}
+
 .toolbar>*{flex:1}
 
 .table-wrap{
- overflow-x:auto;border:1px solid #dee2e6;border-radius:8px
+ overflow-x:auto;
+ border:1px solid #dee2e6;
+ border-radius:8px
 }
-table{width:100%;border-collapse:collapse;min-width:500px;font-size:13px}
+
+table{
+ width:100%;
+ border-collapse:collapse;
+ min-width:600px;
+ font-size:13px
+}
+
 th{
- background:#f7f8fa;padding:11px 8px;text-align:left;
+ background:#f7f8fa;
+ padding:11px 8px;
+ text-align:left;
  border-bottom:2px solid #dee2e6
 }
-td{padding:10px 8px;border-bottom:1px solid #eee}
-.badge{
- display:inline-block;padding:4px 9px;border-radius:30px;
- font-size:10px;font-weight:bold
+
+td{
+ padding:10px 8px;
+ border-bottom:1px solid #eee
 }
+
+.badge{
+ display:inline-block;
+ padding:4px 9px;
+ border-radius:30px;
+ font-size:10px;
+ font-weight:bold
+}
+
 .badge-ok{background:#d4edda;color:#155724}
 .badge-no{background:#f8d7da;color:#721c24}
 .badge-info{background:#d1ecf1;color:#0c5460}
 
-.actions{display:flex;gap:5px}
+.actions{
+ display:flex;
+ gap:5px
+}
+
 .actions button{
- width:auto;min-height:32px;padding:5px 9px;
- font-size:12px;margin:0
+ width:auto;
+ min-height:32px;
+ padding:5px 9px;
+ font-size:12px;
+ margin:0
 }
 
 .box{
- background:#f8f9fc;border:1px solid #e5e8eb;
- border-radius:9px;padding:15px;margin:12px 0
+ background:#f8f9fc;
+ border:1px solid #e5e8eb;
+ border-radius:9px;
+ padding:15px;
+ margin:12px 0
 }
 
 .login{
- min-height:100vh;display:flex;align-items:center;
- justify-content:center;padding:20px;
+ min-height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
  background:linear-gradient(135deg,#0b1a2e,#123b60)
 }
+
 .login-box{
- width:100%;max-width:420px;background:white;
- border-radius:15px;padding:25px;
+ width:100%;
+ max-width:420px;
+ background:white;
+ border-radius:15px;
+ padding:25px;
  box-shadow:0 15px 50px #0005
 }
-.login-logo{text-align:center;margin-bottom:20px}
+
+.login-logo{
+ text-align:center;
+ margin-bottom:20px
+}
+
 .login-logo img{
- width:80px;height:80px;border-radius:50%;object-fit:cover
+ width:80px;
+ height:80px;
+ border-radius:50%;
+ object-fit:cover
 }
-.login-logo h1{color:#0b1a2e;margin-top:10px}
-.login-logo p{color:#777;font-size:13px;margin-top:4px}
+
+.login-logo h1{
+ color:#0b1a2e;
+ margin-top:10px
+}
+
+.login-logo p{
+ color:#777;
+ font-size:13px;
+ margin-top:4px
+}
+
 .login-error{
- background:#f8d7da;color:#721c24;padding:10px;
- border-radius:6px;font-size:13px;margin-bottom:10px
+ background:#f8d7da;
+ color:#721c24;
+ padding:10px;
+ border-radius:6px;
+ font-size:13px;
+ margin-bottom:10px
 }
+
 .userbar{
- background:#f8f9fc;border:1px solid #e5e8eb;
- padding:10px;border-radius:7px;margin-bottom:15px;
- display:flex;justify-content:space-between;gap:8px;
- align-items:center;font-size:12px
+ background:#f8f9fc;
+ border:1px solid #e5e8eb;
+ padding:10px;
+ border-radius:7px;
+ margin-bottom:15px;
+ display:flex;
+ justify-content:space-between;
+ gap:8px;
+ align-items:center;
+ font-size:12px
 }
+
 .userbar button{
- border:0;background:#dc3545;color:white;
- border-radius:5px;padding:6px 10px;font-size:11px
+ border:0;
+ background:#dc3545;
+ color:white;
+ border-radius:5px;
+ padding:6px 10px;
+ font-size:11px
 }
 
 .modal{
- position:fixed;inset:0;background:#0008;z-index:3000;
- display:none;align-items:center;justify-content:center;padding:15px
+ position:fixed;
+ inset:0;
+ background:#0008;
+ z-index:3000;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ padding:15px
 }
+
 .modal.open{display:flex}
+
 .modal-box{
- background:white;width:100%;max-width:500px;
- max-height:90vh;overflow:auto;border-radius:12px;padding:20px
+ background:white;
+ width:100%;
+ max-width:500px;
+ max-height:90vh;
+ overflow:auto;
+ border-radius:12px;
+ padding:20px
 }
+
 .modal-head{
- display:flex;justify-content:space-between;
- align-items:center;margin-bottom:10px
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:10px
 }
+
 .close{
- border:0;background:#eee;border-radius:50%;
- width:32px;height:32px
+ border:0;
+ background:#eee;
+ border-radius:50%;
+ width:32px;
+ height:32px
 }
 
 .toast{
- position:fixed;left:15px;right:15px;bottom:20px;
- max-width:450px;margin:auto;background:#0b1a2e;color:white;
- padding:14px;border-radius:8px;z-index:5000;
+ position:fixed;
+ left:15px;
+ right:15px;
+ bottom:20px;
+ max-width:450px;
+ margin:auto;
+ background:#0b1a2e;
+ color:white;
+ padding:14px;
+ border-radius:8px;
+ z-index:5000;
  box-shadow:0 5px 20px #0004
 }
+
 .toast.ok{border-left:4px solid #28a745}
 .toast.err{border-left:4px solid #dc3545}
 
 .progress{
- height:13px;background:#e9ecef;border-radius:20px;
- overflow:hidden;margin:10px 0
+ height:13px;
+ background:#e9ecef;
+ border-radius:20px;
+ overflow:hidden;
+ margin:10px 0
 }
+
 .progress div{
- height:100%;background:#1ea5dc;border-radius:20px
+ height:100%;
+ background:#1ea5dc;
+ border-radius:20px
 }
 
 .signature-grid{
- display:grid;grid-template-columns:1fr 1fr;
- gap:35px 25px;margin-top:35px
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:35px 25px;
+ margin-top:35px
 }
+
 .signature{
- text-align:center;padding-top:25px;
- border-top:1px solid #333;font-size:11px
+ text-align:center;
+ padding-top:25px;
+ border-top:1px solid #333;
+ font-size:11px
 }
 
-footer{text-align:center;color:#999;font-size:11px;padding:20px}
+footer{
+ text-align:center;
+ color:#999;
+ font-size:11px;
+ padding:20px
+}
 
-body.dark{background:#121212;color:#eee}
-body.dark section,body.dark .card,body.dark .box,
-body.dark .modal-box,body.dark .login-box{
- background:#1f1f1f;color:#eee;border-color:#333
+body.dark{
+ background:#121212;
+ color:#eee
 }
-body.dark input,body.dark select,body.dark textarea{
- background:#292929;color:#eee;border-color:#444
+
+body.dark section,
+body.dark .card,
+body.dark .box,
+body.dark .modal-box,
+body.dark .login-box{
+ background:#1f1f1f;
+ color:#eee;
+ border-color:#333
 }
+
+body.dark input,
+body.dark select,
+body.dark textarea{
+ background:#292929;
+ color:#eee;
+ border-color:#444
+}
+
 body.dark h2{color:white}
 
 @media(max-width:420px){
@@ -235,14 +400,24 @@ body.dark h2{color:white}
 
 <body>
 
-<!-- LOGIN -->
+<!-- ==========================================================
+     LOGIN
+========================================================== -->
+
 <div id="loginScreen" class="login">
+
  <div class="login-box">
 
   <div class="login-logo">
-   <img src="logo.png" onerror="this.style.display='none'" alt="O.J.V.">
+
+   <img src="logo.png"
+        onerror="this.style.display='none'"
+        alt="O.J.V.">
+
    <h1>O.J.V.</h1>
+
    <p>Jovens Visionários · Professional Plus</p>
+
   </div>
 
   <div id="loginError" class="login-error hidden"></div>
@@ -250,12 +425,24 @@ body.dark h2{color:white}
   <div class="form">
 
    <label>E-mail</label>
-   <input id="loginEmail" type="email" placeholder="seu@email.com">
+
+   <input
+    id="loginEmail"
+    type="email"
+    placeholder="seu@email.com"
+   >
 
    <label>Palavra-passe</label>
-   <input id="loginPassword" type="password" placeholder="••••••••">
 
-   <button class="btn btn-dark" onclick="login()">🔐 Entrar</button>
+   <input
+    id="loginPassword"
+    type="password"
+    placeholder="••••••••"
+   >
+
+   <button class="btn btn-dark" onclick="login()">
+    🔐 Entrar
+   </button>
 
    <button class="btn btn-outline" onclick="registrar()">
     Criar conta
@@ -266,10 +453,16 @@ body.dark h2{color:white}
    </button>
 
   </div>
+
  </div>
+
 </div>
 
-<!-- APP -->
+
+<!-- ==========================================================
+     APP
+========================================================== -->
+
 <div id="app" class="hidden">
 
 <header>
@@ -284,12 +477,21 @@ body.dark h2{color:white}
     onerror="this.style.display='none';document.getElementById('fallbackLogo').style.display='flex'"
    >
 
-   <div id="fallbackLogo" class="logo-fallback" style="display:none">
+   <div
+    id="fallbackLogo"
+    class="logo-fallback"
+    style="display:none"
+   >
     OJV
    </div>
 
    <div>
-    <h1>O.J.V. <small>Professional Plus</small></h1>
+
+    <h1>
+     O.J.V.
+     <small>Professional Plus</small>
+    </h1>
+
    </div>
 
   </div>
@@ -305,6 +507,7 @@ body.dark h2{color:white}
   </div>
 
  </div>
+
 
  <nav id="nav">
 
@@ -341,6 +544,7 @@ body.dark h2{color:white}
 
 </header>
 
+
 <div class="container">
 
 <div class="userbar">
@@ -349,11 +553,17 @@ body.dark h2{color:white}
   👤 <strong id="usuarioEmail"></strong>
  </span>
 
- <button onclick="logout()">Sair</button>
+ <button onclick="logout()">
+  Sair
+ </button>
 
 </div>
 
-<!-- PAINEL -->
+
+<!-- ==========================================================
+     PAINEL
+========================================================== -->
+
 <section id="inicio" class="ativo">
 
  <h2>Painel</h2>
@@ -365,26 +575,55 @@ body.dark h2{color:white}
  <div class="cards">
 
   <div class="card">
-   <span id="dashMembros" class="numero">0</span>
-   <span class="rotulo">Membros</span>
+
+   <span id="dashMembros" class="numero">
+    0
+   </span>
+
+   <span class="rotulo">
+    Membros
+   </span>
+
   </div>
 
   <div class="card verde">
-   <span id="dashReceitas" class="numero">0</span>
-   <span class="rotulo">Receitas</span>
+
+   <span id="dashReceitas" class="numero">
+    0
+   </span>
+
+   <span class="rotulo">
+    Receitas
+   </span>
+
   </div>
 
   <div class="card vermelho">
-   <span id="dashDespesas" class="numero">0</span>
-   <span class="rotulo">Despesas</span>
+
+   <span id="dashDespesas" class="numero">
+    0
+   </span>
+
+   <span class="rotulo">
+    Despesas
+   </span>
+
   </div>
 
   <div class="card azul">
-   <span id="dashSaldo" class="numero">0</span>
-   <span class="rotulo">Saldo</span>
+
+   <span id="dashSaldo" class="numero">
+    0
+   </span>
+
+   <span class="rotulo">
+    Saldo
+   </span>
+
   </div>
 
  </div>
+
 
  <div class="box">
 
@@ -394,6 +633,7 @@ body.dark h2{color:white}
 
  </div>
 
+
  <div class="box">
 
   <h3>📅 Próximos eventos</h3>
@@ -402,13 +642,18 @@ body.dark h2{color:white}
 
  </div>
 
+
  <button class="btn btn-dark" onclick="gerarPDF()">
   📄 Gerar resumo completo em PDF
  </button>
 
 </section>
 
-<!-- MEMBROS -->
+
+<!-- ==========================================================
+     MEMBROS
+========================================================== -->
+
 <section id="membros">
 
  <h2>Membros</h2>
@@ -416,6 +661,7 @@ body.dark h2{color:white}
  <p class="subtitulo">
   Cadastro e gestão dos membros
  </p>
+
 
  <div class="toolbar">
 
@@ -429,11 +675,13 @@ body.dark h2{color:white}
 
  </div>
 
+
  <input
   id="buscaMembro"
-  placeholder="🔍 Nome, telefone ou e-mail"
+  placeholder="🔍 Nome, BI, telefone ou e-mail"
   oninput="renderMembros()"
  >
+
 
  <div class="table-wrap" style="margin-top:12px">
 
@@ -442,11 +690,14 @@ body.dark h2{color:white}
    <thead>
 
     <tr>
+
      <th>Nome</th>
+     <th>BI</th>
      <th>E-mail</th>
      <th>Telefone</th>
      <th>Status</th>
      <th>Ações</th>
+
     </tr>
 
    </thead>
@@ -456,6 +707,7 @@ body.dark h2{color:white}
   </table>
 
  </div>
+
 
  <p style="margin-top:10px;font-size:13px">
 
@@ -471,7 +723,11 @@ body.dark h2{color:white}
 
 </section>
 
-<!-- FINANCEIRO -->
+
+<!-- ==========================================================
+     FINANCEIRO
+========================================================== -->
+
 <section id="financeiro">
 
  <h2>Finanças</h2>
@@ -480,24 +736,41 @@ body.dark h2{color:white}
   Registre receitas e despesas
  </p>
 
+
  <div class="cards">
 
   <div class="card verde">
+
    <span id="finR" class="numero">0</span>
-   <span class="rotulo">Receitas</span>
+
+   <span class="rotulo">
+    Receitas
+   </span>
+
   </div>
 
   <div class="card vermelho">
+
    <span id="finD" class="numero">0</span>
-   <span class="rotulo">Despesas</span>
+
+   <span class="rotulo">
+    Despesas
+   </span>
+
   </div>
 
   <div class="card azul">
+
    <span id="finS" class="numero">0</span>
-   <span class="rotulo">Saldo</span>
+
+   <span class="rotulo">
+    Saldo
+   </span>
+
   </div>
 
  </div>
+
 
  <div class="form">
 
@@ -515,6 +788,7 @@ body.dark h2{color:white}
 
   </select>
 
+
   <label>Categoria</label>
 
   <select id="categoria">
@@ -528,6 +802,7 @@ body.dark h2{color:white}
 
   </select>
 
+
   <label>Valor (Kz)</label>
 
   <input
@@ -537,12 +812,14 @@ body.dark h2{color:white}
    placeholder="0"
   >
 
+
   <label>Descrição</label>
 
   <input
    id="descricao"
    placeholder="Descrição da transação"
   >
+
 
   <button
    class="btn btn-success"
@@ -555,7 +832,11 @@ body.dark h2{color:white}
 
 </section>
 
-<!-- TRANSAÇÕES -->
+
+<!-- ==========================================================
+     TRANSAÇÕES
+========================================================== -->
+
 <section id="transacoes">
 
  <h2>Transações</h2>
@@ -563,6 +844,7 @@ body.dark h2{color:white}
  <p class="subtitulo">
   Histórico financeiro
  </p>
+
 
  <div class="toolbar">
 
@@ -572,15 +854,27 @@ body.dark h2{color:white}
    oninput="renderTransacoes()"
   >
 
-  <select id="filtro" onchange="renderTransacoes()">
+  <select
+   id="filtro"
+   onchange="renderTransacoes()"
+  >
 
-   <option value="">Todas</option>
-   <option value="receita">Receitas</option>
-   <option value="despesa">Despesas</option>
+   <option value="">
+    Todas
+   </option>
+
+   <option value="receita">
+    Receitas
+   </option>
+
+   <option value="despesa">
+    Despesas
+   </option>
 
   </select>
 
  </div>
+
 
  <div class="table-wrap">
 
@@ -589,11 +883,13 @@ body.dark h2{color:white}
    <thead>
 
     <tr>
+
      <th>Data</th>
      <th>Descrição</th>
      <th>Tipo</th>
      <th>Valor</th>
      <th>Ação</th>
+
     </tr>
 
    </thead>
@@ -606,7 +902,11 @@ body.dark h2{color:white}
 
 </section>
 
-<!-- EVENTOS -->
+
+<!-- ==========================================================
+     EVENTOS
+========================================================== -->
+
 <section id="eventos">
 
  <h2>Eventos</h2>
@@ -614,6 +914,7 @@ body.dark h2{color:white}
  <p class="subtitulo">
   Organização dos eventos
  </p>
+
 
  <div class="form">
 
@@ -641,6 +942,7 @@ body.dark h2{color:white}
 
  </div>
 
+
  <div class="table-wrap">
 
   <table>
@@ -648,10 +950,12 @@ body.dark h2{color:white}
    <thead>
 
     <tr>
+
      <th>Evento</th>
      <th>Data</th>
      <th>Local</th>
      <th>Ação</th>
+
     </tr>
 
    </thead>
@@ -664,7 +968,11 @@ body.dark h2{color:white}
 
 </section>
 
-<!-- META -->
+
+<!-- ==========================================================
+     META
+========================================================== -->
+
 <section id="meta">
 
  <h2>Meta de Poupança</h2>
@@ -672,6 +980,7 @@ body.dark h2{color:white}
  <p class="subtitulo">
   Defina e acompanhe o objetivo
  </p>
+
 
  <div class="box">
 
@@ -685,6 +994,7 @@ body.dark h2{color:white}
 
   </div>
 
+
   <div class="progress">
 
    <div
@@ -693,6 +1003,7 @@ body.dark h2{color:white}
    ></div>
 
   </div>
+
 
   <div style="display:flex;justify-content:space-between;font-size:13px">
 
@@ -711,6 +1022,7 @@ body.dark h2{color:white}
 
  </div>
 
+
  <div class="form">
 
   <input
@@ -725,6 +1037,7 @@ body.dark h2{color:white}
   >
    🎯 Definir meta
   </button>
+
 
   <input
    id="guardarMeta"
@@ -745,13 +1058,18 @@ body.dark h2{color:white}
 
 </div>
 
+
 <footer>
  © 2026 O.J.V. Professional Plus
 </footer>
 
 </div>
 
-<!-- MODAL MEMBRO -->
+
+<!-- ==========================================================
+     MODAL MEMBRO
+========================================================== -->
+
 <div id="modalMembro" class="modal">
 
  <div class="modal-box">
@@ -762,22 +1080,44 @@ body.dark h2{color:white}
     Novo Membro
    </h3>
 
-   <button class="close" onclick="fecharModal()">
+   <button
+    class="close"
+    onclick="fecharModal()"
+   >
     ×
    </button>
 
   </div>
 
+
   <div class="form">
 
-   <label>Nome completo</label>
+   <label>
+    Nome completo
+   </label>
 
    <input
     id="mNome"
     placeholder="Nome do membro"
    >
 
-   <label>E-mail do membro</label>
+
+   <!-- NOVO CAMPO BI -->
+
+   <label>
+    Número do BI
+   </label>
+
+   <input
+    id="mBI"
+    placeholder="Número do Bilhete de Identidade"
+    autocomplete="off"
+   >
+
+
+   <label>
+    E-mail do membro
+   </label>
 
    <input
     id="mEmail"
@@ -785,14 +1125,20 @@ body.dark h2{color:white}
     placeholder="membro@email.com"
    >
 
-   <label>Telefone</label>
+
+   <label>
+    Telefone
+   </label>
 
    <input
     id="mTelefone"
     placeholder="+244 ..."
    >
 
-   <label>Data de nascimento</label>
+
+   <label>
+    Data de nascimento
+   </label>
 
    <input
     id="mNascimento"
@@ -800,7 +1146,10 @@ body.dark h2{color:white}
     maxlength="10"
    >
 
-   <label>Status</label>
+
+   <label>
+    Status
+   </label>
 
    <select id="mStatus">
 
@@ -813,6 +1162,7 @@ body.dark h2{color:white}
     </option>
 
    </select>
+
 
    <button
     class="btn btn-success"
@@ -827,13 +1177,15 @@ body.dark h2{color:white}
 
 </div>
 
+
 <div id="toast" class="toast hidden"></div>
+
 
 <script>
 
 /* ==========================================================
    CONFIGURAÇÃO SUPABASE
-   ========================================================== */
+========================================================== */
 
 const SUPABASE_URL=
 "https://zytbddkoddcmreyvjmkz.supabase.co";
@@ -850,7 +1202,7 @@ supabase.createClient(
 
 /* ==========================================================
    ESTADO
-   ========================================================== */
+========================================================== */
 
 let membros=[];
 let transacoes=[];
@@ -859,16 +1211,18 @@ let meta={
  valor:0,
  guardado:0
 };
+
 let editId=null;
 
 
 /* ==========================================================
    AUXILIARES
-   ========================================================== */
+========================================================== */
 
 function $(id){
  return document.getElementById(id);
 }
+
 
 function toast(msg,erro=false){
 
@@ -877,16 +1231,15 @@ function toast(msg,erro=false){
  t.textContent=msg;
 
  t.className=
-  "toast "+
-  (erro?"err":"ok");
+  "toast "+(erro?"err":"ok");
 
  t.classList.remove("hidden");
 
- setTimeout(
-  ()=>t.classList.add("hidden"),
-  3500
- );
+ setTimeout(()=>{
+  t.classList.add("hidden");
+ },3500);
 }
+
 
 function kz(v){
 
@@ -896,9 +1249,9 @@ function kz(v){
    {
     minimumFractionDigits:0
    }
-  )+
-  " Kz";
+  )+" Kz";
 }
+
 
 function esc(v){
 
@@ -913,7 +1266,7 @@ function esc(v){
 
 /* ==========================================================
    LOGIN
-   ========================================================== */
+========================================================== */
 
 async function verificarSessao(){
 
@@ -921,22 +1274,28 @@ async function verificarSessao(){
 
  if(data.session){
 
-  $("loginScreen").classList.add("hidden");
+  $("loginScreen")
+   .classList.add("hidden");
 
-  $("app").classList.remove("hidden");
+  $("app")
+   .classList.remove("hidden");
 
-  $("usuarioEmail").textContent=
-   data.session.user.email||
-   "Utilizador";
+  $("usuarioEmail")
+   .textContent=
+   data.session.user.email||"Utilizador";
 
   await carregarTudo();
 
  }else{
 
-  $("loginScreen").classList.remove("hidden");
+  $("loginScreen")
+   .classList.remove("hidden");
 
-  $("app").classList.add("hidden");
+  $("app")
+   .classList.add("hidden");
+
  }
+
 }
 
 
@@ -957,28 +1316,31 @@ async function login(){
   return;
  }
 
+
  const {error}=
   await db.auth.signInWithPassword({
    email,
    password
   });
 
+
  if(error){
 
-  mostrarLoginErro(
-   error.message
-  );
+  mostrarLoginErro(error.message);
 
   return;
  }
 
- $("loginError").classList.add("hidden");
+
+ $("loginError")
+  .classList.add("hidden");
 
  await verificarSessao();
 
  toast(
   "Login efetuado com sucesso."
  );
+
 }
 
 
@@ -999,11 +1361,13 @@ async function registrar(){
   return;
  }
 
+
  const {error}=
   await db.auth.signUp({
    email,
    password
   });
+
 
  if(error){
 
@@ -1014,9 +1378,11 @@ async function registrar(){
   return;
  }
 
+
  mostrarLoginErro(
   "Conta criada. Se a confirmação de e-mail estiver ativa, confirme o e-mail antes de entrar."
  );
+
 }
 
 
@@ -1034,6 +1400,7 @@ async function recuperarSenha(){
   return;
  }
 
+
  const {error}=
   await db.auth.resetPasswordForEmail(
    email,
@@ -1043,6 +1410,7 @@ async function recuperarSenha(){
      location.pathname
    }
   );
+
 
  if(error){
 
@@ -1055,7 +1423,9 @@ async function recuperarSenha(){
   mostrarLoginErro(
    "Foi enviado um e-mail para redefinir a palavra-passe."
   );
+
  }
+
 }
 
 
@@ -1064,8 +1434,7 @@ function mostrarLoginErro(msg){
  $("loginError").textContent=msg;
 
  $("loginError")
-  .classList
-  .remove("hidden");
+  .classList.remove("hidden");
 }
 
 
@@ -1074,12 +1443,13 @@ async function logout(){
  await db.auth.signOut();
 
  location.reload();
+
 }
 
 
 /* ==========================================================
    CARREGAR TUDO
-   ========================================================== */
+========================================================== */
 
 async function carregarTudo(){
 
@@ -1092,12 +1462,13 @@ async function carregarTudo(){
  await carregarMeta();
 
  atualizarDashboard();
+
 }
 
 
 /* ==========================================================
    MEMBROS
-   ========================================================== */
+========================================================== */
 
 async function carregarMembros(){
 
@@ -1107,8 +1478,11 @@ async function carregarMembros(){
    .select("*")
    .order(
     "created_at",
-    {ascending:false}
+    {
+     ascending:false
+    }
    );
+
 
  if(error){
 
@@ -1122,12 +1496,16 @@ async function carregarMembros(){
 
   membros=[];
 
+  renderMembros();
+
   return;
  }
+
 
  membros=data||[];
 
  renderMembros();
+
 }
 
 
@@ -1135,37 +1513,44 @@ function novoMembro(){
 
  editId=null;
 
- $("tituloMembro").textContent=
-  "Novo Membro";
+ $("tituloMembro")
+  .textContent="Novo Membro";
 
  $("mNome").value="";
+
+ $("mBI").value="";
+
  $("mEmail").value="";
+
  $("mTelefone").value="";
+
  $("mNascimento").value="";
+
  $("mStatus").value="Ativo";
 
  $("modalMembro")
-  .classList
-  .add("open");
+  .classList.add("open");
+
 }
 
 
 function editarMembro(id){
 
  const m=
-  membros.find(
-   x=>x.id===id
-  );
+  membros.find(x=>x.id===id);
 
  if(!m)return;
 
  editId=id;
 
- $("tituloMembro").textContent=
-  "Editar Membro";
+ $("tituloMembro")
+  .textContent="Editar Membro";
 
  $("mNome").value=
   m.nome||"";
+
+ $("mBI").value=
+  m.bi||"";
 
  $("mEmail").value=
   m.email||"";
@@ -1180,16 +1565,16 @@ function editarMembro(id){
   m.status||"Ativo";
 
  $("modalMembro")
-  .classList
-  .add("open");
+  .classList.add("open");
+
 }
 
 
 function fecharModal(){
 
  $("modalMembro")
-  .classList
-  .remove("open");
+  .classList.remove("open");
+
 }
 
 
@@ -1197,6 +1582,9 @@ async function salvarMembro(){
 
  const nome=
   $("mNome").value.trim();
+
+ const bi=
+  $("mBI").value.trim();
 
  const email=
   $("mEmail").value.trim();
@@ -1210,6 +1598,7 @@ async function salvarMembro(){
  const status=
   $("mStatus").value;
 
+
  if(!nome){
 
   toast(
@@ -1220,15 +1609,26 @@ async function salvarMembro(){
   return;
  }
 
+
  const dados={
+
   nome,
+
+  bi,
+
   email,
+
   telefone,
+
   aniversario,
+
   status
+
  };
 
+
  let result;
+
 
  if(editId){
 
@@ -1244,7 +1644,9 @@ async function salvarMembro(){
    await db
     .from("membros")
     .insert(dados);
+
  }
+
 
  if(result.error){
 
@@ -1259,6 +1661,7 @@ async function salvarMembro(){
   return;
  }
 
+
  fecharModal();
 
  await carregarMembros();
@@ -1266,33 +1669,32 @@ async function salvarMembro(){
  atualizarDashboard();
 
  toast(
-  editId?
-  "Membro atualizado.":
-  "Membro cadastrado."
+  editId
+   ?"Membro atualizado."
+   :"Membro cadastrado."
  );
+
 }
 
 
 async function excluirMembro(id){
 
  const m=
-  membros.find(
-   x=>x.id===id
-  );
+  membros.find(x=>x.id===id);
 
  if(!m)return;
 
  if(!confirm(
-  "Eliminar o membro "+
-  m.nome+
-  "?"
+  "Eliminar o membro "+m.nome+"?"
  ))return;
+
 
  const {error}=
   await db
    .from("membros")
    .delete()
    .eq("id",id);
+
 
  if(error){
 
@@ -1305,6 +1707,7 @@ async function excluirMembro(id){
   return;
  }
 
+
  await carregarMembros();
 
  atualizarDashboard();
@@ -1312,6 +1715,7 @@ async function excluirMembro(id){
  toast(
   "Membro eliminado."
  );
+
 }
 
 
@@ -1319,20 +1723,36 @@ function renderMembros(){
 
  const termo=
   ($("buscaMembro").value||"")
-  .toLowerCase();
+   .toLowerCase();
+
 
  const lista=
   membros.filter(m=>
+
    String(m.nome||"")
     .toLowerCase()
-    .includes(termo)||
+    .includes(termo)
+
+   ||
+
+   String(m.bi||"")
+    .toLowerCase()
+    .includes(termo)
+
+   ||
+
    String(m.email||"")
     .toLowerCase()
-    .includes(termo)||
+    .includes(termo)
+
+   ||
+
    String(m.telefone||"")
     .toLowerCase()
     .includes(termo)
+
   );
+
 
  $("listaMembros").innerHTML=
   lista.map(m=>`
@@ -1343,6 +1763,10 @@ function renderMembros(){
      <strong>
       ${esc(m.nome)}
      </strong>
+    </td>
+
+    <td>
+     ${esc(m.bi||"")}
     </td>
 
     <td>
@@ -1395,31 +1819,32 @@ function renderMembros(){
 
   `
    <tr>
-    <td
-     colspan="5"
-     style="text-align:center"
-    >
+    <td colspan="6"
+        style="text-align:center">
      Nenhum membro encontrado.
     </td>
    </tr>
   `;
 
- $("totalMembros").textContent=
-  membros.length;
 
- $("ativos").textContent=
+ $("totalMembros")
+  .textContent=membros.length;
+
+ $("ativos")
+  .textContent=
   membros.filter(
    m=>m.status==="Ativo"
   ).length;
 
- $("navMembros").textContent=
-  membros.length;
+ $("navMembros")
+  .textContent=membros.length;
+
 }
 
 
 /* ==========================================================
-   TRANSAÇÕES
-   ========================================================== */
+   FINANÇAS / TRANSAÇÕES
+========================================================== */
 
 async function carregarTransacoes(){
 
@@ -1429,8 +1854,11 @@ async function carregarTransacoes(){
    .select("*")
    .order(
     "created_at",
-    {ascending:false}
+    {
+     ascending:false
+    }
    );
+
 
  if(error){
 
@@ -1444,12 +1872,16 @@ async function carregarTransacoes(){
 
   transacoes=[];
 
+  renderTransacoes();
+
   return;
  }
+
 
  transacoes=data||[];
 
  renderTransacoes();
+
 }
 
 
@@ -1467,6 +1899,7 @@ async function adicionarFinanceiro(){
  const descricao=
   $("descricao").value.trim();
 
+
  if(!valor||valor<=0){
 
   toast(
@@ -1477,6 +1910,7 @@ async function adicionarFinanceiro(){
   return;
  }
 
+
  if(!descricao){
 
   toast(
@@ -1486,6 +1920,7 @@ async function adicionarFinanceiro(){
 
   return;
  }
+
 
  const dados={
 
@@ -1502,12 +1937,15 @@ async function adicionarFinanceiro(){
 
   data:
    new Date().toISOString()
+
  };
+
 
  const {error}=
   await db
    .from("transacoes")
    .insert(dados);
+
 
  if(error){
 
@@ -1522,6 +1960,7 @@ async function adicionarFinanceiro(){
   return;
  }
 
+
  $("valor").value="";
 
  $("descricao").value="";
@@ -1533,6 +1972,7 @@ async function adicionarFinanceiro(){
  toast(
   "Transação registrada."
  );
+
 }
 
 
@@ -1542,11 +1982,13 @@ async function excluirTransacao(id){
   "Eliminar esta transação?"
  ))return;
 
+
  const {error}=
   await db
    .from("transacoes")
    .delete()
    .eq("id",id);
+
 
  if(error){
 
@@ -1559,6 +2001,7 @@ async function excluirTransacao(id){
   return;
  }
 
+
  await carregarTransacoes();
 
  atualizarDashboard();
@@ -1566,6 +2009,7 @@ async function excluirTransacao(id){
  toast(
   "Transação eliminada."
  );
+
 }
 
 
@@ -1573,10 +2017,11 @@ function renderTransacoes(){
 
  const termo=
   ($("buscaTransacao").value||"")
-  .toLowerCase();
+   .toLowerCase();
 
  const filtro=
   $("filtro").value;
+
 
  const lista=
   transacoes.filter(t=>{
@@ -1588,12 +2033,12 @@ function renderTransacoes(){
      String(t.categoria||"")
     ).toLowerCase();
 
-   return(
-    texto.includes(termo)&&
-    (!filtro||t.tipo===filtro)
-   );
+   return texto.includes(termo)
+    &&
+    (!filtro||t.tipo===filtro);
 
   });
+
 
  $("listaTransacoes").innerHTML=
   lista.map(t=>`
@@ -1619,14 +2064,11 @@ function renderTransacoes(){
     </td>
 
     <td
-     style="
-      font-weight:bold;
-      color:${
-       Number(t.valor)>=0
-        ?"#28a745"
-        :"#dc3545"
-      }
-     "
+     style="font-weight:bold;color:${
+      Number(t.valor)>=0
+       ?" #28a745"
+       :"#dc3545"
+     }"
     >
 
      ${
@@ -1654,20 +2096,19 @@ function renderTransacoes(){
 
   `
    <tr>
-    <td
-     colspan="5"
-     style="text-align:center"
-    >
+    <td colspan="5"
+        style="text-align:center">
      Nenhuma transação.
     </td>
    </tr>
   `;
+
 }
 
 
 /* ==========================================================
    EVENTOS
-   ========================================================== */
+========================================================== */
 
 async function carregarEventos(){
 
@@ -1677,8 +2118,11 @@ async function carregarEventos(){
    .select("*")
    .order(
     "data",
-    {ascending:true}
+    {
+     ascending:true
+    }
    );
+
 
  if(error){
 
@@ -1692,12 +2136,16 @@ async function carregarEventos(){
 
   eventos=[];
 
+  renderEventos();
+
   return;
  }
+
 
  eventos=data||[];
 
  renderEventos();
+
 }
 
 
@@ -1712,6 +2160,7 @@ async function adicionarEvento(){
  const local=
   $("eventoLocal").value.trim();
 
+
  if(!nome||!data){
 
   toast(
@@ -1721,6 +2170,7 @@ async function adicionarEvento(){
 
   return;
  }
+
 
  const {error}=
   await db
@@ -1734,9 +2184,11 @@ async function adicionarEvento(){
     local:
      local||"Não definido",
 
-    status:"Agendado"
+    status:
+     "Agendado"
 
    });
+
 
  if(error){
 
@@ -1749,17 +2201,22 @@ async function adicionarEvento(){
   return;
  }
 
+
  $("eventoNome").value="";
 
  $("eventoData").value="";
 
  $("eventoLocal").value="";
 
+
  await carregarEventos();
+
+ atualizarDashboard();
 
  toast(
   "Evento criado."
  );
+
 }
 
 
@@ -1769,11 +2226,13 @@ async function excluirEvento(id){
   "Eliminar este evento?"
  ))return;
 
+
  const {error}=
   await db
    .from("eventos")
    .delete()
    .eq("id",id);
+
 
  if(error){
 
@@ -1786,11 +2245,15 @@ async function excluirEvento(id){
   return;
  }
 
+
  await carregarEventos();
+
+ atualizarDashboard();
 
  toast(
   "Evento eliminado."
  );
+
 }
 
 
@@ -1832,20 +2295,19 @@ function renderEventos(){
 
   `
    <tr>
-    <td
-     colspan="4"
-     style="text-align:center"
-    >
+    <td colspan="4"
+        style="text-align:center">
      Nenhum evento.
     </td>
    </tr>
   `;
+
 }
 
 
 /* ==========================================================
    META
-   ========================================================== */
+========================================================== */
 
 async function carregarMeta(){
 
@@ -1856,6 +2318,7 @@ async function carregarMeta(){
    .limit(1)
    .maybeSingle();
 
+
  if(error){
 
   console.error(error);
@@ -1865,8 +2328,11 @@ async function carregarMeta(){
    guardado:0
   };
 
+  renderMeta();
+
   return;
  }
+
 
  meta=
   data||
@@ -1876,6 +2342,7 @@ async function carregarMeta(){
   };
 
  renderMeta();
+
 }
 
 
@@ -1883,6 +2350,7 @@ async function definirMeta(){
 
  const valor=
   Number($("novaMeta").value);
+
 
  if(!valor||valor<=0){
 
@@ -1894,6 +2362,7 @@ async function definirMeta(){
   return;
  }
 
+
  if(meta.id){
 
   const {error}=
@@ -1903,16 +2372,13 @@ async function definirMeta(){
      valor,
      guardado:0
     })
-    .eq(
-     "id",
-     meta.id
-    );
+    .eq("id",meta.id);
+
 
   if(error){
 
    toast(
-    "Erro: "+
-    error.message,
+    "Erro: "+error.message,
     true
    );
 
@@ -1929,17 +2395,19 @@ async function definirMeta(){
      guardado:0
     });
 
+
   if(error){
 
    toast(
-    "Erro: "+
-    error.message,
+    "Erro: "+error.message,
     true
    );
 
    return;
   }
+
  }
+
 
  $("novaMeta").value="";
 
@@ -1948,6 +2416,7 @@ async function definirMeta(){
  toast(
   "Meta definida."
  );
+
 }
 
 
@@ -1955,6 +2424,7 @@ async function guardarMeta(){
 
  const valor=
   Number($("guardarMeta").value);
+
 
  if(!valor||valor<=0){
 
@@ -1966,6 +2436,7 @@ async function guardarMeta(){
   return;
  }
 
+
  if(!meta.valor){
 
   toast(
@@ -1976,11 +2447,13 @@ async function guardarMeta(){
   return;
  }
 
+
  const novo=
   Math.min(
    Number(meta.guardado||0)+valor,
    Number(meta.valor)
   );
+
 
  const {error}=
   await db
@@ -1988,21 +2461,19 @@ async function guardarMeta(){
    .update({
     guardado:novo
    })
-   .eq(
-    "id",
-    meta.id
-   );
+   .eq("id",meta.id);
+
 
  if(error){
 
   toast(
-   "Erro: "+
-   error.message,
+   "Erro: "+error.message,
    true
   );
 
   return;
  }
+
 
  $("guardarMeta").value="";
 
@@ -2011,6 +2482,7 @@ async function guardarMeta(){
  toast(
   "Valor guardado na meta."
  );
+
 }
 
 
@@ -2025,34 +2497,39 @@ function renderMeta(){
  const pct=
   valor
    ?Math.min(
-    100,
-    guardado/valor*100
-   )
+     100,
+     guardado/valor*100
+    )
    :0;
 
- $("metaValor").textContent=
-  kz(valor);
 
- $("metaGuardado").textContent=
-  kz(guardado);
+ $("metaValor")
+  .textContent=kz(valor);
 
- $("metaPct").textContent=
+ $("metaGuardado")
+  .textContent=kz(guardado);
+
+ $("metaPct")
+  .textContent=
   pct.toFixed(0)+"%";
 
- $("barra").style.width=
+ $("barra")
+  .style.width=
   pct+"%";
+
 }
 
 
 /* ==========================================================
    DASHBOARD
-   ========================================================== */
+========================================================== */
 
 function atualizarDashboard(){
 
  let receitas=0;
 
  let despesas=0;
+
 
  transacoes.forEach(t=>{
 
@@ -2066,32 +2543,44 @@ function atualizarDashboard(){
 
  });
 
+
  const saldo=
   receitas-despesas;
 
- $("dashMembros").textContent=
+
+ $("dashMembros")
+  .textContent=
   membros.length;
 
- $("dashReceitas").textContent=
+ $("dashReceitas")
+  .textContent=
   kz(receitas);
 
- $("dashDespesas").textContent=
+ $("dashDespesas")
+  .textContent=
   kz(despesas);
 
- $("dashSaldo").textContent=
+ $("dashSaldo")
+  .textContent=
   kz(saldo);
 
- $("finR").textContent=
+
+ $("finR")
+  .textContent=
   kz(receitas);
 
- $("finD").textContent=
+ $("finD")
+  .textContent=
   kz(despesas);
 
- $("finS").textContent=
+ $("finS")
+  .textContent=
   kz(saldo);
+
 
  const ult=
   transacoes.slice(0,5);
+
 
  $("ultimas").innerHTML=
   ult.map(t=>`
@@ -2110,13 +2599,11 @@ function atualizarDashboard(){
     </span>
 
     <strong
-     style="
-      color:${
-       Number(t.valor)>=0
-        ?"#28a745"
-        :"#dc3545"
-      }
-     "
+     style="color:${
+      Number(t.valor)>=0
+       ?" #28a745"
+       :"#dc3545"
+     }"
     >
 
      ${
@@ -2132,17 +2619,18 @@ function atualizarDashboard(){
   `).join("")||
   "Nenhuma transação.";
 
+
  const hoje=
   new Date()
    .toISOString()
    .slice(0,10);
 
+
  const prox=
   eventos
-   .filter(
-    e=>e.data>=hoje
-   )
+   .filter(e=>e.data>=hoje)
    .slice(0,5);
+
 
  $("proximos").innerHTML=
   prox.map(e=>`
@@ -2175,18 +2663,19 @@ function atualizarDashboard(){
 
   `).join("")||
   "Nenhum evento próximo.";
+
 }
 
 
 /* ==========================================================
    NAVEGAÇÃO
-   ========================================================== */
+========================================================== */
 
 function menu(){
 
  $("nav")
-  .classList
-  .toggle("aberto");
+  .classList.toggle("aberto");
+
 }
 
 
@@ -2194,53 +2683,61 @@ function abrir(id){
 
  document
   .querySelectorAll("section")
-  .forEach(
-   s=>s.classList.remove("ativo")
+  .forEach(s=>
+   s.classList.remove("ativo")
   );
 
+
  $(id)
-  .classList
-  .add("ativo");
+  .classList.add("ativo");
+
 
  document
   .querySelectorAll("nav button")
-  .forEach(
-   b=>b.classList.remove("ativo")
+  .forEach(b=>
+   b.classList.remove("ativo")
   );
 
+
  const bot=
-  [...document.querySelectorAll("nav button")]
-   .find(
-    b=>
-     b.getAttribute("onclick")
-      ?.includes("'"+id+"'")
-   );
+  [
+   ...document
+    .querySelectorAll("nav button")
+  ]
+  .find(
+   b=>
+    b.getAttribute("onclick")
+     ?.includes("'"+id+"'")
+  );
+
 
  if(bot)
   bot.classList.add("ativo");
 
+
  $("nav")
-  .classList
-  .remove("aberto");
+  .classList.remove("aberto");
+
 }
 
 
 function tema(){
 
  document.body
-  .classList
-  .toggle("dark");
+  .classList.toggle("dark");
 
  localStorage.setItem(
   "ojv_dark",
-  document.body.classList.contains("dark")
+  document.body
+   .classList.contains("dark")
  );
+
 }
 
 
 /* ==========================================================
    CSV
-   ========================================================== */
+========================================================== */
 
 function baixar(
  nome,
@@ -2267,18 +2764,21 @@ function baixar(
  a.click();
 
  URL.revokeObjectURL(url);
+
 }
 
 
 function exportarMembros(){
 
  let csv=
-  "Nome,E-mail,Telefone,Aniversário,Status\n";
+  "Nome,BI,E-mail,Telefone,Aniversário,Status\n";
+
 
  membros.forEach(m=>{
 
   csv+=
    `"${m.nome||""}",`+
+   `"${m.bi||""}",`+
    `"${m.email||""}",`+
    `"${m.telefone||""}",`+
    `"${m.aniversario||""}",`+
@@ -2286,74 +2786,83 @@ function exportarMembros(){
 
  });
 
+
  baixar(
   "membros_ojv.csv",
   csv
  );
+
+}
+
+
+/* ==========================================================
+   LOGO PARA PDF
+========================================================== */
+
+function carregarLogoPDF(){
+
+ return new Promise(resolve=>{
+
+  const img=
+   new Image();
+
+  img.crossOrigin="anonymous";
+
+  img.onload=()=>{
+
+   try{
+
+    const canvas=
+     document.createElement("canvas");
+
+    canvas.width=
+     img.naturalWidth;
+
+    canvas.height=
+     img.naturalHeight;
+
+    const ctx=
+     canvas.getContext("2d");
+
+    ctx.drawImage(
+     img,
+     0,
+     0
+    );
+
+    resolve(
+     canvas.toDataURL(
+      "image/png"
+     )
+    );
+
+   }catch(e){
+
+    resolve(null);
+
+   }
+
+  };
+
+
+  img.onerror=()=>{
+
+   resolve(null);
+
+  };
+
+
+  img.src=
+   "logo.png?"+Date.now();
+
+ });
+
 }
 
 
 /* ==========================================================
    PDF
-   ========================================================== */
-
-async function carregarLogoParaPDF(){
-
- /*
-  O logo.png deve estar na mesma pasta do index.html.
-  O fetch é usado para obter o arquivo diretamente.
- */
-
- try{
-
-  const resposta=
-   await fetch(
-    "logo.png",
-    {
-     cache:"no-store"
-    }
-   );
-
-  if(!resposta.ok){
-
-   throw new Error(
-    "Logo não encontrado: "+
-    resposta.status
-   );
-
-  }
-
-  const blob=
-   await resposta.blob();
-
-  return await new Promise(
-   (resolve,reject)=>{
-
-    const leitor=
-     new FileReader();
-
-    leitor.onload=
-     ()=>resolve(leitor.result);
-
-    leitor.onerror=
-     reject;
-
-    leitor.readAsDataURL(blob);
-
-   }
-  );
-
- }catch(erro){
-
-  console.error(
-   "Erro ao carregar logo.png:",
-   erro
-  );
-
-  return null;
- }
-}
-
+========================================================== */
 
 async function gerarPDF(){
 
@@ -2361,51 +2870,50 @@ async function gerarPDF(){
   "A preparar o relatório PDF..."
  );
 
+
  const {jsPDF}=
   window.jspdf;
 
+
  const pdf=
   new jsPDF();
+
 
  const margem=18;
 
  let y=18;
 
 
- /* ========================================================
-    LOGOTIPO
-    ======================================================== */
+ /* LOGÓTIPO */
 
- const logoBase64=
-  await carregarLogoParaPDF();
+ try{
 
- if(logoBase64){
+  const logoData=
+   await carregarLogoPDF();
 
-  try{
+
+  if(logoData){
 
    pdf.addImage(
-    logoBase64,
+    logoData,
     "PNG",
     margem,
     y,
-    30,
-    30
-   );
-
-  }catch(erro){
-
-   console.error(
-    "Erro ao inserir logo no PDF:",
-    erro
+    25,
+    25
    );
 
   }
+
+ }catch(e){
+
+  console.error(
+   "Erro ao carregar logo:",
+   e
+  );
+
  }
 
-
- /* ========================================================
-    CABEÇALHO
-    ======================================================== */
 
  pdf.setFont(
   "helvetica",
@@ -2416,9 +2924,10 @@ async function gerarPDF(){
 
  pdf.text(
   "O.J.V. - Jovens Visionários",
-  55,
-  y+10
+  50,
+  y+8
  );
+
 
  pdf.setFont(
   "helvetica",
@@ -2429,11 +2938,13 @@ async function gerarPDF(){
 
  pdf.text(
   "Relatório Geral",
-  55,
-  y+18
+  50,
+  y+16
  );
 
- y+=40;
+
+ y+=34;
+
 
  pdf.setFontSize(10);
 
@@ -2445,16 +2956,14 @@ async function gerarPDF(){
   y
  );
 
+
  y+=12;
 
-
- /* ========================================================
-    FINANCEIRO
-    ======================================================== */
 
  let receitas=0;
 
  let despesas=0;
+
 
  transacoes.forEach(t=>{
 
@@ -2468,9 +2977,12 @@ async function gerarPDF(){
 
  });
 
+
  const saldo=
   receitas-despesas;
 
+
+ /* FINANCEIRO */
 
  pdf.setFont(
   "helvetica",
@@ -2487,6 +2999,7 @@ async function gerarPDF(){
 
  y+=7;
 
+
  pdf.setFont(
   "helvetica",
   "normal"
@@ -2494,27 +3007,27 @@ async function gerarPDF(){
 
  pdf.setFontSize(10);
 
+
  pdf.text(
-  "Receitas: "+
-  kz(receitas),
+  "Receitas: "+kz(receitas),
   margem,
   y
  );
 
  y+=6;
 
+
  pdf.text(
-  "Despesas: "+
-  kz(despesas),
+  "Despesas: "+kz(despesas),
   margem,
   y
  );
 
  y+=6;
 
+
  pdf.text(
-  "Saldo: "+
-  kz(saldo),
+  "Saldo: "+kz(saldo),
   margem,
   y
  );
@@ -2522,9 +3035,7 @@ async function gerarPDF(){
  y+=12;
 
 
- /* ========================================================
-    MEMBROS
-    ======================================================== */
+ /* MEMBROS */
 
  pdf.setFont(
   "helvetica",
@@ -2541,6 +3052,7 @@ async function gerarPDF(){
 
  y+=7;
 
+
  pdf.setFont(
   "helvetica",
   "normal"
@@ -2548,15 +3060,18 @@ async function gerarPDF(){
 
  pdf.setFontSize(10);
 
+
  const ativos=
   membros.filter(
    m=>m.status==="Ativo"
   ).length;
 
+
  const inativos=
   membros.filter(
    m=>m.status!=="Ativo"
   ).length;
+
 
  pdf.text(
   `Total: ${membros.length} | Ativos: ${ativos} | Inativos: ${inativos}`,
@@ -2567,9 +3082,7 @@ async function gerarPDF(){
  y+=12;
 
 
- /* ========================================================
-    EVENTOS
-    ======================================================== */
+ /* EVENTOS */
 
  pdf.setFont(
   "helvetica",
@@ -2586,6 +3099,7 @@ async function gerarPDF(){
 
  y+=7;
 
+
  pdf.setFont(
   "helvetica",
   "normal"
@@ -2593,10 +3107,12 @@ async function gerarPDF(){
 
  pdf.setFontSize(10);
 
+
  const agendados=
   eventos.filter(
    e=>e.status==="Agendado"
   ).length;
+
 
  pdf.text(
   `Total: ${eventos.length} | Agendados: ${agendados}`,
@@ -2607,9 +3123,7 @@ async function gerarPDF(){
  y+=12;
 
 
- /* ========================================================
-    META
-    ======================================================== */
+ /* META */
 
  pdf.setFont(
   "helvetica",
@@ -2626,12 +3140,14 @@ async function gerarPDF(){
 
  y+=7;
 
+
  pdf.setFont(
   "helvetica",
   "normal"
  );
 
  pdf.setFontSize(10);
+
 
  const mv=
   Number(meta.valor||0);
@@ -2642,10 +3158,11 @@ async function gerarPDF(){
  const mp=
   mv
    ?Math.min(
-    100,
-    mg/mv*100
-   )
+     100,
+     mg/mv*100
+    )
    :0;
+
 
  pdf.text(
   `Guardado: ${kz(mg)} / ${kz(mv)} (${mp.toFixed(0)}%)`,
@@ -2656,9 +3173,7 @@ async function gerarPDF(){
  y+=22;
 
 
- /* ========================================================
-    ASSINATURAS
-    ======================================================== */
+ /* ASSINATURAS */
 
  pdf.setFont(
   "helvetica",
@@ -2675,7 +3190,9 @@ async function gerarPDF(){
 
  y+=20;
 
+
  const largura=80;
+
 
  pdf.line(
   margem,
@@ -2684,12 +3201,14 @@ async function gerarPDF(){
   y
  );
 
+
  pdf.line(
   112,
   y,
   112+largura,
   y
  );
+
 
  pdf.setFont(
   "helvetica",
@@ -2698,11 +3217,13 @@ async function gerarPDF(){
 
  pdf.setFontSize(9);
 
+
  pdf.text(
   "Presidente",
   margem,
   y+5
  );
+
 
  pdf.text(
   "Director",
@@ -2710,7 +3231,9 @@ async function gerarPDF(){
   y+5
  );
 
+
  y+=30;
+
 
  pdf.line(
   margem,
@@ -2719,6 +3242,7 @@ async function gerarPDF(){
   y
  );
 
+
  pdf.line(
   112,
   y,
@@ -2726,11 +3250,13 @@ async function gerarPDF(){
   y
  );
 
+
  pdf.text(
   "Financeiro / Tesoureiro",
   margem,
   y+5
  );
+
 
  pdf.text(
   "Desenvolvedor / Programador",
@@ -2738,14 +3264,12 @@ async function gerarPDF(){
   y+5
  );
 
+
  y+=25;
 
 
- /* ========================================================
-    RODAPÉ
-    ======================================================== */
-
  pdf.setFontSize(8);
+
 
  pdf.text(
   "O.J.V. Professional Plus - 2026",
@@ -2753,10 +3277,6 @@ async function gerarPDF(){
   y
  );
 
-
- /* ========================================================
-    GUARDAR
-    ======================================================== */
 
  pdf.save(
   "OJV_Relatorio_"+
@@ -2766,15 +3286,17 @@ async function gerarPDF(){
   ".pdf"
  );
 
+
  toast(
   "PDF gerado com sucesso."
  );
+
 }
 
 
 /* ==========================================================
    DATA
-   ========================================================== */
+========================================================== */
 
 function formatarData(v){
 
@@ -2789,12 +3311,13 @@ function formatarData(v){
  return d.toLocaleDateString(
   "pt-AO"
  );
+
 }
 
 
 /* ==========================================================
    MÁSCARA DATA
-   ========================================================== */
+========================================================== */
 
 $("mNascimento")
  .addEventListener(
@@ -2805,6 +3328,7 @@ $("mNascimento")
     this.value
      .replace(/\D/g,"")
      .slice(0,8);
+
 
    if(v.length>4){
 
@@ -2821,7 +3345,9 @@ $("mNascimento")
      v.slice(0,2)+
      "/"+
      v.slice(2);
+
    }
+
 
    this.value=v;
 
@@ -2831,7 +3357,7 @@ $("mNascimento")
 
 /* ==========================================================
    FECHAR MODAL
-   ========================================================== */
+========================================================== */
 
 $("modalMembro")
  .addEventListener(
@@ -2864,7 +3390,7 @@ document.addEventListener(
 
 /* ==========================================================
    TEMA
-   ========================================================== */
+========================================================== */
 
 if(
  localStorage.getItem(
@@ -2873,15 +3399,14 @@ if(
 ){
 
  document.body
-  .classList
-  .add("dark");
+  .classList.add("dark");
 
 }
 
 
 /* ==========================================================
    SUPABASE SESSION
-   ========================================================== */
+========================================================== */
 
 db.auth.onAuthStateChange(
  (event,session)=>{
@@ -2889,12 +3414,10 @@ db.auth.onAuthStateChange(
   if(session){
 
    $("loginScreen")
-    .classList
-    .add("hidden");
+    .classList.add("hidden");
 
    $("app")
-    .classList
-    .remove("hidden");
+    .classList.remove("hidden");
 
    $("usuarioEmail")
     .textContent=
@@ -2909,7 +3432,7 @@ db.auth.onAuthStateChange(
 
 /* ==========================================================
    INICIAR
-   ========================================================== */
+========================================================== */
 
 verificarSessao();
 
