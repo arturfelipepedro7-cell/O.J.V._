@@ -238,6 +238,7 @@ body.dark h2{color:white}
 <!-- LOGIN -->
 <div id="loginScreen" class="login">
  <div class="login-box">
+
   <div class="login-logo">
    <img src="logo.png" onerror="this.style.display='none'" alt="O.J.V.">
    <h1>O.J.V.</h1>
@@ -247,6 +248,7 @@ body.dark h2{color:white}
   <div id="loginError" class="login-error hidden"></div>
 
   <div class="form">
+
    <label>E-mail</label>
    <input id="loginEmail" type="email" placeholder="seu@email.com">
 
@@ -254,8 +256,15 @@ body.dark h2{color:white}
    <input id="loginPassword" type="password" placeholder="••••••••">
 
    <button class="btn btn-dark" onclick="login()">🔐 Entrar</button>
-   <button class="btn btn-outline" onclick="registrar()">Criar conta</button>
-   <button class="btn btn-outline" onclick="recuperarSenha()">Esqueci a palavra-passe</button>
+
+   <button class="btn btn-outline" onclick="registrar()">
+    Criar conta
+   </button>
+
+   <button class="btn btn-outline" onclick="recuperarSenha()">
+    Esqueci a palavra-passe
+   </button>
+
   </div>
  </div>
 </div>
@@ -264,81 +273,174 @@ body.dark h2{color:white}
 <div id="app" class="hidden">
 
 <header>
+
  <div class="topo">
+
   <div class="logo">
-   <img src="logo.png" alt="O.J.V."
-        onerror="this.style.display='none';document.getElementById('fallbackLogo').style.display='flex'">
-   <div id="fallbackLogo" class="logo-fallback" style="display:none">OJV</div>
+
+   <img
+    src="logo.png"
+    alt="O.J.V."
+    onerror="this.style.display='none';document.getElementById('fallbackLogo').style.display='flex'"
+   >
+
+   <div id="fallbackLogo" class="logo-fallback" style="display:none">
+    OJV
+   </div>
+
    <div>
     <h1>O.J.V. <small>Professional Plus</small></h1>
    </div>
+
   </div>
 
   <div class="acoes">
+
    <button onclick="tema()">🌓</button>
-   <button class="menu-toggle" onclick="menu()">☰ Menu</button>
+
+   <button class="menu-toggle" onclick="menu()">
+    ☰ Menu
+   </button>
+
   </div>
+
  </div>
 
  <nav id="nav">
-  <button class="ativo" onclick="abrir('inicio')">📊 Painel</button>
-  <button onclick="abrir('membros')">👥 Membros <span id="navMembros" class="badge badge-info">0</span></button>
-  <button onclick="abrir('financeiro')">💰 Finanças</button>
-  <button onclick="abrir('transacoes')">📋 Transações</button>
-  <button onclick="abrir('eventos')">📅 Eventos</button>
-  <button onclick="abrir('meta')">🎯 Meta</button>
-  <button onclick="gerarPDF()">📄 Gerar relatório PDF</button>
+
+  <button class="ativo" onclick="abrir('inicio')">
+   📊 Painel
+  </button>
+
+  <button onclick="abrir('membros')">
+   👥 Membros
+   <span id="navMembros" class="badge badge-info">0</span>
+  </button>
+
+  <button onclick="abrir('financeiro')">
+   💰 Finanças
+  </button>
+
+  <button onclick="abrir('transacoes')">
+   📋 Transações
+  </button>
+
+  <button onclick="abrir('eventos')">
+   📅 Eventos
+  </button>
+
+  <button onclick="abrir('meta')">
+   🎯 Meta
+  </button>
+
+  <button onclick="gerarPDF()">
+   📄 Gerar relatório PDF
+  </button>
+
  </nav>
+
 </header>
 
 <div class="container">
 
 <div class="userbar">
- <span>👤 <strong id="usuarioEmail"></strong></span>
+
+ <span>
+  👤 <strong id="usuarioEmail"></strong>
+ </span>
+
  <button onclick="logout()">Sair</button>
+
 </div>
 
 <!-- PAINEL -->
 <section id="inicio" class="ativo">
+
  <h2>Painel</h2>
- <p class="subtitulo">Visão geral da organização</p>
+
+ <p class="subtitulo">
+  Visão geral da organização
+ </p>
 
  <div class="cards">
-  <div class="card"><span id="dashMembros" class="numero">0</span><span class="rotulo">Membros</span></div>
-  <div class="card verde"><span id="dashReceitas" class="numero">0</span><span class="rotulo">Receitas</span></div>
-  <div class="card vermelho"><span id="dashDespesas" class="numero">0</span><span class="rotulo">Despesas</span></div>
-  <div class="card azul"><span id="dashSaldo" class="numero">0</span><span class="rotulo">Saldo</span></div>
+
+  <div class="card">
+   <span id="dashMembros" class="numero">0</span>
+   <span class="rotulo">Membros</span>
+  </div>
+
+  <div class="card verde">
+   <span id="dashReceitas" class="numero">0</span>
+   <span class="rotulo">Receitas</span>
+  </div>
+
+  <div class="card vermelho">
+   <span id="dashDespesas" class="numero">0</span>
+   <span class="rotulo">Despesas</span>
+  </div>
+
+  <div class="card azul">
+   <span id="dashSaldo" class="numero">0</span>
+   <span class="rotulo">Saldo</span>
+  </div>
+
  </div>
 
  <div class="box">
+
   <h3>📈 Últimas transações</h3>
+
   <div id="ultimas"></div>
+
  </div>
 
  <div class="box">
+
   <h3>📅 Próximos eventos</h3>
+
   <div id="proximos"></div>
+
  </div>
 
- <button class="btn btn-dark" onclick="gerarPDF()">📄 Gerar resumo completo em PDF</button>
+ <button class="btn btn-dark" onclick="gerarPDF()">
+  📄 Gerar resumo completo em PDF
+ </button>
+
 </section>
 
 <!-- MEMBROS -->
 <section id="membros">
+
  <h2>Membros</h2>
- <p class="subtitulo">Cadastro e gestão dos membros</p>
+
+ <p class="subtitulo">
+  Cadastro e gestão dos membros
+ </p>
 
  <div class="toolbar">
-  <button class="btn btn-success" onclick="novoMembro()">➕ Novo Membro</button>
-  <button class="btn btn-outline" onclick="exportarMembros()">📤 CSV</button>
+
+  <button class="btn btn-success" onclick="novoMembro()">
+   ➕ Novo Membro
+  </button>
+
+  <button class="btn btn-outline" onclick="exportarMembros()">
+   📤 CSV
+  </button>
+
  </div>
 
- <input id="buscaMembro" placeholder="🔍 Nome, telefone ou e-mail"
-        oninput="renderMembros()">
+ <input
+  id="buscaMembro"
+  placeholder="🔍 Nome, telefone ou e-mail"
+  oninput="renderMembros()"
+ >
 
  <div class="table-wrap" style="margin-top:12px">
+
   <table>
+
    <thead>
+
     <tr>
      <th>Nome</th>
      <th>E-mail</th>
@@ -346,181 +448,405 @@ body.dark h2{color:white}
      <th>Status</th>
      <th>Ações</th>
     </tr>
+
    </thead>
+
    <tbody id="listaMembros"></tbody>
+
   </table>
+
  </div>
 
  <p style="margin-top:10px;font-size:13px">
-  Total: <strong id="totalMembros">0</strong> ·
-  Ativos: <strong id="ativos">0</strong>
+
+  Total:
+  <strong id="totalMembros">0</strong>
+
+  ·
+
+  Ativos:
+  <strong id="ativos">0</strong>
+
  </p>
+
 </section>
 
 <!-- FINANCEIRO -->
 <section id="financeiro">
+
  <h2>Finanças</h2>
- <p class="subtitulo">Registre receitas e despesas</p>
+
+ <p class="subtitulo">
+  Registre receitas e despesas
+ </p>
 
  <div class="cards">
-  <div class="card verde"><span id="finR" class="numero">0</span><span class="rotulo">Receitas</span></div>
-  <div class="card vermelho"><span id="finD" class="numero">0</span><span class="rotulo">Despesas</span></div>
-  <div class="card azul"><span id="finS" class="numero">0</span><span class="rotulo">Saldo</span></div>
+
+  <div class="card verde">
+   <span id="finR" class="numero">0</span>
+   <span class="rotulo">Receitas</span>
+  </div>
+
+  <div class="card vermelho">
+   <span id="finD" class="numero">0</span>
+   <span class="rotulo">Despesas</span>
+  </div>
+
+  <div class="card azul">
+   <span id="finS" class="numero">0</span>
+   <span class="rotulo">Saldo</span>
+  </div>
+
  </div>
 
  <div class="form">
+
   <label>Tipo</label>
+
   <select id="tipo">
-   <option value="receita">💰 Receita</option>
-   <option value="despesa">💸 Despesa</option>
+
+   <option value="receita">
+    💰 Receita
+   </option>
+
+   <option value="despesa">
+    💸 Despesa
+   </option>
+
   </select>
 
   <label>Categoria</label>
+
   <select id="categoria">
+
    <option>Mensalidade</option>
    <option>Doação</option>
    <option>Evento</option>
    <option>Material</option>
    <option>Transporte</option>
    <option>Outro</option>
+
   </select>
 
   <label>Valor (Kz)</label>
-  <input id="valor" type="number" step="0.01" placeholder="0">
+
+  <input
+   id="valor"
+   type="number"
+   step="0.01"
+   placeholder="0"
+  >
 
   <label>Descrição</label>
-  <input id="descricao" placeholder="Descrição da transação">
 
-  <button class="btn btn-success" onclick="adicionarFinanceiro()">💾 Registrar</button>
+  <input
+   id="descricao"
+   placeholder="Descrição da transação"
+  >
+
+  <button
+   class="btn btn-success"
+   onclick="adicionarFinanceiro()"
+  >
+   💾 Registrar
+  </button>
+
  </div>
+
 </section>
 
 <!-- TRANSAÇÕES -->
 <section id="transacoes">
+
  <h2>Transações</h2>
- <p class="subtitulo">Histórico financeiro</p>
+
+ <p class="subtitulo">
+  Histórico financeiro
+ </p>
 
  <div class="toolbar">
-  <input id="buscaTransacao" placeholder="🔍 Buscar" oninput="renderTransacoes()">
+
+  <input
+   id="buscaTransacao"
+   placeholder="🔍 Buscar"
+   oninput="renderTransacoes()"
+  >
+
   <select id="filtro" onchange="renderTransacoes()">
+
    <option value="">Todas</option>
    <option value="receita">Receitas</option>
    <option value="despesa">Despesas</option>
+
   </select>
+
  </div>
 
  <div class="table-wrap">
+
   <table>
+
    <thead>
-    <tr><th>Data</th><th>Descrição</th><th>Tipo</th><th>Valor</th><th>Ação</th></tr>
+
+    <tr>
+     <th>Data</th>
+     <th>Descrição</th>
+     <th>Tipo</th>
+     <th>Valor</th>
+     <th>Ação</th>
+    </tr>
+
    </thead>
+
    <tbody id="listaTransacoes"></tbody>
+
   </table>
+
  </div>
+
 </section>
 
 <!-- EVENTOS -->
 <section id="eventos">
+
  <h2>Eventos</h2>
- <p class="subtitulo">Organização dos eventos</p>
+
+ <p class="subtitulo">
+  Organização dos eventos
+ </p>
 
  <div class="form">
-  <input id="eventoNome" placeholder="Nome do evento">
-  <input id="eventoData" type="date">
-  <input id="eventoLocal" placeholder="Local">
-  <button class="btn btn-success" onclick="adicionarEvento()">📅 Criar evento</button>
+
+  <input
+   id="eventoNome"
+   placeholder="Nome do evento"
+  >
+
+  <input
+   id="eventoData"
+   type="date"
+  >
+
+  <input
+   id="eventoLocal"
+   placeholder="Local"
+  >
+
+  <button
+   class="btn btn-success"
+   onclick="adicionarEvento()"
+  >
+   📅 Criar evento
+  </button>
+
  </div>
 
  <div class="table-wrap">
+
   <table>
-   <thead><tr><th>Evento</th><th>Data</th><th>Local</th><th>Ação</th></tr></thead>
+
+   <thead>
+
+    <tr>
+     <th>Evento</th>
+     <th>Data</th>
+     <th>Local</th>
+     <th>Ação</th>
+    </tr>
+
+   </thead>
+
    <tbody id="listaEventos"></tbody>
+
   </table>
+
  </div>
+
 </section>
 
 <!-- META -->
 <section id="meta">
+
  <h2>Meta de Poupança</h2>
- <p class="subtitulo">Defina e acompanhe o objetivo</p>
+
+ <p class="subtitulo">
+  Defina e acompanhe o objetivo
+ </p>
 
  <div class="box">
+
   <div style="display:flex;justify-content:space-between">
+
    <strong>Meta</strong>
-   <strong id="metaValor">0 Kz</strong>
+
+   <strong id="metaValor">
+    0 Kz
+   </strong>
+
   </div>
 
-  <div class="progress"><div id="barra" style="width:0%"></div></div>
+  <div class="progress">
+
+   <div
+    id="barra"
+    style="width:0%"
+   ></div>
+
+  </div>
 
   <div style="display:flex;justify-content:space-between;font-size:13px">
-   <span>Guardado: <strong id="metaGuardado">0 Kz</strong></span>
-   <span id="metaPct">0%</span>
+
+   <span>
+    Guardado:
+    <strong id="metaGuardado">
+     0 Kz
+    </strong>
+   </span>
+
+   <span id="metaPct">
+    0%
+   </span>
+
   </div>
+
  </div>
 
  <div class="form">
-  <input id="novaMeta" type="number" placeholder="Valor da meta (Kz)">
-  <button class="btn btn-gold" onclick="definirMeta()">🎯 Definir meta</button>
 
-  <input id="guardarMeta" type="number" placeholder="Quanto guardar?">
-  <button class="btn btn-success" onclick="guardarMeta()">💰 Guardar</button>
+  <input
+   id="novaMeta"
+   type="number"
+   placeholder="Valor da meta (Kz)"
+  >
+
+  <button
+   class="btn btn-gold"
+   onclick="definirMeta()"
+  >
+   🎯 Definir meta
+  </button>
+
+  <input
+   id="guardarMeta"
+   type="number"
+   placeholder="Quanto guardar?"
+  >
+
+  <button
+   class="btn btn-success"
+   onclick="guardarMeta()"
+  >
+   💰 Guardar
+  </button>
+
  </div>
+
 </section>
 
 </div>
 
-<footer>© 2026 O.J.V. Professional Plus</footer>
+<footer>
+ © 2026 O.J.V. Professional Plus
+</footer>
+
 </div>
 
 <!-- MODAL MEMBRO -->
 <div id="modalMembro" class="modal">
+
  <div class="modal-box">
+
   <div class="modal-head">
-   <h3 id="tituloMembro">Novo Membro</h3>
-   <button class="close" onclick="fecharModal()">×</button>
+
+   <h3 id="tituloMembro">
+    Novo Membro
+   </h3>
+
+   <button class="close" onclick="fecharModal()">
+    ×
+   </button>
+
   </div>
 
   <div class="form">
+
    <label>Nome completo</label>
-   <input id="mNome" placeholder="Nome do membro">
+
+   <input
+    id="mNome"
+    placeholder="Nome do membro"
+   >
 
    <label>E-mail do membro</label>
-   <input id="mEmail" type="email" placeholder="membro@email.com">
+
+   <input
+    id="mEmail"
+    type="email"
+    placeholder="membro@email.com"
+   >
 
    <label>Telefone</label>
-   <input id="mTelefone" placeholder="+244 ...">
+
+   <input
+    id="mTelefone"
+    placeholder="+244 ..."
+   >
 
    <label>Data de nascimento</label>
-   <input id="mNascimento" placeholder="DD/MM/AAAA" maxlength="10">
+
+   <input
+    id="mNascimento"
+    placeholder="DD/MM/AAAA"
+    maxlength="10"
+   >
 
    <label>Status</label>
+
    <select id="mStatus">
-    <option value="Ativo">Ativo</option>
-    <option value="Inativo">Inativo</option>
+
+    <option value="Ativo">
+     Ativo
+    </option>
+
+    <option value="Inativo">
+     Inativo
+    </option>
+
    </select>
 
-   <button class="btn btn-success" onclick="salvarMembro()">💾 Salvar membro</button>
+   <button
+    class="btn btn-success"
+    onclick="salvarMembro()"
+   >
+    💾 Salvar membro
+   </button>
+
   </div>
+
  </div>
+
 </div>
 
 <div id="toast" class="toast hidden"></div>
 
 <script>
+
 /* ==========================================================
    CONFIGURAÇÃO SUPABASE
    ========================================================== */
 
-const SUPABASE_URL="https://zytbddkoddcmreyvjmkz.supabase.co";
+const SUPABASE_URL=
+"https://zytbddkoddcmreyvjmkz.supabase.co";
 
-/*
- IMPORTANTE:
- A chave abaixo é a chave PUBLICÁVEL (anon/publishable).
- NUNCA coloque a service_role key no HTML.
-*/
-const SUPABASE_KEY="sb_publishable_KkrrmpUmwMguZCNvZiclSg_zFJCOj50";
+const SUPABASE_KEY=
+"sb_publishable_KkrrmpUmwMguZCNvZiclSg_zFJCOj50";
 
-const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const db=
+supabase.createClient(
+ SUPABASE_URL,
+ SUPABASE_KEY
+);
+
 
 /* ==========================================================
    ESTADO
@@ -529,28 +855,53 @@ const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 let membros=[];
 let transacoes=[];
 let eventos=[];
-let meta={valor:0,guardado:0};
+let meta={
+ valor:0,
+ guardado:0
+};
 let editId=null;
+
 
 /* ==========================================================
    AUXILIARES
    ========================================================== */
 
-function $(id){return document.getElementById(id)}
+function $(id){
+ return document.getElementById(id);
+}
 
 function toast(msg,erro=false){
+
  const t=$("toast");
+
  t.textContent=msg;
- t.className="toast "+(erro?"err":"ok");
+
+ t.className=
+  "toast "+
+  (erro?"err":"ok");
+
  t.classList.remove("hidden");
- setTimeout(()=>t.classList.add("hidden"),3500);
+
+ setTimeout(
+  ()=>t.classList.add("hidden"),
+  3500
+ );
 }
 
 function kz(v){
- return Number(v||0).toLocaleString("pt-AO",{minimumFractionDigits:0})+" Kz";
+
+ return Number(v||0)
+  .toLocaleString(
+   "pt-AO",
+   {
+    minimumFractionDigits:0
+   }
+  )+
+  " Kz";
 }
 
 function esc(v){
+
  return String(v??"")
   .replaceAll("&","&amp;")
   .replaceAll("<","&lt;")
@@ -559,110 +910,190 @@ function esc(v){
   .replaceAll("'","&#039;");
 }
 
+
 /* ==========================================================
-   LOGIN SUPABASE
+   LOGIN
    ========================================================== */
 
 async function verificarSessao(){
+
  const {data}=await db.auth.getSession();
 
  if(data.session){
+
   $("loginScreen").classList.add("hidden");
+
   $("app").classList.remove("hidden");
-  $("usuarioEmail").textContent=data.session.user.email||"Utilizador";
+
+  $("usuarioEmail").textContent=
+   data.session.user.email||
+   "Utilizador";
+
   await carregarTudo();
+
  }else{
+
   $("loginScreen").classList.remove("hidden");
+
   $("app").classList.add("hidden");
  }
 }
 
+
 async function login(){
- const email=$("loginEmail").value.trim();
- const password=$("loginPassword").value;
+
+ const email=
+  $("loginEmail").value.trim();
+
+ const password=
+  $("loginPassword").value;
 
  if(!email||!password){
-  mostrarLoginErro("Digite o e-mail e a palavra-passe.");
+
+  mostrarLoginErro(
+   "Digite o e-mail e a palavra-passe."
+  );
+
   return;
  }
 
- const {error}=await db.auth.signInWithPassword({
-  email,password
- });
+ const {error}=
+  await db.auth.signInWithPassword({
+   email,
+   password
+  });
 
  if(error){
-  mostrarLoginErro(error.message);
+
+  mostrarLoginErro(
+   error.message
+  );
+
   return;
  }
 
  $("loginError").classList.add("hidden");
+
  await verificarSessao();
- toast("Login efetuado com sucesso.");
+
+ toast(
+  "Login efetuado com sucesso."
+ );
 }
+
 
 async function registrar(){
- const email=$("loginEmail").value.trim();
- const password=$("loginPassword").value;
+
+ const email=
+  $("loginEmail").value.trim();
+
+ const password=
+  $("loginPassword").value;
 
  if(!email||password.length<6){
-  mostrarLoginErro("Use um e-mail válido e uma palavra-passe com pelo menos 6 caracteres.");
+
+  mostrarLoginErro(
+   "Use um e-mail válido e uma palavra-passe com pelo menos 6 caracteres."
+  );
+
   return;
  }
 
- const {error}=await db.auth.signUp({
-  email,password
- });
+ const {error}=
+  await db.auth.signUp({
+   email,
+   password
+  });
 
  if(error){
-  mostrarLoginErro(error.message);
+
+  mostrarLoginErro(
+   error.message
+  );
+
   return;
  }
 
- mostrarLoginErro("Conta criada. Se a confirmação de e-mail estiver ativa, confirme o e-mail antes de entrar.");
+ mostrarLoginErro(
+  "Conta criada. Se a confirmação de e-mail estiver ativa, confirme o e-mail antes de entrar."
+ );
 }
+
 
 async function recuperarSenha(){
- const email=$("loginEmail").value.trim();
+
+ const email=
+  $("loginEmail").value.trim();
 
  if(!email){
-  mostrarLoginErro("Digite primeiro o seu e-mail.");
+
+  mostrarLoginErro(
+   "Digite primeiro o seu e-mail."
+  );
+
   return;
  }
 
- const {error}=await db.auth.resetPasswordForEmail(email,{
-  redirectTo:location.origin+location.pathname
- });
+ const {error}=
+  await db.auth.resetPasswordForEmail(
+   email,
+   {
+    redirectTo:
+     location.origin+
+     location.pathname
+   }
+  );
 
  if(error){
-  mostrarLoginErro(error.message);
+
+  mostrarLoginErro(
+   error.message
+  );
+
  }else{
-  mostrarLoginErro("Foi enviado um e-mail para redefinir a palavra-passe.");
+
+  mostrarLoginErro(
+   "Foi enviado um e-mail para redefinir a palavra-passe."
+  );
  }
 }
 
+
 function mostrarLoginErro(msg){
+
  $("loginError").textContent=msg;
- $("loginError").classList.remove("hidden");
+
+ $("loginError")
+  .classList
+  .remove("hidden");
 }
 
+
 async function logout(){
+
  await db.auth.signOut();
+
  location.reload();
 }
 
+
 /* ==========================================================
-   CARREGAMENTO DAS 4 ÁREAS
+   CARREGAR TUDO
    ========================================================== */
 
 async function carregarTudo(){
 
  await carregarMembros();
+
  await carregarTransacoes();
+
  await carregarEventos();
+
  await carregarMeta();
 
  atualizarDashboard();
 }
+
 
 /* ==========================================================
    MEMBROS
@@ -670,66 +1101,122 @@ async function carregarTudo(){
 
 async function carregarMembros(){
 
- /*
-  Esta consulta usa a tabela membros.
-  Os campos usados são:
-  nome, email, telefone, aniversario, status, data_entrada.
- */
- const {data,error}=await db
-  .from("membros")
-  .select("*")
-  .order("created_at",{ascending:false});
+ const {data,error}=
+  await db
+   .from("membros")
+   .select("*")
+   .order(
+    "created_at",
+    {ascending:false}
+   );
 
  if(error){
+
   console.error(error);
-  toast("Erro ao carregar membros: "+error.message,true);
+
+  toast(
+   "Erro ao carregar membros: "+
+   error.message,
+   true
+  );
+
   membros=[];
+
   return;
  }
 
  membros=data||[];
+
  renderMembros();
 }
 
+
 function novoMembro(){
+
  editId=null;
- $("tituloMembro").textContent="Novo Membro";
+
+ $("tituloMembro").textContent=
+  "Novo Membro";
+
  $("mNome").value="";
  $("mEmail").value="";
  $("mTelefone").value="";
  $("mNascimento").value="";
  $("mStatus").value="Ativo";
- $("modalMembro").classList.add("open");
+
+ $("modalMembro")
+  .classList
+  .add("open");
 }
 
+
 function editarMembro(id){
- const m=membros.find(x=>x.id===id);
+
+ const m=
+  membros.find(
+   x=>x.id===id
+  );
+
  if(!m)return;
 
  editId=id;
- $("tituloMembro").textContent="Editar Membro";
- $("mNome").value=m.nome||"";
- $("mEmail").value=m.email||"";
- $("mTelefone").value=m.telefone||"";
- $("mNascimento").value=m.aniversario||"";
- $("mStatus").value=m.status||"Ativo";
- $("modalMembro").classList.add("open");
+
+ $("tituloMembro").textContent=
+  "Editar Membro";
+
+ $("mNome").value=
+  m.nome||"";
+
+ $("mEmail").value=
+  m.email||"";
+
+ $("mTelefone").value=
+  m.telefone||"";
+
+ $("mNascimento").value=
+  m.aniversario||"";
+
+ $("mStatus").value=
+  m.status||"Ativo";
+
+ $("modalMembro")
+  .classList
+  .add("open");
 }
 
+
 function fecharModal(){
- $("modalMembro").classList.remove("open");
+
+ $("modalMembro")
+  .classList
+  .remove("open");
 }
+
 
 async function salvarMembro(){
 
- const nome=$("mNome").value.trim();
- const email=$("mEmail").value.trim();
- const telefone=$("mTelefone").value.trim();
- const aniversario=$("mNascimento").value.trim();
- const status=$("mStatus").value;
+ const nome=
+  $("mNome").value.trim();
+
+ const email=
+  $("mEmail").value.trim();
+
+ const telefone=
+  $("mTelefone").value.trim();
+
+ const aniversario=
+  $("mNascimento").value.trim();
+
+ const status=
+  $("mStatus").value;
 
  if(!nome){
-  toast("Informe o nome do membro.",true);
+
+  toast(
+   "Informe o nome do membro.",
+   true
+  );
+
   return;
  }
 
@@ -744,195 +1231,439 @@ async function salvarMembro(){
  let result;
 
  if(editId){
-  result=await db
-   .from("membros")
-   .update(dados)
-   .eq("id",editId);
+
+  result=
+   await db
+    .from("membros")
+    .update(dados)
+    .eq("id",editId);
+
  }else{
-  result=await db
-   .from("membros")
-   .insert(dados);
+
+  result=
+   await db
+    .from("membros")
+    .insert(dados);
  }
 
  if(result.error){
+
   console.error(result.error);
-  toast("Erro ao guardar membro: "+result.error.message,true);
+
+  toast(
+   "Erro ao guardar membro: "+
+   result.error.message,
+   true
+  );
+
   return;
  }
 
  fecharModal();
+
  await carregarMembros();
+
  atualizarDashboard();
- toast(editId?"Membro atualizado.":"Membro cadastrado.");
+
+ toast(
+  editId?
+  "Membro atualizado.":
+  "Membro cadastrado."
+ );
 }
+
 
 async function excluirMembro(id){
 
- const m=membros.find(x=>x.id===id);
+ const m=
+  membros.find(
+   x=>x.id===id
+  );
+
  if(!m)return;
 
- if(!confirm("Eliminar o membro "+m.nome+"?"))return;
+ if(!confirm(
+  "Eliminar o membro "+
+  m.nome+
+  "?"
+ ))return;
 
- const {error}=await db
-  .from("membros")
-  .delete()
-  .eq("id",id);
+ const {error}=
+  await db
+   .from("membros")
+   .delete()
+   .eq("id",id);
 
  if(error){
-  toast("Erro ao eliminar: "+error.message,true);
+
+  toast(
+   "Erro ao eliminar: "+
+   error.message,
+   true
+  );
+
   return;
  }
 
  await carregarMembros();
+
  atualizarDashboard();
- toast("Membro eliminado.");
+
+ toast(
+  "Membro eliminado."
+ );
 }
+
 
 function renderMembros(){
 
- const termo=($("buscaMembro").value||"").toLowerCase();
+ const termo=
+  ($("buscaMembro").value||"")
+  .toLowerCase();
 
- const lista=membros.filter(m=>
-  String(m.nome||"").toLowerCase().includes(termo)||
-  String(m.email||"").toLowerCase().includes(termo)||
-  String(m.telefone||"").toLowerCase().includes(termo)
- );
+ const lista=
+  membros.filter(m=>
+   String(m.nome||"")
+    .toLowerCase()
+    .includes(termo)||
+   String(m.email||"")
+    .toLowerCase()
+    .includes(termo)||
+   String(m.telefone||"")
+    .toLowerCase()
+    .includes(termo)
+  );
 
- $("listaMembros").innerHTML=lista.map(m=>`
-  <tr>
-   <td><strong>${esc(m.nome)}</strong></td>
-   <td>${esc(m.email||"")}</td>
-   <td>${esc(m.telefone||"")}</td>
-   <td>
-    <span class="badge ${m.status==="Ativo"?"badge-ok":"badge-no"}">
-     ${esc(m.status||"")}
-    </span>
-   </td>
-   <td>
-    <div class="actions">
-     <button class="btn btn-outline" onclick="editarMembro('${m.id}')">✏️</button>
-     <button class="btn btn-danger" onclick="excluirMembro('${m.id}')">🗑️</button>
-    </div>
-   </td>
-  </tr>
- `).join("")||`
-  <tr><td colspan="5" style="text-align:center">Nenhum membro encontrado.</td></tr>
- `;
+ $("listaMembros").innerHTML=
+  lista.map(m=>`
 
- $("totalMembros").textContent=membros.length;
- $("ativos").textContent=membros.filter(m=>m.status==="Ativo").length;
- $("navMembros").textContent=membros.length;
+   <tr>
+
+    <td>
+     <strong>
+      ${esc(m.nome)}
+     </strong>
+    </td>
+
+    <td>
+     ${esc(m.email||"")}
+    </td>
+
+    <td>
+     ${esc(m.telefone||"")}
+    </td>
+
+    <td>
+
+     <span class="badge ${
+      m.status==="Ativo"
+       ?"badge-ok"
+       :"badge-no"
+     }">
+
+      ${esc(m.status||"")}
+
+     </span>
+
+    </td>
+
+    <td>
+
+     <div class="actions">
+
+      <button
+       class="btn btn-outline"
+       onclick="editarMembro('${m.id}')"
+      >
+       ✏️
+      </button>
+
+      <button
+       class="btn btn-danger"
+       onclick="excluirMembro('${m.id}')"
+      >
+       🗑️
+      </button>
+
+     </div>
+
+    </td>
+
+   </tr>
+
+  `).join("")||
+
+  `
+   <tr>
+    <td
+     colspan="5"
+     style="text-align:center"
+    >
+     Nenhum membro encontrado.
+    </td>
+   </tr>
+  `;
+
+ $("totalMembros").textContent=
+  membros.length;
+
+ $("ativos").textContent=
+  membros.filter(
+   m=>m.status==="Ativo"
+  ).length;
+
+ $("navMembros").textContent=
+  membros.length;
 }
 
+
 /* ==========================================================
-   FINANÇAS / TRANSAÇÕES
+   TRANSAÇÕES
    ========================================================== */
 
 async function carregarTransacoes(){
 
- const {data,error}=await db
-  .from("transacoes")
-  .select("*")
-  .order("created_at",{ascending:false});
+ const {data,error}=
+  await db
+   .from("transacoes")
+   .select("*")
+   .order(
+    "created_at",
+    {ascending:false}
+   );
 
  if(error){
+
   console.error(error);
-  toast("Erro ao carregar transações: "+error.message,true);
+
+  toast(
+   "Erro ao carregar transações: "+
+   error.message,
+   true
+  );
+
   transacoes=[];
+
   return;
  }
 
  transacoes=data||[];
+
  renderTransacoes();
 }
 
+
 async function adicionarFinanceiro(){
 
- const tipo=$("tipo").value;
- const categoria=$("categoria").value;
- const valor=Number($("valor").value);
- const descricao=$("descricao").value.trim();
+ const tipo=
+  $("tipo").value;
+
+ const categoria=
+  $("categoria").value;
+
+ const valor=
+  Number($("valor").value);
+
+ const descricao=
+  $("descricao").value.trim();
 
  if(!valor||valor<=0){
-  toast("Informe um valor válido.",true);
+
+  toast(
+   "Informe um valor válido.",
+   true
+  );
+
   return;
  }
 
  if(!descricao){
-  toast("Informe a descrição.",true);
+
+  toast(
+   "Informe a descrição.",
+   true
+  );
+
   return;
  }
 
  const dados={
+
   tipo,
+
   categoria,
-  valor:tipo==="despesa"?-valor:valor,
+
+  valor:
+   tipo==="despesa"
+    ?-valor
+    :valor,
+
   descricao,
-  data:new Date().toISOString()
+
+  data:
+   new Date().toISOString()
  };
 
- const {error}=await db.from("transacoes").insert(dados);
+ const {error}=
+  await db
+   .from("transacoes")
+   .insert(dados);
 
  if(error){
+
   console.error(error);
-  toast("Erro ao registrar finança: "+error.message,true);
+
+  toast(
+   "Erro ao registrar finança: "+
+   error.message,
+   true
+  );
+
   return;
  }
 
  $("valor").value="";
+
  $("descricao").value="";
 
  await carregarTransacoes();
+
  atualizarDashboard();
 
- toast("Transação registrada.");
+ toast(
+  "Transação registrada."
+ );
 }
+
 
 async function excluirTransacao(id){
 
- if(!confirm("Eliminar esta transação?"))return;
+ if(!confirm(
+  "Eliminar esta transação?"
+ ))return;
 
- const {error}=await db
-  .from("transacoes")
-  .delete()
-  .eq("id",id);
+ const {error}=
+  await db
+   .from("transacoes")
+   .delete()
+   .eq("id",id);
 
  if(error){
-  toast("Erro ao eliminar transação: "+error.message,true);
+
+  toast(
+   "Erro ao eliminar transação: "+
+   error.message,
+   true
+  );
+
   return;
  }
 
  await carregarTransacoes();
+
  atualizarDashboard();
- toast("Transação eliminada.");
+
+ toast(
+  "Transação eliminada."
+ );
 }
+
 
 function renderTransacoes(){
 
- const termo=($("buscaTransacao").value||"").toLowerCase();
- const filtro=$("filtro").value;
+ const termo=
+  ($("buscaTransacao").value||"")
+  .toLowerCase();
 
- const lista=transacoes.filter(t=>{
-  const texto=(String(t.descricao||"")+" "+String(t.categoria||"")).toLowerCase();
-  return texto.includes(termo)&&(!filtro||t.tipo===filtro);
- });
+ const filtro=
+  $("filtro").value;
 
- $("listaTransacoes").innerHTML=lista.map(t=>`
-  <tr>
-   <td>${formatarData(t.data||t.created_at)}</td>
-   <td>${esc(t.descricao||"")}</td>
-   <td>${t.tipo==="receita"?"💰 Receita":"💸 Despesa"}</td>
-   <td style="font-weight:bold;color:${Number(t.valor)>=0?"#28a745":"#dc3545"}">
-    ${Number(t.valor)>=0?"+":""}${kz(t.valor)}
-   </td>
-   <td>
-    <button class="btn btn-danger" onclick="excluirTransacao('${t.id}')">🗑️</button>
-   </td>
-  </tr>
- `).join("")||`
-  <tr><td colspan="5" style="text-align:center">Nenhuma transação.</td></tr>
- `;
+ const lista=
+  transacoes.filter(t=>{
+
+   const texto=
+    (
+     String(t.descricao||"")+
+     " "+
+     String(t.categoria||"")
+    ).toLowerCase();
+
+   return(
+    texto.includes(termo)&&
+    (!filtro||t.tipo===filtro)
+   );
+
+  });
+
+ $("listaTransacoes").innerHTML=
+  lista.map(t=>`
+
+   <tr>
+
+    <td>
+     ${formatarData(
+      t.data||t.created_at
+     )}
+    </td>
+
+    <td>
+     ${esc(t.descricao||"")}
+    </td>
+
+    <td>
+     ${
+      t.tipo==="receita"
+       ?"💰 Receita"
+       :"💸 Despesa"
+     }
+    </td>
+
+    <td
+     style="
+      font-weight:bold;
+      color:${
+       Number(t.valor)>=0
+        ?"#28a745"
+        :"#dc3545"
+      }
+     "
+    >
+
+     ${
+      Number(t.valor)>=0
+       ?"+"
+       :""
+     }${kz(t.valor)}
+
+    </td>
+
+    <td>
+
+     <button
+      class="btn btn-danger"
+      onclick="excluirTransacao('${t.id}')"
+     >
+      🗑️
+     </button>
+
+    </td>
+
+   </tr>
+
+  `).join("")||
+
+  `
+   <tr>
+    <td
+     colspan="5"
+     style="text-align:center"
+    >
+     Nenhuma transação.
+    </td>
+   </tr>
+  `;
 }
+
 
 /* ==========================================================
    EVENTOS
@@ -940,88 +1671,177 @@ function renderTransacoes(){
 
 async function carregarEventos(){
 
- const {data,error}=await db
-  .from("eventos")
-  .select("*")
-  .order("data",{ascending:true});
+ const {data,error}=
+  await db
+   .from("eventos")
+   .select("*")
+   .order(
+    "data",
+    {ascending:true}
+   );
 
  if(error){
+
   console.error(error);
-  toast("Erro ao carregar eventos: "+error.message,true);
+
+  toast(
+   "Erro ao carregar eventos: "+
+   error.message,
+   true
+  );
+
   eventos=[];
+
   return;
  }
 
  eventos=data||[];
+
  renderEventos();
 }
 
+
 async function adicionarEvento(){
 
- const nome=$("eventoNome").value.trim();
- const data=$("eventoData").value;
- const local=$("eventoLocal").value.trim();
+ const nome=
+  $("eventoNome").value.trim();
+
+ const data=
+  $("eventoData").value;
+
+ const local=
+  $("eventoLocal").value.trim();
 
  if(!nome||!data){
-  toast("Nome e data são obrigatórios.",true);
+
+  toast(
+   "Nome e data são obrigatórios.",
+   true
+  );
+
   return;
  }
 
- const {error}=await db
-  .from("eventos")
-  .insert({
-   nome,
-   data,
-   local:local||"Não definido",
-   status:"Agendado"
-  });
+ const {error}=
+  await db
+   .from("eventos")
+   .insert({
+
+    nome,
+
+    data,
+
+    local:
+     local||"Não definido",
+
+    status:"Agendado"
+
+   });
 
  if(error){
-  toast("Erro ao criar evento: "+error.message,true);
+
+  toast(
+   "Erro ao criar evento: "+
+   error.message,
+   true
+  );
+
   return;
  }
 
  $("eventoNome").value="";
+
  $("eventoData").value="";
+
  $("eventoLocal").value="";
 
  await carregarEventos();
- toast("Evento criado.");
+
+ toast(
+  "Evento criado."
+ );
 }
+
 
 async function excluirEvento(id){
 
- if(!confirm("Eliminar este evento?"))return;
+ if(!confirm(
+  "Eliminar este evento?"
+ ))return;
 
- const {error}=await db
-  .from("eventos")
-  .delete()
-  .eq("id",id);
+ const {error}=
+  await db
+   .from("eventos")
+   .delete()
+   .eq("id",id);
 
  if(error){
-  toast("Erro ao eliminar evento: "+error.message,true);
+
+  toast(
+   "Erro ao eliminar evento: "+
+   error.message,
+   true
+  );
+
   return;
  }
 
  await carregarEventos();
- toast("Evento eliminado.");
+
+ toast(
+  "Evento eliminado."
+ );
 }
+
 
 function renderEventos(){
 
- $("listaEventos").innerHTML=eventos.map(e=>`
-  <tr>
-   <td><strong>${esc(e.nome||"")}</strong></td>
-   <td>${esc(e.data||"")}</td>
-   <td>${esc(e.local||"")}</td>
-   <td>
-    <button class="btn btn-danger" onclick="excluirEvento('${e.id}')">🗑️</button>
-   </td>
-  </tr>
- `).join("")||`
-  <tr><td colspan="4" style="text-align:center">Nenhum evento.</td></tr>
- `;
+ $("listaEventos").innerHTML=
+  eventos.map(e=>`
+
+   <tr>
+
+    <td>
+     <strong>
+      ${esc(e.nome||"")}
+     </strong>
+    </td>
+
+    <td>
+     ${esc(e.data||"")}
+    </td>
+
+    <td>
+     ${esc(e.local||"")}
+    </td>
+
+    <td>
+
+     <button
+      class="btn btn-danger"
+      onclick="excluirEvento('${e.id}')"
+     >
+      🗑️
+     </button>
+
+    </td>
+
+   </tr>
+
+  `).join("")||
+
+  `
+   <tr>
+    <td
+     colspan="4"
+     style="text-align:center"
+    >
+     Nenhum evento.
+    </td>
+   </tr>
+  `;
 }
+
 
 /* ==========================================================
    META
@@ -1029,99 +1849,200 @@ function renderEventos(){
 
 async function carregarMeta(){
 
- const {data,error}=await db
-  .from("metas")
-  .select("*")
-  .limit(1)
-  .maybeSingle();
+ const {data,error}=
+  await db
+   .from("metas")
+   .select("*")
+   .limit(1)
+   .maybeSingle();
 
  if(error){
+
   console.error(error);
-  meta={valor:0,guardado:0};
+
+  meta={
+   valor:0,
+   guardado:0
+  };
+
   return;
  }
 
- meta=data||{valor:0,guardado:0};
+ meta=
+  data||
+  {
+   valor:0,
+   guardado:0
+  };
+
  renderMeta();
 }
 
+
 async function definirMeta(){
 
- const valor=Number($("novaMeta").value);
+ const valor=
+  Number($("novaMeta").value);
 
  if(!valor||valor<=0){
-  toast("Valor da meta inválido.",true);
+
+  toast(
+   "Valor da meta inválido.",
+   true
+  );
+
   return;
  }
 
  if(meta.id){
-  const {error}=await db
-   .from("metas")
-   .update({valor,guardado:0})
-   .eq("id",meta.id);
+
+  const {error}=
+   await db
+    .from("metas")
+    .update({
+     valor,
+     guardado:0
+    })
+    .eq(
+     "id",
+     meta.id
+    );
 
   if(error){
-   toast("Erro: "+error.message,true);
+
+   toast(
+    "Erro: "+
+    error.message,
+    true
+   );
+
    return;
   }
+
  }else{
-  const {error}=await db
-   .from("metas")
-   .insert({valor,guardado:0});
+
+  const {error}=
+   await db
+    .from("metas")
+    .insert({
+     valor,
+     guardado:0
+    });
 
   if(error){
-   toast("Erro: "+error.message,true);
+
+   toast(
+    "Erro: "+
+    error.message,
+    true
+   );
+
    return;
   }
  }
 
  $("novaMeta").value="";
+
  await carregarMeta();
- toast("Meta definida.");
+
+ toast(
+  "Meta definida."
+ );
 }
+
 
 async function guardarMeta(){
 
- const valor=Number($("guardarMeta").value);
+ const valor=
+  Number($("guardarMeta").value);
 
  if(!valor||valor<=0){
-  toast("Valor inválido.",true);
+
+  toast(
+   "Valor inválido.",
+   true
+  );
+
   return;
  }
 
  if(!meta.valor){
-  toast("Defina uma meta primeiro.",true);
+
+  toast(
+   "Defina uma meta primeiro.",
+   true
+  );
+
   return;
  }
 
- const novo=Math.min(Number(meta.guardado||0)+valor,Number(meta.valor));
+ const novo=
+  Math.min(
+   Number(meta.guardado||0)+valor,
+   Number(meta.valor)
+  );
 
- const {error}=await db
-  .from("metas")
-  .update({guardado:novo})
-  .eq("id",meta.id);
+ const {error}=
+  await db
+   .from("metas")
+   .update({
+    guardado:novo
+   })
+   .eq(
+    "id",
+    meta.id
+   );
 
  if(error){
-  toast("Erro: "+error.message,true);
+
+  toast(
+   "Erro: "+
+   error.message,
+   true
+  );
+
   return;
  }
 
  $("guardarMeta").value="";
+
  await carregarMeta();
- toast("Valor guardado na meta.");
+
+ toast(
+  "Valor guardado na meta."
+ );
 }
+
 
 function renderMeta(){
 
- const valor=Number(meta.valor||0);
- const guardado=Number(meta.guardado||0);
- const pct=valor?Math.min(100,guardado/valor*100):0;
+ const valor=
+  Number(meta.valor||0);
 
- $("metaValor").textContent=kz(valor);
- $("metaGuardado").textContent=kz(guardado);
- $("metaPct").textContent=pct.toFixed(0)+"%";
- $("barra").style.width=pct+"%";
+ const guardado=
+  Number(meta.guardado||0);
+
+ const pct=
+  valor
+   ?Math.min(
+    100,
+    guardado/valor*100
+   )
+   :0;
+
+ $("metaValor").textContent=
+  kz(valor);
+
+ $("metaGuardado").textContent=
+  kz(guardado);
+
+ $("metaPct").textContent=
+  pct.toFixed(0)+"%";
+
+ $("barra").style.width=
+  pct+"%";
 }
+
 
 /* ==========================================================
    DASHBOARD
@@ -1130,270 +2051,726 @@ function renderMeta(){
 function atualizarDashboard(){
 
  let receitas=0;
+
  let despesas=0;
 
  transacoes.forEach(t=>{
-  const v=Number(t.valor||0);
-  if(v>=0)receitas+=v;
-  else despesas+=Math.abs(v);
+
+  const v=
+   Number(t.valor||0);
+
+  if(v>=0)
+   receitas+=v;
+  else
+   despesas+=Math.abs(v);
+
  });
 
- const saldo=receitas-despesas;
+ const saldo=
+  receitas-despesas;
 
- $("dashMembros").textContent=membros.length;
- $("dashReceitas").textContent=kz(receitas);
- $("dashDespesas").textContent=kz(despesas);
- $("dashSaldo").textContent=kz(saldo);
+ $("dashMembros").textContent=
+  membros.length;
 
- $("finR").textContent=kz(receitas);
- $("finD").textContent=kz(despesas);
- $("finS").textContent=kz(saldo);
+ $("dashReceitas").textContent=
+  kz(receitas);
 
- const ult=transacoes.slice(0,5);
+ $("dashDespesas").textContent=
+  kz(despesas);
 
- $("ultimas").innerHTML=ult.map(t=>`
-  <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee">
-   <span>${esc(t.descricao||"")}</span>
-   <strong style="color:${Number(t.valor)>=0?"#28a745":"#dc3545"}">
-    ${Number(t.valor)>=0?"+":""}${kz(t.valor)}
-   </strong>
-  </div>
- `).join("")||"Nenhuma transação.";
+ $("dashSaldo").textContent=
+  kz(saldo);
 
- const hoje=new Date().toISOString().slice(0,10);
+ $("finR").textContent=
+  kz(receitas);
 
- const prox=eventos
-  .filter(e=>e.data>=hoje)
-  .slice(0,5);
+ $("finD").textContent=
+  kz(despesas);
 
- $("proximos").innerHTML=prox.map(e=>`
-  <div style="padding:8px 0;border-bottom:1px solid #eee">
-   <strong>${esc(e.nome)}</strong>
-   <span style="float:right">${esc(e.data)}</span>
-   <small style="display:block;color:#777">${esc(e.local||"")}</small>
-  </div>
- `).join("")||"Nenhum evento próximo.";
+ $("finS").textContent=
+  kz(saldo);
+
+ const ult=
+  transacoes.slice(0,5);
+
+ $("ultimas").innerHTML=
+  ult.map(t=>`
+
+   <div
+    style="
+     display:flex;
+     justify-content:space-between;
+     padding:8px 0;
+     border-bottom:1px solid #eee
+    "
+   >
+
+    <span>
+     ${esc(t.descricao||"")}
+    </span>
+
+    <strong
+     style="
+      color:${
+       Number(t.valor)>=0
+        ?"#28a745"
+        :"#dc3545"
+      }
+     "
+    >
+
+     ${
+      Number(t.valor)>=0
+       ?"+"
+       :""
+     }${kz(t.valor)}
+
+    </strong>
+
+   </div>
+
+  `).join("")||
+  "Nenhuma transação.";
+
+ const hoje=
+  new Date()
+   .toISOString()
+   .slice(0,10);
+
+ const prox=
+  eventos
+   .filter(
+    e=>e.data>=hoje
+   )
+   .slice(0,5);
+
+ $("proximos").innerHTML=
+  prox.map(e=>`
+
+   <div
+    style="
+     padding:8px 0;
+     border-bottom:1px solid #eee
+    "
+   >
+
+    <strong>
+     ${esc(e.nome)}
+    </strong>
+
+    <span style="float:right">
+     ${esc(e.data)}
+    </span>
+
+    <small
+     style="
+      display:block;
+      color:#777
+     "
+    >
+     ${esc(e.local||"")}
+    </small>
+
+   </div>
+
+  `).join("")||
+  "Nenhum evento próximo.";
 }
+
 
 /* ==========================================================
    NAVEGAÇÃO
    ========================================================== */
 
 function menu(){
- $("nav").classList.toggle("aberto");
+
+ $("nav")
+  .classList
+  .toggle("aberto");
 }
+
 
 function abrir(id){
 
- document.querySelectorAll("section").forEach(s=>s.classList.remove("ativo"));
- $(id).classList.add("ativo");
+ document
+  .querySelectorAll("section")
+  .forEach(
+   s=>s.classList.remove("ativo")
+  );
 
- document.querySelectorAll("nav button").forEach(b=>b.classList.remove("ativo"));
+ $(id)
+  .classList
+  .add("ativo");
 
- const bot=[...document.querySelectorAll("nav button")]
-  .find(b=>b.getAttribute("onclick")?.includes("'"+id+"'"));
+ document
+  .querySelectorAll("nav button")
+  .forEach(
+   b=>b.classList.remove("ativo")
+  );
 
- if(bot)bot.classList.add("ativo");
+ const bot=
+  [...document.querySelectorAll("nav button")]
+   .find(
+    b=>
+     b.getAttribute("onclick")
+      ?.includes("'"+id+"'")
+   );
 
- $("nav").classList.remove("aberto");
+ if(bot)
+  bot.classList.add("ativo");
+
+ $("nav")
+  .classList
+  .remove("aberto");
 }
+
 
 function tema(){
- document.body.classList.toggle("dark");
- localStorage.setItem("ojv_dark",document.body.classList.contains("dark"));
+
+ document.body
+  .classList
+  .toggle("dark");
+
+ localStorage.setItem(
+  "ojv_dark",
+  document.body.classList.contains("dark")
+ );
 }
+
 
 /* ==========================================================
    CSV
    ========================================================== */
 
-function baixar(nome,conteudo,tipo="text/csv"){
+function baixar(
+ nome,
+ conteudo,
+ tipo="text/csv"
+){
 
- const blob=new Blob([conteudo],{type:tipo});
- const url=URL.createObjectURL(blob);
- const a=document.createElement("a");
+ const blob=
+  new Blob(
+   [conteudo],
+   {type:tipo}
+  );
+
+ const url=
+  URL.createObjectURL(blob);
+
+ const a=
+  document.createElement("a");
+
  a.href=url;
+
  a.download=nome;
+
  a.click();
+
  URL.revokeObjectURL(url);
 }
 
+
 function exportarMembros(){
 
- let csv="Nome,E-mail,Telefone,Aniversário,Status\n";
+ let csv=
+  "Nome,E-mail,Telefone,Aniversário,Status\n";
 
  membros.forEach(m=>{
-  csv+=`"${m.nome||""}","${m.email||""}","${m.telefone||""}","${m.aniversario||""}","${m.status||""}"\n`;
+
+  csv+=
+   `"${m.nome||""}",`+
+   `"${m.email||""}",`+
+   `"${m.telefone||""}",`+
+   `"${m.aniversario||""}",`+
+   `"${m.status||""}"\n`;
+
  });
 
- baixar("membros_ojv.csv",csv);
+ baixar(
+  "membros_ojv.csv",
+  csv
+ );
 }
+
 
 /* ==========================================================
    PDF
    ========================================================== */
 
+async function carregarLogoParaPDF(){
+
+ /*
+  O logo.png deve estar na mesma pasta do index.html.
+  O fetch é usado para obter o arquivo diretamente.
+ */
+
+ try{
+
+  const resposta=
+   await fetch(
+    "logo.png",
+    {
+     cache:"no-store"
+    }
+   );
+
+  if(!resposta.ok){
+
+   throw new Error(
+    "Logo não encontrado: "+
+    resposta.status
+   );
+
+  }
+
+  const blob=
+   await resposta.blob();
+
+  return await new Promise(
+   (resolve,reject)=>{
+
+    const leitor=
+     new FileReader();
+
+    leitor.onload=
+     ()=>resolve(leitor.result);
+
+    leitor.onerror=
+     reject;
+
+    leitor.readAsDataURL(blob);
+
+   }
+  );
+
+ }catch(erro){
+
+  console.error(
+   "Erro ao carregar logo.png:",
+   erro
+  );
+
+  return null;
+ }
+}
+
+
 async function gerarPDF(){
 
- toast("A preparar o relatório PDF...");
+ toast(
+  "A preparar o relatório PDF..."
+ );
 
- const {jsPDF}=window.jspdf;
- const pdf=new jsPDF();
+ const {jsPDF}=
+  window.jspdf;
+
+ const pdf=
+  new jsPDF();
 
  const margem=18;
+
  let y=18;
 
- /* LOGOTIPO */
- try{
-  const img=new Image();
-  img.src="logo.png";
 
-  await new Promise(resolve=>{
-   img.onload=resolve;
-   img.onerror=resolve;
-  });
+ /* ========================================================
+    LOGOTIPO
+    ======================================================== */
 
-  if(img.complete&&img.naturalWidth){
-   pdf.addImage(img,"PNG",margem,y,25,25);
+ const logoBase64=
+  await carregarLogoParaPDF();
+
+ if(logoBase64){
+
+  try{
+
+   pdf.addImage(
+    logoBase64,
+    "PNG",
+    margem,
+    y,
+    30,
+    30
+   );
+
+  }catch(erro){
+
+   console.error(
+    "Erro ao inserir logo no PDF:",
+    erro
+   );
+
   }
- }catch(e){}
+ }
 
- pdf.setFont("helvetica","bold");
+
+ /* ========================================================
+    CABEÇALHO
+    ======================================================== */
+
+ pdf.setFont(
+  "helvetica",
+  "bold"
+ );
+
  pdf.setFontSize(16);
- pdf.text("O.J.V. - Jovens Visionários",50,y+8);
 
- pdf.setFont("helvetica","normal");
+ pdf.text(
+  "O.J.V. - Jovens Visionários",
+  55,
+  y+10
+ );
+
+ pdf.setFont(
+  "helvetica",
+  "normal"
+ );
+
  pdf.setFontSize(11);
- pdf.text("Relatório Geral",50,y+16);
 
- y+=34;
+ pdf.text(
+  "Relatório Geral",
+  55,
+  y+18
+ );
+
+ y+=40;
 
  pdf.setFontSize(10);
+
  pdf.text(
-  "Data: "+new Date().toLocaleDateString("pt-AO"),
-  margem,y
+  "Data: "+
+  new Date()
+   .toLocaleDateString("pt-AO"),
+  margem,
+  y
  );
 
  y+=12;
 
+
+ /* ========================================================
+    FINANCEIRO
+    ======================================================== */
+
  let receitas=0;
+
  let despesas=0;
 
  transacoes.forEach(t=>{
-  const v=Number(t.valor||0);
-  if(v>=0)receitas+=v;
-  else despesas+=Math.abs(v);
+
+  const v=
+   Number(t.valor||0);
+
+  if(v>=0)
+   receitas+=v;
+  else
+   despesas+=Math.abs(v);
+
  });
 
- const saldo=receitas-despesas;
+ const saldo=
+  receitas-despesas;
 
- /* FINANCEIRO */
- pdf.setFont("helvetica","bold");
+
+ pdf.setFont(
+  "helvetica",
+  "bold"
+ );
+
  pdf.setFontSize(12);
- pdf.text("FINANCEIRO",margem,y);
+
+ pdf.text(
+  "FINANCEIRO",
+  margem,
+  y
+ );
+
  y+=7;
 
- pdf.setFont("helvetica","normal");
- pdf.setFontSize(10);
- pdf.text("Receitas: "+kz(receitas),margem,y);y+=6;
- pdf.text("Despesas: "+kz(despesas),margem,y);y+=6;
- pdf.text("Saldo: "+kz(saldo),margem,y);y+=12;
+ pdf.setFont(
+  "helvetica",
+  "normal"
+ );
 
- /* MEMBROS */
- pdf.setFont("helvetica","bold");
+ pdf.setFontSize(10);
+
+ pdf.text(
+  "Receitas: "+
+  kz(receitas),
+  margem,
+  y
+ );
+
+ y+=6;
+
+ pdf.text(
+  "Despesas: "+
+  kz(despesas),
+  margem,
+  y
+ );
+
+ y+=6;
+
+ pdf.text(
+  "Saldo: "+
+  kz(saldo),
+  margem,
+  y
+ );
+
+ y+=12;
+
+
+ /* ========================================================
+    MEMBROS
+    ======================================================== */
+
+ pdf.setFont(
+  "helvetica",
+  "bold"
+ );
+
  pdf.setFontSize(12);
- pdf.text("MEMBROS",margem,y);
+
+ pdf.text(
+  "MEMBROS",
+  margem,
+  y
+ );
+
  y+=7;
 
- pdf.setFont("helvetica","normal");
+ pdf.setFont(
+  "helvetica",
+  "normal"
+ );
+
  pdf.setFontSize(10);
 
- const ativos=membros.filter(m=>m.status==="Ativo").length;
- const inativos=membros.filter(m=>m.status!=="Ativo").length;
+ const ativos=
+  membros.filter(
+   m=>m.status==="Ativo"
+  ).length;
+
+ const inativos=
+  membros.filter(
+   m=>m.status!=="Ativo"
+  ).length;
 
  pdf.text(
   `Total: ${membros.length} | Ativos: ${ativos} | Inativos: ${inativos}`,
-  margem,y
+  margem,
+  y
  );
 
  y+=12;
 
- /* EVENTOS */
- pdf.setFont("helvetica","bold");
+
+ /* ========================================================
+    EVENTOS
+    ======================================================== */
+
+ pdf.setFont(
+  "helvetica",
+  "bold"
+ );
+
  pdf.setFontSize(12);
- pdf.text("EVENTOS",margem,y);
+
+ pdf.text(
+  "EVENTOS",
+  margem,
+  y
+ );
+
  y+=7;
 
- pdf.setFont("helvetica","normal");
+ pdf.setFont(
+  "helvetica",
+  "normal"
+ );
+
  pdf.setFontSize(10);
 
- const agendados=eventos.filter(e=>e.status==="Agendado").length;
+ const agendados=
+  eventos.filter(
+   e=>e.status==="Agendado"
+  ).length;
 
  pdf.text(
   `Total: ${eventos.length} | Agendados: ${agendados}`,
-  margem,y
+  margem,
+  y
  );
 
  y+=12;
 
- /* META */
- pdf.setFont("helvetica","bold");
+
+ /* ========================================================
+    META
+    ======================================================== */
+
+ pdf.setFont(
+  "helvetica",
+  "bold"
+ );
+
  pdf.setFontSize(12);
- pdf.text("META",margem,y);
+
+ pdf.text(
+  "META",
+  margem,
+  y
+ );
+
  y+=7;
 
- pdf.setFont("helvetica","normal");
+ pdf.setFont(
+  "helvetica",
+  "normal"
+ );
+
  pdf.setFontSize(10);
 
- const mv=Number(meta.valor||0);
- const mg=Number(meta.guardado||0);
- const mp=mv?Math.min(100,mg/mv*100):0;
+ const mv=
+  Number(meta.valor||0);
+
+ const mg=
+  Number(meta.guardado||0);
+
+ const mp=
+  mv
+   ?Math.min(
+    100,
+    mg/mv*100
+   )
+   :0;
 
  pdf.text(
   `Guardado: ${kz(mg)} / ${kz(mv)} (${mp.toFixed(0)}%)`,
-  margem,y
+  margem,
+  y
  );
 
  y+=22;
 
- /* ASSINATURAS */
- pdf.setFont("helvetica","bold");
+
+ /* ========================================================
+    ASSINATURAS
+    ======================================================== */
+
+ pdf.setFont(
+  "helvetica",
+  "bold"
+ );
+
  pdf.setFontSize(12);
- pdf.text("ASSINATURAS",margem,y);
+
+ pdf.text(
+  "ASSINATURAS",
+  margem,
+  y
+ );
 
  y+=20;
 
  const largura=80;
 
- pdf.line(margem,y,margem+largura,y);
- pdf.line(112,y,112+largura,y);
+ pdf.line(
+  margem,
+  y,
+  margem+largura,
+  y
+ );
 
- pdf.setFont("helvetica","normal");
+ pdf.line(
+  112,
+  y,
+  112+largura,
+  y
+ );
+
+ pdf.setFont(
+  "helvetica",
+  "normal"
+ );
+
  pdf.setFontSize(9);
 
- pdf.text("Presidente",margem,y+5);
- pdf.text("Director",112,y+5);
+ pdf.text(
+  "Presidente",
+  margem,
+  y+5
+ );
+
+ pdf.text(
+  "Director",
+  112,
+  y+5
+ );
 
  y+=30;
 
- pdf.line(margem,y,margem+largura,y);
- pdf.line(112,y,112+largura,y);
+ pdf.line(
+  margem,
+  y,
+  margem+largura,
+  y
+ );
 
- pdf.text("Financeiro / Tesoureiro",margem,y+5);
- pdf.text("Desenvolvedor / Programador",112,y+5);
+ pdf.line(
+  112,
+  y,
+  112+largura,
+  y
+ );
+
+ pdf.text(
+  "Financeiro / Tesoureiro",
+  margem,
+  y+5
+ );
+
+ pdf.text(
+  "Desenvolvedor / Programador",
+  112,
+  y+5
+ );
 
  y+=25;
 
+
+ /* ========================================================
+    RODAPÉ
+    ======================================================== */
+
  pdf.setFontSize(8);
+
  pdf.text(
   "O.J.V. Professional Plus - 2026",
-  margem,y
+  margem,
+  y
  );
 
- pdf.save("OJV_Relatorio_"+new Date().toISOString().slice(0,10)+".pdf");
 
- toast("PDF gerado com sucesso.");
+ /* ========================================================
+    GUARDAR
+    ======================================================== */
+
+ pdf.save(
+  "OJV_Relatorio_"+
+  new Date()
+   .toISOString()
+   .slice(0,10)+
+  ".pdf"
+ );
+
+ toast(
+  "PDF gerado com sucesso."
+ );
 }
+
 
 /* ==========================================================
    DATA
@@ -1403,61 +2780,132 @@ function formatarData(v){
 
  if(!v)return"";
 
- const d=new Date(v);
+ const d=
+  new Date(v);
 
- if(isNaN(d))return String(v);
+ if(isNaN(d))
+  return String(v);
 
- return d.toLocaleDateString("pt-AO");
+ return d.toLocaleDateString(
+  "pt-AO"
+ );
 }
+
 
 /* ==========================================================
    MÁSCARA DATA
    ========================================================== */
 
-$("mNascimento").addEventListener("input",function(){
+$("mNascimento")
+ .addEventListener(
+  "input",
+  function(){
 
- let v=this.value.replace(/\D/g,"").slice(0,8);
+   let v=
+    this.value
+     .replace(/\D/g,"")
+     .slice(0,8);
 
- if(v.length>4)
-  v=v.slice(0,2)+"/"+v.slice(2,4)+"/"+v.slice(4);
- else if(v.length>2)
-  v=v.slice(0,2)+"/"+v.slice(2);
+   if(v.length>4){
 
- this.value=v;
-});
+    v=
+     v.slice(0,2)+
+     "/"+
+     v.slice(2,4)+
+     "/"+
+     v.slice(4);
+
+   }else if(v.length>2){
+
+    v=
+     v.slice(0,2)+
+     "/"+
+     v.slice(2);
+   }
+
+   this.value=v;
+
+  }
+ );
+
 
 /* ==========================================================
    FECHAR MODAL
    ========================================================== */
 
-$("modalMembro").addEventListener("click",e=>{
- if(e.target===$("modalMembro"))fecharModal();
-});
+$("modalMembro")
+ .addEventListener(
+  "click",
+  e=>{
 
-document.addEventListener("keydown",e=>{
- if(e.key==="Escape")fecharModal();
-});
+   if(
+    e.target===
+    $("modalMembro")
+   ){
+
+    fecharModal();
+
+   }
+
+  }
+ );
+
+
+document.addEventListener(
+ "keydown",
+ e=>{
+
+  if(e.key==="Escape")
+   fecharModal();
+
+ }
+);
+
 
 /* ==========================================================
    TEMA
    ========================================================== */
 
-if(localStorage.getItem("ojv_dark")==="true")
- document.body.classList.add("dark");
+if(
+ localStorage.getItem(
+  "ojv_dark"
+ )==="true"
+){
+
+ document.body
+  .classList
+  .add("dark");
+
+}
+
 
 /* ==========================================================
    SUPABASE SESSION
    ========================================================== */
 
-db.auth.onAuthStateChange((event,session)=>{
+db.auth.onAuthStateChange(
+ (event,session)=>{
 
- if(session){
-  $("loginScreen").classList.add("hidden");
-  $("app").classList.remove("hidden");
-  $("usuarioEmail").textContent=session.user.email||"Utilizador";
+  if(session){
+
+   $("loginScreen")
+    .classList
+    .add("hidden");
+
+   $("app")
+    .classList
+    .remove("hidden");
+
+   $("usuarioEmail")
+    .textContent=
+    session.user.email||
+    "Utilizador";
+
+  }
+
  }
+);
 
-});
 
 /* ==========================================================
    INICIAR
@@ -1466,5 +2914,6 @@ db.auth.onAuthStateChange((event,session)=>{
 verificarSessao();
 
 </script>
+
 </body>
 </html>
