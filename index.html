@@ -2,4428 +2,1469 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, shrink-to-fit=no, viewport-fit=cover">
-
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=5">
 <title>O.J.V. Professional Plus</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-    background:#f4f6f9;
-    color:#1e2a3a;
-    min-height:100vh;
-    padding-bottom:70px;
+ font-family:Arial,Helvetica,sans-serif;
+ background:#f3f5f8;color:#182536;
+ min-height:100vh;padding-bottom:60px
 }
-
-button,input,select,textarea{
-    font-family:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-/* LOGIN */
-
-#loginTela{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    background:linear-gradient(135deg,#071525,#0b1a2e,#123452);
-}
-
-.login-box{
-    width:100%;
-    max-width:420px;
-    background:#fff;
-    padding:30px 24px;
-    border-radius:18px;
-    box-shadow:0 15px 50px rgba(0,0,0,.30);
-}
-
-.login-logo{
-    width:90px;
-    height:90px;
-    display:block;
-    margin:0 auto 15px;
-    border-radius:50%;
-    object-fit:cover;
-    border:3px solid #e9ecef;
-}
-
-.login-box h1{
-    text-align:center;
-    color:#0b1a2e;
-    font-size:1.6rem;
-}
-
-.login-box .sub{
-    text-align:center;
-    color:#777;
-    margin:6px 0 22px;
-}
-
-.login-box label{
-    display:block;
-    font-weight:600;
-    margin:12px 0 6px;
-}
-
-.login-box input{
-    width:100%;
-    padding:14px;
-    border:1px solid #ced4da;
-    border-radius:8px;
-    font-size:1rem;
-    outline:none;
-}
-
-.login-box input:focus{
-    border-color:#1ea5dc;
-    box-shadow:0 0 0 3px rgba(30,165,220,.15);
-}
-
-.login-btn{
-    width:100%;
-    padding:15px;
-    margin-top:18px;
-    border:0;
-    border-radius:8px;
-    background:#1ea5dc;
-    color:white;
-    font-size:1rem;
-    font-weight:700;
-}
-
-.login-btn:active{
-    transform:scale(.98);
-}
-
-.login-secondary{
-    width:100%;
-    padding:13px;
-    margin-top:9px;
-    border:2px solid #0b1a2e;
-    border-radius:8px;
-    background:white;
-    color:#0b1a2e;
-    font-weight:700;
-}
-
-.login-info{
-    text-align:center;
-    font-size:.78rem;
-    color:#777;
-    margin-top:16px;
-}
-
-/* APP */
-
-#app{
-    display:none;
-}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
 
 header{
-    background:#0b1a2e;
-    color:#fff;
-    padding:12px 16px;
-    display:flex;
-    flex-direction:column;
-    position:sticky;
-    top:0;
-    z-index:100;
+ background:#0b1a2e;color:white;padding:12px 16px;
+ position:sticky;top:0;z-index:1000
 }
-
-.topo{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    width:100%;
-}
-
-.logo{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
+.topo{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.logo{display:flex;align-items:center;gap:10px}
 .logo img{
-    width:48px;
-    height:48px;
-    border-radius:50%;
-    object-fit:cover;
-    border:2px solid rgba(255,255,255,.3);
+ width:46px;height:46px;border-radius:50%;
+ object-fit:cover;border:2px solid #fff
 }
-
-.logo h1{
-    font-size:1.15rem;
+.logo-fallback{
+ width:46px;height:46px;border-radius:50%;
+ background:#1ea5dc;display:flex;align-items:center;
+ justify-content:center;font-weight:bold
 }
-
-.logo small{
-    display:block;
-    opacity:.7;
-    font-size:.72rem;
-}
-
-.acoes{
-    display:flex;
-    gap:7px;
-    align-items:center;
-}
-
-.acoes button{
-    background:transparent;
-    border:1px solid rgba(255,255,255,.3);
-    color:#fff;
-    padding:8px 10px;
-    border-radius:7px;
-}
-
+.logo h1{font-size:18px}
+.logo small{display:block;font-size:11px;opacity:.7}
 .menu-toggle{
-    background:#fff!important;
-    color:#0b1a2e!important;
-    border:0!important;
-    font-weight:700;
+ background:white;border:0;border-radius:25px;
+ padding:9px 15px;color:#0b1a2e;font-weight:bold
 }
-
+.acoes{display:flex;gap:7px;align-items:center}
+.acoes>button:first-child{
+ background:transparent;color:white;border:1px solid #ffffff55;
+ border-radius:6px;padding:8px
+}
 nav{
-    background:#0b1a2e;
-    display:none;
-    flex-direction:column;
-    padding:10px 0;
-    border-top:1px solid rgba(255,255,255,.1);
+ display:none;flex-direction:column;margin-top:10px;
+ border-top:1px solid #ffffff22
 }
-
-nav.aberto{
-    display:flex;
-}
-
+nav.aberto{display:flex}
 nav button{
-    padding:12px 16px;
-    border:0;
-    background:transparent;
-    color:rgba(255,255,255,.75);
-    text-align:left;
-    font-size:1rem;
+ background:transparent;color:#ddd;border:0;
+ padding:13px;text-align:left;border-bottom:1px solid #ffffff0d
 }
+nav button.ativo{background:#ffffff12;color:white;border-left:4px solid #1ea5dc}
 
-nav button.ativo{
-    background:rgba(255,255,255,.1);
-    color:#fff;
-    border-left:4px solid #1ea5dc;
-}
-
-.container{
-    max-width:750px;
-    margin:auto;
-    padding:16px;
-}
-
+.container{max-width:760px;margin:auto;padding:15px}
 section{
-    display:none;
-    background:#fff;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 4px 12px rgba(0,0,0,.05);
-    margin-bottom:20px;
+ display:none;background:white;border-radius:12px;
+ padding:20px;margin-bottom:15px;
+ box-shadow:0 3px 15px #0000000b
 }
-
-section.ativo{
-    display:block;
-}
-
-section h2{
-    color:#0b1a2e;
-    font-size:1.4rem;
-}
-
+section.ativo{display:block}
+h2{color:#0b1a2e;margin-bottom:5px}
 .subtitulo{
-    color:#777;
-    font-size:.9rem;
-    margin:5px 0 17px;
-    padding-bottom:10px;
-    border-bottom:2px solid #f0f0f0;
+ color:#777;font-size:13px;border-bottom:2px solid #eee;
+ padding-bottom:10px;margin-bottom:15px
 }
-
-/* CARDS */
 
 .cards{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:10px;margin-bottom:15px
 }
-
 .card{
-    background:#f8f9fc;
-    border:1px solid #e9ecef;
-    border-radius:9px;
-    padding:15px;
-    text-align:center;
+ padding:16px;border-radius:9px;text-align:center;
+ background:#f8f9fb;border:1px solid #e6e9ed
 }
-
-.card .numero{
-    display:block;
-    font-size:1.7rem;
-    font-weight:800;
-}
-
+.card .numero{display:block;font-size:25px;font-weight:bold}
 .card .rotulo{
-    display:block;
-    color:#6c757d;
-    font-size:.7rem;
-    text-transform:uppercase;
-    margin-top:4px;
+ display:block;font-size:11px;color:#6c757d;
+ margin-top:4px;text-transform:uppercase
 }
+.verde .numero{color:#28a745}
+.vermelho .numero{color:#dc3545}
+.azul .numero{color:#0b1a2e}
+.ouro .numero{color:#d39e00}
 
-.card.verde .numero{
-    color:#28a745;
+.form{display:flex;flex-direction:column;gap:10px;margin:14px 0}
+.form label{font-size:13px;font-weight:bold;color:#495057}
+input,select,textarea{
+ width:100%;padding:13px;border:1px solid #ced4da;
+ border-radius:7px;background:white;color:#182536;outline:none
 }
-
-.card.vermelho .numero{
-    color:#dc3545;
+input:focus,select:focus,textarea:focus{
+ border-color:#1ea5dc;box-shadow:0 0 0 3px #1ea5dc22
 }
-
-.card.azul .numero{
-    color:#0b1a2e;
-}
-
-.card.ouro .numero{
-    color:#d39e00;
-}
-
-/* FORM */
-
-.grupo-form{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    margin:14px 0;
-}
-
-.grupo-form label{
-    font-weight:600;
-    font-size:.9rem;
-}
-
-.grupo-form input,
-.grupo-form select,
-.grupo-form textarea{
-    width:100%;
-    padding:14px;
-    border:1px solid #ced4da;
-    border-radius:7px;
-    font-size:1rem;
-    background:#fff;
-    color:#1e2a3a;
-    outline:none;
-}
-
-.grupo-form input:focus,
-.grupo-form select:focus,
-.grupo-form textarea:focus{
-    border-color:#1ea5dc;
-    box-shadow:0 0 0 3px rgba(30,165,220,.15);
-}
-
 .btn{
-    width:100%;
-    min-height:50px;
-    padding:14px;
-    border:0;
-    border-radius:7px;
-    color:#fff;
-    background:#1ea5dc;
-    font-size:1rem;
-    font-weight:700;
-    margin:3px 0;
+ width:100%;padding:14px;border:0;border-radius:7px;
+ background:#1ea5dc;color:white;font-weight:bold;
+ margin:3px 0;min-height:48px
 }
+.btn-success{background:#28a745}
+.btn-danger{background:#dc3545}
+.btn-dark{background:#0b1a2e}
+.btn-gold{background:#d39e00;color:#17202c}
+.btn-outline{background:white;color:#0b1a2e;border:2px solid #0b1a2e}
 
-.btn-success{
-    background:#28a745;
+.toolbar{display:flex;gap:8px;margin-bottom:12px}
+.toolbar>*{flex:1}
+
+.table-wrap{
+ overflow-x:auto;border:1px solid #dee2e6;border-radius:8px
 }
-
-.btn-danger{
-    background:#dc3545;
-}
-
-.btn-ouro{
-    background:#d39e00;
-    color:#1e2a3a;
-}
-
-.btn-outline{
-    background:#fff;
-    color:#0b1a2e;
-    border:2px solid #0b1a2e;
-}
-
-.btn:active{
-    transform:scale(.98);
-}
-
-/* TABLE */
-
-.tabela-wrapper{
-    width:100%;
-    overflow-x:auto;
-    border:1px solid #dee2e6;
-    border-radius:8px;
-    margin-top:12px;
-}
-
-table{
-    width:100%;
-    min-width:480px;
-    border-collapse:collapse;
-    font-size:.84rem;
-}
-
+table{width:100%;border-collapse:collapse;min-width:500px;font-size:13px}
 th{
-    background:#f8f9fa;
-    padding:11px 8px;
-    text-align:left;
-    border-bottom:2px solid #dee2e6;
+ background:#f7f8fa;padding:11px 8px;text-align:left;
+ border-bottom:2px solid #dee2e6
 }
-
-td{
-    padding:11px 8px;
-    border-bottom:1px solid #f1f3f5;
-}
-
+td{padding:10px 8px;border-bottom:1px solid #eee}
 .badge{
-    display:inline-block;
-    padding:4px 10px;
-    border-radius:50px;
-    font-size:.7rem;
-    font-weight:700;
+ display:inline-block;padding:4px 9px;border-radius:30px;
+ font-size:10px;font-weight:bold
+}
+.badge-ok{background:#d4edda;color:#155724}
+.badge-no{background:#f8d7da;color:#721c24}
+.badge-info{background:#d1ecf1;color:#0c5460}
+
+.actions{display:flex;gap:5px}
+.actions button{
+ width:auto;min-height:32px;padding:5px 9px;
+ font-size:12px;margin:0
 }
 
-.badge-sucesso{
-    background:#d4edda;
-    color:#155724;
+.box{
+ background:#f8f9fc;border:1px solid #e5e8eb;
+ border-radius:9px;padding:15px;margin:12px 0
 }
 
-.badge-perigo{
-    background:#f8d7da;
-    color:#721c24;
+.login{
+ min-height:100vh;display:flex;align-items:center;
+ justify-content:center;padding:20px;
+ background:linear-gradient(135deg,#0b1a2e,#123b60)
 }
-
-.badge-info{
-    background:#d1ecf1;
-    color:#0c5460;
+.login-box{
+ width:100%;max-width:420px;background:white;
+ border-radius:15px;padding:25px;
+ box-shadow:0 15px 50px #0005
 }
-
-.grupo-acoes{
-    display:flex;
-    gap:5px;
+.login-logo{text-align:center;margin-bottom:20px}
+.login-logo img{
+ width:80px;height:80px;border-radius:50%;object-fit:cover
 }
-
-.grupo-acoes .btn{
-    width:auto;
-    min-height:34px;
-    padding:7px 9px;
-    font-size:.75rem;
+.login-logo h1{color:#0b1a2e;margin-top:10px}
+.login-logo p{color:#777;font-size:13px;margin-top:4px}
+.login-error{
+ background:#f8d7da;color:#721c24;padding:10px;
+ border-radius:6px;font-size:13px;margin-bottom:10px
 }
-
-/* PAGINAÇÃO */
-
-.paginacao{
-    display:flex;
-    gap:5px;
-    justify-content:center;
-    margin-top:12px;
+.userbar{
+ background:#f8f9fc;border:1px solid #e5e8eb;
+ padding:10px;border-radius:7px;margin-bottom:15px;
+ display:flex;justify-content:space-between;gap:8px;
+ align-items:center;font-size:12px
 }
-
-.paginacao button{
-    min-width:38px;
-    min-height:38px;
-    border:1px solid #ddd;
-    background:#fff;
-    border-radius:5px;
+.userbar button{
+ border:0;background:#dc3545;color:white;
+ border-radius:5px;padding:6px 10px;font-size:11px
 }
-
-.paginacao button.ativo{
-    background:#0b1a2e;
-    color:#fff;
-}
-
-/* MODAL */
 
 .modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    z-index:2000;
-    align-items:center;
-    justify-content:center;
-    padding:15px;
+ position:fixed;inset:0;background:#0008;z-index:3000;
+ display:none;align-items:center;justify-content:center;padding:15px
 }
-
-.modal.aberto{
-    display:flex;
+.modal.open{display:flex}
+.modal-box{
+ background:white;width:100%;max-width:500px;
+ max-height:90vh;overflow:auto;border-radius:12px;padding:20px
 }
-
-.modal-conteudo{
-    background:#fff;
-    width:100%;
-    max-width:480px;
-    max-height:90vh;
-    overflow:auto;
-    padding:24px;
-    border-radius:13px;
+.modal-head{
+ display:flex;justify-content:space-between;
+ align-items:center;margin-bottom:10px
 }
-
-.modal-conteudo h3{
-    color:#0b1a2e;
-    margin-bottom:10px;
-}
-
-/* TOAST */
-
-.toast-container{
-    position:fixed;
-    bottom:20px;
-    left:15px;
-    right:15px;
-    z-index:4000;
-    max-width:450px;
-    margin:auto;
+.close{
+ border:0;background:#eee;border-radius:50%;
+ width:32px;height:32px
 }
 
 .toast{
-    background:#0b1a2e;
-    color:#fff;
-    padding:14px;
-    border-radius:8px;
-    margin-top:6px;
-    border-left:4px solid #1ea5dc;
-    box-shadow:0 5px 20px rgba(0,0,0,.2);
+ position:fixed;left:15px;right:15px;bottom:20px;
+ max-width:450px;margin:auto;background:#0b1a2e;color:white;
+ padding:14px;border-radius:8px;z-index:5000;
+ box-shadow:0 5px 20px #0004
+}
+.toast.ok{border-left:4px solid #28a745}
+.toast.err{border-left:4px solid #dc3545}
+
+.progress{
+ height:13px;background:#e9ecef;border-radius:20px;
+ overflow:hidden;margin:10px 0
+}
+.progress div{
+ height:100%;background:#1ea5dc;border-radius:20px
 }
 
-.toast.sucesso{
-    border-left-color:#28a745;
+.signature-grid{
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:35px 25px;margin-top:35px
+}
+.signature{
+ text-align:center;padding-top:25px;
+ border-top:1px solid #333;font-size:11px
 }
 
-.toast.erro{
-    border-left-color:#dc3545;
+footer{text-align:center;color:#999;font-size:11px;padding:20px}
+
+body.dark{background:#121212;color:#eee}
+body.dark section,body.dark .card,body.dark .box,
+body.dark .modal-box,body.dark .login-box{
+ background:#1f1f1f;color:#eee;border-color:#333
 }
-
-.toast.atencao{
-    border-left-color:#ffc107;
+body.dark input,body.dark select,body.dark textarea{
+ background:#292929;color:#eee;border-color:#444
 }
+body.dark h2{color:white}
 
-/* META */
-
-.meta-container{
-    background:#f8f9fc;
-    padding:16px;
-    border:1px solid #e9ecef;
-    border-radius:8px;
-}
-
-.barra-progresso{
-    height:13px;
-    background:#e9ecef;
-    border-radius:20px;
-    overflow:hidden;
-    margin:10px 0;
-}
-
-.preenchimento{
-    height:100%;
-    background:linear-gradient(90deg,#1ea5dc,#007bff);
-}
-
-/* DASH */
-
-.bloco-dashboard{
-    background:#f8f9fc;
-    padding:16px;
-    border-radius:8px;
-    border:1px solid #e9ecef;
-    margin-top:12px;
-}
-
-.grafico-barras{
-    display:flex;
-    gap:12px;
-    align-items:flex-end;
-    height:120px;
-    margin-top:20px;
-}
-
-.barra{
-    flex:1;
-    min-height:8px;
-    border-radius:5px 5px 0 0;
-    position:relative;
-}
-
-.barra .valor{
-    position:absolute;
-    top:-22px;
-    width:100%;
-    text-align:center;
-    font-size:.7rem;
-    font-weight:700;
-}
-
-/* FOOTER */
-
-footer{
-    text-align:center;
-    padding:15px;
-    color:#adb5bd;
-    font-size:.75rem;
-}
-
-/* DARK */
-
-body.escuro{
-    background:#121212;
-    color:#eee;
-}
-
-body.escuro section,
-body.escuro .card,
-body.escuro .modal-conteudo,
-body.escuro .bloco-dashboard,
-body.escuro .meta-container{
-    background:#1e1e1e;
-    color:#eee;
-    border-color:#333;
-}
-
-body.escuro section h2,
-body.escuro .modal-conteudo h3{
-    color:#fff;
-}
-
-body.escuro input,
-body.escuro select,
-body.escuro textarea{
-    background:#2d2d2d;
-    color:#eee;
-    border-color:#444;
-}
-
-body.escuro th{
-    background:#252525;
-    color:#fff;
-}
-
-body.escuro td{
-    border-color:#333;
-}
-
-body.escuro .btn-outline{
-    background:#1e1e1e;
-    color:#fff;
-    border-color:#777;
-}
-
-/* RESPONSIVE */
-
-@media(max-width:600px){
-
-    .container{
-        padding:11px;
-    }
-
-    section{
-        padding:16px;
-    }
-
-    .logo img{
-        width:40px;
-        height:40px;
-    }
-
-    .logo h1{
-        font-size:1rem;
-    }
-
-    .cards{
-        gap:7px;
-    }
-
-}
-
-@media(max-width:380px){
-
-    .cards{
-        grid-template-columns:1fr;
-    }
-
-}
-
-/* PRINT */
-
-@media print{
-
-    header,
-    nav,
-    .btn,
-    .toast-container,
-    footer{
-        display:none!important;
-    }
-
-    section{
-        display:block!important;
-        box-shadow:none!important;
-    }
-
+@media(max-width:420px){
+ .cards{grid-template-columns:1fr 1fr}
+ .signature-grid{grid-template-columns:1fr}
+ .toolbar{flex-direction:column}
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================================================
-     LOGIN
-========================================================= -->
+<!-- LOGIN -->
+<div id="loginScreen" class="login">
+ <div class="login-box">
+  <div class="login-logo">
+   <img src="logo.png" onerror="this.style.display='none'" alt="O.J.V.">
+   <h1>O.J.V.</h1>
+   <p>Jovens Visionários · Professional Plus</p>
+  </div>
 
-<div id="loginTela">
+  <div id="loginError" class="login-error hidden"></div>
 
-    <div class="login-box">
+  <div class="form">
+   <label>E-mail</label>
+   <input id="loginEmail" type="email" placeholder="seu@email.com">
 
-        <img
-            src="logo.png"
-            class="login-logo"
-            onerror="this.style.display='none'"
-        >
+   <label>Palavra-passe</label>
+   <input id="loginPassword" type="password" placeholder="••••••••">
 
-        <h1>O.J.V.</h1>
-
-        <div class="sub">
-            Professional Plus
-        </div>
-
-        <label>E-mail</label>
-
-        <input
-            id="loginEmail"
-            type="email"
-            placeholder="seu@email.com"
-            autocomplete="email"
-        >
-
-        <label>Palavra-passe</label>
-
-        <input
-            id="loginPassword"
-            type="password"
-            placeholder="Palavra-passe"
-            autocomplete="current-password"
-        >
-
-        <button
-            class="login-btn"
-            onclick="entrar()"
-        >
-            🔐 Entrar
-        </button>
-
-        <button
-            class="login-secondary"
-            onclick="registar()"
-        >
-            Criar conta
-        </button>
-
-        <button
-            class="login-secondary"
-            onclick="recuperarSenha()"
-        >
-            Esqueci a palavra-passe
-        </button>
-
-        <div class="login-info">
-            Acesso protegido pelo Supabase
-        </div>
-
-    </div>
-
+   <button class="btn btn-dark" onclick="login()">🔐 Entrar</button>
+   <button class="btn btn-outline" onclick="registrar()">Criar conta</button>
+   <button class="btn btn-outline" onclick="recuperarSenha()">Esqueci a palavra-passe</button>
+  </div>
+ </div>
 </div>
 
-
-<!-- =========================================================
-     APLICAÇÃO
-========================================================= -->
-
-<div id="app">
+<!-- APP -->
+<div id="app" class="hidden">
 
 <header>
+ <div class="topo">
+  <div class="logo">
+   <img src="logo.png" alt="O.J.V."
+        onerror="this.style.display='none';document.getElementById('fallbackLogo').style.display='flex'">
+   <div id="fallbackLogo" class="logo-fallback" style="display:none">OJV</div>
+   <div>
+    <h1>O.J.V. <small>Professional Plus</small></h1>
+   </div>
+  </div>
 
-    <div class="topo">
+  <div class="acoes">
+   <button onclick="tema()">🌓</button>
+   <button class="menu-toggle" onclick="menu()">☰ Menu</button>
+  </div>
+ </div>
 
-        <div class="logo">
-
-            <img
-                src="logo.png"
-                alt="O.J.V."
-                onerror="this.style.display='none'"
-            >
-
-            <div>
-                <h1>O.J.V.</h1>
-                <small>Professional Plus</small>
-            </div>
-
-        </div>
-
-        <div class="acoes">
-
-            <button onclick="alternarTema()">
-                🌓
-            </button>
-
-            <button onclick="sair()">
-                🚪
-            </button>
-
-            <button
-                class="menu-toggle"
-                onclick="alternarMenu()"
-            >
-                ☰ Menu
-            </button>
-
-        </div>
-
-    </div>
-
-    <nav id="menuNav">
-
-        <button
-            class="ativo"
-            onclick="abrir('inicio')"
-        >
-            📊 Painel
-        </button>
-
-        <button onclick="abrir('membros')">
-            👥 Membros
-            <span
-                class="badge badge-info"
-                id="navMembros"
-            >0</span>
-        </button>
-
-        <button onclick="abrir('financeiro')">
-            💰 Finanças
-        </button>
-
-        <button onclick="abrir('transacoes')">
-            📋 Transações
-        </button>
-
-        <button onclick="abrir('eventos')">
-            📅 Eventos
-        </button>
-
-        <button onclick="abrir('meta')">
-            🎯 Meta
-        </button>
-
-        <button onclick="gerarPDF()">
-            📄 Gerar PDF
-        </button>
-
-    </nav>
-
+ <nav id="nav">
+  <button class="ativo" onclick="abrir('inicio')">📊 Painel</button>
+  <button onclick="abrir('membros')">👥 Membros <span id="navMembros" class="badge badge-info">0</span></button>
+  <button onclick="abrir('financeiro')">💰 Finanças</button>
+  <button onclick="abrir('transacoes')">📋 Transações</button>
+  <button onclick="abrir('eventos')">📅 Eventos</button>
+  <button onclick="abrir('meta')">🎯 Meta</button>
+  <button onclick="gerarPDF()">📄 Gerar relatório PDF</button>
+ </nav>
 </header>
-
 
 <div class="container">
 
-<!-- =========================================================
-     PAINEL
-========================================================= -->
+<div class="userbar">
+ <span>👤 <strong id="usuarioEmail"></strong></span>
+ <button onclick="logout()">Sair</button>
+</div>
 
+<!-- PAINEL -->
 <section id="inicio" class="ativo">
+ <h2>Painel</h2>
+ <p class="subtitulo">Visão geral da organização</p>
 
-<h2>Painel</h2>
+ <div class="cards">
+  <div class="card"><span id="dashMembros" class="numero">0</span><span class="rotulo">Membros</span></div>
+  <div class="card verde"><span id="dashReceitas" class="numero">0</span><span class="rotulo">Receitas</span></div>
+  <div class="card vermelho"><span id="dashDespesas" class="numero">0</span><span class="rotulo">Despesas</span></div>
+  <div class="card azul"><span id="dashSaldo" class="numero">0</span><span class="rotulo">Saldo</span></div>
+ </div>
 
-<p class="subtitulo">
-Resumo geral da organização
-</p>
+ <div class="box">
+  <h3>📈 Últimas transações</h3>
+  <div id="ultimas"></div>
+ </div>
 
-<div
-    class="cards"
-    id="cardsDashboard"
-></div>
+ <div class="box">
+  <h3>📅 Próximos eventos</h3>
+  <div id="proximos"></div>
+ </div>
 
-
-<div class="bloco-dashboard">
-
-<h4>📈 Últimas transações</h4>
-
-<div id="ultimasTransacoes"></div>
-
-</div>
-
-
-<div class="bloco-dashboard">
-
-<h4>📅 Próximos eventos</h4>
-
-<div id="proximosEventos"></div>
-
-</div>
-
-
-<div class="bloco-dashboard">
-
-<h4>📊 Resumo financeiro</h4>
-
-<div
-    class="grafico-barras"
-    id="graficoBarras"
-></div>
-
-</div>
-
-
-<div style="margin-top:12px">
-
-<button
-    class="btn"
-    onclick="gerarPDF()"
->
-📄 Gerar Relatório PDF
-</button>
-
-</div>
-
+ <button class="btn btn-dark" onclick="gerarPDF()">📄 Gerar resumo completo em PDF</button>
 </section>
 
-
-<!-- =========================================================
-     MEMBROS
-========================================================= -->
-
+<!-- MEMBROS -->
 <section id="membros">
+ <h2>Membros</h2>
+ <p class="subtitulo">Cadastro e gestão dos membros</p>
 
-<h2>Membros</h2>
+ <div class="toolbar">
+  <button class="btn btn-success" onclick="novoMembro()">➕ Novo Membro</button>
+  <button class="btn btn-outline" onclick="exportarMembros()">📤 CSV</button>
+ </div>
 
-<p class="subtitulo">
-Cadastre e gerencie os membros
-</p>
+ <input id="buscaMembro" placeholder="🔍 Nome, telefone ou e-mail"
+        oninput="renderMembros()">
 
-<div
-    style="display:flex;gap:8px;margin-bottom:12px"
->
+ <div class="table-wrap" style="margin-top:12px">
+  <table>
+   <thead>
+    <tr>
+     <th>Nome</th>
+     <th>E-mail</th>
+     <th>Telefone</th>
+     <th>Status</th>
+     <th>Ações</th>
+    </tr>
+   </thead>
+   <tbody id="listaMembros"></tbody>
+  </table>
+ </div>
 
-<button
-    class="btn btn-success"
-    onclick="abrirModal()"
-    style="flex:2"
->
-➕ Novo Membro
-</button>
-
-<button
-    class="btn btn-outline"
-    onclick="exportarMembrosCSV()"
-    style="flex:1"
->
-📤 CSV
-</button>
-
-</div>
-
-
-<input
-    id="buscaMembro"
-    placeholder="🔍 Buscar nome, telefone ou e-mail"
-    oninput="filtrarMembros()"
-    style="
-        width:100%;
-        padding:13px;
-        border:1px solid #ced4da;
-        border-radius:7px;
-        margin-bottom:12px;
-    "
->
-
-
-<div class="tabela-wrapper">
-
-<table>
-
-<thead>
-
-<tr>
-<th>Nome</th>
-<th>Contacto</th>
-<th>Status</th>
-<th>Ações</th>
-</tr>
-
-</thead>
-
-<tbody id="listaMembros"></tbody>
-
-</table>
-
-</div>
-
-
-<div
-    class="paginacao"
-    id="pagMembros"
-></div>
-
-
-<p style="margin-top:10px">
-
-Total:
-<strong id="totalMembros">0</strong>
-
-&nbsp;|&nbsp;
-
-Ativos:
-<strong
-    id="ativosCount"
-    style="color:#28a745"
->
-0
-</strong>
-
-</p>
-
+ <p style="margin-top:10px;font-size:13px">
+  Total: <strong id="totalMembros">0</strong> ·
+  Ativos: <strong id="ativos">0</strong>
+ </p>
 </section>
 
-
-<!-- =========================================================
-     FINANCEIRO
-========================================================= -->
-
+<!-- FINANCEIRO -->
 <section id="financeiro">
+ <h2>Finanças</h2>
+ <p class="subtitulo">Registre receitas e despesas</p>
 
-<h2>Finanças</h2>
+ <div class="cards">
+  <div class="card verde"><span id="finR" class="numero">0</span><span class="rotulo">Receitas</span></div>
+  <div class="card vermelho"><span id="finD" class="numero">0</span><span class="rotulo">Despesas</span></div>
+  <div class="card azul"><span id="finS" class="numero">0</span><span class="rotulo">Saldo</span></div>
+ </div>
 
-<p class="subtitulo">
-Registre receitas e despesas
-</p>
+ <div class="form">
+  <label>Tipo</label>
+  <select id="tipo">
+   <option value="receita">💰 Receita</option>
+   <option value="despesa">💸 Despesa</option>
+  </select>
 
+  <label>Categoria</label>
+  <select id="categoria">
+   <option>Mensalidade</option>
+   <option>Doação</option>
+   <option>Evento</option>
+   <option>Material</option>
+   <option>Transporte</option>
+   <option>Outro</option>
+  </select>
 
-<div
-    style="
-    display:flex;
-    gap:7px;
-    margin-bottom:14px;
-    "
->
+  <label>Valor (Kz)</label>
+  <input id="valor" type="number" step="0.01" placeholder="0">
 
-<div
-    style="
-    flex:1;
-    background:#f8f9fc;
-    padding:12px;
-    border-radius:8px;
-    text-align:center;
-    "
->
+  <label>Descrição</label>
+  <input id="descricao" placeholder="Descrição da transação">
 
-<div style="font-size:.7rem">
-Receitas
-</div>
-
-<strong
-    id="finReceitas"
-    style="color:#28a745"
->
-0 Kz
-</strong>
-
-</div>
-
-
-<div
-    style="
-    flex:1;
-    background:#f8f9fc;
-    padding:12px;
-    border-radius:8px;
-    text-align:center;
-    "
->
-
-<div style="font-size:.7rem">
-Despesas
-</div>
-
-<strong
-    id="finDespesas"
-    style="color:#dc3545"
->
-0 Kz
-</strong>
-
-</div>
-
-
-<div
-    style="
-    flex:1;
-    background:#0b1a2e;
-    color:#fff;
-    padding:12px;
-    border-radius:8px;
-    text-align:center;
-    "
->
-
-<div style="font-size:.7rem">
-Saldo
-</div>
-
-<strong id="finSaldo">
-0 Kz
-</strong>
-
-</div>
-
-</div>
-
-
-<div class="grupo-form">
-
-<select id="tipoTransacao">
-
-<option value="receita">
-💰 Receita
-</option>
-
-<option value="despesa">
-💸 Despesa
-</option>
-
-</select>
-
-
-<select id="categoriaTransacao">
-
-<option>Mensalidade</option>
-<option>Doação</option>
-<option>Evento</option>
-<option>Material</option>
-<option>Transporte</option>
-<option>Outro</option>
-
-</select>
-
-
-<input
-    id="valorTransacao"
-    type="number"
-    step="0.01"
-    placeholder="Valor em Kz"
->
-
-
-<input
-    id="descricaoTransacao"
-    placeholder="Descrição"
->
-
-
-<button
-    class="btn btn-success"
-    onclick="adicionarTransacao()"
->
-➕ Registrar Transação
-</button>
-
-</div>
-
+  <button class="btn btn-success" onclick="adicionarFinanceiro()">💾 Registrar</button>
+ </div>
 </section>
 
-
-<!-- =========================================================
-     TRANSAÇÕES
-========================================================= -->
-
+<!-- TRANSAÇÕES -->
 <section id="transacoes">
+ <h2>Transações</h2>
+ <p class="subtitulo">Histórico financeiro</p>
 
-<h2>Transações</h2>
+ <div class="toolbar">
+  <input id="buscaTransacao" placeholder="🔍 Buscar" oninput="renderTransacoes()">
+  <select id="filtro" onchange="renderTransacoes()">
+   <option value="">Todas</option>
+   <option value="receita">Receitas</option>
+   <option value="despesa">Despesas</option>
+  </select>
+ </div>
 
-<p class="subtitulo">
-Histórico financeiro
-</p>
-
-
-<input
-    id="buscaTransacao"
-    placeholder="🔍 Buscar transação"
-    oninput="filtrarTransacoes()"
-    style="
-    width:100%;
-    padding:13px;
-    border:1px solid #ced4da;
-    border-radius:7px;
-    margin-bottom:8px;
-    "
->
-
-
-<select
-    id="filtroTipo"
-    onchange="filtrarTransacoes()"
-    style="
-    width:100%;
-    padding:13px;
-    border:1px solid #ced4da;
-    border-radius:7px;
-    margin-bottom:10px;
-    "
->
-
-<option value="">
-Todos
-</option>
-
-<option value="receita">
-Receitas
-</option>
-
-<option value="despesa">
-Despesas
-</option>
-
-</select>
-
-
-<button
-    class="btn btn-outline"
-    onclick="exportarTransacoesCSV()"
->
-📤 Exportar CSV
-</button>
-
-
-<div class="tabela-wrapper">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Data</th>
-<th>Descrição</th>
-<th>Valor</th>
-<th>Ação</th>
-
-</tr>
-
-</thead>
-
-<tbody id="listaTransacoes"></tbody>
-
-</table>
-
-</div>
-
-
-<div
-    class="paginacao"
-    id="pagTransacoes"
-></div>
-
+ <div class="table-wrap">
+  <table>
+   <thead>
+    <tr><th>Data</th><th>Descrição</th><th>Tipo</th><th>Valor</th><th>Ação</th></tr>
+   </thead>
+   <tbody id="listaTransacoes"></tbody>
+  </table>
+ </div>
 </section>
 
-
-<!-- =========================================================
-     EVENTOS
-========================================================= -->
-
+<!-- EVENTOS -->
 <section id="eventos">
+ <h2>Eventos</h2>
+ <p class="subtitulo">Organização dos eventos</p>
 
-<h2>Eventos</h2>
+ <div class="form">
+  <input id="eventoNome" placeholder="Nome do evento">
+  <input id="eventoData" type="date">
+  <input id="eventoLocal" placeholder="Local">
+  <button class="btn btn-success" onclick="adicionarEvento()">📅 Criar evento</button>
+ </div>
 
-<p class="subtitulo">
-Organize os eventos
-</p>
-
-
-<div class="grupo-form">
-
-<input
-    id="eventoNome"
-    placeholder="Nome do evento"
->
-
-<input
-    id="eventoData"
-    type="date"
->
-
-<input
-    id="eventoLocal"
-    placeholder="Local"
->
-
-
-<button
-    class="btn btn-success"
-    onclick="adicionarEvento()"
->
-📅 Criar Evento
-</button>
-
-</div>
-
-
-<div class="tabela-wrapper">
-
-<table>
-
-<thead>
-
-<tr>
-<th>Evento</th>
-<th>Data</th>
-<th>Status</th>
-<th>Ação</th>
-</tr>
-
-</thead>
-
-<tbody id="listaEventos"></tbody>
-
-</table>
-
-</div>
-
+ <div class="table-wrap">
+  <table>
+   <thead><tr><th>Evento</th><th>Data</th><th>Local</th><th>Ação</th></tr></thead>
+   <tbody id="listaEventos"></tbody>
+  </table>
+ </div>
 </section>
 
-
-<!-- =========================================================
-     META
-========================================================= -->
-
+<!-- META -->
 <section id="meta">
+ <h2>Meta de Poupança</h2>
+ <p class="subtitulo">Defina e acompanhe o objetivo</p>
 
-<h2>Meta de Poupança</h2>
+ <div class="box">
+  <div style="display:flex;justify-content:space-between">
+   <strong>Meta</strong>
+   <strong id="metaValor">0 Kz</strong>
+  </div>
 
-<p class="subtitulo">
-Acompanhe o objetivo financeiro
-</p>
+  <div class="progress"><div id="barra" style="width:0%"></div></div>
 
+  <div style="display:flex;justify-content:space-between;font-size:13px">
+   <span>Guardado: <strong id="metaGuardado">0 Kz</strong></span>
+   <span id="metaPct">0%</span>
+  </div>
+ </div>
 
-<div class="meta-container">
+ <div class="form">
+  <input id="novaMeta" type="number" placeholder="Valor da meta (Kz)">
+  <button class="btn btn-gold" onclick="definirMeta()">🎯 Definir meta</button>
 
-<div
-    style="
-    display:flex;
-    justify-content:space-between;
-    "
->
-
-<span>
-Meta:
-<strong id="metaValorExibido">
-0 Kz
-</strong>
-</span>
-
-<span>
-Guardado:
-<strong id="metaGuardadoExibido">
-0 Kz
-</strong>
-</span>
-
-</div>
-
-
-<div class="barra-progresso">
-
-<div
-    class="preenchimento"
-    id="metaBarra"
-    style="width:0%"
-></div>
-
-</div>
-
-
-<div
-    style="
-    display:flex;
-    justify-content:space-between;
-    "
->
-
-<span>
-Progresso:
-<strong id="metaProgresso">
-0%
-</strong>
-</span>
-
-<span>
-Falta:
-<strong id="metaFalta">
-0 Kz
-</strong>
-</span>
-
-</div>
-
-</div>
-
-
-<div class="grupo-form">
-
-<input
-    id="metaValorInput"
-    type="number"
-    placeholder="Valor da meta"
->
-
-<button
-    class="btn btn-ouro"
-    onclick="definirMeta()"
->
-🎯 Definir Meta
-</button>
-
-</div>
-
-
-<div class="grupo-form">
-
-<input
-    id="metaGuardarInput"
-    type="number"
-    placeholder="Valor a guardar"
->
-
-<button
-    class="btn btn-success"
-    onclick="guardarParaMeta()"
->
-💰 Guardar para Meta
-</button>
-
-</div>
-
+  <input id="guardarMeta" type="number" placeholder="Quanto guardar?">
+  <button class="btn btn-success" onclick="guardarMeta()">💰 Guardar</button>
+ </div>
 </section>
 
 </div>
 
-
-<footer>
-© 2026 O.J.V. Professional Plus
-</footer>
-
-
-<!-- =========================================================
-     MODAL MEMBRO
-========================================================= -->
-
-<div
-    class="modal"
-    id="modal"
->
-
-<div class="modal-conteudo">
-
-<h3 id="modalTitulo">
-📝 Novo Membro
-</h3>
-
-
-<div class="grupo-form">
-
-<label>
-Nome completo
-</label>
-
-<input
-    id="modalNome"
-    placeholder="Nome completo"
->
-
-
-<label>
-E-mail do membro
-</label>
-
-<input
-    id="modalEmail"
-    type="email"
-    placeholder="email@exemplo.com"
->
-
-
-<label>
-Telefone
-</label>
-
-<input
-    id="modalTelefone"
-    placeholder="+244 9XX XXX XXX"
->
-
-
-<label>
-Data de nascimento
-</label>
-
-<input
-    id="modalAniversario"
-    placeholder="DD/MM/AAAA"
-    maxlength="10"
-    inputmode="numeric"
->
-
-
-<label>
-Status
-</label>
-
-<select id="modalStatus">
-
-<option value="Ativo">
-✅ Ativo
-</option>
-
-<option value="Inativo">
-❌ Inativo
-</option>
-
-</select>
-
+<footer>© 2026 O.J.V. Professional Plus</footer>
 </div>
 
+<!-- MODAL MEMBRO -->
+<div id="modalMembro" class="modal">
+ <div class="modal-box">
+  <div class="modal-head">
+   <h3 id="tituloMembro">Novo Membro</h3>
+   <button class="close" onclick="fecharModal()">×</button>
+  </div>
 
-<div
-    style="
-    display:flex;
-    gap:8px;
-    "
->
+  <div class="form">
+   <label>Nome completo</label>
+   <input id="mNome" placeholder="Nome do membro">
 
-<button
-    class="btn btn-outline"
-    onclick="fecharModal()"
-    style="flex:1"
->
-Cancelar
-</button>
+   <label>E-mail do membro</label>
+   <input id="mEmail" type="email" placeholder="membro@email.com">
 
-<button
-    class="btn btn-success"
-    onclick="salvarMembro()"
-    style="flex:2"
->
-💾 Salvar
-</button>
+   <label>Telefone</label>
+   <input id="mTelefone" placeholder="+244 ...">
 
+   <label>Data de nascimento</label>
+   <input id="mNascimento" placeholder="DD/MM/AAAA" maxlength="10">
+
+   <label>Status</label>
+   <select id="mStatus">
+    <option value="Ativo">Ativo</option>
+    <option value="Inativo">Inativo</option>
+   </select>
+
+   <button class="btn btn-success" onclick="salvarMembro()">💾 Salvar membro</button>
+  </div>
+ </div>
 </div>
 
-</div>
-
-</div>
-
-
-<div
-    class="toast-container"
-    id="toastContainer"
-></div>
-
+<div id="toast" class="toast hidden"></div>
 
 <script>
+/* ==========================================================
+   CONFIGURAÇÃO SUPABASE
+   ========================================================== */
 
-/* =========================================================
-   SUPABASE
-========================================================= */
+const SUPABASE_URL="https://zytbddkoddcmreyvjmkz.supabase.co";
 
-const SUPABASE_URL =
-"https://zytbddkoddcmreyvjmkz.supabase.co";
+/*
+ IMPORTANTE:
+ A chave abaixo é a chave PUBLICÁVEL (anon/publishable).
+ NUNCA coloque a service_role key no HTML.
+*/
+const SUPABASE_KEY="sb_publishable_KkrrmpUmwMguZCNvZiclSg_zFJCOj50";
 
-const SUPABASE_KEY =
-"sb_publishable_KkrrmpUmwMguZCNvZiclSg_zFJCOj50";
+const db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
 
-const supabaseClient =
-supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
+/* ==========================================================
+   ESTADO
+   ========================================================== */
 
+let membros=[];
+let transacoes=[];
+let eventos=[];
+let meta={valor:0,guardado:0};
+let editId=null;
 
-/* =========================================================
-   DADOS
-========================================================= */
-
-let membros = [];
-let transacoes = [];
-let eventos = [];
-
-let meta = {
-    valor:0,
-    guardado:0
-};
-
-let editandoIndex = -1;
-
-let paginaAtual = {
-    membros:1,
-    transacoes:1
-};
-
-const POR_PAGINA = 5;
-
-let membrosFiltrados = [];
-let transacoesFiltradas = [];
-
-
-/* =========================================================
+/* ==========================================================
    AUXILIARES
-========================================================= */
+   ========================================================== */
 
-function $(id){
-    return document.getElementById(id);
+function $(id){return document.getElementById(id)}
+
+function toast(msg,erro=false){
+ const t=$("toast");
+ t.textContent=msg;
+ t.className="toast "+(erro?"err":"ok");
+ t.classList.remove("hidden");
+ setTimeout(()=>t.classList.add("hidden"),3500);
 }
 
-
-function mostrarToast(
-    mensagem,
-    tipo="sucesso"
-){
-
-    const c =
-        $("toastContainer");
-
-    const t =
-        document.createElement("div");
-
-    t.className =
-        "toast " + tipo;
-
-    t.textContent =
-        mensagem;
-
-    c.appendChild(t);
-
-    setTimeout(
-        ()=>{
-            t.remove();
-        },
-        3500
-    );
+function kz(v){
+ return Number(v||0).toLocaleString("pt-AO",{minimumFractionDigits:0})+" Kz";
 }
 
-
-function formatarNumero(
-    valor
-){
-
-    return Number(
-        valor || 0
-    ).toLocaleString(
-        "pt-PT"
-    );
+function esc(v){
+ return String(v??"")
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
 }
 
-
-function escaparHTML(texto){
-
-    if(texto === null ||
-       texto === undefined)
-        return "";
-
-    return String(texto)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-}
-
-
-/* =========================================================
-   LOGIN
-========================================================= */
+/* ==========================================================
+   LOGIN SUPABASE
+   ========================================================== */
 
 async function verificarSessao(){
+ const {data}=await db.auth.getSession();
 
-    const {
-        data,
-        error
-    } =
-    await supabaseClient.auth.getSession();
-
-    if(error){
-
-        console.error(error);
-
-        mostrarToast(
-            "Erro ao verificar login.",
-            "erro"
-        );
-
-        return;
-
-    }
-
-    if(data.session){
-
-        mostrarAplicacao();
-
-    }else{
-
-        mostrarLogin();
-
-    }
+ if(data.session){
+  $("loginScreen").classList.add("hidden");
+  $("app").classList.remove("hidden");
+  $("usuarioEmail").textContent=data.session.user.email||"Utilizador";
+  await carregarTudo();
+ }else{
+  $("loginScreen").classList.remove("hidden");
+  $("app").classList.add("hidden");
+ }
 }
 
+async function login(){
+ const email=$("loginEmail").value.trim();
+ const password=$("loginPassword").value;
 
-function mostrarLogin(){
+ if(!email||!password){
+  mostrarLoginErro("Digite o e-mail e a palavra-passe.");
+  return;
+ }
 
-    $("loginTela").style.display =
-        "flex";
+ const {error}=await db.auth.signInWithPassword({
+  email,password
+ });
 
-    $("app").style.display =
-        "none";
+ if(error){
+  mostrarLoginErro(error.message);
+  return;
+ }
+
+ $("loginError").classList.add("hidden");
+ await verificarSessao();
+ toast("Login efetuado com sucesso.");
 }
 
+async function registrar(){
+ const email=$("loginEmail").value.trim();
+ const password=$("loginPassword").value;
 
-function mostrarAplicacao(){
+ if(!email||password.length<6){
+  mostrarLoginErro("Use um e-mail válido e uma palavra-passe com pelo menos 6 caracteres.");
+  return;
+ }
 
-    $("loginTela").style.display =
-        "none";
+ const {error}=await db.auth.signUp({
+  email,password
+ });
 
-    $("app").style.display =
-        "block";
+ if(error){
+  mostrarLoginErro(error.message);
+  return;
+ }
 
-    carregarDados();
-
+ mostrarLoginErro("Conta criada. Se a confirmação de e-mail estiver ativa, confirme o e-mail antes de entrar.");
 }
-
-
-async function entrar(){
-
-    const email =
-        $("loginEmail")
-        .value
-        .trim();
-
-    const password =
-        $("loginPassword")
-        .value;
-
-    if(!email ||
-       !password){
-
-        mostrarToast(
-            "Informe o e-mail e a palavra-passe.",
-            "atencao"
-        );
-
-        return;
-    }
-
-
-    const {
-        data,
-        error
-    } =
-    await supabaseClient.auth.signInWithPassword({
-
-        email:email,
-
-        password:password
-
-    });
-
-
-    if(error){
-
-        mostrarToast(
-            "E-mail ou palavra-passe incorretos.",
-            "erro"
-        );
-
-        console.error(error);
-
-        return;
-    }
-
-
-    mostrarToast(
-        "Login efetuado com sucesso.",
-        "sucesso"
-    );
-
-    mostrarAplicacao();
-}
-
-
-async function registar(){
-
-    const email =
-        $("loginEmail")
-        .value
-        .trim();
-
-    const password =
-        $("loginPassword")
-        .value;
-
-
-    if(!email ||
-       !password){
-
-        mostrarToast(
-            "Informe o e-mail e a palavra-passe.",
-            "atencao"
-        );
-
-        return;
-    }
-
-
-    if(password.length < 6){
-
-        mostrarToast(
-            "A palavra-passe deve ter pelo menos 6 caracteres.",
-            "atencao"
-        );
-
-        return;
-    }
-
-
-    const {
-        error
-    } =
-    await supabaseClient.auth.signUp({
-
-        email:email,
-
-        password:password
-
-    });
-
-
-    if(error){
-
-        mostrarToast(
-            error.message,
-            "erro"
-        );
-
-        return;
-    }
-
-
-    mostrarToast(
-        "Conta criada. Verifique o seu e-mail se a confirmação estiver ativa.",
-        "sucesso"
-    );
-}
-
 
 async function recuperarSenha(){
+ const email=$("loginEmail").value.trim();
 
-    const email =
-        $("loginEmail")
-        .value
-        .trim();
+ if(!email){
+  mostrarLoginErro("Digite primeiro o seu e-mail.");
+  return;
+ }
 
+ const {error}=await db.auth.resetPasswordForEmail(email,{
+  redirectTo:location.origin+location.pathname
+ });
 
-    if(!email){
-
-        mostrarToast(
-            "Digite primeiro o seu e-mail.",
-            "atencao"
-        );
-
-        return;
-    }
-
-
-    const {
-        error
-    } =
-    await supabaseClient.auth.resetPasswordForEmail(
-        email,
-        {
-            redirectTo:
-            window.location.href
-        }
-    );
-
-
-    if(error){
-
-        mostrarToast(
-            error.message,
-            "erro"
-        );
-
-        return;
-    }
-
-
-    mostrarToast(
-        "E-mail de recuperação enviado.",
-        "sucesso"
-    );
+ if(error){
+  mostrarLoginErro(error.message);
+ }else{
+  mostrarLoginErro("Foi enviado um e-mail para redefinir a palavra-passe.");
+ }
 }
 
-
-async function sair(){
-
-    await supabaseClient.auth.signOut();
-
-    membros = [];
-    transacoes = [];
-    eventos = [];
-
-    mostrarLogin();
+function mostrarLoginErro(msg){
+ $("loginError").textContent=msg;
+ $("loginError").classList.remove("hidden");
 }
 
-
-/* =========================================================
-   CARREGAR DADOS SUPABASE
-========================================================= */
-
-async function carregarDados(){
-
-    try{
-
-        const resultadoMembros =
-            await supabaseClient
-            .from("membros")
-            .select("*")
-            .order("created_at",{ascending:false});
-
-
-        if(resultadoMembros.error){
-
-            console.error(
-                resultadoMembros.error
-            );
-
-            mostrarToast(
-                "Erro ao carregar membros.",
-                "erro"
-            );
-
-        }else{
-
-            membros =
-                resultadoMembros.data || [];
-
-        }
-
-
-        const resultadoTransacoes =
-            await supabaseClient
-            .from("transacoes")
-            .select("*")
-            .order("created_at",{ascending:false});
-
-
-        if(resultadoTransacoes.error){
-
-            console.error(
-                resultadoTransacoes.error
-            );
-
-        }else{
-
-            transacoes =
-                resultadoTransacoes.data || [];
-
-        }
-
-
-        const resultadoEventos =
-            await supabaseClient
-            .from("eventos")
-            .select("*")
-            .order("data",{ascending:true});
-
-
-        if(resultadoEventos.error){
-
-            console.error(
-                resultadoEventos.error
-            );
-
-        }else{
-
-            eventos =
-                resultadoEventos.data || [];
-
-        }
-
-
-        const resultadoMeta =
-            await supabaseClient
-            .from("meta")
-            .select("*")
-            .limit(1);
-
-
-        if(
-            !resultadoMeta.error &&
-            resultadoMeta.data &&
-            resultadoMeta.data.length
-        ){
-
-            meta = resultadoMeta.data[0];
-
-        }
-
-
-        atualizarTudo();
-
-
-    }catch(e){
-
-        console.error(e);
-
-        mostrarToast(
-            "Erro de ligação ao Supabase.",
-            "erro"
-        );
-
-    }
-
+async function logout(){
+ await db.auth.signOut();
+ location.reload();
 }
 
+/* ==========================================================
+   CARREGAMENTO DAS 4 ÁREAS
+   ========================================================== */
 
-/* =========================================================
-   MENU
-========================================================= */
+async function carregarTudo(){
 
-function alternarMenu(){
+ await carregarMembros();
+ await carregarTransacoes();
+ await carregarEventos();
+ await carregarMeta();
 
-    $("menuNav")
-        .classList
-        .toggle("aberto");
-
+ atualizarDashboard();
 }
 
-
-function abrir(id){
-
-    document
-        .querySelectorAll("section")
-        .forEach(
-            s=>s.classList.remove("ativo")
-        );
-
-
-    const sec =
-        $(id);
-
-    if(sec)
-        sec.classList.add("ativo");
-
-
-    document
-        .querySelectorAll("nav button")
-        .forEach(
-            b=>b.classList.remove("ativo")
-        );
-
-
-    const botao =
-        document.querySelector(
-            'nav button[onclick*="' +
-            id +
-            '"]'
-        );
-
-
-    if(botao)
-        botao.classList.add("ativo");
-
-
-    $("menuNav")
-        .classList
-        .remove("aberto");
-
-}
-
-
-/* =========================================================
-   TEMA
-========================================================= */
-
-function alternarTema(){
-
-    const escuro =
-        document.body
-        .classList
-        .toggle("escuro");
-
-    localStorage.setItem(
-        "ojv_tema",
-        escuro ? "true" : "false"
-    );
-
-}
-
-
-function carregarTema(){
-
-    if(
-        localStorage.getItem(
-            "ojv_tema"
-        ) === "true"
-    ){
-
-        document.body
-            .classList
-            .add("escuro");
-
-    }
-
-}
-
-
-/* =========================================================
-   PAGINAÇÃO
-========================================================= */
-
-function criarPagina(
-    tipo,
-    dados
-){
-
-    const total =
-        dados.length;
-
-    const paginas =
-        Math.ceil(
-            total / POR_PAGINA
-        ) || 1;
-
-
-    if(
-        paginaAtual[tipo] >
-        paginas
-    ){
-
-        paginaAtual[tipo] =
-            paginas;
-
-    }
-
-
-    const inicio =
-        (paginaAtual[tipo]-1)
-        * POR_PAGINA;
-
-
-    return {
-
-        dados:dados.slice(
-            inicio,
-            inicio + POR_PAGINA
-        ),
-
-        inicio:inicio,
-
-        paginas:paginas
-
-    };
-
-}
-
-
-function desenharPaginacao(
-    tipo,
-    total,
-    elemento
-){
-
-    const el =
-        $(elemento);
-
-    if(total <= 1){
-
-        el.innerHTML="";
-        return;
-
-    }
-
-
-    let html="";
-
-
-    for(
-        let i=1;
-        i<=total;
-        i++
-    ){
-
-        html +=
-        `<button
-            class="${i===paginaAtual[tipo]?'ativo':''}"
-            onclick="paginar('${tipo}',${i})"
-        >
-        ${i}
-        </button>`;
-
-    }
-
-
-    el.innerHTML =
-        html;
-
-}
-
-
-function paginar(
-    tipo,
-    pagina
-){
-
-    paginaAtual[tipo] =
-        pagina;
-
-    atualizarTudo();
-
-}
-
-
-/* =========================================================
+/* ==========================================================
    MEMBROS
-========================================================= */
+   ========================================================== */
 
-function abrirModal(){
+async function carregarMembros(){
 
-    editandoIndex=-1;
+ /*
+  Esta consulta usa a tabela membros.
+  Os campos usados são:
+  nome, email, telefone, aniversario, status, data_entrada.
+ */
+ const {data,error}=await db
+  .from("membros")
+  .select("*")
+  .order("created_at",{ascending:false});
 
-    $("modalTitulo")
-        .textContent =
-        "📝 Novo Membro";
+ if(error){
+  console.error(error);
+  toast("Erro ao carregar membros: "+error.message,true);
+  membros=[];
+  return;
+ }
 
-    $("modalNome").value="";
-    $("modalEmail").value="";
-    $("modalTelefone").value="";
-    $("modalAniversario").value="";
-    $("modalStatus").value="Ativo";
-
-    $("modal")
-        .classList
-        .add("aberto");
-
+ membros=data||[];
+ renderMembros();
 }
 
+function novoMembro(){
+ editId=null;
+ $("tituloMembro").textContent="Novo Membro";
+ $("mNome").value="";
+ $("mEmail").value="";
+ $("mTelefone").value="";
+ $("mNascimento").value="";
+ $("mStatus").value="Ativo";
+ $("modalMembro").classList.add("open");
+}
+
+function editarMembro(id){
+ const m=membros.find(x=>x.id===id);
+ if(!m)return;
+
+ editId=id;
+ $("tituloMembro").textContent="Editar Membro";
+ $("mNome").value=m.nome||"";
+ $("mEmail").value=m.email||"";
+ $("mTelefone").value=m.telefone||"";
+ $("mNascimento").value=m.aniversario||"";
+ $("mStatus").value=m.status||"Ativo";
+ $("modalMembro").classList.add("open");
+}
 
 function fecharModal(){
-
-    $("modal")
-        .classList
-        .remove("aberto");
-
+ $("modalMembro").classList.remove("open");
 }
-
-
-function aplicarMascaraData(){
-
-    const input =
-        $("modalAniversario");
-
-    input.oninput =
-    function(){
-
-        let v =
-            this.value
-            .replace(/\D/g,"")
-            .slice(0,8);
-
-
-        if(v.length>4){
-
-            v =
-                v.slice(0,2)+"/"+
-                v.slice(2,4)+"/"+
-                v.slice(4);
-
-        }else if(v.length>2){
-
-            v =
-                v.slice(0,2)+"/"+
-                v.slice(2);
-
-        }
-
-
-        this.value=v;
-
-    };
-
-}
-
 
 async function salvarMembro(){
 
-    const nome =
-        $("modalNome")
-        .value
-        .trim();
+ const nome=$("mNome").value.trim();
+ const email=$("mEmail").value.trim();
+ const telefone=$("mTelefone").value.trim();
+ const aniversario=$("mNascimento").value.trim();
+ const status=$("mStatus").value;
 
-    const email =
-        $("modalEmail")
-        .value
-        .trim();
+ if(!nome){
+  toast("Informe o nome do membro.",true);
+  return;
+ }
 
-    const telefone =
-        $("modalTelefone")
-        .value
-        .trim();
+ const dados={
+  nome,
+  email,
+  telefone,
+  aniversario,
+  status
+ };
 
-    const aniversario =
-        $("modalAniversario")
-        .value
-        .trim();
+ let result;
 
-    const status =
-        $("modalStatus")
-        .value;
+ if(editId){
+  result=await db
+   .from("membros")
+   .update(dados)
+   .eq("id",editId);
+ }else{
+  result=await db
+   .from("membros")
+   .insert(dados);
+ }
 
+ if(result.error){
+  console.error(result.error);
+  toast("Erro ao guardar membro: "+result.error.message,true);
+  return;
+ }
 
-    if(!nome){
-
-        mostrarToast(
-            "Informe o nome.",
-            "atencao"
-        );
-
-        return;
-    }
-
-
-    if(
-        aniversario &&
-        aniversario.length !== 10
-    ){
-
-        mostrarToast(
-            "Data deve estar no formato DD/MM/AAAA.",
-            "atencao"
-        );
-
-        return;
-    }
-
-
-    const dados = {
-
-        nome:nome,
-
-        email:email,
-
-        telefone:telefone,
-
-        aniversario:aniversario,
-
-        status:status
-
-    };
-
-
-    try{
-
-        if(editandoIndex === -1){
-
-            const {
-                error
-            } =
-            await supabaseClient
-            .from("membros")
-            .insert([dados]);
-
-
-            if(error)
-                throw error;
-
-
-            mostrarToast(
-                "Membro adicionado.",
-                "sucesso"
-            );
-
-
-        }else{
-
-            const membro =
-                membros[editandoIndex];
-
-
-            const {
-                error
-            } =
-            await supabaseClient
-            .from("membros")
-            .update(dados)
-            .eq("id",membro.id);
-
-
-            if(error)
-                throw error;
-
-
-            mostrarToast(
-                "Membro atualizado.",
-                "sucesso"
-            );
-
-        }
-
-
-        fecharModal();
-
-        await carregarDados();
-
-
-    }catch(e){
-
-        console.error(e);
-
-        mostrarToast(
-            "Erro ao guardar membro. Verifique as colunas da tabela membros.",
-            "erro"
-        );
-
-    }
-
+ fecharModal();
+ await carregarMembros();
+ atualizarDashboard();
+ toast(editId?"Membro atualizado.":"Membro cadastrado.");
 }
 
+async function excluirMembro(id){
 
-function editarMembro(i){
+ const m=membros.find(x=>x.id===id);
+ if(!m)return;
 
-    const m =
-        membrosFiltrados[i];
+ if(!confirm("Eliminar o membro "+m.nome+"?"))return;
 
-    const indiceReal =
-        membros.findIndex(
-            x=>x.id===m.id
-        );
+ const {error}=await db
+  .from("membros")
+  .delete()
+  .eq("id",id);
 
+ if(error){
+  toast("Erro ao eliminar: "+error.message,true);
+  return;
+ }
 
-    editandoIndex =
-        indiceReal;
-
-
-    $("modalTitulo")
-        .textContent =
-        "✏️ Editar Membro";
-
-    $("modalNome").value =
-        m.nome || "";
-
-    $("modalEmail").value =
-        m.email || "";
-
-    $("modalTelefone").value =
-        m.telefone || "";
-
-    $("modalAniversario").value =
-        m.aniversario || "";
-
-    $("modalStatus").value =
-        m.status || "Ativo";
-
-
-    $("modal")
-        .classList
-        .add("aberto");
-
+ await carregarMembros();
+ atualizarDashboard();
+ toast("Membro eliminado.");
 }
 
+function renderMembros(){
 
-async function excluirMembro(i){
+ const termo=($("buscaMembro").value||"").toLowerCase();
 
-    const m =
-        membrosFiltrados[i];
+ const lista=membros.filter(m=>
+  String(m.nome||"").toLowerCase().includes(termo)||
+  String(m.email||"").toLowerCase().includes(termo)||
+  String(m.telefone||"").toLowerCase().includes(termo)
+ );
 
+ $("listaMembros").innerHTML=lista.map(m=>`
+  <tr>
+   <td><strong>${esc(m.nome)}</strong></td>
+   <td>${esc(m.email||"")}</td>
+   <td>${esc(m.telefone||"")}</td>
+   <td>
+    <span class="badge ${m.status==="Ativo"?"badge-ok":"badge-no"}">
+     ${esc(m.status||"")}
+    </span>
+   </td>
+   <td>
+    <div class="actions">
+     <button class="btn btn-outline" onclick="editarMembro('${m.id}')">✏️</button>
+     <button class="btn btn-danger" onclick="excluirMembro('${m.id}')">🗑️</button>
+    </div>
+   </td>
+  </tr>
+ `).join("")||`
+  <tr><td colspan="5" style="text-align:center">Nenhum membro encontrado.</td></tr>
+ `;
 
-    if(
-        !confirm(
-            'Eliminar o membro "' +
-            (m.nome || "") +
-            '"?'
-        )
-    )
-        return;
-
-
-    const {
-        error
-    } =
-    await supabaseClient
-    .from("membros")
-    .delete()
-    .eq("id",m.id);
-
-
-    if(error){
-
-        mostrarToast(
-            "Erro ao eliminar membro.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    mostrarToast(
-        "Membro eliminado.",
-        "sucesso"
-    );
-
-
-    await carregarDados();
-
+ $("totalMembros").textContent=membros.length;
+ $("ativos").textContent=membros.filter(m=>m.status==="Ativo").length;
+ $("navMembros").textContent=membros.length;
 }
 
+/* ==========================================================
+   FINANÇAS / TRANSAÇÕES
+   ========================================================== */
 
-function filtrarMembros(){
+async function carregarTransacoes(){
 
-    const termo =
-        (
-            $("buscaMembro")
-            .value || ""
-        ).toLowerCase();
+ const {data,error}=await db
+  .from("transacoes")
+  .select("*")
+  .order("created_at",{ascending:false});
 
+ if(error){
+  console.error(error);
+  toast("Erro ao carregar transações: "+error.message,true);
+  transacoes=[];
+  return;
+ }
 
-    membrosFiltrados =
-        membros.filter(
-            m=>
-                (m.nome||"")
-                .toLowerCase()
-                .includes(termo)
-
-                ||
-
-                (m.telefone||"")
-                .toLowerCase()
-                .includes(termo)
-
-                ||
-
-                (m.email||"")
-                .toLowerCase()
-                .includes(termo)
-        );
-
-
-    paginaAtual.membros=1;
-
-    atualizarTudo();
-
+ transacoes=data||[];
+ renderTransacoes();
 }
 
+async function adicionarFinanceiro(){
 
-/* =========================================================
-   TRANSAÇÕES
-========================================================= */
+ const tipo=$("tipo").value;
+ const categoria=$("categoria").value;
+ const valor=Number($("valor").value);
+ const descricao=$("descricao").value.trim();
 
-async function adicionarTransacao(){
+ if(!valor||valor<=0){
+  toast("Informe um valor válido.",true);
+  return;
+ }
 
-    const tipo =
-        $("tipoTransacao").value;
+ if(!descricao){
+  toast("Informe a descrição.",true);
+  return;
+ }
 
-    const categoria =
-        $("categoriaTransacao").value;
+ const dados={
+  tipo,
+  categoria,
+  valor:tipo==="despesa"?-valor:valor,
+  descricao,
+  data:new Date().toISOString()
+ };
 
-    const valor =
-        parseFloat(
-            $("valorTransacao").value
-        );
+ const {error}=await db.from("transacoes").insert(dados);
 
-    const descricao =
-        $("descricaoTransacao")
-        .value
-        .trim();
+ if(error){
+  console.error(error);
+  toast("Erro ao registrar finança: "+error.message,true);
+  return;
+ }
 
+ $("valor").value="";
+ $("descricao").value="";
 
-    if(
-        !valor ||
-        valor<=0
-    ){
+ await carregarTransacoes();
+ atualizarDashboard();
 
-        mostrarToast(
-            "Informe um valor válido.",
-            "atencao"
-        );
-
-        return;
-    }
-
-
-    if(!descricao){
-
-        mostrarToast(
-            "Informe a descrição.",
-            "atencao"
-        );
-
-        return;
-    }
-
-
-    const dados={
-
-        tipo:tipo,
-
-        categoria:categoria,
-
-        valor:
-            tipo==="despesa"
-            ? -valor
-            : valor,
-
-        descricao:descricao,
-
-        data:
-            new Date()
-            .toLocaleString("pt-PT")
-
-    };
-
-
-    const {
-        error
-    } =
-    await supabaseClient
-    .from("transacoes")
-    .insert([dados]);
-
-
-    if(error){
-
-        console.error(error);
-
-        mostrarToast(
-            "Erro ao registrar transação.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    $("valorTransacao").value="";
-    $("descricaoTransacao").value="";
-
-
-    mostrarToast(
-        "Transação registrada.",
-        "sucesso"
-    );
-
-
-    await carregarDados();
-
+ toast("Transação registrada.");
 }
-
 
 async function excluirTransacao(id){
 
-    if(
-        !confirm(
-            "Eliminar esta transação?"
-        )
-    )
-        return;
+ if(!confirm("Eliminar esta transação?"))return;
 
+ const {error}=await db
+  .from("transacoes")
+  .delete()
+  .eq("id",id);
 
-    const {
-        error
-    } =
-    await supabaseClient
-    .from("transacoes")
-    .delete()
-    .eq("id",id);
+ if(error){
+  toast("Erro ao eliminar transação: "+error.message,true);
+  return;
+ }
 
-
-    if(error){
-
-        mostrarToast(
-            "Erro ao eliminar transação.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    mostrarToast(
-        "Transação eliminada.",
-        "sucesso"
-    );
-
-
-    await carregarDados();
-
+ await carregarTransacoes();
+ atualizarDashboard();
+ toast("Transação eliminada.");
 }
 
+function renderTransacoes(){
 
-function filtrarTransacoes(){
+ const termo=($("buscaTransacao").value||"").toLowerCase();
+ const filtro=$("filtro").value;
 
-    const termo =
-        (
-            $("buscaTransacao")
-            .value || ""
-        ).toLowerCase();
+ const lista=transacoes.filter(t=>{
+  const texto=(String(t.descricao||"")+" "+String(t.categoria||"")).toLowerCase();
+  return texto.includes(termo)&&(!filtro||t.tipo===filtro);
+ });
 
-    const tipo =
-        $("filtroTipo").value;
-
-
-    transacoesFiltradas =
-        transacoes.filter(
-            t=>
-                (
-                    t.descricao||""
-                )
-                .toLowerCase()
-                .includes(termo)
-
-                &&
-
-                (
-                    !tipo ||
-                    t.tipo===tipo
-                )
-        );
-
-
-    paginaAtual.transacoes=1;
-
-    atualizarTudo();
-
+ $("listaTransacoes").innerHTML=lista.map(t=>`
+  <tr>
+   <td>${formatarData(t.data||t.created_at)}</td>
+   <td>${esc(t.descricao||"")}</td>
+   <td>${t.tipo==="receita"?"💰 Receita":"💸 Despesa"}</td>
+   <td style="font-weight:bold;color:${Number(t.valor)>=0?"#28a745":"#dc3545"}">
+    ${Number(t.valor)>=0?"+":""}${kz(t.valor)}
+   </td>
+   <td>
+    <button class="btn btn-danger" onclick="excluirTransacao('${t.id}')">🗑️</button>
+   </td>
+  </tr>
+ `).join("")||`
+  <tr><td colspan="5" style="text-align:center">Nenhuma transação.</td></tr>
+ `;
 }
 
-
-/* =========================================================
+/* ==========================================================
    EVENTOS
-========================================================= */
+   ========================================================== */
+
+async function carregarEventos(){
+
+ const {data,error}=await db
+  .from("eventos")
+  .select("*")
+  .order("data",{ascending:true});
+
+ if(error){
+  console.error(error);
+  toast("Erro ao carregar eventos: "+error.message,true);
+  eventos=[];
+  return;
+ }
+
+ eventos=data||[];
+ renderEventos();
+}
 
 async function adicionarEvento(){
 
-    const nome =
-        $("eventoNome")
-        .value
-        .trim();
+ const nome=$("eventoNome").value.trim();
+ const data=$("eventoData").value;
+ const local=$("eventoLocal").value.trim();
 
-    const data =
-        $("eventoData").value;
+ if(!nome||!data){
+  toast("Nome e data são obrigatórios.",true);
+  return;
+ }
 
-    const local =
-        $("eventoLocal")
-        .value
-        .trim();
+ const {error}=await db
+  .from("eventos")
+  .insert({
+   nome,
+   data,
+   local:local||"Não definido",
+   status:"Agendado"
+  });
 
+ if(error){
+  toast("Erro ao criar evento: "+error.message,true);
+  return;
+ }
 
-    if(!nome || !data){
+ $("eventoNome").value="";
+ $("eventoData").value="";
+ $("eventoLocal").value="";
 
-        mostrarToast(
-            "Nome e data são obrigatórios.",
-            "atencao"
-        );
-
-        return;
-    }
-
-
-    const {
-        error
-    } =
-    await supabaseClient
-    .from("eventos")
-    .insert([{
-
-        nome:nome,
-
-        data:data,
-
-        local:local,
-
-        status:"Agendado"
-
-    }]);
-
-
-    if(error){
-
-        console.error(error);
-
-        mostrarToast(
-            "Erro ao criar evento.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    $("eventoNome").value="";
-    $("eventoData").value="";
-    $("eventoLocal").value="";
-
-
-    mostrarToast(
-        "Evento criado.",
-        "sucesso"
-    );
-
-
-    await carregarDados();
-
+ await carregarEventos();
+ toast("Evento criado.");
 }
-
 
 async function excluirEvento(id){
 
-    if(
-        !confirm(
-            "Eliminar este evento?"
-        )
-    )
-        return;
+ if(!confirm("Eliminar este evento?"))return;
 
+ const {error}=await db
+  .from("eventos")
+  .delete()
+  .eq("id",id);
 
-    const {
-        error
-    } =
-    await supabaseClient
-    .from("eventos")
-    .delete()
-    .eq("id",id);
+ if(error){
+  toast("Erro ao eliminar evento: "+error.message,true);
+  return;
+ }
 
-
-    if(error){
-
-        mostrarToast(
-            "Erro ao eliminar evento.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    mostrarToast(
-        "Evento eliminado.",
-        "sucesso"
-    );
-
-
-    await carregarDados();
-
+ await carregarEventos();
+ toast("Evento eliminado.");
 }
 
+function renderEventos(){
 
-/* =========================================================
+ $("listaEventos").innerHTML=eventos.map(e=>`
+  <tr>
+   <td><strong>${esc(e.nome||"")}</strong></td>
+   <td>${esc(e.data||"")}</td>
+   <td>${esc(e.local||"")}</td>
+   <td>
+    <button class="btn btn-danger" onclick="excluirEvento('${e.id}')">🗑️</button>
+   </td>
+  </tr>
+ `).join("")||`
+  <tr><td colspan="4" style="text-align:center">Nenhum evento.</td></tr>
+ `;
+}
+
+/* ==========================================================
    META
-========================================================= */
+   ========================================================== */
+
+async function carregarMeta(){
+
+ const {data,error}=await db
+  .from("metas")
+  .select("*")
+  .limit(1)
+  .maybeSingle();
+
+ if(error){
+  console.error(error);
+  meta={valor:0,guardado:0};
+  return;
+ }
+
+ meta=data||{valor:0,guardado:0};
+ renderMeta();
+}
 
 async function definirMeta(){
 
-    const valor =
-        parseFloat(
-            $("metaValorInput").value
-        );
+ const valor=Number($("novaMeta").value);
 
+ if(!valor||valor<=0){
+  toast("Valor da meta inválido.",true);
+  return;
+ }
 
-    if(
-        !valor ||
-        valor<=0
-    ){
+ if(meta.id){
+  const {error}=await db
+   .from("metas")
+   .update({valor,guardado:0})
+   .eq("id",meta.id);
 
-        mostrarToast(
-            "Informe uma meta válida.",
-            "atencao"
-        );
+  if(error){
+   toast("Erro: "+error.message,true);
+   return;
+  }
+ }else{
+  const {error}=await db
+   .from("metas")
+   .insert({valor,guardado:0});
 
-        return;
-    }
+  if(error){
+   toast("Erro: "+error.message,true);
+   return;
+  }
+ }
 
-
-    try{
-
-        const existente =
-            await supabaseClient
-            .from("meta")
-            .select("id")
-            .limit(1);
-
-
-        if(
-            existente.data &&
-            existente.data.length
-        ){
-
-            const {
-                error
-            } =
-            await supabaseClient
-            .from("meta")
-            .update({
-
-                valor:valor,
-
-                guardado:0
-
-            })
-            .eq(
-                "id",
-                existente.data[0].id
-            );
-
-
-            if(error)
-                throw error;
-
-
-        }else{
-
-            const {
-                error
-            } =
-            await supabaseClient
-            .from("meta")
-            .insert([{
-
-                valor:valor,
-
-                guardado:0
-
-            }]);
-
-
-            if(error)
-                throw error;
-
-        }
-
-
-        $("metaValorInput").value="";
-
-
-        mostrarToast(
-            "Meta definida.",
-            "sucesso"
-        );
-
-
-        await carregarDados();
-
-
-    }catch(e){
-
-        console.error(e);
-
-        mostrarToast(
-            "Erro ao guardar meta.",
-            "erro"
-        );
-
-    }
-
+ $("novaMeta").value="";
+ await carregarMeta();
+ toast("Meta definida.");
 }
 
+async function guardarMeta(){
 
-async function guardarParaMeta(){
+ const valor=Number($("guardarMeta").value);
 
-    const valor =
-        parseFloat(
-            $("metaGuardarInput").value
-        );
+ if(!valor||valor<=0){
+  toast("Valor inválido.",true);
+  return;
+ }
 
+ if(!meta.valor){
+  toast("Defina uma meta primeiro.",true);
+  return;
+ }
 
-    if(
-        !valor ||
-        valor<=0
-    ){
+ const novo=Math.min(Number(meta.guardado||0)+valor,Number(meta.valor));
 
-        mostrarToast(
-            "Informe um valor válido.",
-            "atencao"
-        );
+ const {error}=await db
+  .from("metas")
+  .update({guardado:novo})
+  .eq("id",meta.id);
 
-        return;
-    }
+ if(error){
+  toast("Erro: "+error.message,true);
+  return;
+ }
 
-
-    if(!meta.id){
-
-        mostrarToast(
-            "Defina uma meta primeiro.",
-            "atencao"
-        );
-
-        return;
-    }
-
-
-    const novo =
-        Math.min(
-            Number(meta.valor),
-            Number(meta.guardado||0)+valor
-        );
-
-
-    const {
-        error
-    } =
-    await supabaseClient
-    .from("meta")
-    .update({
-        guardado:novo
-    })
-    .eq("id",meta.id);
-
-
-    if(error){
-
-        mostrarToast(
-            "Erro ao atualizar meta.",
-            "erro"
-        );
-
-        return;
-    }
-
-
-    $("metaGuardarInput").value="";
-
-
-    mostrarToast(
-        "Valor guardado na meta.",
-        "sucesso"
-    );
-
-
-    await carregarDados();
-
+ $("guardarMeta").value="";
+ await carregarMeta();
+ toast("Valor guardado na meta.");
 }
 
+function renderMeta(){
 
-/* =========================================================
+ const valor=Number(meta.valor||0);
+ const guardado=Number(meta.guardado||0);
+ const pct=valor?Math.min(100,guardado/valor*100):0;
+
+ $("metaValor").textContent=kz(valor);
+ $("metaGuardado").textContent=kz(guardado);
+ $("metaPct").textContent=pct.toFixed(0)+"%";
+ $("barra").style.width=pct+"%";
+}
+
+/* ==========================================================
+   DASHBOARD
+   ========================================================== */
+
+function atualizarDashboard(){
+
+ let receitas=0;
+ let despesas=0;
+
+ transacoes.forEach(t=>{
+  const v=Number(t.valor||0);
+  if(v>=0)receitas+=v;
+  else despesas+=Math.abs(v);
+ });
+
+ const saldo=receitas-despesas;
+
+ $("dashMembros").textContent=membros.length;
+ $("dashReceitas").textContent=kz(receitas);
+ $("dashDespesas").textContent=kz(despesas);
+ $("dashSaldo").textContent=kz(saldo);
+
+ $("finR").textContent=kz(receitas);
+ $("finD").textContent=kz(despesas);
+ $("finS").textContent=kz(saldo);
+
+ const ult=transacoes.slice(0,5);
+
+ $("ultimas").innerHTML=ult.map(t=>`
+  <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee">
+   <span>${esc(t.descricao||"")}</span>
+   <strong style="color:${Number(t.valor)>=0?"#28a745":"#dc3545"}">
+    ${Number(t.valor)>=0?"+":""}${kz(t.valor)}
+   </strong>
+  </div>
+ `).join("")||"Nenhuma transação.";
+
+ const hoje=new Date().toISOString().slice(0,10);
+
+ const prox=eventos
+  .filter(e=>e.data>=hoje)
+  .slice(0,5);
+
+ $("proximos").innerHTML=prox.map(e=>`
+  <div style="padding:8px 0;border-bottom:1px solid #eee">
+   <strong>${esc(e.nome)}</strong>
+   <span style="float:right">${esc(e.data)}</span>
+   <small style="display:block;color:#777">${esc(e.local||"")}</small>
+  </div>
+ `).join("")||"Nenhum evento próximo.";
+}
+
+/* ==========================================================
+   NAVEGAÇÃO
+   ========================================================== */
+
+function menu(){
+ $("nav").classList.toggle("aberto");
+}
+
+function abrir(id){
+
+ document.querySelectorAll("section").forEach(s=>s.classList.remove("ativo"));
+ $(id).classList.add("ativo");
+
+ document.querySelectorAll("nav button").forEach(b=>b.classList.remove("ativo"));
+
+ const bot=[...document.querySelectorAll("nav button")]
+  .find(b=>b.getAttribute("onclick")?.includes("'"+id+"'"));
+
+ if(bot)bot.classList.add("ativo");
+
+ $("nav").classList.remove("aberto");
+}
+
+function tema(){
+ document.body.classList.toggle("dark");
+ localStorage.setItem("ojv_dark",document.body.classList.contains("dark"));
+}
+
+/* ==========================================================
    CSV
-========================================================= */
+   ========================================================== */
 
-function baixarCSV(
-    nome,
-    conteudo
-){
+function baixar(nome,conteudo,tipo="text/csv"){
 
-    const blob =
-        new Blob(
-            [conteudo],
-            {type:"text/csv;charset=utf-8"}
-        );
-
-
-    const url =
-        URL.createObjectURL(blob);
-
-    const a =
-        document.createElement("a");
-
-    a.href=url;
-
-    a.download=nome;
-
-    a.click();
-
-    URL.revokeObjectURL(url);
-
+ const blob=new Blob([conteudo],{type:tipo});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download=nome;
+ a.click();
+ URL.revokeObjectURL(url);
 }
 
+function exportarMembros(){
 
-function exportarMembrosCSV(){
+ let csv="Nome,E-mail,Telefone,Aniversário,Status\n";
 
-    if(!membros.length){
+ membros.forEach(m=>{
+  csv+=`"${m.nome||""}","${m.email||""}","${m.telefone||""}","${m.aniversario||""}","${m.status||""}"\n`;
+ });
 
-        mostrarToast(
-            "Não há membros.",
-            "atencao"
-        );
-
-        return;
-    }
-
-
-    let csv =
-        "Nome,E-mail,Telefone,Aniversario,Status\n";
-
-
-    membros.forEach(m=>{
-
-        csv +=
-            `"${m.nome||""}",`+
-            `"${m.email||""}",`+
-            `"${m.telefone||""}",`+
-            `"${m.aniversario||""}",`+
-            `"${m.status||""}"\n`;
-
-    });
-
-
-    baixarCSV(
-        "membros_ojv.csv",
-        csv
-    );
-
+ baixar("membros_ojv.csv",csv);
 }
 
-
-function exportarTransacoesCSV(){
-
-    let csv =
-        "Data,Tipo,Categoria,Descricao,Valor\n";
-
-
-    transacoes.forEach(t=>{
-
-        csv +=
-            `"${t.data||""}",`+
-            `"${t.tipo||""}",`+
-            `"${t.categoria||""}",`+
-            `"${t.descricao||""}",`+
-            `"${t.valor||0}"\n`;
-
-    });
-
-
-    baixarCSV(
-        "transacoes_ojv.csv",
-        csv
-    );
-
-}
-
-
-/* =========================================================
-   ATUALIZAR INTERFACE
-========================================================= */
-
-function atualizarTudo(){
-
-    membrosFiltrados =
-        membrosFiltrados.length ||
-        $("buscaMembro")?.value
-        ? membros.filter(m=>{
-
-            const termo =
-                (
-                    $("buscaMembro")?.value ||
-                    ""
-                ).toLowerCase();
-
-            return (
-                (m.nome||"")
-                .toLowerCase()
-                .includes(termo)
-
-                ||
-
-                (m.email||"")
-                .toLowerCase()
-                .includes(termo)
-
-                ||
-
-                (m.telefone||"")
-                .toLowerCase()
-                .includes(termo)
-            );
-
-        })
-        : membros.slice();
-
-
-    if(
-        $("buscaTransacao") &&
-        (
-            $("buscaTransacao").value ||
-            $("filtroTipo").value
-        )
-    ){
-
-        filtrarTransacoes();
-
-    }else{
-
-        transacoesFiltradas =
-            transacoes.slice();
-
-    }
-
-
-    const pM =
-        criarPagina(
-            "membros",
-            membrosFiltrados
-        );
-
-
-    const pT =
-        criarPagina(
-            "transacoes",
-            transacoesFiltradas
-        );
-
-
-    /* MEMBROS */
-
-    desenharPaginacao(
-        "membros",
-        pM.paginas,
-        "pagMembros"
-    );
-
-
-    let htmlM="";
-
-
-    pM.dados.forEach(
-        (m,i)=>{
-
-            const real =
-                pM.inicio+i;
-
-
-            const classe =
-                m.status==="Ativo"
-                ? "badge-sucesso"
-                : "badge-perigo";
-
-
-            htmlM += `
-
-<tr>
-
-<td>
-
-<strong>
-${escaparHTML(m.nome)}
-</strong>
-
-<br>
-
-<span style="font-size:.7rem;color:#777">
-${escaparHTML(m.email||"")}
-</span>
-
-</td>
-
-
-<td>
-${escaparHTML(m.telefone||"")}
-</td>
-
-
-<td>
-
-<span class="badge ${classe}">
-${escaparHTML(m.status||"Ativo")}
-</span>
-
-</td>
-
-
-<td>
-
-<div class="grupo-acoes">
-
-<button
-class="btn btn-outline"
-onclick="editarMembro(${real})"
->
-✏️
-</button>
-
-<button
-class="btn btn-danger"
-onclick="excluirMembro(${real})"
->
-🗑️
-</button>
-
-</div>
-
-</td>
-
-</tr>
-
-`;
-
-        }
-    );
-
-
-    $("listaMembros").innerHTML =
-        htmlM ||
-        `
-<tr>
-<td colspan="4" style="text-align:center">
-Nenhum membro cadastrado.
-</td>
-</tr>
-`;
-
-
-    $("totalMembros")
-        .textContent =
-        membros.length;
-
-
-    $("ativosCount")
-        .textContent =
-        membros.filter(
-            m=>m.status==="Ativo"
-        ).length;
-
-
-    $("navMembros")
-        .textContent =
-        membros.length;
-
-
-    /* TRANSAÇÕES */
-
-    desenharPaginacao(
-        "transacoes",
-        pT.paginas,
-        "pagTransacoes"
-    );
-
-
-    let htmlT="";
-
-
-    pT.dados.forEach(t=>{
-
-        const valor =
-            Number(t.valor||0);
-
-
-        const cor =
-            valor>=0
-            ? "#28a745"
-            : "#dc3545";
-
-
-        htmlT += `
-
-<tr>
-
-<td style="font-size:.7rem">
-${escaparHTML(t.data||"")}
-</td>
-
-<td>
-
-<strong>
-${escaparHTML(t.descricao||"")}
-</strong>
-
-<br>
-
-<span style="font-size:.7rem;color:#777">
-${escaparHTML(t.categoria||"")}
-</span>
-
-</td>
-
-<td
-style="
-font-weight:700;
-color:${cor}
-"
->
-
-${valor>=0?"+":""}
-${formatarNumero(valor)}
- Kz
-
-</td>
-
-
-<td>
-
-<button
-class="btn btn-danger"
-style="
-width:auto;
-min-height:34px;
-padding:7px;
-font-size:.72rem;
-"
-onclick="excluirTransacao('${t.id}')"
->
-🗑️
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-    });
-
-
-    $("listaTransacoes").innerHTML =
-        htmlT ||
-        `
-<tr>
-<td colspan="4" style="text-align:center">
-Nenhuma transação.
-</td>
-</tr>
-`;
-
-
-    /* EVENTOS */
-
-    let htmlE="";
-
-
-    eventos.forEach(e=>{
-
-        htmlE += `
-
-<tr>
-
-<td>
-
-<strong>
-${escaparHTML(e.nome||"")}
-</strong>
-
-<br>
-
-<span style="font-size:.7rem;color:#777">
-${escaparHTML(e.local||"")}
-</span>
-
-</td>
-
-<td>
-${escaparHTML(e.data||"")}
-</td>
-
-<td>
-
-<span class="badge badge-info">
-${escaparHTML(e.status||"Agendado")}
-</span>
-
-</td>
-
-<td>
-
-<button
-class="btn btn-danger"
-style="
-width:auto;
-min-height:34px;
-padding:7px;
-font-size:.72rem;
-"
-onclick="excluirEvento('${e.id}')"
->
-🗑️
-</button>
-
-</td>
-
-</tr>
-
-`;
-
-    });
-
-
-    $("listaEventos").innerHTML =
-        htmlE ||
-        `
-<tr>
-<td colspan="4" style="text-align:center">
-Nenhum evento.
-</td>
-</tr>
-`;
-
-
-    /* FINANÇAS */
-
-    let receitas=0;
-    let despesas=0;
-
-
-    transacoes.forEach(t=>{
-
-        const v =
-            Number(t.valor||0);
-
-
-        if(v>=0)
-            receitas+=v;
-        else
-            despesas+=Math.abs(v);
-
-    });
-
-
-    const saldo =
-        receitas-despesas;
-
-
-    $("finReceitas")
-        .textContent =
-        formatarNumero(receitas)+" Kz";
-
-
-    $("finDespesas")
-        .textContent =
-        formatarNumero(despesas)+" Kz";
-
-
-    $("finSaldo")
-        .textContent =
-        formatarNumero(saldo)+" Kz";
-
-
-    /* DASHBOARD */
-
-    $("cardsDashboard").innerHTML = `
-
-<div class="card">
-
-<span class="numero">
-${membros.length}
-</span>
-
-<span class="rotulo">
-Membros
-</span>
-
-</div>
-
-
-<div class="card verde">
-
-<span class="numero">
-${formatarNumero(receitas)}
-</span>
-
-<span class="rotulo">
-Receitas
-</span>
-
-</div>
-
-
-<div class="card vermelho">
-
-<span class="numero">
-${formatarNumero(despesas)}
-</span>
-
-<span class="rotulo">
-Despesas
-</span>
-
-</div>
-
-
-<div class="card azul">
-
-<span class="numero">
-${formatarNumero(saldo)}
-</span>
-
-<span class="rotulo">
-Saldo
-</span>
-
-</div>
-
-`;
-
-
-    /* ÚLTIMAS TRANSAÇÕES */
-
-    const ult =
-        transacoes
-        .slice(0,3);
-
-
-    $("ultimasTransacoes").innerHTML =
-        ult.length
-        ? ult.map(t=>`
-
-<div
-style="
-display:flex;
-justify-content:space-between;
-padding:7px 0;
-border-bottom:1px solid #eee;
-"
->
-
-<span>
-${escaparHTML(t.descricao||"")}
-</span>
-
-<strong
-style="
-color:${Number(t.valor)>=0?"#28a745":"#dc3545"}
-"
->
-
-${Number(t.valor)>=0?"+":""}
-${formatarNumero(t.valor)}
- Kz
-
-</strong>
-
-</div>
-
-`).join("")
-        : "Nenhuma transação.";
-
-
-    /* EVENTOS */
-
-    const prox =
-        eventos
-        .filter(e=>
-            !e.status ||
-            e.status==="Agendado"
-        )
-        .slice(0,3);
-
-
-    $("proximosEventos").innerHTML =
-        prox.length
-        ? prox.map(e=>`
-
-<div
-style="
-display:flex;
-justify-content:space-between;
-padding:7px 0;
-border-bottom:1px solid #eee;
-"
->
-
-<span>
-${escaparHTML(e.nome||"")}
-</span>
-
-<strong>
-${escaparHTML(e.data||"")}
-</strong>
-
-</div>
-
-`).join("")
-        : "Nenhum evento agendado.";
-
-
-    /* GRÁFICO */
-
-    const max =
-        Math.max(
-            receitas,
-            despesas,
-            Math.abs(saldo),
-            1
-        );
-
-
-    $("graficoBarras").innerHTML = `
-
-<div
-class="barra"
-style="
-height:${(receitas/max)*90+10}px;
-background:#28a745;
-"
->
-
-<span class="valor">
-${formatarNumero(receitas)}
-</span>
-
-</div>
-
-
-<div
-class="barra"
-style="
-height:${(despesas/max)*90+10}px;
-background:#dc3545;
-"
->
-
-<span class="valor">
-${formatarNumero(despesas)}
-</span>
-
-</div>
-
-
-<div
-class="barra"
-style="
-height:${(Math.abs(saldo)/max)*90+10}px;
-background:#0b1a2e;
-"
->
-
-<span class="valor">
-${formatarNumero(saldo)}
-</span>
-
-</div>
-
-`;
-
-
-    /* META */
-
-    const valorMeta =
-        Number(meta.valor||0);
-
-    const guardado =
-        Number(meta.guardado||0);
-
-
-    const percentual =
-        valorMeta>0
-        ? Math.min(
-            100,
-            guardado/valorMeta*100
-        )
-        : 0;
-
-
-    $("metaValorExibido")
-        .textContent =
-        formatarNumero(valorMeta)+" Kz";
-
-
-    $("metaGuardadoExibido")
-        .textContent =
-        formatarNumero(guardado)+" Kz";
-
-
-    $("metaBarra")
-        .style.width =
-        percentual+"%";
-
-
-    $("metaProgresso")
-        .textContent =
-        percentual.toFixed(0)+"%";
-
-
-    $("metaFalta")
-        .textContent =
-        formatarNumero(
-            Math.max(
-                0,
-                valorMeta-guardado
-            )
-        )+" Kz";
-
-}
-
-
-/* =========================================================
-   PDF PROFISSIONAL
-========================================================= */
+/* ==========================================================
+   PDF
+   ========================================================== */
 
 async function gerarPDF(){
 
-    if(
-        typeof window.jspdf ===
-        "undefined"
-    ){
+ toast("A preparar o relatório PDF...");
 
-        mostrarToast(
-            "Biblioteca PDF não carregada.",
-            "erro"
-        );
+ const {jsPDF}=window.jspdf;
+ const pdf=new jsPDF();
 
-        return;
+ const margem=18;
+ let y=18;
 
-    }
+ /* LOGOTIPO */
+ try{
+  const img=new Image();
+  img.src="logo.png";
 
+  await new Promise(resolve=>{
+   img.onload=resolve;
+   img.onerror=resolve;
+  });
+
+  if(img.complete&&img.naturalWidth){
+   pdf.addImage(img,"PNG",margem,y,25,25);
+  }
+ }catch(e){}
 
-    const {
-        jsPDF
-    } =
-    window.jspdf;
+ pdf.setFont("helvetica","bold");
+ pdf.setFontSize(16);
+ pdf.text("O.J.V. - Jovens Visionários",50,y+8);
 
+ pdf.setFont("helvetica","normal");
+ pdf.setFontSize(11);
+ pdf.text("Relatório Geral",50,y+16);
 
-    const pdf =
-        new jsPDF({
-            orientation:"portrait",
-            unit:"mm",
-            format:"a4"
-        });
+ y+=34;
 
+ pdf.setFontSize(10);
+ pdf.text(
+  "Data: "+new Date().toLocaleDateString("pt-AO"),
+  margem,y
+ );
 
-    const largura=210;
-    const altura=297;
+ y+=12;
 
+ let receitas=0;
+ let despesas=0;
 
-    let y=18;
+ transacoes.forEach(t=>{
+  const v=Number(t.valor||0);
+  if(v>=0)receitas+=v;
+  else despesas+=Math.abs(v);
+ });
 
+ const saldo=receitas-despesas;
 
-    /* LOGO */
+ /* FINANCEIRO */
+ pdf.setFont("helvetica","bold");
+ pdf.setFontSize(12);
+ pdf.text("FINANCEIRO",margem,y);
+ y+=7;
 
-    try{
+ pdf.setFont("helvetica","normal");
+ pdf.setFontSize(10);
+ pdf.text("Receitas: "+kz(receitas),margem,y);y+=6;
+ pdf.text("Despesas: "+kz(despesas),margem,y);y+=6;
+ pdf.text("Saldo: "+kz(saldo),margem,y);y+=12;
 
-        const img =
-            new Image();
+ /* MEMBROS */
+ pdf.setFont("helvetica","bold");
+ pdf.setFontSize(12);
+ pdf.text("MEMBROS",margem,y);
+ y+=7;
 
-        img.src =
-            "logo.png";
+ pdf.setFont("helvetica","normal");
+ pdf.setFontSize(10);
 
+ const ativos=membros.filter(m=>m.status==="Ativo").length;
+ const inativos=membros.filter(m=>m.status!=="Ativo").length;
 
-        await new Promise(
-            resolve=>{
+ pdf.text(
+  `Total: ${membros.length} | Ativos: ${ativos} | Inativos: ${inativos}`,
+  margem,y
+ );
 
-                img.onload=resolve;
+ y+=12;
 
-                img.onerror=resolve;
+ /* EVENTOS */
+ pdf.setFont("helvetica","bold");
+ pdf.setFontSize(12);
+ pdf.text("EVENTOS",margem,y);
+ y+=7;
 
-            }
-        );
+ pdf.setFont("helvetica","normal");
+ pdf.setFontSize(10);
 
+ const agendados=eventos.filter(e=>e.status==="Agendado").length;
 
-        if(
-            img.complete &&
-            img.naturalWidth>0
-        ){
+ pdf.text(
+  `Total: ${eventos.length} | Agendados: ${agendados}`,
+  margem,y
+ );
 
-            pdf.addImage(
-                img,
-                "PNG",
-                17,
-                10,
-                30,
-                30
-            );
+ y+=12;
 
-        }
+ /* META */
+ pdf.setFont("helvetica","bold");
+ pdf.setFontSize(12);
+ pdf.text("META",margem,y);
+ y+=7;
 
-    }catch(e){
+ pdf.setFont("helvetica","normal");
+ pdf.setFontSize(10);
 
-        console.log(
-            "Logo não carregado."
-        );
+ const mv=Number(meta.valor||0);
+ const mg=Number(meta.guardado||0);
+ const mp=mv?Math.min(100,mg/mv*100):0;
 
-    }
+ pdf.text(
+  `Guardado: ${kz(mg)} / ${kz(mv)} (${mp.toFixed(0)}%)`,
+  margem,y
+ );
 
+ y+=22;
 
-    /* CABEÇALHO */
+ /* ASSINATURAS */
+ pdf.setFont("helvetica","bold");
+ pdf.setFontSize(12);
+ pdf.text("ASSINATURAS",margem,y);
 
-    pdf.setTextColor(
-        11,26,46
-    );
+ y+=20;
 
+ const largura=80;
 
-    pdf.setFont(
-        "helvetica",
-        "bold"
-    );
+ pdf.line(margem,y,margem+largura,y);
+ pdf.line(112,y,112+largura,y);
 
+ pdf.setFont("helvetica","normal");
+ pdf.setFontSize(9);
 
-    pdf.setFontSize(18);
+ pdf.text("Presidente",margem,y+5);
+ pdf.text("Director",112,y+5);
 
+ y+=30;
 
-    pdf.text(
-        "O.J.V. - Jovens Visionários",
-        54,
-        21
-    );
+ pdf.line(margem,y,margem+largura,y);
+ pdf.line(112,y,112+largura,y);
 
+ pdf.text("Financeiro / Tesoureiro",margem,y+5);
+ pdf.text("Desenvolvedor / Programador",112,y+5);
 
-    pdf.setFont(
-        "helvetica",
-        "normal"
-    );
+ y+=25;
 
+ pdf.setFontSize(8);
+ pdf.text(
+  "O.J.V. Professional Plus - 2026",
+  margem,y
+ );
 
-    pdf.setFontSize(11);
+ pdf.save("OJV_Relatorio_"+new Date().toISOString().slice(0,10)+".pdf");
 
-
-    pdf.text(
-        "Relatório Geral",
-        54,
-        29
-    );
-
-
-    pdf.setFontSize(9);
-
-
-    pdf.text(
-        "Data: "+
-        new Date()
-        .toLocaleDateString(
-            "pt-PT"
-        ),
-        54,
-        36
-    );
-
-
-    pdf.setDrawColor(
-        100,100,100
-    );
-
-
-    pdf.line(
-        17,
-        44,
-        193,
-        44
-    );
-
-
-    y=57;
-
-
-    function titulo(
-        texto
-    ){
-
-        pdf.setFont(
-            "helvetica",
-            "bold"
-        );
-
-        pdf.setFontSize(12);
-
-        pdf.setTextColor(
-            11,26,46
-        );
-
-        pdf.text(
-            texto,
-            18,
-            y
-        );
-
-        y+=8;
-
-    }
-
-
-    function linha(
-        texto
-    ){
-
-        pdf.setFont(
-            "helvetica",
-            "normal"
-        );
-
-        pdf.setFontSize(10);
-
-        pdf.setTextColor(
-            40,40,40
-        );
-
-        pdf.text(
-            String(texto),
-            21,
-            y
-        );
-
-        y+=6;
-
-    }
-
-
-    /* FINANCEIRO */
-
-    let receitas=0;
-    let despesas=0;
-
-
-    transacoes.forEach(t=>{
-
-        const valor =
-            Number(t.valor||0);
-
-
-        if(valor>=0)
-            receitas+=valor;
-        else
-            despesas+=Math.abs(valor);
-
-    });
-
-
-    const saldo =
-        receitas-despesas;
-
-
-    titulo("FINANCEIRO");
-
-
-    linha(
-        "Receitas: "+
-        formatarNumero(receitas)+
-        " Kz"
-    );
-
-
-    linha(
-        "Despesas: "+
-        formatarNumero(despesas)+
-        " Kz"
-    );
-
-
-    linha(
-        "Saldo: "+
-        formatarNumero(saldo)+
-        " Kz"
-    );
-
-
-    y+=7;
-
-
-    /* MEMBROS */
-
-    const ativos =
-        membros.filter(
-            m=>m.status==="Ativo"
-        ).length;
-
-
-    const inativos =
-        membros.length-ativos;
-
-
-    titulo("MEMBROS");
-
-
-    linha(
-        "Total: "+
-        membros.length+
-        " | Ativos: "+
-        ativos+
-        " | Inativos: "+
-        inativos
-    );
-
-
-    y+=7;
-
-
-    /* EVENTOS */
-
-    const agendados =
-        eventos.filter(
-            e=>
-                !e.status ||
-                e.status==="Agendado"
-        ).length;
-
-
-    titulo("EVENTOS");
-
-
-    linha(
-        "Total: "+
-        eventos.length+
-        " | Agendados: "+
-        agendados
-    );
-
-
-    y+=7;
-
-
-    /* META */
-
-    const metaValor =
-        Number(meta.valor||0);
-
-    const metaGuardado =
-        Number(meta.guardado||0);
-
-
-    const metaPercentual =
-        metaValor>0
-        ? Math.min(
-            100,
-            metaGuardado/metaValor*100
-        )
-        : 0;
-
-
-    titulo("META");
-
-
-    linha(
-        "Guardado: "+
-        formatarNumero(metaGuardado)+
-        " / "+
-        formatarNumero(metaValor)+
-        " Kz ("+
-        metaPercentual.toFixed(0)+
-        "%)"
-    );
-
-
-    /* BARRA META */
-
-    y+=4;
-
-
-    pdf.setFillColor(
-        230,230,230
-    );
-
-
-    pdf.roundedRect(
-        20,
-        y,
-        170,
-        6,
-        3,
-        3,
-        "F"
-    );
-
-
-    if(metaPercentual>0){
-
-        pdf.setFillColor(
-            30,165,220
-        );
-
-
-        pdf.roundedRect(
-            20,
-            y,
-            170*(metaPercentual/100),
-            6,
-            3,
-            3,
-            "F"
-        );
-
-    }
-
-
-    y+=20;
-
-
-    /* ASSINATURAS */
-
-    titulo("ASSINATURAS");
-
-
-    y+=14;
-
-
-    pdf.setDrawColor(
-        60,60,60
-    );
-
-
-    /* PRESIDENTE */
-
-    pdf.line(
-        18,
-        y,
-        88,
-        y
-    );
-
-
-    /* DIRECTOR */
-
-    pdf.line(
-        122,
-        y,
-        192,
-        y
-    );
-
-
-    pdf.setFont(
-        "helvetica",
-        "normal"
-    );
-
-
-    pdf.setFontSize(9);
-
-
-    pdf.text(
-        "Presidente",
-        53,
-        y+6,
-        {align:"center"}
-    );
-
-
-    pdf.text(
-        "Director",
-        157,
-        y+6,
-        {align:"center"}
-    );
-
-
-    y+=31;
-
-
-    /* FINANCEIRO */
-
-    pdf.line(
-        18,
-        y,
-        88,
-        y
-    );
-
-
-    /* DESENVOLVEDOR */
-
-    pdf.line(
-        122,
-        y,
-        192,
-        y
-    );
-
-
-    pdf.text(
-        "Financeiro",
-        53,
-        y+6,
-        {align:"center"}
-    );
-
-
-    pdf.text(
-        "Desenvolvedor",
-        157,
-        y+6,
-        {align:"center"}
-    );
-
-
-    /* RODAPÉ */
-
-    pdf.setFontSize(8);
-
-    pdf.setTextColor(
-        100,100,100
-    );
-
-
-    pdf.text(
-        "O.J.V. Professional Plus - 2026",
-        largura/2,
-        286,
-        {align:"center"}
-    );
-
-
-    /* SALVAR */
-
-    const data =
-        new Date()
-        .toISOString()
-        .slice(0,10);
-
-
-    pdf.save(
-        "OJV_Relatorio_"+data+".pdf"
-    );
-
-
-    mostrarToast(
-        "PDF gerado com sucesso.",
-        "sucesso"
-    );
-
+ toast("PDF gerado com sucesso.");
 }
 
+/* ==========================================================
+   DATA
+   ========================================================== */
 
-/* =========================================================
-   EVENTOS DO MODAL
-========================================================= */
+function formatarData(v){
 
-$("modal")
-.addEventListener(
-    "click",
-    function(e){
+ if(!v)return"";
 
-        if(e.target===this)
-            fecharModal();
+ const d=new Date(v);
 
-    }
-);
+ if(isNaN(d))return String(v);
 
+ return d.toLocaleDateString("pt-AO");
+}
 
-document.addEventListener(
-    "keydown",
-    function(e){
+/* ==========================================================
+   MÁSCARA DATA
+   ========================================================== */
 
-        if(e.key==="Escape")
-            fecharModal();
+$("mNascimento").addEventListener("input",function(){
 
-    }
-);
+ let v=this.value.replace(/\D/g,"").slice(0,8);
 
+ if(v.length>4)
+  v=v.slice(0,2)+"/"+v.slice(2,4)+"/"+v.slice(4);
+ else if(v.length>2)
+  v=v.slice(0,2)+"/"+v.slice(2);
 
-/* =========================================================
-   FECHAR MENU
-========================================================= */
+ this.value=v;
+});
 
-document.addEventListener(
-    "click",
-    function(e){
+/* ==========================================================
+   FECHAR MODAL
+   ========================================================== */
 
-        const nav =
-            $("menuNav");
+$("modalMembro").addEventListener("click",e=>{
+ if(e.target===$("modalMembro"))fecharModal();
+});
 
-        const toggle =
-            document.querySelector(
-                ".menu-toggle"
-            );
+document.addEventListener("keydown",e=>{
+ if(e.key==="Escape")fecharModal();
+});
 
+/* ==========================================================
+   TEMA
+   ========================================================== */
 
-        if(
-            nav.classList.contains(
-                "aberto"
-            ) &&
+if(localStorage.getItem("ojv_dark")==="true")
+ document.body.classList.add("dark");
 
-            !nav.contains(e.target) &&
+/* ==========================================================
+   SUPABASE SESSION
+   ========================================================== */
 
-            !toggle.contains(e.target)
-        ){
+db.auth.onAuthStateChange((event,session)=>{
 
-            nav.classList.remove(
-                "aberto"
-            );
+ if(session){
+  $("loginScreen").classList.add("hidden");
+  $("app").classList.remove("hidden");
+  $("usuarioEmail").textContent=session.user.email||"Utilizador";
+ }
 
-        }
+});
 
-    }
-);
-
-
-/* =========================================================
-   SUPABASE AUTH
-========================================================= */
-
-supabaseClient.auth.onAuthStateChange(
-    function(event,session){
-
-        if(session){
-
-            mostrarAplicacao();
-
-        }else{
-
-            mostrarLogin();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   INICIALIZAÇÃO
-========================================================= */
-
-carregarTema();
-
-aplicarMascaraData();
+/* ==========================================================
+   INICIAR
+   ========================================================== */
 
 verificarSessao();
 
-
-/* FUNÇÕES GLOBAIS */
-
-window.entrar=entrar;
-window.registar=registar;
-window.recuperarSenha=recuperarSenha;
-window.sair=sair;
-
-window.alternarTema=alternarTema;
-window.alternarMenu=alternarMenu;
-window.abrir=abrir;
-
-window.abrirModal=abrirModal;
-window.fecharModal=fecharModal;
-window.salvarMembro=salvarMembro;
-window.editarMembro=editarMembro;
-window.excluirMembro=excluirMembro;
-window.filtrarMembros=filtrarMembros;
-
-window.adicionarTransacao=adicionarTransacao;
-window.excluirTransacao=excluirTransacao;
-window.filtrarTransacoes=filtrarTransacoes;
-
-window.adicionarEvento=adicionarEvento;
-window.excluirEvento=excluirEvento;
-
-window.definirMeta=definirMeta;
-window.guardarParaMeta=guardarParaMeta;
-
-window.exportarMembrosCSV=exportarMembrosCSV;
-window.exportarTransacoesCSV=exportarTransacoesCSV;
-
-window.paginar=paginar;
-window.gerarPDF=gerarPDF;
-
 </script>
-
 </body>
 </html>
