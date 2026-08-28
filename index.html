@@ -510,7 +510,7 @@ body.dark h2{color:white}
     placeholder="••••••••"
    >
 
-   <button class="btn btn-dark" onclick="login()">
+   <button class="btn btn-dark" onclick="login()" id="btnLogin">
     Entrar
    </button>
 
@@ -1118,7 +1118,7 @@ body.dark h2{color:white}
   </p>
 
   <button class="btn btn-backup" onclick="gerarBackup()">
-   💾 Gerar Backup
+   Gerar Backup
   </button>
 
  </div>
@@ -1140,7 +1140,7 @@ body.dark h2{color:white}
   >
 
   <button class="btn btn-restore" onclick="restaurarBackup()">
-   📥 Restaurar Backup
+   Restaurar Backup
   </button>
 
  </div>
@@ -1632,65 +1632,18 @@ function atualizarPermissoesUI(){
 
 
 /* ==========================================================
-   LOGIN
+   LOGIN - CORRIGIDO
 ========================================================== */
-
-async function verificarSessao(){
-
- try{
-
-  const {data,error}=
-   await db.auth.getSession();
-
-  if(error){
-   console.error(error);
-   mostrarLoginErro(error.message);
-   return;
-  }
-
-  if(data && data.session){
-
-   utilizadorAtual=
-    data.session.user;
-
-   verificarAdministrador(
-    utilizadorAtual
-   );
-
-   $("loginScreen").classList.add("hidden");
-   $("app").classList.remove("hidden");
-
-   $("usuarioEmail").textContent=
-    utilizadorAtual.email||"Utilizador";
-
-   atualizarPermissoesUI();
-
-   await carregarTudo();
-
-  }else{
-
-   $("loginScreen").classList.remove("hidden");
-   $("app").classList.add("hidden");
-
-  }
-
- }catch(e){
-
-  console.error(e);
-
-  mostrarLoginErro(
-   "Erro ao verificar sessao."
-  );
-
- }
-
-}
-
 
 async function login() {
 
+ console.log("🔐 Botão Entrar clicado!");
+
  const email = document.getElementById("loginEmail").value.trim();
  const password = document.getElementById("loginPassword").value;
+
+ console.log("📧 Email:", email);
+ console.log("🔑 Password length:", password ? password.length : 0);
 
  if (!email) {
   mostrarLoginErro("Digite o e-mail.");
@@ -1698,7 +1651,7 @@ async function login() {
  }
 
  if (!password || password.length < 6) {
-  mostrarLoginErro("Digite uma palavra-passe valida (minimo 6 caracteres).");
+  mostrarLoginErro("Digite uma palavra-passe válida (mínimo 6 caracteres).");
   return;
  }
 
@@ -1706,21 +1659,28 @@ async function login() {
 
  try {
 
+  console.log("🔄 A tentar autenticar no Supabase...");
+
   const { data, error } = await db.auth.signInWithPassword({
    email: email,
    password: password
   });
 
+  console.log("📊 Resposta:", { data, error });
+
   if (error) {
-   console.error("Erro:", error);
+   console.error("❌ Erro:", error);
    mostrarLoginErro("Erro: " + error.message);
    return;
   }
 
   if (!data || !data.session) {
-   mostrarLoginErro("Sessao nao criada. Tente novamente.");
+   console.error("❌ Sessão não criada");
+   mostrarLoginErro("Sessão não criada. Tente novamente.");
    return;
   }
+
+  console.log("✅ Login bem-sucedido!");
 
   utilizadorAtual = data.user;
   verificarAdministrador(utilizadorAtual);
@@ -1738,8 +1698,8 @@ async function login() {
   toast("Login efetuado com sucesso.");
 
  } catch (e) {
-  console.error("Erro:", e);
-  mostrarLoginErro("Erro: " + (e.message || "erro desconhecido"));
+  console.error("💥 Erro inesperado:", e);
+  mostrarLoginErro("Erro inesperado: " + (e.message || "erro desconhecido"));
  }
 
 }
@@ -1764,6 +1724,68 @@ async function logout(){
  isAdmin=false;
 
  location.reload();
+
+}
+
+
+/* ==========================================================
+   VERIFICAR SESSAO
+========================================================== */
+
+async function verificarSessao(){
+
+ try{
+
+  console.log("🔍 A verificar sessão...");
+
+  const {data,error}=
+   await db.auth.getSession();
+
+  if(error){
+   console.error("❌ Erro na sessão:", error);
+   mostrarLoginErro(error.message);
+   return;
+  }
+
+  if(data && data.session){
+
+   console.log("✅ Utilizador já autenticado:", data.session.user.email);
+
+   utilizadorAtual=
+    data.session.user;
+
+   verificarAdministrador(
+    utilizadorAtual
+   );
+
+   $("loginScreen").classList.add("hidden");
+   $("app").classList.remove("hidden");
+
+   $("usuarioEmail").textContent=
+    utilizadorAtual.email||"Utilizador";
+
+   atualizarPermissoesUI();
+
+   await carregarTudo();
+
+  }else{
+
+   console.log("⏳ Nenhuma sessão ativa.");
+
+   $("loginScreen").classList.remove("hidden");
+   $("app").classList.add("hidden");
+
+  }
+
+ }catch(e){
+
+  console.error("💥 Erro:", e);
+
+  mostrarLoginErro(
+   "Erro ao verificar sessão."
+  );
+
+ }
 
 }
 
@@ -2549,25 +2571,19 @@ function verificarAlarmes(){
   const d=detalhesEvento(e.id);
   if(!d.hora)return;
 
-  // Converter data do evento para objeto Date
   const partes = String(e.data).split('-');
   if(partes.length !== 3) return;
-  const dataEvento = new Date(partes[0], partes[1]-1, partes[2]);
   
-  // Criar data/hora completa do evento
   const horaParts = d.hora.split(':');
   const dataHoraEvento = new Date(partes[0], partes[1]-1, partes[2], parseInt(horaParts[0]), parseInt(horaParts[1]));
 
   const diferenca = dataHoraEvento.getTime() - agora.getTime();
-  const diferencaDias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
 
-  // ALARME NO DIA DO EVENTO (quando falta menos de 1 hora)
   if(diferenca <= 3600000 && diferenca > 0){
    dispararAlarme(e, "O evento vai comecar em breve!");
    return;
   }
 
-  // ALARME 24 HORAS ANTES (entre 23 e 25 horas antes)
   if(diferenca <= 90000000 && diferenca > 82800000){
    dispararAlarme(e, "Atencao: este evento acontecera amanha!");
    return;
@@ -2620,7 +2636,6 @@ function pararAlarme(){
 }
 
 
-// Verificar alarmes a cada 30 segundos
 setInterval(verificarAlarmes, 30000);
 
 
@@ -2759,6 +2774,20 @@ async function redefinirMeta() {
   toast("Erro: " + e.message, true);
  }
  
+}
+function renderMeta(){
+
+ const valor=Number(meta.valor||0);
+ const guardado=Number(meta.guardado||0);
+
+ const pct=valor?Math.min(100,guardado/valor*100):0;
+
+ $("metaValor").textContent=kz(valor);
+ $("metaGuardado").textContent=kz(guardado);
+ $("metaPct").textContent=pct.toFixed(0)+"%";
+ $("barra").style.width=pct+"%";
+
+}
 
 
 /* ==========================================================
@@ -2918,70 +2947,66 @@ function gerarBackup(){
 }
 
 
-async function restaurarBackup() {
- 
- if (!isAdmin) {
+async function restaurarBackup(){
+
+ if(!isAdmin){
   toast("Apenas o administrador pode restaurar backups.", true);
   return;
  }
- 
+
  const fileInput = document.getElementById('restoreFile');
  const file = fileInput.files[0];
- 
- if (!file) {
+
+ if(!file){
   toast("Seleccione um ficheiro JSON primeiro.", true);
   return;
  }
- 
- try {
-  
+
+ try{
+
   const text = await file.text();
   const dados = JSON.parse(text);
-  
-  if (!dados.membros || !dados.transacoes || !dados.eventos) {
+
+  if(!dados.membros || !dados.transacoes || !dados.eventos){
    toast("Ficheiro invalido.", true);
    return;
   }
-  
-  if (!confirm(
-    "Isto substitui TODOS os dados atuais.\n\n" +
-    "Membros: " + dados.membros.length + "\n" +
-    "Transacoes: " + dados.transacoes.length + "\n" +
-    "Eventos: " + dados.eventos.length + "\n\n" +
-    "Continuar?"
-   )) return;
-  
+
+  if(!confirm(
+   "Isto substitui TODOS os dados atuais.\n\n"+
+   "Membros: "+dados.membros.length+"\n"+
+   "Transacoes: "+dados.transacoes.length+"\n"+
+   "Eventos: "+dados.eventos.length+"\n\n"+
+   "Continuar?"
+  )) return;
+
   toast("A restaurar dados...");
-  
-  // Apagar dados atuais
+
   await db.from("membros").delete().neq("id", 0);
   await db.from("transacoes").delete().neq("id", 0);
   await db.from("eventos").delete().neq("id", 0);
-  
-  // REMOVER os IDs para o Supabase criar novos
-  const membrosSemId = dados.membros.map(({ id, ...rest }) => rest);
-  const transacoesSemId = dados.transacoes.map(({ id, ...rest }) => rest);
-  const eventosSemId = dados.eventos.map(({ id, ...rest }) => rest);
-  
-  // Inserir sem os IDs
-  if (membrosSemId.length > 0) {
-   const { error } = await db.from("membros").insert(membrosSemId);
-   if (error) throw error;
+
+  const membrosSemId = dados.membros.map(({id, ...rest}) => rest);
+  const transacoesSemId = dados.transacoes.map(({id, ...rest}) => rest);
+  const eventosSemId = dados.eventos.map(({id, ...rest}) => rest);
+
+  if(membrosSemId.length > 0){
+   const {error} = await db.from("membros").insert(membrosSemId);
+   if(error) throw error;
   }
-  
-  if (transacoesSemId.length > 0) {
-   const { error } = await db.from("transacoes").insert(transacoesSemId);
-   if (error) throw error;
+
+  if(transacoesSemId.length > 0){
+   const {error} = await db.from("transacoes").insert(transacoesSemId);
+   if(error) throw error;
   }
-  
-  if (eventosSemId.length > 0) {
-   const { error } = await db.from("eventos").insert(eventosSemId);
-   if (error) throw error;
+
+  if(eventosSemId.length > 0){
+   const {error} = await db.from("eventos").insert(eventosSemId);
+   if(error) throw error;
   }
-  
-  // Restaurar meta
-  if (dados.meta) {
-   if (dados.meta.id) {
+
+  if(dados.meta){
+   if(dados.meta.id){
     await db.from("metas").update({
      valor: dados.meta.valor,
      guardado: dados.meta.guardado
@@ -2993,17 +3018,18 @@ async function restaurarBackup() {
     });
    }
   }
-  
+
   fileInput.value = '';
   await carregarTudo();
   toast("Backup restaurado com sucesso!");
-  
- } catch (e) {
+
+ }catch(e){
   console.error(e);
-  toast("Erro: " + e.message, true);
+  toast("Erro: "+e.message, true);
  }
- 
+
 }
+
 
 /* ==========================================================
    DATA
@@ -3129,7 +3155,6 @@ aplicarMascaraData(document.getElementById("eventoData"));
 
 verificarSessao();
 
-// Verificar alarmes ao carregar
 setTimeout(verificarAlarmes, 5000);
 
 </script>
