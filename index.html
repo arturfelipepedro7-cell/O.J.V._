@@ -48,4 +48,3091 @@ nav{
  display:none;flex-direction:column;margin-top:10px;
  border-top:1px solid #ffffff22
 }
-nav.aberto{displa
+nav.aberto{display:flex}
+nav button{
+ background:transparent;color:#ddd;border:0;
+ padding:13px;text-align:left;border-bottom:1px solid #ffffff0d
+}
+nav button.ativo{
+ background:#ffffff12;color:white;
+ border-left:4px solid #1ea5dc
+}
+
+.container{max-width:760px;margin:auto;padding:15px}
+
+section{
+ display:none;background:white;border-radius:12px;
+ padding:20px;margin-bottom:15px;
+ box-shadow:0 3px 15px #0000000b
+}
+section.ativo{display:block}
+
+h2{color:#0b1a2e;margin-bottom:5px}
+
+.subtitulo{
+ color:#777;font-size:13px;
+ border-bottom:2px solid #eee;
+ padding-bottom:10px;margin-bottom:15px
+}
+
+.cards{
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:10px;margin-bottom:15px
+}
+
+.card{
+ padding:16px;border-radius:9px;
+ text-align:center;background:#f8f9fb;
+ border:1px solid #e6e9ed
+}
+
+.card .numero{
+ display:block;font-size:25px;font-weight:bold
+}
+
+.card .rotulo{
+ display:block;font-size:11px;color:#6c757d;
+ margin-top:4px;text-transform:uppercase
+}
+
+.verde .numero{color:#28a745}
+.vermelho .numero{color:#dc3545}
+.azul .numero{color:#0b1a2e}
+.ouro .numero{color:#d39e00}
+
+.form{
+ display:flex;flex-direction:column;
+ gap:10px;margin:14px 0
+}
+
+.form label{
+ font-size:13px;font-weight:bold;color:#495057
+}
+
+input,select,textarea{
+ width:100%;padding:13px;
+ border:1px solid #ced4da;
+ border-radius:7px;background:white;
+ color:#182536;outline:none
+}
+
+input:focus,select:focus,textarea:focus{
+ border-color:#1ea5dc;
+ box-shadow:0 0 0 3px #1ea5dc22
+}
+
+.btn{
+ width:100%;padding:14px;border:0;
+ border-radius:7px;background:#1ea5dc;
+ color:white;font-weight:bold;
+ margin:3px 0;min-height:48px
+}
+
+.btn-success{background:#28a745}
+.btn-danger{background:#dc3545}
+.btn-dark{background:#0b1a2e}
+.btn-gold{background:#d39e00;color:#17202c}
+.btn-outline{
+ background:white;color:#0b1a2e;
+ border:2px solid #0b1a2e
+}
+.btn-backup{
+ background:#6f42c1;
+ color:white
+}
+.btn-restore{
+ background:#fd7e14;
+ color:white
+}
+
+.toolbar{
+ display:flex;gap:8px;margin-bottom:12px;
+ flex-wrap:wrap
+}
+
+.toolbar>*{flex:1;min-width:120px}
+
+.table-wrap{
+ overflow-x:auto;
+ border:1px solid #dee2e6;
+ border-radius:8px
+}
+
+table{
+ width:100%;
+ border-collapse:collapse;
+ min-width:600px;
+ font-size:13px
+}
+
+th{
+ background:#f7f8fa;
+ padding:11px 8px;
+ text-align:left;
+ border-bottom:2px solid #dee2e6
+}
+
+td{
+ padding:10px 8px;
+ border-bottom:1px solid #eee
+}
+
+.badge{
+ display:inline-block;
+ padding:4px 9px;
+ border-radius:30px;
+ font-size:10px;
+ font-weight:bold
+}
+
+.badge-ok{background:#d4edda;color:#155724}
+.badge-no{background:#f8d7da;color:#721c24}
+.badge-info{background:#d1ecf1;color:#0c5460}
+.badge-warning{background:#fff3cd;color:#856404}
+.badge-fundador{background:#d39e00;color:#fff}
+
+.actions{
+ display:flex;
+ gap:5px;
+ flex-wrap:wrap
+}
+
+.actions button{
+ width:auto;
+ min-height:32px;
+ padding:5px 9px;
+ font-size:12px;
+ margin:0
+}
+
+.box{
+ background:#f8f9fc;
+ border:1px solid #e5e8eb;
+ border-radius:9px;
+ padding:15px;
+ margin:12px 0
+}
+
+.login{
+ min-height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+ background:linear-gradient(135deg,#0b1a2e,#123b60)
+}
+
+.login-box{
+ width:100%;
+ max-width:420px;
+ background:white;
+ border-radius:15px;
+ padding:25px;
+ box-shadow:0 15px 50px #0005
+}
+
+.login-logo{
+ text-align:center;
+ margin-bottom:20px
+}
+
+.login-logo img{
+ width:80px;
+ height:80px;
+ border-radius:50%;
+ object-fit:cover
+}
+
+.login-logo h1{
+ color:#0b1a2e;
+ margin-top:10px
+}
+
+.login-logo p{
+ color:#777;
+ font-size:13px;
+ margin-top:4px
+}
+
+.login-error{
+ background:#f8d7da;
+ color:#721c24;
+ padding:10px;
+ border-radius:6px;
+ font-size:13px;
+ margin-bottom:10px
+}
+
+.userbar{
+ background:#f8f9fc;
+ border:1px solid #e5e8eb;
+ padding:10px;
+ border-radius:7px;
+ margin-bottom:15px;
+ display:flex;
+ justify-content:space-between;
+ gap:8px;
+ align-items:center;
+ font-size:12px
+}
+
+.userbar button{
+ border:0;
+ background:#dc3545;
+ color:white;
+ border-radius:5px;
+ padding:6px 10px;
+ font-size:11px
+}
+
+.modal{
+ position:fixed;
+ inset:0;
+ background:#0008;
+ z-index:3000;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ padding:15px
+}
+
+.modal.open{display:flex}
+
+.modal-box{
+ background:white;
+ width:100%;
+ max-width:550px;
+ max-height:90vh;
+ overflow:auto;
+ border-radius:12px;
+ padding:20px
+}
+
+.modal-head{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:10px
+}
+
+.close{
+ border:0;
+ background:#eee;
+ border-radius:50%;
+ width:32px;
+ height:32px;
+ font-size:18px;
+ cursor:pointer
+}
+
+.toast{
+ position:fixed;
+ left:15px;
+ right:15px;
+ bottom:20px;
+ max-width:450px;
+ margin:auto;
+ background:#0b1a2e;
+ color:white;
+ padding:14px;
+ border-radius:8px;
+ z-index:5000;
+ box-shadow:0 5px 20px #0004
+}
+
+.toast.ok{border-left:4px solid #28a745}
+.toast.err{border-left:4px solid #dc3545}
+
+.progress{
+ height:13px;
+ background:#e9ecef;
+ border-radius:20px;
+ overflow:hidden;
+ margin:10px 0
+}
+
+.progress div{
+ height:100%;
+ background:#1ea5dc;
+ border-radius:20px
+}
+
+footer{
+ text-align:center;
+ color:#999;
+ font-size:11px;
+ padding:20px
+}
+
+body.dark{
+ background:#121212;
+ color:#eee
+}
+
+body.dark section,
+body.dark .card,
+body.dark .box,
+body.dark .modal-box,
+body.dark .login-box{
+ background:#1f1f1f;
+ color:#eee;
+ border-color:#333
+}
+
+body.dark input,
+body.dark select,
+body.dark textarea{
+ background:#292929;
+ color:#eee;
+ border-color:#444
+}
+
+body.dark h2{color:white}
+
+@media(max-width:420px){
+ .cards{grid-template-columns:1fr 1fr}
+ .toolbar{flex-direction:column}
+}
+
+.fundador-destaque{
+ background:#fff8e1 !important;
+ border-left:4px solid #d39e00 !important;
+}
+
+.evento-card{
+ background:#f8f9fc;
+ border:1px solid #e5e8eb;
+ border-radius:8px;
+ padding:12px;
+ margin-bottom:10px
+}
+
+.evento-card .titulo{
+ font-weight:bold;
+ font-size:15px
+}
+
+.evento-card .detalhes{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:5px;
+ font-size:12px;
+ color:#555;
+ margin-top:5px
+}
+
+.alarm-screen{
+ position:fixed;
+ inset:0;
+ background:#0b1a2e;
+ color:#fff;
+ z-index:9999;
+ display:none;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+ text-align:center
+}
+
+.alarm-screen.open{display:flex}
+
+.alarm-box{
+ width:100%;
+ max-width:500px;
+ background:#fff;
+ color:#182536;
+ border-radius:20px;
+ padding:30px;
+ box-shadow:0 0 50px #0008
+}
+
+.alarm-icon{
+ font-size:70px;
+ animation:piscar .5s infinite alternate
+}
+
+@keyframes piscar{
+ from{transform:scale(1)}
+ to{transform:scale(1.15)}
+}
+
+.backup-buttons{
+ display:flex;
+ gap:10px;
+ margin-top:10px
+}
+
+.backup-buttons .btn{
+ flex:1
+}
+</style>
+</head>
+
+<body>
+
+<!-- ==========================================================
+     LOGIN
+========================================================== -->
+
+<div id="loginScreen" class="login">
+
+ <div class="login-box">
+
+  <div class="login-logo">
+
+   <img src="logo.png"
+        onerror="this.style.display='none'"
+        alt="O.J.V.">
+
+   <h1>O.J.V.</h1>
+
+   <p>Organização Jovens Visionários</p>
+
+  </div>
+
+  <div id="loginError" class="login-error hidden"></div>
+
+  <div class="form">
+
+   <label>E-mail</label>
+
+   <input
+    id="loginEmail"
+    type="email"
+    placeholder="seu@email.com"
+   >
+
+   <label>Palavra-passe</label>
+
+   <input
+    id="loginPassword"
+    type="password"
+    placeholder="••••••••"
+   >
+
+   <button class="btn btn-dark" onclick="login()">
+    Entrar
+   </button>
+
+  </div>
+
+ </div>
+
+</div>
+
+
+<!-- ==========================================================
+     APP
+========================================================== -->
+
+<div id="app" class="hidden">
+
+<header>
+
+ <div class="topo">
+
+  <div class="logo">
+
+   <img
+    src="logo.png"
+    alt="O.J.V."
+    onerror="this.style.display='none';document.getElementById('fallbackLogo').style.display='flex'"
+   >
+
+   <div
+    id="fallbackLogo"
+    class="logo-fallback"
+    style="display:none"
+   >
+    OJV
+   </div>
+
+   <div>
+
+    <h1>
+     O.J.V.
+     <small>Organização Jovens Visionários</small>
+    </h1>
+
+   </div>
+
+  </div>
+
+  <div class="acoes">
+
+   <button onclick="tema()">Tema</button>
+
+   <button class="menu-toggle" onclick="menu()">
+    Menu
+   </button>
+
+  </div>
+
+ </div>
+
+
+ <nav id="nav">
+
+  <button class="ativo" onclick="abrir('inicio')">
+   Painel
+  </button>
+
+  <button onclick="abrir('membros')">
+   Membros
+   <span id="navMembros" class="badge badge-info">0</span>
+  </button>
+
+  <button onclick="abrir('financeiro')">
+   Finanças
+  </button>
+
+  <button onclick="abrir('transacoes')">
+   Transações
+  </button>
+
+  <button onclick="abrir('eventos')">
+   Eventos
+  </button>
+
+  <button onclick="abrir('meta')">
+   Meta
+  </button>
+
+  <button onclick="abrir('backup')">
+   Backup
+  </button>
+
+ </nav>
+
+</header>
+
+
+<div class="container">
+
+<div class="userbar">
+
+ <span>
+  <strong id="usuarioEmail"></strong>
+  <span id="userRole" style="margin-left:10px;font-size:11px;color:#777"></span>
+ </span>
+
+ <button onclick="logout()">
+  Sair
+ </button>
+
+</div>
+
+
+<!-- ==========================================================
+     PAINEL
+========================================================== -->
+
+<section id="inicio" class="ativo">
+
+ <h2>Painel</h2>
+
+ <p class="subtitulo">
+  Visão geral da organização
+ </p>
+
+ <div class="cards">
+
+  <div class="card">
+
+   <span id="dashMembros" class="numero">
+    0
+   </span>
+
+   <span class="rotulo">
+    Membros
+   </span>
+
+  </div>
+
+  <div class="card verde">
+
+   <span id="dashReceitas" class="numero">
+    0
+   </span>
+
+   <span class="rotulo">
+    Receitas
+   </span>
+
+  </div>
+
+  <div class="card vermelho">
+
+   <span id="dashDespesas" class="numero">
+    0
+   </span>
+
+   <span class="rotulo">
+    Despesas
+   </span>
+
+  </div>
+
+  <div class="card azul">
+
+   <span id="dashSaldo" class="numero">
+    0
+   </span>
+
+   <span class="rotulo">
+    Saldo
+   </span>
+
+  </div>
+
+ </div>
+
+
+ <div class="box">
+
+  <h3>Últimas transações</h3>
+
+  <div id="ultimas"></div>
+
+ </div>
+
+
+ <div class="box">
+
+  <h3>Próximos eventos</h3>
+
+  <div id="proximos"></div>
+
+ </div>
+
+</section>
+
+
+<!-- ==========================================================
+     MEMBROS
+========================================================== -->
+
+<section id="membros">
+
+ <h2>Membros</h2>
+
+ <p class="subtitulo">
+  Cadastro e gestão dos membros
+ </p>
+
+
+ <div class="toolbar" id="membroToolbar">
+
+  <button class="btn btn-success" onclick="novoMembro()" id="btnNovoMembro">
+   Novo Membro
+  </button>
+
+  <button class="btn btn-outline" onclick="exportarMembros()">
+   CSV
+  </button>
+
+ </div>
+
+
+ <input
+  id="buscaMembro"
+  placeholder="Nome, BI, telefone ou e-mail"
+  oninput="renderMembros()"
+ >
+
+
+ <div class="table-wrap" style="margin-top:12px">
+
+  <table>
+
+   <thead>
+
+    <tr>
+
+     <th>Nome</th>
+     <th>Cargo</th>
+     <th>BI</th>
+     <th>E-mail</th>
+     <th>Telefone</th>
+     <th>Status</th>
+     <th>Ações</th>
+
+    </tr>
+
+   </thead>
+
+   <tbody id="listaMembros"></tbody>
+
+  </table>
+
+ </div>
+
+
+ <p style="margin-top:10px;font-size:13px">
+
+  Total:
+  <strong id="totalMembros">0</strong>
+
+  ·
+
+  Ativos:
+  <strong id="ativos">0</strong>
+
+ </p>
+
+</section>
+
+
+<!-- ==========================================================
+     FINANCEIRO
+========================================================== -->
+
+<section id="financeiro">
+
+ <h2>Finanças</h2>
+
+ <p class="subtitulo">
+  Registre receitas e despesas
+ </p>
+
+
+ <div class="cards">
+
+  <div class="card verde">
+
+   <span id="finR" class="numero">0</span>
+
+   <span class="rotulo">
+    Receitas
+   </span>
+
+  </div>
+
+  <div class="card vermelho">
+
+   <span id="finD" class="numero">0</span>
+
+   <span class="rotulo">
+    Despesas
+   </span>
+
+  </div>
+
+  <div class="card azul">
+
+   <span id="finS" class="numero">0</span>
+
+   <span class="rotulo">
+    Saldo
+   </span>
+
+  </div>
+
+ </div>
+
+
+ <div class="form" id="financeiroForm">
+
+  <label>Tipo</label>
+
+  <select id="tipo">
+
+   <option value="receita">
+    Receita
+   </option>
+
+   <option value="despesa">
+    Despesa
+   </option>
+
+  </select>
+
+
+  <label>Categoria</label>
+
+  <select id="categoria">
+
+   <option>Mensalidade</option>
+   <option>Doação</option>
+   <option>Evento</option>
+   <option>Material</option>
+   <option>Transporte</option>
+   <option>Outro</option>
+
+  </select>
+
+
+  <label>Valor (Kz)</label>
+
+  <input
+   id="valor"
+   type="number"
+   step="0.01"
+   placeholder="0"
+  >
+
+
+  <label>Descrição</label>
+
+  <input
+   id="descricao"
+   placeholder="Descrição da transação"
+  >
+
+
+  <button
+   class="btn btn-success"
+   onclick="adicionarFinanceiro()"
+   id="btnAdicionarFinanceiro"
+  >
+   Registrar
+  </button>
+
+ </div>
+
+</section>
+
+
+<!-- ==========================================================
+     TRANSAÇÕES
+========================================================== -->
+
+<section id="transacoes">
+
+ <h2>Transações</h2>
+
+ <p class="subtitulo">
+  Histórico financeiro
+ </p>
+
+
+ <div class="toolbar">
+
+  <input
+   id="buscaTransacao"
+   placeholder="Buscar"
+   oninput="renderTransacoes()"
+  >
+
+  <select
+   id="filtro"
+   onchange="renderTransacoes()"
+  >
+
+   <option value="">
+    Todas
+   </option>
+
+   <option value="receita">
+    Receitas
+   </option>
+
+   <option value="despesa">
+    Despesas
+   </option>
+
+  </select>
+
+ </div>
+
+
+ <div class="table-wrap">
+
+  <table>
+
+   <thead>
+
+    <tr>
+
+     <th>Data</th>
+     <th>Descrição</th>
+     <th>Tipo</th>
+     <th>Valor</th>
+     <th>Ação</th>
+
+    </tr>
+
+   </thead>
+
+   <tbody id="listaTransacoes"></tbody>
+
+  </table>
+
+ </div>
+
+</section>
+
+
+<!-- ==========================================================
+     EVENTOS
+========================================================== -->
+
+<section id="eventos">
+
+ <h2>Eventos</h2>
+
+ <p class="subtitulo">
+  Organização dos eventos
+ </p>
+
+
+ <div class="toolbar" id="eventoToolbar">
+
+  <button class="btn btn-success" onclick="novoEvento()" id="btnNovoEvento">
+   Novo Evento
+  </button>
+
+ </div>
+
+
+ <input
+  id="buscaEvento"
+  placeholder="Pesquisar evento..."
+  oninput="renderEventos()"
+  style="margin-bottom:10px;width:100%;padding:10px;border:1px solid #ced4da;border-radius:7px"
+ >
+
+
+ <div id="listaEventos"></div>
+
+</section>
+
+
+<!-- ==========================================================
+     META
+========================================================== -->
+
+<section id="meta">
+
+ <h2>Meta de Poupança</h2>
+
+ <p class="subtitulo">
+  Defina e acompanhe o objetivo
+ </p>
+
+
+ <div class="box">
+
+  <div style="display:flex;justify-content:space-between">
+
+   <strong>Meta</strong>
+
+   <strong id="metaValor">
+    0 Kz
+   </strong>
+
+  </div>
+
+
+  <div class="progress">
+
+   <div
+    id="barra"
+    style="width:0%"
+   ></div>
+
+  </div>
+
+
+  <div style="display:flex;justify-content:space-between;font-size:13px">
+
+   <span>
+    Guardado:
+    <strong id="metaGuardado">
+     0 Kz
+    </strong>
+   </span>
+
+   <span id="metaPct">
+    0%
+   </span>
+
+  </div>
+
+ </div>
+
+
+ <div class="form" id="metaForm">
+
+  <input
+   id="novaMeta"
+   type="number"
+   placeholder="Valor da meta (Kz)"
+  >
+
+  <button
+   class="btn btn-gold"
+   onclick="definirMeta()"
+   id="btnDefinirMeta"
+  >
+   Definir meta
+  </button>
+
+
+  <input
+   id="guardarMeta"
+   type="number"
+   placeholder="Quanto guardar?"
+  >
+
+  <button
+   class="btn btn-success"
+   onclick="guardarMeta()"
+   id="btnGuardarMeta"
+  >
+   Guardar
+  </button>
+
+
+  <button
+   class="btn btn-danger"
+   onclick="redefinirMeta()"
+   id="btnRedefinirMeta"
+  >
+   Redefinir meta
+  </button>
+
+ </div>
+
+</section>
+
+
+<!-- ==========================================================
+     BACKUP
+========================================================== -->
+
+<section id="backup">
+
+ <h2>Backup e Restauração</h2>
+
+ <p class="subtitulo">
+  Guarde ou recupere todos os dados da organização
+ </p>
+
+ <div class="box">
+
+  <h3>Gerar Backup</h3>
+
+  <p style="font-size:13px;color:#555;margin-bottom:10px">
+   Exporta todos os dados (membros, transações, eventos e meta) num ficheiro JSON.
+  </p>
+
+  <button class="btn btn-backup" onclick="gerarBackup()">
+   💾 Gerar Backup
+  </button>
+
+ </div>
+
+ <div class="box">
+
+  <h3>Restaurar Backup</h3>
+
+  <p style="font-size:13px;color:#555;margin-bottom:10px">
+   Seleccione um ficheiro JSON para restaurar todos os dados.
+   <strong>Atenção:</strong> Isto substituirá todos os dados atuais.
+  </p>
+
+  <input
+   type="file"
+   id="restoreFile"
+   accept=".json"
+   style="margin-bottom:10px"
+  >
+
+  <button class="btn btn-restore" onclick="restaurarBackup()">
+   📥 Restaurar Backup
+  </button>
+
+ </div>
+
+</section>
+
+</div>
+
+
+<footer>
+ 2026 O.J.V. - Organização Jovens Visionários
+</footer>
+
+</div>
+
+
+<!-- ==========================================================
+     MODAL MEMBRO
+========================================================== -->
+
+<div id="modalMembro" class="modal">
+
+ <div class="modal-box">
+
+  <div class="modal-head">
+
+   <h3 id="tituloMembro">
+    Novo Membro
+   </h3>
+
+   <button
+    class="close"
+    onclick="fecharModal()"
+   >
+    ×
+   </button>
+
+  </div>
+
+
+  <div class="form">
+
+   <label>
+    Nome completo
+   </label>
+
+   <input
+    id="mNome"
+    placeholder="Nome do membro"
+   >
+
+
+   <label>
+    Cargo
+   </label>
+
+   <select id="mCargo">
+    <option value="Membro">Membro</option>
+    <option value="Fundador">Fundador</option>
+    <option value="Presidente">Presidente</option>
+    <option value="Vice-Presidente">Vice-Presidente</option>
+    <option value="Secretario">Secretario</option>
+    <option value="Tesoureiro">Tesoureiro</option>
+    <option value="Director">Director</option>
+    <option value="Coordenador">Coordenador</option>
+    <option value="Consultor">Consultor</option>
+    <option value="Voluntario">Voluntario</option>
+   </select>
+
+
+   <label>
+    Número do BI
+   </label>
+
+   <input
+    id="mBI"
+    placeholder="Número do Bilhete de Identidade"
+   >
+
+
+   <label>
+    E-mail
+   </label>
+
+   <input
+    id="mEmail"
+    type="email"
+    placeholder="membro@email.com"
+   >
+
+
+   <label>
+    Telefone
+   </label>
+
+   <input
+    id="mTelefone"
+    placeholder="+244 ..."
+   >
+
+
+   <label>
+    Data de nascimento
+   </label>
+
+   <input
+    id="mNascimento"
+    placeholder="DD/MM/AAAA"
+    maxlength="10"
+   >
+
+
+   <label>
+    Data de adesão
+   </label>
+
+   <input
+    id="mAdesao"
+    placeholder="DD/MM/AAAA"
+    maxlength="10"
+   >
+
+
+   <label>
+    Status
+   </label>
+
+   <select id="mStatus">
+
+    <option value="Ativo">
+     Ativo
+    </option>
+
+    <option value="Inativo">
+     Inativo
+    </option>
+
+   </select>
+
+
+   <button
+    class="btn btn-success"
+    onclick="salvarMembro()"
+   >
+    Salvar membro
+   </button>
+
+  </div>
+
+ </div>
+
+</div>
+
+
+<!-- ==========================================================
+     MODAL EVENTO
+========================================================== -->
+
+<div id="modalEvento" class="modal">
+
+ <div class="modal-box">
+
+  <div class="modal-head">
+
+   <h3 id="tituloEvento">
+    Novo Evento
+   </h3>
+
+   <button
+    class="close"
+    onclick="fecharEventoModal()"
+   >
+    ×
+   </button>
+
+  </div>
+
+
+  <div class="form">
+
+   <label>
+    Nome do evento
+   </label>
+
+   <input
+    id="eventoNome"
+    placeholder="Ex.: Reunião geral"
+   >
+
+
+   <label>
+    Data do evento
+   </label>
+
+   <input
+    id="eventoData"
+    placeholder="DD/MM/AAAA"
+    maxlength="10"
+   >
+
+
+   <label>
+    Hora
+   </label>
+
+   <input
+    id="eventoHora"
+    type="time"
+   >
+
+
+   <label>
+    Local
+   </label>
+
+   <input
+    id="eventoLocal"
+    placeholder="Local do evento"
+   >
+
+
+   <label>
+    Responsável
+   </label>
+
+   <input
+    id="eventoResponsavel"
+    placeholder="Nome do responsável"
+   >
+
+
+   <label>
+    Participantes previstos
+   </label>
+
+   <input
+    id="eventoParticipantes"
+    type="number"
+    min="0"
+    placeholder="Número de participantes"
+   >
+
+
+   <label>
+    Descrição
+   </label>
+
+   <textarea
+    id="eventoDescricao"
+    placeholder="Descrição detalhada do evento"
+    rows="3"
+   ></textarea>
+
+
+   <label>
+    Status
+   </label>
+
+   <select id="eventoStatus">
+
+    <option value="Agendado">
+     Agendado
+    </option>
+
+    <option value="Em andamento">
+     Em andamento
+    </option>
+
+    <option value="Concluído">
+     Concluído
+    </option>
+
+    <option value="Cancelado">
+     Cancelado
+    </option>
+
+   </select>
+
+
+   <button
+    class="btn btn-success"
+    onclick="salvarEvento()"
+   >
+    Salvar evento
+   </button>
+
+  </div>
+
+ </div>
+
+</div>
+
+
+<!-- ==========================================================
+     ALARME
+========================================================== -->
+
+<div id="alarmScreen" class="alarm-screen">
+
+ <div class="alarm-box">
+
+  <div class="alarm-icon">
+   !
+  </div>
+
+  <h2>ALARME DE EVENTO</h2>
+
+  <div id="eventoAlarmado" style="font-size:20px;font-weight:bold;margin:15px 0">
+   Evento
+  </div>
+
+  <p id="detalhesAlarme"></p>
+
+  <button
+   class="btn btn-danger"
+   onclick="pararAlarme()"
+   style="margin-top:20px"
+  >
+   PARAR ALARME
+  </button>
+
+ </div>
+
+</div>
+
+
+<div id="toast" class="toast hidden"></div>
+
+
+<script>
+
+/* ==========================================================
+   CONFIGURACAO SUPABASE
+========================================================== */
+
+const SUPABASE_URL =
+"https://zytbddkoddcmreyvjmkz.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_KkrrmpUmwMguZCNvZiclSg_zFJCOj50";
+
+const ADMIN_EMAIL =
+"arturfelipepedro7@gmail.com";
+
+const db =
+supabase.createClient(
+ SUPABASE_URL,
+ SUPABASE_KEY
+);
+
+
+/* ==========================================================
+   ESTADO
+========================================================== */
+
+let membros=[];
+let transacoes=[];
+let eventos=[];
+
+let meta={
+ id:null,
+ valor:0,
+ guardado:0
+};
+
+let editId=null;
+let editEventoId=null;
+let utilizadorAtual=null;
+let isAdmin=false;
+
+
+/* ==========================================================
+   AUXILIARES
+========================================================== */
+
+function $(id){
+ return document.getElementById(id);
+}
+
+
+function toast(msg,erro=false){
+
+ const t=$("toast");
+
+ t.textContent=msg;
+
+ t.className=
+  "toast "+(erro?"err":"ok");
+
+ t.classList.remove("hidden");
+
+ setTimeout(()=>{
+  t.classList.add("hidden");
+ },3500);
+}
+
+
+function kz(v){
+
+ return Number(v||0)
+  .toLocaleString(
+   "pt-AO",
+   {
+    minimumFractionDigits:0,
+    maximumFractionDigits:2
+   }
+  )+" Kz";
+}
+
+
+function esc(v){
+
+ return String(v??"")
+  .replaceAll("&","&amp;")
+  .replaceAll("<","&lt;")
+  .replaceAll(">","&gt;")
+  .replaceAll('"',"&quot;")
+  .replaceAll("'","&#039;");
+}
+
+
+/* ==========================================================
+   PERMISSOES
+========================================================== */
+
+function verificarAdministrador(user){
+
+ if(!user){
+  isAdmin=false;
+  return;
+ }
+
+ const email=
+  String(user.email||"")
+   .trim()
+   .toLowerCase();
+
+ const admin=
+  String(ADMIN_EMAIL||"")
+   .trim()
+   .toLowerCase();
+
+ isAdmin=
+  admin.length>0 &&
+  email===admin;
+
+}
+
+
+function isFundador(cargo){
+ const cargosFundadores = ["Fundador", "Presidente", "Vice-Presidente", "Director"];
+ return cargosFundadores.includes(cargo);
+}
+
+
+function atualizarPermissoesUI(){
+
+ const botoes = [
+  {id:'btnNovoMembro', show:isAdmin},
+  {id:'btnNovoEvento', show:isAdmin},
+  {id:'btnAdicionarFinanceiro', show:isAdmin},
+  {id:'btnDefinirMeta', show:isAdmin},
+  {id:'btnGuardarMeta', show:isAdmin},
+  {id:'btnRedefinirMeta', show:isAdmin}
+ ];
+
+ botoes.forEach(b=>{
+  const el = $(b.id);
+  if(el) {
+   if(b.show){
+    el.style.display='block';
+    el.disabled=false;
+   } else {
+    el.style.display='none';
+    el.disabled=true;
+   }
+  }
+ });
+
+ const roleEl = $("userRole");
+ if(roleEl){
+  roleEl.textContent = isAdmin ? "(Admin)" : "(Visualizador)";
+ }
+
+ renderMembros();
+ renderEventos();
+
+}
+
+
+/* ==========================================================
+   LOGIN
+========================================================== */
+
+async function verificarSessao(){
+
+ try{
+
+  const {data,error}=
+   await db.auth.getSession();
+
+  if(error){
+   console.error(error);
+   mostrarLoginErro(error.message);
+   return;
+  }
+
+  if(data && data.session){
+
+   utilizadorAtual=
+    data.session.user;
+
+   verificarAdministrador(
+    utilizadorAtual
+   );
+
+   $("loginScreen").classList.add("hidden");
+   $("app").classList.remove("hidden");
+
+   $("usuarioEmail").textContent=
+    utilizadorAtual.email||"Utilizador";
+
+   atualizarPermissoesUI();
+
+   await carregarTudo();
+
+  }else{
+
+   $("loginScreen").classList.remove("hidden");
+   $("app").classList.add("hidden");
+
+  }
+
+ }catch(e){
+
+  console.error(e);
+
+  mostrarLoginErro(
+   "Erro ao verificar sessao."
+  );
+
+ }
+
+}
+
+
+async function login() {
+
+ const email = document.getElementById("loginEmail").value.trim();
+ const password = document.getElementById("loginPassword").value;
+
+ if (!email) {
+  mostrarLoginErro("Digite o e-mail.");
+  return;
+ }
+
+ if (!password || password.length < 6) {
+  mostrarLoginErro("Digite uma palavra-passe valida (minimo 6 caracteres).");
+  return;
+ }
+
+ document.getElementById("loginError").classList.add("hidden");
+
+ try {
+
+  const { data, error } = await db.auth.signInWithPassword({
+   email: email,
+   password: password
+  });
+
+  if (error) {
+   console.error("Erro:", error);
+   mostrarLoginErro("Erro: " + error.message);
+   return;
+  }
+
+  if (!data || !data.session) {
+   mostrarLoginErro("Sessao nao criada. Tente novamente.");
+   return;
+  }
+
+  utilizadorAtual = data.user;
+  verificarAdministrador(utilizadorAtual);
+
+  document.getElementById("loginScreen").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+
+  document.getElementById("usuarioEmail").textContent =
+   utilizadorAtual.email || "Utilizador";
+
+  atualizarPermissoesUI();
+
+  await carregarTudo();
+
+  toast("Login efetuado com sucesso.");
+
+ } catch (e) {
+  console.error("Erro:", e);
+  mostrarLoginErro("Erro: " + (e.message || "erro desconhecido"));
+ }
+
+}
+
+
+function mostrarLoginErro(msg){
+
+ const e=$("loginError");
+
+ e.textContent=msg;
+
+ e.classList.remove("hidden");
+
+}
+
+
+async function logout(){
+
+ await db.auth.signOut();
+
+ utilizadorAtual=null;
+ isAdmin=false;
+
+ location.reload();
+
+}
+
+
+/* ==========================================================
+   CARREGAR TUDO
+========================================================== */
+
+async function carregarTudo(){
+
+ await carregarMembros();
+ await carregarTransacoes();
+ await carregarEventos();
+ await carregarMeta();
+ atualizarDashboard();
+
+}
+
+
+/* ==========================================================
+   MEMBROS
+========================================================== */
+
+async function carregarMembros(){
+
+ const {data,error}=
+  await db
+   .from("membros")
+   .select("*")
+   .order("nome",{ascending:true});
+
+ if(error){
+
+  console.error(error);
+  membros=[];
+  toast(
+   "Erro ao carregar membros: "+
+   error.message,
+   true
+  );
+
+ }else{
+
+  membros=data||[];
+
+ }
+
+ renderMembros();
+
+}
+
+
+function novoMembro(){
+
+ if(!isAdmin){
+  toast("Apenas o administrador pode criar membros.",true);
+  return;
+ }
+
+ editId=null;
+
+ $("tituloMembro").textContent="Novo Membro";
+ $("mNome").value="";
+ $("mCargo").value="Membro";
+ $("mBI").value="";
+ $("mEmail").value="";
+ $("mTelefone").value="";
+ $("mNascimento").value="";
+ $("mAdesao").value="";
+ $("mStatus").value="Ativo";
+
+ $("modalMembro").classList.add("open");
+
+}
+
+
+function editarMembro(id){
+
+ if(!isAdmin){
+  toast("Apenas o administrador pode editar.",true);
+  return;
+ }
+
+ const m=
+  membros.find(x=>String(x.id)===String(id));
+
+ if(!m)return;
+
+ editId=id;
+
+ $("tituloMembro").textContent="Editar Membro";
+ $("mNome").value=m.nome||"";
+ $("mCargo").value=m.cargo||"Membro";
+ $("mBI").value=m.bi||"";
+ $("mEmail").value=m.email||"";
+ $("mTelefone").value=m.telefone||"";
+ $("mNascimento").value=m.aniversario||"";
+ $("mAdesao").value=m.data_adesao||m.adesao||"";
+ $("mStatus").value=m.status||"Ativo";
+
+ $("modalMembro").classList.add("open");
+
+}
+
+
+function fecharModal(){
+
+ $("modalMembro").classList.remove("open");
+
+}
+
+
+async function salvarMembro(){
+
+ if(!isAdmin){
+  toast("Sem permissao para alterar dados.",true);
+  return;
+ }
+
+ const dados={
+  nome:$("mNome").value.trim(),
+  cargo:$("mCargo").value,
+  bi:$("mBI").value.trim(),
+  email:$("mEmail").value.trim(),
+  telefone:$("mTelefone").value.trim(),
+  aniversario:$("mNascimento").value.trim() || null,
+  data_adesao:$("mAdesao").value.trim() || null,
+  status:$("mStatus").value
+ };
+
+ if(!dados.nome){
+  toast("Informe o nome.",true);
+  return;
+ }
+
+ let result;
+
+ if(editId){
+  result=await db.from("membros").update(dados).eq("id",editId);
+ }else{
+  result=await db.from("membros").insert(dados);
+ }
+
+ if(result.error){
+  toast("Erro ao guardar membro: "+result.error.message,true);
+  return;
+ }
+
+ fecharModal();
+ await carregarMembros();
+ atualizarDashboard();
+ toast(editId?"Membro atualizado.":"Membro cadastrado.");
+
+}
+
+
+async function excluirMembro(id){
+
+ if(!isAdmin){
+  toast("Apenas o administrador pode eliminar.",true);
+  return;
+ }
+
+ const m=
+  membros.find(x=>String(x.id)===String(id));
+
+ if(!m)return;
+
+ if(!confirm("Eliminar "+m.nome+"?"))return;
+
+ const {error}=
+  await db.from("membros").delete().eq("id",id);
+
+ if(error){
+  toast("Erro: "+error.message,true);
+  return;
+ }
+
+ await carregarMembros();
+ atualizarDashboard();
+ toast("Membro eliminado.");
+
+}
+
+
+function renderMembros(){
+
+ const termo=
+  ($("buscaMembro")?.value||"").toLowerCase();
+
+ const listaOrdenada = [...membros].sort((a,b) => {
+  const aFundador = isFundador(a.cargo);
+  const bFundador = isFundador(b.cargo);
+
+  if(aFundador && !bFundador) return -1;
+  if(!aFundador && bFundador) return 1;
+
+  return String(a.nome||"").localeCompare(String(b.nome||""), "pt");
+ });
+
+ const lista=
+  listaOrdenada.filter(m=>
+
+   String(m.nome||"").toLowerCase().includes(termo)||
+   String(m.bi||"").toLowerCase().includes(termo)||
+   String(m.email||"").toLowerCase().includes(termo)||
+   String(m.telefone||"").toLowerCase().includes(termo)||
+   String(m.cargo||"").toLowerCase().includes(termo)
+
+  );
+
+ $("listaMembros").innerHTML=
+  lista.map(m=>{
+
+   const isFund = isFundador(m.cargo);
+   const badgeClass = isFund ? 'badge-fundador' : 'badge-info';
+
+   return`
+   <tr ${isFund ? 'class="fundador-destaque"' : ''}>
+    <td>
+     <strong>${esc(m.nome)}</strong>
+     ${isFund ? ' ⭐' : ''}
+    </td>
+    <td>
+     <span class="badge ${badgeClass}">
+      ${esc(m.cargo||"Membro")}
+     </span>
+    </td>
+    <td>${esc(m.bi||"")}</td>
+    <td>${esc(m.email||"")}</td>
+    <td>${esc(m.telefone||"")}</td>
+    <td>
+     <span class="badge ${m.status==="Ativo"?"badge-ok":"badge-no"}">
+      ${esc(m.status||"")}
+     </span>
+    </td>
+    <td>
+     <div class="actions">
+      ${isAdmin ? `
+       <button class="btn btn-outline" onclick="editarMembro('${m.id}')">Editar</button>
+       <button class="btn btn-danger" onclick="excluirMembro('${m.id}')">Eliminar</button>
+      ` : `
+       <span class="badge badge-info">Visualizar</span>
+      `}
+     </div>
+    </td>
+   </tr>
+  `;
+
+  }).join("")||
+
+  `<tr><td colspan="7" style="text-align:center">Nenhum membro encontrado.</td></tr>`;
+
+ $("totalMembros").textContent=membros.length;
+ $("ativos").textContent=membros.filter(m=>m.status==="Ativo").length;
+ $("navMembros").textContent=membros.length;
+
+}
+
+
+/* ==========================================================
+   FINANCAS / TRANSACOES
+========================================================== */
+
+async function carregarTransacoes(){
+
+ const {data,error}=
+  await db
+   .from("transacoes")
+   .select("*")
+   .order("created_at",{ascending:false});
+
+ if(error){
+  console.error(error);
+  transacoes=[];
+  renderTransacoes();
+  toast("Erro ao carregar transacoes: "+error.message,true);
+  return;
+ }
+
+ transacoes=data||[];
+ renderTransacoes();
+ atualizarDashboard();
+
+}
+
+
+function obterTotais(){
+
+ let receitas=0;
+ let despesas=0;
+
+ transacoes.forEach(t=>{
+  const valor=Math.abs(Number(t.valor||0));
+  if(t.tipo==="despesa"){
+   despesas+=valor;
+  }else{
+   receitas+=valor;
+  }
+ });
+
+ return{receitas,despesas,saldo:receitas-despesas};
+
+}
+
+
+async function adicionarFinanceiro(){
+
+ if(!isAdmin){
+  toast("Apenas o administrador pode registrar transacoes.",true);
+  return;
+ }
+
+ const tipo=$("tipo").value;
+ const categoria=$("categoria").value;
+ const valor=Math.abs(Number($("valor").value));
+ const descricao=$("descricao").value.trim();
+
+ if(!valor||valor<=0){
+  toast("Informe um valor valido.",true);
+  return;
+ }
+
+ if(!descricao){
+  toast("Informe a descricao.",true);
+  return;
+ }
+
+ const totais=obterTotais();
+
+ if(tipo==="despesa"&&valor>totais.saldo){
+  toast("Saldo insuficiente. Disponivel: "+kz(totais.saldo),true);
+  return;
+ }
+
+ const dados={
+  tipo:tipo,
+  categoria:categoria,
+  valor:valor,
+  descricao:descricao,
+  data:new Date().toISOString()
+ };
+
+ const {error}=await db.from("transacoes").insert(dados);
+
+ if(error){
+  toast("Erro ao registrar transacao: "+error.message,true);
+  return;
+ }
+
+ $("valor").value="";
+ $("descricao").value="";
+
+ await carregarTransacoes();
+ atualizarDashboard();
+ toast("Transacao registrada com sucesso.");
+
+}
+
+
+async function excluirTransacao(id){
+
+ if(!isAdmin){
+  toast("Apenas o administrador pode eliminar transacoes.",true);
+  return;
+ }
+
+ if(!confirm("Eliminar esta transacao?"))return;
+
+ const {error}=await db.from("transacoes").delete().eq("id",id);
+
+ if(error){
+  toast("Erro ao eliminar: "+error.message,true);
+  return;
+ }
+
+ await carregarTransacoes();
+ atualizarDashboard();
+ toast("Transacao eliminada.");
+
+}
+
+
+function renderTransacoes(){
+
+ const termo=
+  ($("buscaTransacao")?.value||"").toLowerCase();
+
+ const filtro=
+  $("filtro")?.value||"";
+
+ const lista=transacoes.filter(t=>{
+  const texto=(String(t.descricao||"")+" "+String(t.categoria||"")).toLowerCase();
+  return texto.includes(termo)&&(!filtro||t.tipo===filtro);
+ });
+
+ $("listaTransacoes").innerHTML=
+  lista.map(t=>{
+   const despesa=t.tipo==="despesa";
+   const valor=Math.abs(Number(t.valor||0));
+   return`
+   <tr>
+    <td>${formatarData(t.data||t.created_at)}</td>
+    <td><strong>${esc(t.descricao||"")}</strong><br><small>${esc(t.categoria||"")}</small></td>
+    <td><span class="badge ${despesa?"badge-no":"badge-ok"}">${despesa?"Despesa":"Receita"}</span></td>
+    <td style="font-weight:bold;color:${despesa?"#dc3545":"#28a745"}">${despesa?"-":"+"}${kz(valor)}</td>
+    <td>
+     ${isAdmin ? `
+      <button class="btn btn-danger" onclick="excluirTransacao('${t.id}')">Eliminar</button>
+     ` : `
+      <span class="badge badge-info">Visualizar</span>
+     `}
+    </td>
+   </tr>
+  `;
+  }).join("")||
+
+  `<tr><td colspan="5" style="text-align:center">Nenhuma transacao.</td></tr>`;
+
+}
+
+
+/* ==========================================================
+   EVENTOS
+========================================================== */
+
+function obterDetalhesEventos(){
+ try{
+  return JSON.parse(localStorage.getItem("ojv_eventos_detalhes")||"{}");
+ }catch(e){
+  return{};
+ }
+}
+
+
+function guardarDetalhesEventos(obj){
+ localStorage.setItem("ojv_eventos_detalhes",JSON.stringify(obj));
+}
+
+
+function detalhesEvento(id){
+ return obterDetalhesEventos()[id]||{};
+}
+
+
+async function carregarEventos(){
+
+ const {data,error}=await db
+  .from("eventos")
+  .select("*")
+  .order("data",{ascending:true});
+
+ if(error){
+  console.error(error);
+  eventos=[];
+  renderEventos();
+  toast("Erro ao carregar eventos: "+error.message,true);
+  return;
+ }
+
+ eventos=data||[];
+ marcarEventosPassados();
+ renderEventos();
+ verificarAlarmes();
+
+}
+
+
+async function marcarEventosPassados(){
+
+ const hoje=new Date();
+ hoje.setHours(0,0,0,0);
+
+ const alteracoes=[];
+
+ for(const e of eventos){
+  if(e.status==="Agendado"||e.status==="Em andamento"){
+   const dataEvento=new Date(e.data+"T23:59:59");
+   if(dataEvento<hoje){
+    alteracoes.push(
+     db.from("eventos").update({status:"Concluído"}).eq("id",e.id)
+    );
+   }
+  }
+ }
+
+ if(alteracoes.length){
+  await Promise.all(alteracoes);
+  const {data}=await db.from("eventos").select("*").order("data",{ascending:true});
+  eventos=data||[];
+ }
+
+}
+
+
+function novoEvento(){
+
+ if(!isAdmin){
+  toast("Apenas o administrador pode criar eventos.",true);
+  return;
+ }
+
+ editEventoId=null;
+
+ $("tituloEvento").textContent="Novo Evento";
+ $("eventoNome").value="";
+ $("eventoData").value="";
+ $("eventoHora").value="";
+ $("eventoLocal").value="";
+ $("eventoResponsavel").value="";
+ $("eventoParticipantes").value="";
+ $("eventoDescricao").value="";
+ $("eventoStatus").value="Agendado";
+
+ $("modalEvento").classList.add("open");
+
+}
+
+
+function editarEvento(id){
+
+ if(!isAdmin){
+  toast("Apenas o administrador pode editar eventos.",true);
+  return;
+ }
+
+ const e=eventos.find(x=>x.id===id);
+ if(!e)return;
+
+ const d=detalhesEvento(id);
+
+ editEventoId=id;
+
+ $("tituloEvento").textContent="Editar Evento";
+ $("eventoNome").value=e.nome||"";
+ $("eventoData").value=formatarData(e.data);
+ $("eventoHora").value=d.hora||"";
+ $("eventoLocal").value=e.local||"";
+ $("eventoResponsavel").value=d.responsavel||"";
+ $("eventoParticipantes").value=d.participantes||"";
+ $("eventoDescricao").value=d.descricao||"";
+ $("eventoStatus").value=e.status||"Agendado";
+
+ $("modalEvento").classList.add("open");
+
+}
+
+
+function fecharEventoModal(){
+ $("modalEvento").classList.remove("open");
+}
+
+
+async function salvarEvento(){
+
+ if(!isAdmin){
+  toast("Apenas o administrador pode alterar eventos.",true);
+  return;
+ }
+
+ const nome=$("eventoNome").value.trim();
+ const dataTexto=$("eventoData").value.trim();
+ const hora=$("eventoHora").value;
+ const local=$("eventoLocal").value.trim();
+ const responsavel=$("eventoResponsavel").value.trim();
+ const participantes=Number($("eventoParticipantes").value||0);
+ const descricao=$("eventoDescricao").value.trim();
+ const status=$("eventoStatus").value;
+
+ if(!nome){
+  toast("Informe o nome do evento.",true);
+  return;
+ }
+
+ if(!dataTexto){
+  toast("Informe a data do evento.",true);
+  return;
+ }
+
+ if(!hora){
+  toast("Informe a hora do evento.",true);
+  return;
+ }
+
+ // Converter data para formato ISO (YYYY-MM-DD)
+ const partes = dataTexto.split('/');
+ if(partes.length === 3){
+  var dataISO = partes[2]+'-'+partes[1].padStart(2,'0')+'-'+partes[0].padStart(2,'0');
+ } else {
+  toast("Data invalida. Use DD/MM/AAAA.",true);
+  return;
+ }
+
+ const dados={
+  nome:nome,
+  data:dataISO,
+  local:local||"Nao definido",
+  status:status
+ };
+
+ let result;
+
+ if(editEventoId){
+  result=await db.from("eventos").update(dados).eq("id",editEventoId);
+ }else{
+  result=await db.from("eventos").insert(dados).select().single();
+ }
+
+ if(result.error){
+  toast("Erro ao guardar evento: "+result.error.message,true);
+  return;
+ }
+
+ let id=editEventoId;
+ if(!id&&result.data){
+  id=result.data.id;
+ }
+
+ const extras=obterDetalhesEventos();
+ extras[id]={
+  hora:hora,
+  responsavel:responsavel,
+  participantes:participantes,
+  descricao:descricao
+ };
+ guardarDetalhesEventos(extras);
+
+ fecharEventoModal();
+ await carregarEventos();
+ atualizarDashboard();
+ toast(editEventoId?"Evento atualizado.":"Evento criado com sucesso.");
+
+}
+
+
+async function excluirEvento(id){
+
+ if(!isAdmin){
+  toast("Apenas o administrador pode eliminar eventos.",true);
+  return;
+ }
+
+ if(!confirm("Eliminar este evento?"))return;
+
+ const {error}=await db.from("eventos").delete().eq("id",id);
+
+ if(error){
+  toast("Erro ao eliminar evento: "+error.message,true);
+  return;
+ }
+
+ const extras=obterDetalhesEventos();
+ delete extras[id];
+ guardarDetalhesEventos(extras);
+
+ await carregarEventos();
+ atualizarDashboard();
+ toast("Evento eliminado.");
+
+}
+
+
+function badgeStatus(status){
+ if(status==="Concluído") return"badge-ok";
+ if(status==="Cancelado") return"badge-no";
+ if(status==="Em andamento") return"badge-warning";
+ return"badge-info";
+}
+
+
+function renderEventos(){
+
+ const termo =
+  ($("buscaEvento")?.value||"").toLowerCase();
+
+ const lista = eventos.filter(e =>
+  String(e.nome||"").toLowerCase().includes(termo) ||
+  String(e.local||"").toLowerCase().includes(termo) ||
+  String(e.status||"").toLowerCase().includes(termo)
+ );
+
+ $("listaEventos").innerHTML =
+  lista.map(e => {
+   const d = detalhesEvento(e.id);
+   return `
+   <div class="evento-card">
+    <div class="titulo">${esc(e.nome||"")}</div>
+    <div class="detalhes">
+     <span>Data: ${esc(e.data||"")}</span>
+     <span>Hora: ${esc(d.hora||"")}</span>
+     <span>Local: ${esc(e.local||"")}</span>
+     <span>Responsavel: ${esc(d.responsavel||"")}</span>
+     <span>Participantes: ${esc(d.participantes||"0")}</span>
+     <span>Status: <span class="badge ${badgeStatus(e.status)}">${esc(e.status||"")}</span></span>
+    </div>
+    ${d.descricao ? `<div style="margin-top:8px;font-size:12px;color:#555">${esc(d.descricao)}</div>` : ''}
+    <div class="actions" style="margin-top:10px">
+     ${isAdmin ? `
+      <button class="btn btn-outline" onclick="editarEvento('${e.id}')">Editar</button>
+      <button class="btn btn-danger" onclick="excluirEvento('${e.id}')">Eliminar</button>
+     ` : `
+      <span class="badge badge-info">Visualizar</span>
+     `}
+    </div>
+   </div>
+  `;
+  }).join("") ||
+
+  `<div style="text-align:center;padding:20px;color:#999">Nenhum evento encontrado.</div>`;
+
+}
+
+
+/* ==========================================================
+   ALARME
+========================================================== */
+
+let alarmAudio=null;
+let alarmInterval=null;
+let ultimoAlarme={};
+let alarmesAtivos=[];
+
+
+function iniciarAudioAlarme(){
+
+ try{
+  const AudioContext=window.AudioContext||window.webkitAudioContext;
+  if(!alarmAudio){
+   if(!AudioContext)return;
+   alarmAudio=new AudioContext();
+  }
+  if(alarmAudio.state==="suspended"){
+   alarmAudio.resume();
+  }
+  tocarSomAlarme();
+ }catch(e){
+  console.log(e);
+ }
+
+}
+
+
+function tocarSomAlarme(){
+
+ if(!alarmAudio)return;
+
+ try{
+  const agora=alarmAudio.currentTime;
+  const osc1=alarmAudio.createOscillator();
+  const osc2=alarmAudio.createOscillator();
+  const gain=alarmAudio.createGain();
+
+  osc1.type="square";
+  osc2.type="square";
+  osc1.frequency.value=880;
+  osc2.frequency.value=660;
+
+  gain.gain.setValueAtTime(0.0001,agora);
+  gain.gain.exponentialRampToValueAtTime(0.9,agora+0.03);
+  gain.gain.exponentialRampToValueAtTime(0.0001,agora+0.7);
+
+  osc1.connect(gain);
+  osc2.connect(gain);
+  gain.connect(alarmAudio.destination);
+
+  osc1.start(agora);
+  osc2.start(agora);
+  osc1.stop(agora+0.7);
+  osc2.stop(agora+0.7);
+
+ }catch(e){}
+
+}
+
+
+function verificarAlarmes(){
+
+ const agora=new Date();
+
+ eventos.forEach(e=>{
+  if(e.status==="Cancelado"||e.status==="Concluído")return;
+
+  const d=detalhesEvento(e.id);
+  if(!d.hora)return;
+
+  // Converter data do evento para objeto Date
+  const partes = String(e.data).split('-');
+  if(partes.length !== 3) return;
+  const dataEvento = new Date(partes[0], partes[1]-1, partes[2]);
+  
+  // Criar data/hora completa do evento
+  const horaParts = d.hora.split(':');
+  const dataHoraEvento = new Date(partes[0], partes[1]-1, partes[2], parseInt(horaParts[0]), parseInt(horaParts[1]));
+
+  const diferenca = dataHoraEvento.getTime() - agora.getTime();
+  const diferencaDias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+
+  // ALARME NO DIA DO EVENTO (quando falta menos de 1 hora)
+  if(diferenca <= 3600000 && diferenca > 0){
+   dispararAlarme(e, "O evento vai comecar em breve!");
+   return;
+  }
+
+  // ALARME 24 HORAS ANTES (entre 23 e 25 horas antes)
+  if(diferenca <= 90000000 && diferenca > 82800000){
+   dispararAlarme(e, "Atencao: este evento acontecera amanha!");
+   return;
+  }
+
+ });
+
+}
+
+
+function dispararAlarme(e,mensagem){
+
+ const chave=String(e.id)+":"+String(e.data)+":"+mensagem;
+ if(ultimoAlarme[chave])return;
+ ultimoAlarme[chave]=true;
+
+ const d=detalhesEvento(e.id);
+
+ $("eventoAlarmado").textContent=e.nome||"Evento da O.J.V.";
+ $("detalhesAlarme").innerHTML =
+  esc(mensagem)+
+  "<br><br>Data: "+esc(e.data)+
+  "<br>Hora: "+esc(d.hora||"")+
+  "<br>Local: "+esc(e.local||"")+
+  "<br>Responsavel: "+esc(d.responsavel||"");
+
+ $("alarmScreen").classList.add("open");
+ iniciarAudioAlarme();
+
+ if(alarmInterval) clearInterval(alarmInterval);
+ alarmInterval=setInterval(tocarSomAlarme,1000);
+
+}
+
+
+function pararAlarme(){
+
+ if(alarmInterval){
+  clearInterval(alarmInterval);
+  alarmInterval=null;
+ }
+ $("alarmScreen").classList.remove("open");
+ if(alarmAudio){
+  try{
+   alarmAudio.close();
+   alarmAudio=null;
+  }catch(e){}
+ }
+
+}
+
+
+// Verificar alarmes a cada 30 segundos
+setInterval(verificarAlarmes, 30000);
+
+
+/* ==========================================================
+   META
+========================================================== */
+
+async function carregarMeta(){
+
+ const {data,error}=await db
+  .from("metas")
+  .select("*")
+  .limit(1)
+  .maybeSingle();
+
+ if(error){
+  console.error(error);
+  meta={id:null,valor:0,guardado:0};
+  renderMeta();
+  return;
+ }
+
+ meta=data||{id:null,valor:0,guardado:0};
+ renderMeta();
+
+}
+
+
+async function definirMeta(){
+
+ if(!isAdmin){
+  toast("Apenas o administrador pode definir a meta.",true);
+  return;
+ }
+
+ const valor=Number($("novaMeta").value);
+
+ if(!valor||valor<=0){
+  toast("Valor da meta invalido.",true);
+  return;
+ }
+
+ if(meta.id){
+  const {error}=await db.from("metas").update({valor:valor,guardado:0}).eq("id",meta.id);
+  if(error){
+   toast("Erro: "+error.message,true);
+   return;
+  }
+ }else{
+  const {error}=await db.from("metas").insert({valor:valor,guardado:0});
+  if(error){
+   toast("Erro: "+error.message,true);
+   return;
+  }
+ }
+
+ $("novaMeta").value="";
+ await carregarMeta();
+ toast("Meta definida com sucesso.");
+
+}
+
+
+async function guardarMeta(){
+
+ if(!isAdmin){
+  toast("Apenas o administrador pode guardar na meta.",true);
+  return;
+ }
+
+ const valor=Number($("guardarMeta").value);
+
+ if(!valor||valor<=0){
+  toast("Valor invalido.",true);
+  return;
+ }
+
+ if(!meta.id||!meta.valor){
+  toast("Defina uma meta primeiro.",true);
+  return;
+ }
+
+ const novo=Math.min(Number(meta.guardado||0)+valor,Number(meta.valor));
+
+ const {error}=await db.from("metas").update({guardado:novo}).eq("id",meta.id);
+
+ if(error){
+  toast("Erro: "+error.message,true);
+  return;
+ }
+
+ $("guardarMeta").value="";
+ await carregarMeta();
+ toast("Valor guardado na meta.");
+
+}
+
+
+async function redefinirMeta() {
+ 
+ if (!isAdmin) {
+  toast("Apenas o administrador pode redefinir a meta.", true);
+  return;
+ }
+ 
+ if (!meta.id) {
+  toast("Nao existe uma meta definida.", true);
+  return;
+ }
+ 
+ if (!confirm("Redefinir a meta? O valor guardado voltara para 0 Kz.")) return;
+ 
+ try {
+  
+  const { error } = await db
+   .from("metas")
+   .update({ guardado: 0 })
+   .eq("id", meta.id);
+  
+  if (error) {
+   toast("Erro ao redefinir meta: " + error.message, true);
+   return;
+  }
+  
+  // Atualizar o estado local
+  meta.guardado = 0;
+  
+  // Atualizar a interface
+  renderMeta();
+  atualizarDashboard();
+  
+  toast("Meta redefinida com sucesso.");
+  
+ } catch (e) {
+  console.error(e);
+  toast("Erro: " + e.message, true);
+ }
+ 
+
+
+/* ==========================================================
+   DASHBOARD
+========================================================== */
+
+function atualizarDashboard(){
+
+ const totais=obterTotais();
+
+ $("dashMembros").textContent=membros.length;
+ $("dashReceitas").textContent=kz(totais.receitas);
+ $("dashDespesas").textContent=kz(totais.despesas);
+ $("dashSaldo").textContent=kz(totais.saldo);
+
+ $("finR").textContent=kz(totais.receitas);
+ $("finD").textContent=kz(totais.despesas);
+ $("finS").textContent=kz(totais.saldo);
+
+ const ult=transacoes.slice(0,5);
+
+ $("ultimas").innerHTML=
+  ult.map(t=>{
+   const despesa=t.tipo==="despesa";
+   const valor=Math.abs(Number(t.valor||0));
+   return`
+   <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee">
+    <span>${esc(t.descricao||"")}</span>
+    <strong style="color:${despesa?"#dc3545":"#28a745"}">${despesa?"-":"+"}${kz(valor)}</strong>
+   </div>
+  `;
+  }).join("")||"Nenhuma transacao.";
+
+ const hoje=new Date().toISOString().slice(0,10);
+
+ const prox=eventos.filter(e=>e.data>=hoje&&e.status!=="Cancelado"&&e.status!=="Concluído").slice(0,5);
+
+ $("proximos").innerHTML=
+  prox.map(e=>{
+   const d=detalhesEvento(e.id);
+   return`
+   <div style="padding:8px 0;border-bottom:1px solid #eee">
+    <strong>${esc(e.nome)}</strong>
+    <span style="float:right">${esc(e.data)}</span>
+    <small style="display:block;color:#777">Local: ${esc(e.local||"")} Hora: ${esc(d.hora||"")}</small>
+   </div>
+  `;
+  }).join("")||"Nenhum evento proximo.";
+
+}
+
+
+/* ==========================================================
+   NAVEGACAO
+========================================================== */
+
+function menu(){
+ $("nav").classList.toggle("aberto");
+}
+
+
+function abrir(id){
+
+ document.querySelectorAll("section").forEach(s=>s.classList.remove("ativo"));
+ if($(id)) $(id).classList.add("ativo");
+
+ document.querySelectorAll("nav button").forEach(b=>b.classList.remove("ativo"));
+
+ const bot=[...document.querySelectorAll("nav button")].find(
+  b=>b.getAttribute("onclick")?.includes("'"+id+"'")
+ );
+
+ if(bot) bot.classList.add("ativo");
+ $("nav").classList.remove("aberto");
+
+}
+
+
+function tema(){
+
+ document.body.classList.toggle("dark");
+ localStorage.setItem("ojv_dark",document.body.classList.contains("dark"));
+
+}
+
+
+/* ==========================================================
+   CSV
+========================================================== */
+
+function baixar(nome,conteudo,tipo="text/csv"){
+
+ const blob=new Blob([conteudo],{type:tipo});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download=nome;
+ a.click();
+ URL.revokeObjectURL(url);
+
+}
+
+
+function exportarMembros(){
+
+ let csv="Nome,Cargo,BI,E-mail,Telefone,Data de adesao,Status\n";
+
+ const lista=[...membros].sort((a,b)=>{
+  const aFundador=isFundador(a.cargo);
+  const bFundador=isFundador(b.cargo);
+  if(aFundador&&!bFundador) return -1;
+  if(!aFundador&&bFundador) return 1;
+  return String(a.nome||"").localeCompare(String(b.nome||""),"pt");
+ });
+
+ lista.forEach(m=>{
+  csv+=`"${m.nome||""}","${m.cargo||"Membro"}","${m.bi||""}","${m.email||""}","${m.telefone||""}","${m.data_adesao||""}","${m.status||""}"\n`;
+ });
+
+ baixar("membros_ojv.csv",csv);
+
+}
+
+
+/* ==========================================================
+   BACKUP
+========================================================== */
+
+function gerarBackup(){
+
+ try{
+
+  const dados = {
+   data: new Date().toISOString(),
+   membros: membros,
+   transacoes: transacoes,
+   eventos: eventos,
+   meta: meta
+  };
+
+  const json = JSON.stringify(dados, null, 2);
+  const blob = new Blob([json], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `backup_ojv_${new Date().toISOString().slice(0,10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+
+  toast("Backup gerado com sucesso!");
+
+ }catch(e){
+  console.error(e);
+  toast("Erro ao gerar backup: "+e.message, true);
+ }
+
+}
+
+
+async function restaurarBackup() {
+ 
+ if (!isAdmin) {
+  toast("Apenas o administrador pode restaurar backups.", true);
+  return;
+ }
+ 
+ const fileInput = document.getElementById('restoreFile');
+ const file = fileInput.files[0];
+ 
+ if (!file) {
+  toast("Seleccione um ficheiro JSON primeiro.", true);
+  return;
+ }
+ 
+ try {
+  
+  const text = await file.text();
+  const dados = JSON.parse(text);
+  
+  if (!dados.membros || !dados.transacoes || !dados.eventos) {
+   toast("Ficheiro invalido.", true);
+   return;
+  }
+  
+  if (!confirm(
+    "Isto substitui TODOS os dados atuais.\n\n" +
+    "Membros: " + dados.membros.length + "\n" +
+    "Transacoes: " + dados.transacoes.length + "\n" +
+    "Eventos: " + dados.eventos.length + "\n\n" +
+    "Continuar?"
+   )) return;
+  
+  toast("A restaurar dados...");
+  
+  // Apagar dados atuais
+  await db.from("membros").delete().neq("id", 0);
+  await db.from("transacoes").delete().neq("id", 0);
+  await db.from("eventos").delete().neq("id", 0);
+  
+  // REMOVER os IDs para o Supabase criar novos
+  const membrosSemId = dados.membros.map(({ id, ...rest }) => rest);
+  const transacoesSemId = dados.transacoes.map(({ id, ...rest }) => rest);
+  const eventosSemId = dados.eventos.map(({ id, ...rest }) => rest);
+  
+  // Inserir sem os IDs
+  if (membrosSemId.length > 0) {
+   const { error } = await db.from("membros").insert(membrosSemId);
+   if (error) throw error;
+  }
+  
+  if (transacoesSemId.length > 0) {
+   const { error } = await db.from("transacoes").insert(transacoesSemId);
+   if (error) throw error;
+  }
+  
+  if (eventosSemId.length > 0) {
+   const { error } = await db.from("eventos").insert(eventosSemId);
+   if (error) throw error;
+  }
+  
+  // Restaurar meta
+  if (dados.meta) {
+   if (dados.meta.id) {
+    await db.from("metas").update({
+     valor: dados.meta.valor,
+     guardado: dados.meta.guardado
+    }).eq("id", dados.meta.id);
+   } else {
+    await db.from("metas").insert({
+     valor: dados.meta.valor,
+     guardado: dados.meta.guardado
+    });
+   }
+  }
+  
+  fileInput.value = '';
+  await carregarTudo();
+  toast("Backup restaurado com sucesso!");
+  
+ } catch (e) {
+  console.error(e);
+  toast("Erro: " + e.message, true);
+ }
+ 
+}
+
+/* ==========================================================
+   DATA
+========================================================== */
+
+function formatarData(v){
+
+ if(!v)return"";
+
+ if(/^\d{2}\/\d{2}\/\d{4}$/.test(String(v)))
+  return String(v);
+
+ const s=String(v).slice(0,10);
+ const m=s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+ if(m) return m[3]+"/"+m[2]+"/"+m[1];
+
+ const d=new Date(v);
+ if(isNaN(d.getTime())) return String(v);
+
+ return String(d.getDate()).padStart(2,"0")+
+  "/"+
+  String(d.getMonth()+1).padStart(2,"0")+
+  "/"+
+  d.getFullYear();
+
+}
+
+
+/* ==========================================================
+   MASCARA DATA
+========================================================== */
+
+function aplicarMascaraData(el){
+
+ if(!el)return;
+
+ el.addEventListener("input",function(){
+
+  let v=this.value.replace(/\D/g,"").slice(0,8);
+
+  if(v.length>4){
+   v=v.slice(0,2)+"/"+v.slice(2,4)+"/"+v.slice(4);
+  }else if(v.length>2){
+   v=v.slice(0,2)+"/"+v.slice(2);
+  }
+
+  this.value=v;
+
+ });
+
+}
+
+
+/* ==========================================================
+   FECHAR MODAIS
+========================================================== */
+
+$("modalMembro").addEventListener("click", function(e){
+ if(e.target===this){
+  fecharModal();
+ }
+});
+
+$("modalEvento").addEventListener("click", function(e){
+ if(e.target===this){
+  fecharEventoModal();
+ }
+});
+
+document.addEventListener("keydown", function(e){
+ if(e.key==="Escape"){
+  fecharModal();
+  fecharEventoModal();
+ }
+});
+
+
+/* ==========================================================
+   TEMA
+========================================================== */
+
+if(localStorage.getItem("ojv_dark")==="true"){
+ document.body.classList.add("dark");
+}
+
+
+/* ==========================================================
+   SUPABASE AUTH
+========================================================== */
+
+db.auth.onAuthStateChange((event,session)=>{
+
+ if(session){
+
+  $("loginScreen").classList.add("hidden");
+  $("app").classList.remove("hidden");
+  $("usuarioEmail").textContent=session.user.email||"Utilizador";
+
+  if(!utilizadorAtual){
+   utilizadorAtual=session.user;
+   verificarAdministrador(utilizadorAtual);
+   atualizarPermissoesUI();
+   carregarTudo();
+  }
+
+ }else{
+
+  $("loginScreen").classList.remove("hidden");
+  $("app").classList.add("hidden");
+
+ }
+
+});
+
+
+/* ==========================================================
+   INICIAR
+========================================================== */
+
+aplicarMascaraData(document.getElementById("mNascimento"));
+aplicarMascaraData(document.getElementById("mAdesao"));
+aplicarMascaraData(document.getElementById("eventoData"));
+
+verificarSessao();
+
+// Verificar alarmes ao carregar
+setTimeout(verificarAlarmes, 5000);
+
+</script>
+
+</body>
+</html>
