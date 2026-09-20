@@ -26,110 +26,39 @@
     --radius-sm: 10px;
     --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-}
-
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 button, input, select, textarea { font: inherit; }
 button { cursor: pointer; border: none; background: none; }
 img { max-width: 100%; display: block; }
 a { text-decoration: none; color: inherit; }
-
 .hidden { display: none !important; }
-
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--primary2); border-radius: 8px; }
-
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-.text-center { text-align: center; }
-.text-muted { color: var(--muted); }
-.flex { display: flex; }
-.flex-center { display: flex; align-items: center; justify-content: center; }
-.flex-between { display: flex; align-items: center; justify-content: space-between; }
-.gap-8 { gap: 8px; }
-.gap-12 { gap: 12px; }
-.gap-16 { gap: 16px; }
-.gap-20 { gap: 20px; }
-.w-full { width: 100%; }
-.mt-8 { margin-top: 8px; }
-.mt-16 { margin-top: 16px; }
-.mb-16 { margin-bottom: 16px; }
-
-.btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 10px 20px;
-    border-radius: var(--radius-sm);
-    font-weight: 600;
-    font-size: 14px;
-    transition: var(--transition);
-    border: 1px solid transparent;
-}
-
+.w-full { width: 100%; } .mt-8 { margin-top: 8px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 20px; border-radius: var(--radius-sm); font-weight: 600; font-size: 14px; transition: var(--transition); border: 1px solid transparent; }
 .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.10); }
 .btn:active { transform: scale(0.97); }
-
-.btn-primary {
-    background: var(--primary);
-    color: #fff;
-}
+.btn-primary { background: var(--primary); color: #fff; }
 .btn-primary:hover { background: var(--primary2); }
-
-.btn-secondary {
-    background: var(--primary-light);
-    color: var(--primary);
-}
+.btn-secondary { background: var(--primary-light); color: var(--primary); }
 .btn-secondary:hover { background: #d4e0f5; }
-
-.btn-success {
-    background: var(--success);
-    color: #fff;
-}
-.btn-success:hover { background: #157a3f; }
-
-.btn-danger {
-    background: var(--danger);
-    color: #fff;
-}
+.btn-success { background: var(--success); color: #fff; }
+.btn-danger { background: var(--danger); color: #fff; }
 .btn-danger:hover { background: #a93226; }
-
-.btn-warning {
-    background: var(--warning);
-    color: #fff;
-}
-.btn-warning:hover { background: #d35400; }
-
-.btn-ghost {
-    background: transparent;
-    color: var(--text);
-    border-color: var(--border);
-}
+.btn-warning { background: var(--warning); color: #fff; }
+.btn-ghost { background: transparent; color: var(--text); border-color: var(--border); }
 .btn-ghost:hover { background: var(--bg); }
-
 .btn-sm { padding: 6px 14px; font-size: 12px; }
 .btn-lg { padding: 14px 28px; font-size: 16px; }
-
-.badge {
-    display: inline-flex;
-    padding: 4px 12px;
-    border-radius: 999px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
-}
-
+.btn-fb { background: #1877F2; color: #fff; }
+.btn-fb:hover { background: #0a5bc4; }
+.btn-wa { background: #25D366; color: #fff; }
+.btn-wa:hover { background: #1da851; }
+.badge { display: inline-flex; padding: 4px 12px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; text-transform: uppercase; }
 .badge-founder { background: var(--accent-light); color: #8a6d00; }
 .badge-active { background: #d4edda; color: #155724; }
 .badge-inactive { background: #e9ecef; color: #495057; }
@@ -138,781 +67,249 @@ a { text-decoration: none; color: inherit; }
 .badge-private { background: #e9ecef; color: #495057; }
 .badge-featured { background: #fff3cd; color: #856404; }
 
-#toast {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    z-index: 999;
-    padding: 14px 24px;
-    border-radius: var(--radius-sm);
-    background: var(--text);
-    color: #fff;
-    font-weight: 500;
-    font-size: 14px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.20);
-    transform: translateY(100px);
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    max-width: 420px;
-    pointer-events: none;
-}
-
-#toast.show {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-}
-
+#toast { position: fixed; bottom: 30px; right: 30px; z-index: 999; padding: 14px 24px; border-radius: var(--radius-sm); background: var(--text); color: #fff; font-weight: 500; font-size: 14px; box-shadow: 0 10px 40px rgba(0,0,0,0.20); transform: translateY(100px); opacity: 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); max-width: 420px; pointer-events: none; }
+#toast.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
 #toast.success { background: var(--success); }
 #toast.error { background: var(--danger); }
 #toast.warning { background: var(--warning); }
 
-.public-header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-}
-
-.public-nav {
-    min-height: 72px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 8px 20px;
-}
-
-.brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 700;
-}
-
-.brand img {
-    width: 48px;
-    height: 48px;
-    object-fit: contain;
-    border-radius: 10px;
-}
-
+.public-header { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+.public-nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 20px; }
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 700; }
+.brand img { width: 48px; height: 48px; object-fit: contain; border-radius: 10px; }
 .brand-name { font-size: 18px; color: var(--primary); }
 .brand-slogan { font-size: 13px; color: var(--muted); font-weight: 400; }
+.nav-links { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.nav-links a { padding: 8px 14px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; color: var(--text); transition: var(--transition); }
+.nav-links a:hover { background: var(--primary-light); color: var(--primary); }
 
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    flex-wrap: wrap;
-}
-
-.nav-links a {
-    padding: 8px 14px;
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    transition: var(--transition);
-}
-
-.nav-links a:hover {
-    background: var(--primary-light);
-    color: var(--primary);
-}
-
-.hero {
-    min-height: 560px;
-    display: flex;
-    align-items: center;
-    background: linear-gradient(135deg, #0a2647 0%, #1a4a7a 50%, #2a5aa8 100%);
-    color: #fff;
-    position: relative;
-    overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    opacity: 0.5;
-}
-
-.hero-inner {
-    display: grid;
-    grid-template-columns: 1.3fr 0.7fr;
-    gap: 50px;
-    align-items: center;
-    padding: 60px 20px;
-    position: relative;
-    z-index: 1;
-}
-
-.hero h1 {
-    font-size: clamp(36px, 5vw, 56px);
-    line-height: 1.05;
-    margin-bottom: 16px;
-    font-weight: 800;
-}
-
-.hero p {
-    font-size: 18px;
-    color: rgba(255,255,255,0.85);
-    max-width: 600px;
-    line-height: 1.8;
-}
-
+.hero { min-height: 560px; display: flex; align-items: center; background: linear-gradient(135deg, #0a2647 0%, #1a4a7a 50%, #2a5aa8 100%); color: #fff; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); opacity: 0.5; }
+.hero-inner { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 50px; align-items: center; padding: 60px 20px; position: relative; z-index: 1; }
+.hero h1 { font-size: clamp(36px, 5vw, 56px); line-height: 1.05; margin-bottom: 16px; font-weight: 800; }
+.hero p { font-size: 18px; color: rgba(255,255,255,0.85); max-width: 600px; line-height: 1.8; }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
-.hero-actions .btn-secondary {
-    background: rgba(255,255,255,0.12);
-    color: #fff;
-    border-color: rgba(255,255,255,0.25);
-}
-.hero-actions .btn-secondary:hover { background: rgba(255,255,255,0.20); }
+.hero-actions .btn-secondary { background: rgba(255,255,255,0.12); color: #fff; border-color: rgba(255,255,255,0.25); }
+.hero-logo img { width: min(280px, 60vw); height: auto; filter: drop-shadow(0 20px 60px rgba(0,0,0,0.30)); border-radius: 20px; }
 
-.hero-logo img {
-    width: min(280px, 60vw);
-    height: auto;
-    filter: drop-shadow(0 20px 60px rgba(0,0,0,0.30));
-    border-radius: 20px;
-}
-
-.section {
-    padding: 70px 20px;
-}
-
-.section-heading {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.section-heading h2 {
-    font-size: 32px;
-    color: var(--primary);
-    margin-bottom: 8px;
-}
-
-.section-heading p {
-    color: var(--muted);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.info-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-}
-
-.info-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 24px 28px;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-}
-
-.info-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,58,107,0.12); }
+.section { padding: 70px 20px; }
+.section-heading { text-align: center; margin-bottom: 40px; }
+.section-heading h2 { font-size: 32px; color: var(--primary); margin-bottom: 8px; }
+.section-heading p { color: var(--muted); max-width: 600px; margin: 0 auto; }
+.info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.info-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; box-shadow: var(--shadow); }
 .info-card h3 { color: var(--primary); margin-bottom: 8px; font-size: 18px; }
 .info-card p { color: var(--muted); line-height: 1.8; white-space: pre-line; }
 .info-full { grid-column: 1 / -1; }
 
-.founders-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 24px;
-}
-
-.founder-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 30px 20px;
-    text-align: center;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
-}
-
-.founder-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(26,58,107,0.12); }
-
-.founder-card::before {
-    content: 'FUNDADOR';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: var(--accent);
-    color: #fff;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding: 5px 0;
-    text-transform: uppercase;
-}
-
-.founder-photo {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: 20px auto 14px;
-    border: 4px solid var(--accent-light);
-    background: var(--bg);
-}
-
+.founders-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
+.founder-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 30px 20px; text-align: center; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+.founder-card::before { content: 'FUNDADOR'; position: absolute; top: 0; left: 0; right: 0; background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1px; padding: 5px 0; text-transform: uppercase; }
+.founder-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 20px auto 14px; border: 4px solid var(--accent-light); background: var(--bg); }
 .founder-card h3 { font-size: 18px; }
 .founder-card p { color: var(--muted); font-size: 14px; }
 
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-}
-
-.gallery-card {
-    background: var(--card);
-    border-radius: var(--radius);
-    overflow: hidden;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-}
-
-.gallery-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,58,107,0.12); }
-
-.gallery-media {
-    aspect-ratio: 16/10;
-    background: #1a1a2e;
-    overflow: hidden;
-}
-
-.gallery-media img,
-.gallery-media video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
+.gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.gallery-card { background: var(--card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
+.gallery-media { aspect-ratio: 16/10; background: #1a1a2e; overflow: hidden; }
+.gallery-media img, .gallery-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .gallery-body { padding: 16px 18px; }
 .gallery-body h3 { font-size: 16px; margin-bottom: 4px; }
 .gallery-body p { color: var(--muted); font-size: 14px; line-height: 1.6; }
 
 .events-public { display: grid; gap: 14px; }
-
-.event-public {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px 22px;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-}
-
-.event-public:hover { transform: translateX(4px); }
-
-.event-date {
-    min-width: 80px;
-    text-align: center;
-    padding: 12px 10px;
-    background: var(--primary-light);
-    border-radius: var(--radius-sm);
-    font-weight: 700;
-    color: var(--primary);
-    font-size: 14px;
-    flex-shrink: 0;
-}
-
+.event-public { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 22px; display: flex; gap: 20px; align-items: center; box-shadow: var(--shadow); }
+.event-date { min-width: 80px; text-align: center; padding: 12px 10px; background: var(--primary-light); border-radius: var(--radius-sm); font-weight: 700; color: var(--primary); font-size: 14px; flex-shrink: 0; }
 .event-public h3 { font-size: 16px; }
 .event-public p { color: var(--muted); font-size: 14px; margin: 2px 0; }
 
-.contact-box {
-    background: linear-gradient(135deg, var(--primary), var(--primary2));
-    color: #fff;
-    border-radius: var(--radius);
-    padding: 40px 48px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-}
-
+.contact-box { background: linear-gradient(135deg, var(--primary), var(--primary2)); color: #fff; border-radius: var(--radius); padding: 40px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
 .contact-box h2 { font-size: 24px; margin-bottom: 8px; }
-.contact-box p { opacity: 0.85; }
-
 .contact-list { display: grid; gap: 10px; }
-
-.contact-item {
-    padding: 12px 16px;
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: var(--radius-sm);
-    background: rgba(255,255,255,0.06);
-    font-size: 14px;
-}
-
+.contact-item { padding: 12px 16px; border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-sm); background: rgba(255,255,255,0.06); font-size: 14px; }
 .contact-item a { color: #fff; }
-.contact-item a:hover { text-decoration: underline; }
 
-.public-footer {
-    background: #0d1b2a;
-    color: #b0c4de;
-    padding: 30px 20px;
-}
-
-.footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-}
-
+.public-footer { background: #0d1b2a; color: #b0c4de; padding: 30px 20px; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
 .public-footer strong { color: #fff; }
 
-.overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(10, 30, 50, 0.80);
-    backdrop-filter: blur(8px);
-    z-index: 200;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.login-card {
-    background: var(--card);
-    width: min(420px, 100%);
-    border-radius: var(--radius);
-    padding: 32px 36px;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.30);
-    animation: slideUp 0.3s ease;
-}
-
-@keyframes slideUp {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
-
-.login-logo {
-    width: 72px;
-    height: 72px;
-    object-fit: contain;
-    margin: 0 auto 12px;
-    border-radius: 12px;
-}
-
+.overlay { position: fixed; inset: 0; background: rgba(10, 30, 50, 0.80); backdrop-filter: blur(8px); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.login-card { background: var(--card); width: min(420px, 100%); border-radius: var(--radius); padding: 32px 36px; box-shadow: 0 40px 100px rgba(0,0,0,0.30); animation: slideUp 0.3s ease; }
+@keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.login-logo { width: 72px; height: 72px; object-fit: contain; margin: 0 auto 12px; border-radius: 12px; }
 .login-card h2 { text-align: center; color: var(--primary); }
 .login-card > p { text-align: center; color: var(--muted); font-size: 14px; }
 
-.field {
-    display: grid;
-    gap: 6px;
-    margin-bottom: 14px;
-}
-
-.field label {
-    font-weight: 600;
-    font-size: 13px;
-    color: var(--text);
-}
-
-.field input,
-.field select,
-.field textarea {
-    width: 100%;
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    background: #fff;
-    color: var(--text);
-    font-size: 14px;
-    transition: var(--transition);
-    outline: none;
-}
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-    border-color: var(--primary2);
-    box-shadow: 0 0 0 3px rgba(42, 90, 168, 0.12);
-}
-
+.field { display: grid; gap: 6px; margin-bottom: 14px; }
+.field label { font-weight: 600; font-size: 13px; color: var(--text); }
+.field input, .field select, .field textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: #fff; color: var(--text); font-size: 14px; transition: var(--transition); outline: none; }
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--primary2); box-shadow: 0 0 0 3px rgba(42, 90, 168, 0.12); }
 .field textarea { min-height: 90px; resize: vertical; }
-
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-}
-
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .form-grid .field { margin-bottom: 0; }
+.check { display: flex; align-items: center; gap: 10px; margin: 12px 0; color: var(--text); font-size: 14px; }
+.check input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
 
-.check {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 12px 0;
-    color: var(--text);
-    font-size: 14px;
-}
-
-.check input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: var(--primary);
-    cursor: pointer;
-}
-
-.modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
-    flex-wrap: wrap;
-}
-
-.app {
-    display: none;
-    min-height: 100vh;
-}
-
+.app { display: none; min-height: 100vh; }
 .app.active { display: flex; }
 
-.sidebar {
-    width: 250px;
-    background: var(--primary);
-    color: #fff;
-    position: fixed;
-    inset: 0 auto 0 0;
-    z-index: 100;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease;
-}
-
-.sidebar-brand {
-    padding: 18px 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-    flex-shrink: 0;
-}
-
-.sidebar-brand img {
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
-    border-radius: 8px;
-}
-
+.sidebar { width: 250px; background: var(--primary); color: #fff; position: fixed; inset: 0 auto 0 0; z-index: 100; overflow-y: auto; display: flex; flex-direction: column; transition: transform 0.3s ease; }
+.sidebar-brand { padding: 18px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
+.sidebar-brand img { width: 42px; height: 42px; object-fit: contain; border-radius: 8px; }
 .sidebar-brand strong { font-size: 15px; line-height: 1.3; }
-
-.sidebar-nav {
-    padding: 12px 10px;
-    flex: 1;
-}
-
-.sidebar-nav button {
-    width: 100%;
-    text-align: left;
-    padding: 10px 14px;
-    border-radius: var(--radius-sm);
-    color: rgba(255,255,255,0.70);
-    font-weight: 500;
-    font-size: 14px;
-    transition: var(--transition);
-    margin-bottom: 2px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
+.sidebar-nav { padding: 12px 10px; flex: 1; }
+.sidebar-nav button { width: 100%; text-align: left; padding: 10px 14px; border-radius: var(--radius-sm); color: rgba(255,255,255,0.70); font-weight: 500; font-size: 14px; transition: var(--transition); margin-bottom: 2px; display: flex; align-items: center; gap: 10px; }
 .sidebar-nav button:hover { background: rgba(255,255,255,0.08); color: #fff; }
-.sidebar-nav button.active {
-    background: rgba(255,255,255,0.15);
-    color: #fff;
-    font-weight: 600;
-}
-
+.sidebar-nav button.active { background: rgba(255,255,255,0.15); color: #fff; font-weight: 600; }
 .sidebar-nav .nav-icon { font-size: 18px; width: 24px; text-align: center; }
-
-.sidebar-bottom {
-    padding: 14px 16px;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    flex-shrink: 0;
-}
-
+.sidebar-bottom { padding: 14px 16px; border-top: 1px solid rgba(255,255,255,0.08); flex-shrink: 0; }
 .sidebar-bottom .btn { width: 100%; justify-content: center; margin-bottom: 6px; }
 
-.main {
-    margin-left: 250px;
-    width: calc(100% - 250px);
-    min-height: 100vh;
-}
-
-.topbar {
-    height: 64px;
-    background: var(--card);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 24px;
-    position: sticky;
-    top: 0;
-    z-index: 60;
-}
-
-.topbar-title {
-    font-weight: 700;
-    font-size: 18px;
-    color: var(--primary);
-}
-
-.user-badge {
-    font-size: 13px;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.user-badge .avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--primary-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    color: var(--primary);
-    font-size: 14px;
-}
-
+.main { margin-left: 250px; width: calc(100% - 250px); min-height: 100vh; }
+.topbar { height: 64px; background: var(--card); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; position: sticky; top: 0; z-index: 60; }
+.topbar-title { font-weight: 700; font-size: 18px; color: var(--primary); }
+.user-badge { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+.user-badge .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--primary-light); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary); font-size: 14px; }
+.user-badge .role-badge { font-size: 10px; padding: 2px 8px; border-radius: 999px; font-weight: 700; text-transform: uppercase; }
 .content { padding: 24px; max-width: 1400px; margin: 0 auto; }
-
 .panel { display: none; animation: fadeIn 0.25s ease; }
 .panel.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.page-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 16px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
+.page-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
 .page-head h1 { font-size: 26px; color: var(--primary); }
 .page-head p { color: var(--muted); margin-top: 2px; }
 
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px;
-    margin-bottom: 24px;
-}
+.readonly-notice { background: #cfe2ff; border: 1px solid #9ec5fe; color: #084298; padding: 12px 18px; border-radius: var(--radius-sm); margin-bottom: 20px; font-size: 14px; display: flex; align-items: center; gap: 10px; }
 
-.stat-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 18px 22px;
-    box-shadow: var(--shadow);
-}
-
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.stat-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 22px; box-shadow: var(--shadow); }
 .stat-card .label { color: var(--muted); font-size: 13px; font-weight: 500; }
 .stat-card .value { font-size: 28px; font-weight: 800; color: var(--primary); margin-top: 4px; }
 .stat-card .value.green { color: var(--success); }
 .stat-card .value.red { color: var(--danger); }
 
-.table-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-}
-
-.table-card .table-header {
-    padding: 16px 20px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
+.table-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.table-card .table-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
 .table-card .table-header h3 { font-size: 16px; }
-
 .table-wrapper { overflow-x: auto; }
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-}
-
-th, td {
-    padding: 12px 16px;
-    text-align: left;
-    border-bottom: 1px solid var(--border);
-}
-
-th {
-    background: var(--bg);
-    font-weight: 600;
-    color: var(--muted);
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--bg); font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
 tr:hover td { background: #fafbfc; }
-
-.member-mini {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.member-mini img {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    object-fit: cover;
-    background: var(--bg);
-}
-
+.member-mini { display: flex; align-items: center; gap: 10px; }
+.member-mini img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; background: var(--bg); }
 .actions { display: flex; gap: 6px; flex-wrap: wrap; }
 
-.modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(10, 30, 50, 0.70);
-    backdrop-filter: blur(6px);
-    z-index: 300;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
+.modal { position: fixed; inset: 0; background: rgba(10, 30, 50, 0.70); backdrop-filter: blur(6px); z-index: 300; display: none; align-items: center; justify-content: center; padding: 20px; }
 .modal.open { display: flex; }
-
-.modal-box {
-    background: var(--card);
-    width: min(800px, 100%);
-    max-height: 90vh;
-    overflow-y: auto;
-    border-radius: var(--radius);
-    padding: 28px 32px;
-    animation: slideUp 0.3s ease;
-}
-
+.modal-box { background: var(--card); width: min(800px, 100%); max-height: 90vh; overflow-y: auto; border-radius: var(--radius); padding: 28px 32px; animation: slideUp 0.3s ease; }
 .modal-box h2 { color: var(--primary); margin-bottom: 4px; }
 .modal-box .modal-sub { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+.preview-profile { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; background: var(--bg); border: 3px solid var(--border); margin-bottom: 10px; }
 
-.preview-profile {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    background: var(--bg);
-    border: 3px solid var(--border);
-    margin-bottom: 10px;
-}
-
-.media-admin-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 18px;
-}
-
-.media-admin-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: var(--transition);
-}
-
-.media-admin-card:hover { transform: translateY(-4px); }
-
-.media-admin-card .media-preview {
-    aspect-ratio: 16/10;
-    background: #1a1a2e;
-    overflow: hidden;
-}
-
-.media-admin-card .media-preview img,
-.media-admin-card .media-preview video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
+.media-admin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
+.media-admin-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+.media-admin-card .media-preview { aspect-ratio: 16/10; background: #1a1a2e; overflow: hidden; }
+.media-admin-card .media-preview img, .media-admin-card .media-preview video { width: 100%; height: 100%; object-fit: cover; }
 .media-admin-body { padding: 14px 16px; }
 .media-admin-body strong { font-size: 15px; }
 
-.progress-bar {
-    height: 10px;
-    background: var(--border);
-    border-radius: 999px;
-    overflow: hidden;
-    margin: 8px 0;
-}
+.progress-bar { height: 10px; background: var(--border); border-radius: 999px; overflow: hidden; margin: 8px 0; }
+.progress-bar .fill { height: 100%; background: linear-gradient(90deg, var(--primary2), var(--accent)); border-radius: 999px; transition: width 0.6s ease; }
 
-.progress-bar .fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary2), var(--accent));
-    border-radius: 999px;
-    transition: width 0.6s ease;
-}
-
-.backup-box {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px 32px;
-    box-shadow: var(--shadow);
-    max-width: 700px;
-}
-
-.backup-box h3 { margin-bottom: 4px; }
-.backup-box .help { color: var(--muted); font-size: 13px; line-height: 1.7; }
+.backup-box, .integration-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; box-shadow: var(--shadow); max-width: 700px; }
+.backup-box h3, .integration-box h3 { margin-bottom: 4px; }
+.backup-box .help, .integration-box .help { color: var(--muted); font-size: 13px; line-height: 1.7; }
 .backup-box hr { margin: 24px 0; border: none; border-top: 1px solid var(--border); }
+.integration-box .help { background: var(--bg); padding: 12px 16px; border-radius: var(--radius-sm); margin: 12px 0 18px; }
+.integration-box .status-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; margin-bottom: 12px; }
+.integration-box .status-pill.on { background: #d4edda; color: #155724; }
+.integration-box .status-pill.off { background: #f8d7da; color: #721c24; }
 
-.mobile-menu {
-    display: none;
-    padding: 8px 12px;
-    border-radius: var(--radius-sm);
+/* ========== CHAT ========== */
+.chat-layout { display: grid; grid-template-columns: 1fr; gap: 16px; height: calc(100vh - 200px); min-height: 500px; }
+.chat-window { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); display: flex; flex-direction: column; overflow: hidden; }
+.chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--bg); }
+.chat-header h3 { font-size: 15px; }
+.chat-status { font-size: 12px; display: flex; align-items: center; gap: 6px; color: var(--muted); }
+.chat-status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); }
+.chat-status .dot.offline { background: var(--danger); }
+.chat-messages { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 14px; background: linear-gradient(180deg, #fafbfc 0%, #f0f4fa 100%); }
+
+.chat-msg-row { display: flex; gap: 10px; align-items: flex-end; max-width: 80%; animation: msgIn 0.25s ease; }
+.chat-msg-row.me { align-self: flex-end; flex-direction: row-reverse; }
+.chat-msg-row.other { align-self: flex-start; }
+
+.chat-avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
     background: var(--primary-light);
-    color: var(--primary);
-    font-size: 20px;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: var(--primary); font-size: 14px;
+    overflow: hidden;
 }
+.chat-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+
+.chat-msg {
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    position: relative;
+    flex: 1;
+    min-width: 0;
+}
+.chat-msg-row.me .chat-msg { background: var(--primary); color: #fff; border-bottom-right-radius: 4px; }
+.chat-msg-row.other .chat-msg { background: #fff; border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+
+.chat-msg .sender { font-size: 11px; font-weight: 700; opacity: 0.75; margin-bottom: 2px; display: block; padding-right: 26px; }
+.chat-msg .time { font-size: 10px; opacity: 0.65; margin-top: 4px; display: block; text-align: right; }
+.chat-msg .msg-text { white-space: pre-wrap; word-break: break-word; padding-right: 20px; }
+
+.chat-msg .btn-delete-msg {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(0,0,0,0.15);
+    color: #fff;
+    border: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-weight: 700;
+}
+.chat-msg-row.other .btn-delete-msg { background: rgba(0,0,0,0.1); color: var(--muted); }
+.chat-msg-row:hover .btn-delete-msg { opacity: 1; }
+.chat-msg .btn-delete-msg:hover { background: var(--danger); color: #fff; }
+
+@media (hover: none) {
+    .chat-msg .btn-delete-msg { opacity: 0.6; }
+}
+
+@keyframes msgIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+.chat-input-row { padding: 14px; border-top: 1px solid var(--border); display: flex; gap: 10px; background: var(--card); }
+.chat-input-row input { flex: 1; padding: 10px 14px; border: 1px solid var(--border); border-radius: 999px; outline: none; font-size: 14px; }
+.chat-input-row input:focus { border-color: var(--primary2); box-shadow: 0 0 0 3px rgba(42,90,168,0.12); }
+
+.video-controls { display: flex; justify-content: center; gap: 12px; padding: 16px; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); margin-top: 12px; }
+
+.mobile-menu { display: none; padding: 8px 12px; border-radius: var(--radius-sm); background: var(--primary-light); color: var(--primary); font-size: 20px; }
 
 @media (max-width: 992px) {
     .hero-inner { grid-template-columns: 1fr; text-align: center; }
@@ -921,68 +318,41 @@ tr:hover td { background: #fafbfc; }
     .hero-logo img { margin: 0 auto; }
     .contact-box { grid-template-columns: 1fr; }
 }
-
 @media (max-width: 768px) {
     .nav-links { display: none; }
     .mobile-menu { display: block; }
-    
     .info-grid { grid-template-columns: 1fr; }
     .form-grid { grid-template-columns: 1fr; }
     .founders-grid { grid-template-columns: 1fr 1fr; }
     .gallery-grid { grid-template-columns: 1fr 1fr; }
     .stats-grid { grid-template-columns: 1fr 1fr; }
-    
     .event-public { flex-direction: column; align-items: stretch; }
     .event-date { min-width: auto; }
-    
-    .sidebar {
-        transform: translateX(-100%);
-        width: 280px;
-    }
+    .sidebar { transform: translateX(-100%); width: 280px; }
     .sidebar.open { transform: translateX(0); }
     .main { margin-left: 0; width: 100%; }
     .content { padding: 16px; }
     .topbar { padding: 0 16px; }
-    
     .contact-box { padding: 28px 20px; }
     .modal-box { padding: 20px; }
-    
-    .brand-slogan { 
-    display: block;
-    font-size: 11px;
+    .brand-slogan { display: block; font-size: 11px; }
+    .brand-name { font-size: 15px; }
+    .brand img { width: 40px; height: 40px; }
+    .chat-msg-row { max-width: 90%; }
 }
-.brand-name { font-size: 15px; }
-.brand img { 
-    width: 40px; 
-    height: 40px; 
-}
-}
-
 @media (max-width: 480px) {
     .founders-grid { grid-template-columns: 1fr; }
     .gallery-grid { grid-template-columns: 1fr; }
     .stats-grid { grid-template-columns: 1fr; }
     .media-admin-grid { grid-template-columns: 1fr; }
-    
     .hero h1 { font-size: 28px; }
     .section { padding: 40px 16px; }
     .section-heading h2 { font-size: 24px; }
 }
-
-.empty-state {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--muted);
-}
-
+.empty-state { text-align: center; padding: 40px 20px; color: var(--muted); }
 .empty-state .icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
-.empty-state h4 { color: var(--text); margin-bottom: 4px; }
 .empty-state p { font-size: 14px; }
-
-/* Classe para campos de data com máscara */
-.campo-data-mascara {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
+.campo-data-mascara { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
 </style>
 </head>
 <body>
@@ -1000,24 +370,19 @@ tr:hover td { background: #fafbfc; }
                 <span class="brand-slogan" id="publicBrandSlogan">O objectivo não é ser rico, mas é não deixar a carteira vazia.</span>
             </span>
         </a>
-
         <div class="nav-links">
             <a href="#sobre">Sobre</a>
             <a href="#fundadores">Fundadores</a>
             <a href="#galeria">Galeria</a>
             <a href="#eventosPublicos">Eventos</a>
             <a href="#contactos">Contactos</a>
-            <button class="btn btn-primary" onclick="abrirLogin()">
-                Acesso interno
-            </button>
+            <button class="btn btn-primary" onclick="abrirLogin()">Acesso interno</button>
         </div>
-
         <button class="mobile-menu" onclick="toggleMobileNav()">☰</button>
     </nav>
 </header>
 
 <main>
-
 <section id="inicio" class="hero">
     <div class="hero-inner container">
         <div>
@@ -1028,9 +393,7 @@ tr:hover td { background: #fafbfc; }
                 <a href="#fundadores" class="btn btn-secondary btn-lg">Fundadores</a>
             </div>
         </div>
-        <div class="hero-logo">
-            <img src="logo.png" alt="Logo O.J.V.">
-        </div>
+        <div class="hero-logo"><img src="logo.png" alt="Logo O.J.V."></div>
     </div>
 </section>
 
@@ -1041,73 +404,40 @@ tr:hover td { background: #fafbfc; }
             <p id="publicDescription">Conheça a nossa organização, a nossa missão e aquilo que orienta o nosso trabalho.</p>
         </div>
         <div class="info-grid">
-            <article class="info-card info-full">
-                <h3>História</h3>
-                <p id="publicHistoria">Informação da organização.</p>
-            </article>
-            <article class="info-card">
-                <h3>Missão</h3>
-                <p id="publicMissao"></p>
-            </article>
-            <article class="info-card">
-                <h3>Visão</h3>
-                <p id="publicVisao"></p>
-            </article>
-            <article class="info-card">
-                <h3>Valores</h3>
-                <p id="publicValores"></p>
-            </article>
-            <article class="info-card">
-                <h3>Descrição</h3>
-                <p id="publicDescricaoDetalhada"></p>
-            </article>
+            <article class="info-card info-full"><h3>História</h3><p id="publicHistoria">Informação da organização.</p></article>
+            <article class="info-card"><h3>Missão</h3><p id="publicMissao"></p></article>
+            <article class="info-card"><h3>Visão</h3><p id="publicVisao"></p></article>
+            <article class="info-card"><h3>Valores</h3><p id="publicValores"></p></article>
+            <article class="info-card"><h3>Descrição</h3><p id="publicDescricaoDetalhada"></p></article>
         </div>
     </div>
 </section>
 
 <section id="fundadores" class="section" style="background: var(--bg);">
     <div class="container">
-        <div class="section-heading">
-            <h2>Fundadores</h2>
-            <p>Pessoas que estiveram na origem e na construção da Organização Jovens Visionários.</p>
-        </div>
-        <div id="foundersGrid" class="founders-grid">
-            <div class="empty-state"><span class="icon">⏳</span><p>A carregar fundadores...</p></div>
-        </div>
+        <div class="section-heading"><h2>Fundadores</h2><p>Pessoas que estiveram na origem e na construção da Organização Jovens Visionários.</p></div>
+        <div id="foundersGrid" class="founders-grid"><div class="empty-state"><span class="icon">⏳</span><p>A carregar fundadores...</p></div></div>
     </div>
 </section>
 
 <section id="galeria" class="section">
     <div class="container">
-        <div class="section-heading">
-            <h2>Galeria</h2>
-            <p>Momentos, projetos, atividades e conteúdos da O.J.V.</p>
-        </div>
-        <div id="publicGallery" class="gallery-grid">
-            <div class="empty-state"><span class="icon">⏳</span><p>A carregar galeria...</p></div>
-        </div>
+        <div class="section-heading"><h2>Galeria</h2><p>Momentos, projetos, atividades e conteúdos da O.J.V.</p></div>
+        <div id="publicGallery" class="gallery-grid"><div class="empty-state"><span class="icon">⏳</span><p>A carregar galeria...</p></div></div>
     </div>
 </section>
 
 <section id="eventosPublicos" class="section" style="background: var(--bg);">
     <div class="container">
-        <div class="section-heading">
-            <h2>Eventos</h2>
-            <p>Acompanhe as atividades públicas da O.J.V.</p>
-        </div>
-        <div id="publicEvents" class="events-public">
-            <div class="empty-state"><span class="icon">⏳</span><p>A carregar eventos...</p></div>
-        </div>
+        <div class="section-heading"><h2>Eventos</h2><p>Acompanhe as atividades públicas da O.J.V.</p></div>
+        <div id="publicEvents" class="events-public"><div class="empty-state"><span class="icon">⏳</span><p>A carregar eventos...</p></div></div>
     </div>
 </section>
 
 <section id="contactos" class="section">
     <div class="container">
         <div class="contact-box">
-            <div>
-                <h2>Fale com a O.J.V.</h2>
-                <p id="contactDescription">Entre em contacto connosco através dos canais disponíveis.</p>
-            </div>
+            <div><h2>Fale com a O.J.V.</h2><p id="contactDescription">Entre em contacto connosco através dos canais disponíveis.</p></div>
             <div class="contact-list">
                 <div class="contact-item" id="contactAddress">Endereço não definido.</div>
                 <div class="contact-item" id="contactPhone">Telefone não definido.</div>
@@ -1117,7 +447,6 @@ tr:hover td { background: #fafbfc; }
         </div>
     </div>
 </section>
-
 </main>
 
 <footer class="public-footer">
@@ -1138,14 +467,8 @@ tr:hover td { background: #fafbfc; }
         <h2>Acesso interno</h2>
         <p>Área reservada aos utilizadores autorizados.</p>
         <form id="loginForm">
-            <div class="field">
-                <label>E-mail</label>
-                <input type="email" id="loginEmail" required autocomplete="email" placeholder="seu@email.com">
-            </div>
-            <div class="field">
-                <label>Palavra-passe</label>
-                <input type="password" id="loginPassword" required autocomplete="current-password" placeholder="••••••••">
-            </div>
+            <div class="field"><label>E-mail</label><input type="email" id="loginEmail" required autocomplete="email" placeholder="seu@email.com"></div>
+            <div class="field"><label>Palavra-passe</label><input type="password" id="loginPassword" required autocomplete="current-password" placeholder="••••••••"></div>
             <button type="submit" class="btn btn-primary w-full">Entrar</button>
         </form>
         <button class="btn btn-ghost w-full mt-8" onclick="fecharLogin()">Voltar</button>
@@ -1162,6 +485,8 @@ tr:hover td { background: #fafbfc; }
     <nav class="sidebar-nav">
         <button class="active" data-panel="dashboard" onclick="mostrarPainel('dashboard',this)"><span class="nav-icon">📊</span> Painel</button>
         <button data-panel="membros" onclick="mostrarPainel('membros',this)"><span class="nav-icon">👥</span> Membros</button>
+        <button data-panel="chat" onclick="mostrarPainel('chat',this)"><span class="nav-icon">💬</span> Chat <span id="chatUnread" class="badge badge-cancel" style="margin-left:auto;display:none;">0</span></button>
+        <button data-panel="video" onclick="mostrarPainel('video',this)"><span class="nav-icon">📹</span> Videochamada</button>
         <button data-panel="financas" onclick="mostrarPainel('financas',this)"><span class="nav-icon">💰</span> Finanças</button>
         <button data-panel="transacoes" onclick="mostrarPainel('transacoes',this)"><span class="nav-icon">📋</span> Transações</button>
         <button data-panel="eventos" onclick="mostrarPainel('eventos',this)"><span class="nav-icon">📅</span> Eventos</button>
@@ -1177,7 +502,6 @@ tr:hover td { background: #fafbfc; }
 </aside>
 
 <main class="main">
-
 <header class="topbar">
     <div style="display:flex;align-items:center;gap:10px;">
         <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
@@ -1186,6 +510,7 @@ tr:hover td { background: #fafbfc; }
     <div class="user-badge">
         <span class="avatar" id="userAvatar">U</span>
         <span id="currentUser">—</span>
+        <span class="role-badge" id="roleBadge" style="display:none;"></span>
     </div>
 </header>
 
@@ -1193,20 +518,19 @@ tr:hover td { background: #fafbfc; }
 
 <section id="panel-dashboard" class="panel active">
     <div class="page-head">
-        <div>
-            <h1>Painel</h1>
-            <p>Visão geral da organização.</p>
-        </div>
+        <div><h1>Painel</h1><p>Visão geral da organização.</p></div>
         <span style="font-size:13px;color:var(--muted);">Atualizado em tempo real</span>
     </div>
-
+    <div id="avisoDashboard" class="readonly-notice hidden">
+        <span>👁️</span>
+        <span>Estás em <strong>modo de visualização</strong>. Só podes ver os dados — apenas o Super Admin pode alterar.</span>
+    </div>
     <div class="stats-grid">
         <div class="stat-card"><span class="label">Total de membros</span><div class="value" id="statMembros">0</div></div>
         <div class="stat-card"><span class="label">Fundadores</span><div class="value" id="statFundadores">0</div></div>
         <div class="stat-card"><span class="label">Eventos públicos</span><div class="value" id="statEventos">0</div></div>
         <div class="stat-card"><span class="label">Conteúdos públicos</span><div class="value" id="statGaleria">0</div></div>
     </div>
-
     <div class="table-card">
         <div class="table-header"><h3>Últimos membros</h3></div>
         <div class="table-wrapper">
@@ -1220,33 +544,65 @@ tr:hover td { background: #fafbfc; }
 
 <section id="panel-membros" class="panel">
     <div class="page-head">
-        <div>
-            <h1>Membros</h1>
-            <p>Fundadores aparecem primeiro. Os restantes ficam somente na área interna.</p>
-        </div>
-        <button class="btn btn-primary admin-only" onclick="abrirMembroModal()">Novo membro</button>
+        <div><h1>Membros</h1><p>Fundadores aparecem primeiro. Os restantes ficam somente na área interna.</p></div>
+        <button class="btn btn-primary super-admin-only hidden" onclick="abrirMembroModal()">Novo membro</button>
     </div>
-
+    <div id="avisoMembros" class="readonly-notice hidden">
+        <span>👁️</span>
+        <span>Estás em <strong>modo de visualização</strong>. Não podes criar, editar ou apagar membros.</span>
+    </div>
     <div class="table-card">
         <div class="table-wrapper">
             <table>
-                <thead>
-                    <tr>
-                        <th>Fundador</th><th>Membro</th><th>Cargo</th><th>BI</th>
-                        <th>E-mail</th><th>Telefone</th><th>Entrada</th><th>Status</th>
-                        <th class="admin-only">Ações</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>Fundador</th><th>Membro</th><th>Cargo</th><th>BI</th><th>E-mail</th><th>Telefone</th><th>Entrada</th><th>Status</th><th class="super-admin-col hidden">Ações</th></tr></thead>
                 <tbody id="membersTable"></tbody>
             </table>
         </div>
     </div>
 </section>
 
-<section id="panel-financas" class="panel">
+<section id="panel-chat" class="panel">
     <div class="page-head">
-        <div><h1>Finanças</h1><p>Resumo financeiro interno.</p></div>
+        <div><h1>Chat interno</h1><p>Canal exclusivo dos administradores.</p></div>
+        <span class="chat-status"><span class="dot" id="chatDot"></span><span id="chatStatusText">A ligar…</span></span>
     </div>
+    <div class="chat-layout">
+        <div class="chat-window">
+            <div class="chat-header">
+                <h3>💬 # administradores</h3>
+                <span style="font-size:12px;color:var(--muted);" id="chatOnlineCount">0 online</span>
+            </div>
+            <div class="chat-messages" id="chatMessages"></div>
+            <form class="chat-input-row" id="chatForm">
+                <input id="chatInput" placeholder="Escreve uma mensagem..." autocomplete="off" maxlength="2000">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section id="panel-video" class="panel">
+    <div class="page-head"><div><h1>Videochamada</h1><p>Reuniões em vídeo entre administradores (via Jitsi Meet).</p></div></div>
+    <div class="table-card" style="padding:24px;">
+        <h3 style="margin-bottom:12px;">Iniciar ou entrar numa sala</h3>
+        <p class="text-muted" style="font-size:13px;margin-bottom:16px;">A videochamada usa o Jitsi Meet (gratuito). No telemóvel abre numa nova aba automaticamente.</p>
+        <div class="form-grid">
+            <div class="field"><label>Nome da sala</label><input id="videoRoomName" placeholder="ex: reuniao-direcao" value="ojv-admin"></div>
+            <div class="field"><label>Nome a apresentar</label><input id="videoDisplayName" placeholder="O teu nome"></div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
+            <button class="btn btn-primary" onclick="entrarVideochamada()">📹 Entrar na chamada</button>
+            <button class="btn btn-secondary" onclick="copiarLinkVideo()">🔗 Copiar link</button>
+        </div>
+    </div>
+    <div id="videoContainer" class="hidden" style="margin-top:20px;">
+        <iframe id="videoFrame" allow="camera; microphone; fullscreen; display-capture; autoplay" style="width:100%;height:70vh;min-height:500px;border:none;border-radius:var(--radius);background:#000;"></iframe>
+        <div class="video-controls"><button class="btn btn-danger" onclick="sairVideochamada()">📴 Sair</button></div>
+    </div>
+</section>
+
+<section id="panel-financas" class="panel">
+    <div class="page-head"><div><h1>Finanças</h1><p>Resumo financeiro interno.</p></div></div>
     <div class="stats-grid">
         <div class="stat-card"><span class="label">Total de entradas</span><div class="value green" id="financeEntradas">0,00</div></div>
         <div class="stat-card"><span class="label">Total de saídas</span><div class="value red" id="financeSaidas">0,00</div></div>
@@ -1258,14 +614,16 @@ tr:hover td { background: #fafbfc; }
 <section id="panel-transacoes" class="panel">
     <div class="page-head">
         <div><h1>Transações</h1><p>Registo financeiro interno.</p></div>
-        <button class="btn btn-primary admin-only" onclick="abrirTransacaoModal()">Nova transação</button>
+        <button class="btn btn-primary super-admin-only hidden" onclick="abrirTransacaoModal()">Nova transação</button>
+    </div>
+    <div id="avisoTransacoes" class="readonly-notice hidden">
+        <span>👁️</span>
+        <span>Estás em <strong>modo de visualização</strong>. Não podes criar ou apagar transações.</span>
     </div>
     <div class="table-card">
         <div class="table-wrapper">
             <table>
-                <thead>
-                    <tr><th>Data</th><th>Tipo</th><th>Categoria</th><th>Valor</th><th>Descrição</th><th class="admin-only">Ações</th></tr>
-                </thead>
+                <thead><tr><th>Data</th><th>Tipo</th><th>Categoria</th><th>Valor</th><th>Descrição</th><th class="super-admin-col hidden">Ações</th></tr></thead>
                 <tbody id="transactionsTable"></tbody>
             </table>
         </div>
@@ -1274,15 +632,17 @@ tr:hover td { background: #fafbfc; }
 
 <section id="panel-eventos" class="panel">
     <div class="page-head">
-        <div><h1>Eventos</h1><p>Gere os eventos e escolha quais ficam visíveis publicamente.</p></div>
-        <button class="btn btn-primary admin-only" onclick="abrirEventoModal()">Novo evento</button>
+        <div><h1>Eventos</h1><p>Gere os eventos e partilha-os nas redes sociais.</p></div>
+        <button class="btn btn-primary super-admin-only hidden" onclick="abrirEventoModal()">Novo evento</button>
+    </div>
+    <div id="avisoEventos" class="readonly-notice hidden">
+        <span>👁️</span>
+        <span>Estás em <strong>modo de visualização</strong>. Não podes criar, editar ou apagar eventos.</span>
     </div>
     <div class="table-card">
         <div class="table-wrapper">
             <table>
-                <thead>
-                    <tr><th>Data</th><th>Evento</th><th>Local</th><th>Status</th><th>Publicado</th><th class="admin-only">Ações</th></tr>
-                </thead>
+                <thead><tr><th>Data</th><th>Evento</th><th>Local</th><th>Status</th><th>Publicado</th><th class="super-admin-col hidden">Ações</th></tr></thead>
                 <tbody id="eventsTable"></tbody>
             </table>
         </div>
@@ -1290,25 +650,17 @@ tr:hover td { background: #fafbfc; }
 </section>
 
 <section id="panel-galeriaAdmin" class="panel">
-    <div class="page-head">
-        <div><h1>Galeria</h1><p>Adiciona fotos ou vídeos. Eles não precisam estar associados a um evento.</p></div>
+    <div class="page-head"><div><h1>Galeria</h1><p>Adiciona fotos ou vídeos.</p></div></div>
+    <div id="avisoGaleria" class="readonly-notice hidden">
+        <span>👁️</span>
+        <span>Estás em <strong>modo de visualização</strong>. Não podes adicionar ou apagar conteúdos.</span>
     </div>
-
-    <div class="table-card" style="padding:24px;margin-bottom:24px;">
+    <div class="table-card super-admin-only hidden" style="padding:24px;margin-bottom:24px;">
         <h3 style="margin-bottom:12px;">Adicionar conteúdo</h3>
         <form id="galleryForm">
             <div class="form-grid">
-                <div class="field">
-                    <label>Título *</label>
-                    <input id="galleryTitle" required placeholder="Título do conteúdo">
-                </div>
-                <div class="field">
-                    <label>Tipo</label>
-                    <select id="galleryType" onchange="toggleThumbnailField()">
-                        <option value="foto">Foto</option>
-                        <option value="video">Vídeo</option>
-                    </select>
-                </div>
+                <div class="field"><label>Título *</label><input id="galleryTitle" required placeholder="Título do conteúdo"></div>
+                <div class="field"><label>Tipo</label><select id="galleryType" onchange="toggleThumbnailField()"><option value="foto">Foto</option><option value="video">Vídeo</option></select></div>
             </div>
             <div class="field" id="thumbnailField" style="display:none;">
                 <label>Imagem de capa (thumbnail) - para vídeos</label>
@@ -1316,21 +668,11 @@ tr:hover td { background: #fafbfc; }
                     <input type="file" id="galleryThumbnail" accept="image/*">
                     <img id="thumbnailPreview" style="width:120px;height:68px;object-fit:cover;border-radius:6px;border:1px solid var(--border);display:none;" alt="Preview">
                 </div>
-                <small style="color:var(--muted);font-size:11px;">Recomendado: imagem 16:9, mínimo 640x360px</small>
             </div>
-            <div class="field">
-                <label>Descrição</label>
-                <textarea id="galleryDescription" placeholder="Descrição opcional..."></textarea>
-            </div>
+            <div class="field"><label>Descrição</label><textarea id="galleryDescription" placeholder="Descrição opcional..."></textarea></div>
             <div class="form-grid">
-                <div class="field">
-                    <label>Ficheiro</label>
-                    <input type="file" id="galleryFile" accept="image/*,video/*">
-                </div>
-                <div class="field">
-                    <label>Ou URL externa</label>
-                    <input id="galleryUrl" type="url" placeholder="https://...">
-                </div>
+                <div class="field"><label>Ficheiro</label><input type="file" id="galleryFile" accept="image/*,video/*"></div>
+                <div class="field"><label>Ou URL externa</label><input id="galleryUrl" type="url" placeholder="https://..."></div>
             </div>
             <div style="display:flex;gap:16px;flex-wrap:wrap;margin:12px 0;">
                 <label class="check"><input type="checkbox" id="galleryPublished" checked> Publicar imediatamente</label>
@@ -1339,17 +681,16 @@ tr:hover td { background: #fafbfc; }
             <button class="btn btn-primary" type="submit">Adicionar à galeria</button>
         </form>
     </div>
-
-    <div id="adminGalleryGrid" class="media-admin-grid">
-        <div class="empty-state"><span class="icon">🖼️</span><p>Nenhum conteúdo na galeria.</p></div>
-    </div>
+    <div id="adminGalleryGrid" class="media-admin-grid"><div class="empty-state"><span class="icon">🖼️</span><p>Nenhum conteúdo na galeria.</p></div></div>
 </section>
 
 <section id="panel-informacoes" class="panel">
-    <div class="page-head">
-        <div><h1>Informações públicas</h1><p>Tudo o que for colocado aqui aparecerá na página pública.</p></div>
+    <div class="page-head"><div><h1>Informações públicas</h1><p>Tudo o que for colocado aqui aparecerá na página pública.</p></div></div>
+    <div id="avisoInformacoes" class="readonly-notice hidden">
+        <span>👁️</span>
+        <span>Estás em <strong>modo de visualização</strong>. Apenas o Super Admin pode editar as informações.</span>
     </div>
-    <div class="table-card" style="padding:24px;">
+    <div class="table-card super-admin-only hidden" style="padding:24px;">
         <form id="publicInfoForm">
             <div class="form-grid">
                 <div class="field"><label>Nome da organização</label><input id="infoNome" placeholder="O.J.V."></div>
@@ -1377,8 +718,10 @@ tr:hover td { background: #fafbfc; }
 </section>
 
 <section id="panel-meta" class="panel">
-    <div class="page-head">
-        <div><h1>Meta financeira</h1><p>Define a meta e acompanha o valor guardado.</p></div>
+    <div class="page-head"><div><h1>Meta financeira</h1><p>Define a meta e acompanha o valor guardado.</p></div></div>
+    <div id="avisoMeta" class="readonly-notice hidden">
+        <span>👁️</span>
+        <span>Estás em <strong>modo de visualização</strong>. Apenas o Super Admin pode alterar a meta.</span>
     </div>
     <div class="backup-box">
         <div class="form-grid">
@@ -1390,27 +733,27 @@ tr:hover td { background: #fafbfc; }
             <p id="metaPercentual" style="font-size:14px;color:var(--muted);">0% — 0,00 / 0,00</p>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <button class="btn btn-primary admin-only" onclick="guardarMeta()">Guardar meta</button>
-            <button class="btn btn-danger admin-only" onclick="redefinirMeta()">Redefinir meta</button>
+            <button class="btn btn-primary super-admin-only hidden" onclick="guardarMeta()">Guardar meta</button>
+            <button class="btn btn-danger super-admin-only hidden" onclick="redefinirMeta()">Redefinir meta</button>
         </div>
     </div>
 </section>
 
 <section id="panel-backup" class="panel">
-    <div class="page-head">
-        <div><h1>Backup</h1><p>Guarda uma cópia JSON dos dados da organização.</p></div>
+    <div class="page-head"><div><h1>Backup</h1><p>Guarda uma cópia JSON dos dados da organização.</p></div></div>
+    <div id="avisoBackup" class="readonly-notice hidden">
+        <span>👁️</span>
+        <span>Estás em <strong>modo de visualização</strong>. Apenas o Super Admin pode fazer backup/restauro.</span>
     </div>
-    <div class="backup-box">
+    <div class="backup-box super-admin-only hidden">
         <h3>Exportar backup</h3>
-        <p class="help">O backup inclui membros, eventos, galeria, informações públicas, transações e metas.</p>
-        <button class="btn btn-primary admin-only" onclick="exportarBackup()">Baixar backup JSON</button>
-
+        <p class="help">Inclui membros, eventos, galeria, informações públicas, transações e metas.</p>
+        <button class="btn btn-primary" onclick="exportarBackup()">Baixar backup JSON</button>
         <hr>
-
         <h3>Restaurar backup</h3>
-        <p class="help">Escolhe um ficheiro JSON criado pelo sistema. A restauração substitui os dados atuais dessas tabelas.</p>
+        <p class="help">Escolhe um ficheiro JSON criado pelo sistema.</p>
         <input type="file" id="backupFile" accept=".json,application/json" style="margin:10px 0 14px;display:block;">
-        <button class="btn btn-danger admin-only" onclick="restaurarBackup()">Restaurar backup</button>
+        <button class="btn btn-danger" onclick="restaurarBackup()">Restaurar backup</button>
     </div>
 </section>
 
@@ -1433,9 +776,7 @@ tr:hover td { background: #fafbfc; }
                 <div class="field"><label>Aniversário</label><input id="memberAniversario" class="campo-data-mascara" placeholder="DD/MM/AAAA" maxlength="10"></div>
                 <div class="field"><label>Data de adesão</label><input id="memberAdesao" class="campo-data-mascara" placeholder="DD/MM/AAAA" maxlength="10"></div>
                 <div class="field"><label>Data de entrada</label><input id="memberEntrada" class="campo-data-mascara" placeholder="DD/MM/AAAA" maxlength="10"></div>
-                <div class="field"><label>Status</label>
-                    <select id="memberStatus"><option value="Ativo">Ativo</option><option value="Inativo">Inativo</option><option value="Suspenso">Suspenso</option></select>
-                </div>
+                <div class="field"><label>Status</label><select id="memberStatus"><option value="Ativo">Ativo</option><option value="Inativo">Inativo</option><option value="Suspenso">Suspenso</option></select></div>
             </div>
             <label class="check"><input type="checkbox" id="memberFundador"> Este membro é fundador</label>
             <div class="field">
@@ -1443,10 +784,7 @@ tr:hover td { background: #fafbfc; }
                 <img id="memberPreview" class="preview-profile" src="logo.png" alt="Pré-visualização">
                 <input type="file" id="memberPhoto" accept="image/png,image/jpeg,image/webp">
             </div>
-            <div class="field">
-                <label>Bio pública do fundador</label>
-                <textarea id="memberBio" placeholder="Opcional. Esta informação só será usada se o membro for fundador."></textarea>
-            </div>
+            <div class="field"><label>Bio pública do fundador</label><textarea id="memberBio" placeholder="Opcional. Usada apenas se for fundador."></textarea></div>
             <div class="modal-actions">
                 <button type="button" class="btn btn-ghost" onclick="fecharMembroModal()">Cancelar</button>
                 <button type="submit" class="btn btn-primary">Guardar membro</button>
@@ -1468,9 +806,7 @@ tr:hover td { background: #fafbfc; }
                 <div class="field"><label>Local</label><input id="eventLocal" placeholder="Local do evento"></div>
                 <div class="field"><label>Responsável</label><input id="eventResponsavel" placeholder="Nome do responsável"></div>
                 <div class="field"><label>Participantes</label><input id="eventParticipantes" type="number" min="0" value="0"></div>
-                <div class="field"><label>Status</label>
-                    <select id="eventStatus"><option value="Agendado">Agendado</option><option value="Realizado">Realizado</option><option value="Cancelado">Cancelado</option></select>
-                </div>
+                <div class="field"><label>Status</label><select id="eventStatus"><option value="Agendado">Agendado</option><option value="Realizado">Realizado</option><option value="Cancelado">Cancelado</option></select></div>
             </div>
             <div class="field"><label>Descrição</label><textarea id="eventDescricao" placeholder="Descrição do evento..."></textarea></div>
             <label class="check"><input type="checkbox" id="eventPublicado"> Publicar este evento na área pública</label>
@@ -1488,9 +824,7 @@ tr:hover td { background: #fafbfc; }
         <p class="modal-sub">Registe uma entrada ou saída financeira.</p>
         <form id="transactionForm">
             <div class="form-grid">
-                <div class="field"><label>Tipo</label>
-                    <select id="transactionTipo"><option value="Entrada">Entrada</option><option value="Saída">Saída</option></select>
-                </div>
+                <div class="field"><label>Tipo</label><select id="transactionTipo"><option value="Entrada">Entrada</option><option value="Saída">Saída</option></select></div>
                 <div class="field"><label>Categoria</label><input id="transactionCategoria" placeholder="Ex: Eventos, Material"></div>
                 <div class="field"><label>Valor *</label><input id="transactionValor" type="number" min="0" step="0.01" required placeholder="0.00"></div>
                 <div class="field"><label>Data *</label><input id="transactionData" class="campo-data-mascara" required placeholder="DD/MM/AAAA" maxlength="10"></div>
@@ -1511,6 +845,7 @@ const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 let utilizadorAtual = null;
 let isAdmin = false;
+let isSuperAdmin = false;
 let membros = [];
 let fundadores = [];
 let eventos = [];
@@ -1521,138 +856,126 @@ let infoPublica = null;
 let editMemberId = null;
 let editEventId = null;
 
-// =========================================================
-// FUNÇÕES DE DATA - FORMATO DD/MM/AAAA
-// =========================================================
+let chatChannel = null;
+let chatOnlineUsers = new Set();
+let chatUnreadCount = 0;
+let chatWindowActive = false;
+let chatIniciado = false;
+let minhaFotoCache = null;
 
+// ========== HELPERS ==========
+function escapeHtml(v) {
+    if (v == null) return "";
+    return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+}
+function formatMoney(v) { return Number(v || 0).toLocaleString("pt-PT", {minimumFractionDigits:2, maximumFractionDigits:2}); }
+function formatTime(v) { if (!v) return ""; return String(v).slice(0,5); }
+function safeUrl(v) {
+    if (!v) return "";
+    try { const u = new URL(v); if (u.protocol === "http:" || u.protocol === "https:") return u.href; } catch(e) {}
+    return "";
+}
+function gerarNomeArquivo(nome) {
+    const base = String(nome || "ficheiro").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9._-]/g,"-").toLowerCase();
+    return Date.now() + "-" + Math.random().toString(36).slice(2,8) + "-" + base;
+}
+function publicStorageUrl(bucket, path) {
+    const {data} = db.storage.from(bucket).getPublicUrl(path);
+    return data.publicUrl;
+}
+function mostrarToast(msg, type) {
+    const el = document.getElementById("toast");
+    el.textContent = msg;
+    el.className = "show " + (type || "");
+    clearTimeout(window.toastTimer);
+    window.toastTimer = setTimeout(function() { el.className = ""; }, 3500);
+}
 function formatarDataBr(dataStr) {
     if (!dataStr) return '—';
     const partes = String(dataStr).slice(0,10).split('-');
     if (partes.length < 3) return dataStr;
-    return `${partes[2]}/${partes[1]}/${partes[0]}`;
+    return partes[2] + '/' + partes[1] + '/' + partes[0];
 }
-
 function dataBrParaInput(dataStr) {
     if (!dataStr) return '';
     if (/^\d{4}-\d{2}-\d{2}$/.test(dataStr)) return dataStr;
     const partes = dataStr.split('/');
     if (partes.length === 3) {
-        return `${partes[2]}-${partes[1].padStart(2,'0')}-${partes[0].padStart(2,'0')}`;
+        return partes[2] + '-' + partes[1].padStart(2,'0') + '-' + partes[0].padStart(2,'0');
     }
     return dataStr;
 }
-
 function aplicarMascaraData(input) {
     let valor = input.value.replace(/\D/g, '');
     if (valor.length > 8) valor = valor.slice(0, 8);
-    
     let formato = '';
     for (let i = 0; i < valor.length; i++) {
-        if (i === 2 || i === 4) {
-            formato += '/';
-        }
+        if (i === 2 || i === 4) formato += '/';
         formato += valor[i];
     }
     input.value = formato;
 }
-
 function inicializarMascarasData() {
-    document.querySelectorAll('.campo-data-mascara').forEach(input => {
-        input.addEventListener('input', function() {
-            aplicarMascaraData(this);
-        });
-        input.addEventListener('focus', function() {
-            this.placeholder = 'DD/MM/AAAA';
-        });
-        input.addEventListener('blur', function() {
-            if (!this.value) this.placeholder = 'DD/MM/AAAA';
-        });
+    document.querySelectorAll('.campo-data-mascara').forEach(function(input) {
+        input.addEventListener('input', function() { aplicarMascaraData(this); });
+        input.addEventListener('blur', function() { if (!this.value) this.placeholder = 'DD/MM/AAAA'; });
     });
 }
 
-// =========================================================
-// FUNÇÕES GERAIS
-// =========================================================
-
-function hojeLocalISO() {
-    const d = new Date();
-    return [d.getFullYear(), String(d.getMonth()+1).padStart(2,"0"), String(d.getDate()).padStart(2,"0")].join("-");
+// ========== PERMISSÕES UI ==========
+function aplicarPermissoesUI() {
+    document.querySelectorAll(".super-admin-only").forEach(function(el) {
+        el.classList.toggle("hidden", !isSuperAdmin);
+    });
+    document.querySelectorAll(".super-admin-col").forEach(function(el) {
+        el.classList.toggle("hidden", !isSuperAdmin);
+    });
+    const avisos = ["avisoDashboard", "avisoMembros", "avisoTransacoes", "avisoEventos",
+                    "avisoGaleria", "avisoInformacoes", "avisoMeta", "avisoBackup"];
+    avisos.forEach(function(id) {
+        const el = document.getElementById(id);
+        if (el) el.classList.toggle("hidden", !(isAdmin && !isSuperAdmin));
+    });
+    const badge = document.getElementById("roleBadge");
+    if (badge) {
+        if (isSuperAdmin) {
+            badge.textContent = "Super Admin";
+            badge.style.background = "#d4edda";
+            badge.style.color = "#155724";
+            badge.style.display = "inline-flex";
+        } else if (isAdmin) {
+            badge.textContent = "Visualizador";
+            badge.style.background = "#cfe2ff";
+            badge.style.color = "#084298";
+            badge.style.display = "inline-flex";
+        } else {
+            badge.style.display = "none";
+        }
+    }
 }
 
-function escapeHtml(v) {
-    if (v == null) return "";
-    return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
-}
-
-function formatMoney(v) {
-    return Number(v || 0).toLocaleString("pt-PT", {minimumFractionDigits:2, maximumFractionDigits:2});
-}
-
-function formatTime(v) {
-    if (!v) return "";
-    return String(v).slice(0,5);
-}
-
-function safeUrl(v) {
-    if (!v) return "";
-    try {
-        const u = new URL(v);
-        if (u.protocol === "http:" || u.protocol === "https:") return u.href;
-    } catch(e) {}
-    return "";
-}
-
-function gerarNomeArquivo(nome) {
-    const base = String(nome || "ficheiro").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9._-]/g,"-").toLowerCase();
-    return `${Date.now()}-${Math.random().toString(36).slice(2,8)}-${base}`;
-}
-
-function publicStorageUrl(bucket, path) {
-    const {data} = db.storage.from(bucket).getPublicUrl(path);
-    return data.publicUrl;
-}
-
-function mostrarToast(msg, type = "") {
-    const el = document.getElementById("toast");
-    el.textContent = msg;
-    el.className = "show " + type;
-    clearTimeout(window.toastTimer);
-    window.toastTimer = setTimeout(() => { el.className = ""; }, 3500);
-}
-
-// =========================================================
-// LOGIN
-// =========================================================
-
+// ========== LOGIN ==========
 function abrirLogin() {
     document.getElementById("loginOverlay").classList.remove("hidden");
-    setTimeout(() => document.getElementById("loginEmail").focus(), 100);
+    setTimeout(function() { document.getElementById("loginEmail").focus(); }, 100);
 }
+function fecharLogin() { document.getElementById("loginOverlay").classList.add("hidden"); }
 
-function fecharLogin() {
-    document.getElementById("loginOverlay").classList.add("hidden");
-}
-
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
+document.getElementById("loginForm").addEventListener("submit", async function(e) {
     e.preventDefault();
     const email = document.getElementById("loginEmail").value.trim();
     const password = document.getElementById("loginPassword").value;
-    const {error} = await db.auth.signInWithPassword({email, password});
-    if (error) {
-        mostrarToast("Erro: " + error.message, "error");
-        return;
-    }
+    const r = await db.auth.signInWithPassword({email: email, password: password});
+    if (r.error) { mostrarToast("Erro: " + r.error.message, "error"); return; }
     fecharLogin();
-    await verificarSessao();
 });
 
 async function verificarSessao() {
-    const {data: {session}} = await db.auth.getSession();
+    const s = await db.auth.getSession();
+    const session = s.data.session;
     if (!session) {
-        utilizadorAtual = null;
-        isAdmin = false;
-        mostrarPublico();
-        return;
+        utilizadorAtual = null; isAdmin = false; isSuperAdmin = false;
+        mostrarPublico(); return;
     }
     utilizadorAtual = session.user;
     await verificarAdmin();
@@ -1662,17 +985,24 @@ async function verificarSessao() {
 
 async function verificarAdmin() {
     isAdmin = false;
+    isSuperAdmin = false;
     if (!utilizadorAtual) return;
-    const {data, error} = await db.from("user_roles").select("role").eq("user_id", utilizadorAtual.id).maybeSingle();
-    if (error) { console.error(error); return; }
-    isAdmin = data?.role === "admin";
-    document.querySelectorAll(".admin-only").forEach(el => el.classList.toggle("hidden", !isAdmin));
+    const r = await db.from("user_roles").select("role, tipo").eq("user_id", utilizadorAtual.id).maybeSingle();
+    if (r.error) { console.error(r.error); return; }
+    isAdmin = r.data && r.data.role === "admin";
+    isSuperAdmin = isAdmin && r.data.tipo === "super_admin";
+}
+
+function actualizarVisibilidadeAdmin() {
+    document.querySelectorAll(".admin-only").forEach(function(el) {
+        el.classList.toggle("hidden", !isAdmin);
+    });
 }
 
 async function logout() {
+    pararChat();
     await db.auth.signOut();
-    utilizadorAtual = null;
-    isAdmin = false;
+    utilizadorAtual = null; isAdmin = false; isSuperAdmin = false;
     mostrarPublico();
     mostrarToast("Sessão terminada.", "success");
 }
@@ -1686,123 +1016,331 @@ function mostrarPublico() {
 function mostrarAreaInterna() {
     document.getElementById("publicArea").style.display = "none";
     document.getElementById("internalApp").classList.add("active");
-    const email = utilizadorAtual?.email || "";
+    const email = (utilizadorAtual && utilizadorAtual.email) || "";
     document.getElementById("currentUser").textContent = email;
     const avatar = document.getElementById("userAvatar");
     avatar.textContent = email.charAt(0).toUpperCase() || "U";
-    document.querySelectorAll(".admin-only").forEach(el => el.classList.toggle("hidden", !isAdmin));
+    actualizarVisibilidadeAdmin();
+    aplicarPermissoesUI();
+    if (isAdmin && !chatIniciado) {
+        chatIniciado = true;
+        setTimeout(function() { iniciarChat(); }, 500);
+    }
 }
 
 function voltarAoPublico() { mostrarPublico(); carregarPublico(); }
-
-function toggleSidebar() {
-    document.getElementById("sidebar").classList.toggle("open");
-}
-
+function toggleSidebar() { document.getElementById("sidebar").classList.toggle("open"); }
 function toggleMobileNav() {
     const links = document.querySelector(".nav-links");
     if (links) links.style.display = links.style.display === "flex" ? "none" : "flex";
 }
 
 function mostrarPainel(name, btn) {
-    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(function(p) { p.classList.remove("active"); });
     const panel = document.getElementById("panel-" + name);
     if (panel) panel.classList.add("active");
-    document.querySelectorAll(".sidebar-nav button").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".sidebar-nav button").forEach(function(b) { b.classList.remove("active"); });
     if (btn) btn.classList.add("active");
     const titles = {
-        dashboard: "Painel",
-        membros: "Membros",
-        financas: "Finanças",
-        transacoes: "Transações",
-        eventos: "Eventos",
-        galeriaAdmin: "Galeria",
-        informacoes: "Informações",
-        meta: "Meta",
-        backup: "Backup"
+        dashboard: "Painel", membros: "Membros", chat: "Chat", video: "Videochamada",
+        financas: "Finanças", transacoes: "Transações", eventos: "Eventos",
+        galeriaAdmin: "Galeria", informacoes: "Informações", meta: "Meta", backup: "Backup"
     };
     document.getElementById("pageTitle").textContent = titles[name] || name;
     document.getElementById("sidebar").classList.remove("open");
+    if (name === "chat") {
+        chatWindowActive = true; chatUnreadCount = 0; actualizarBadgeChat();
+        const box = document.getElementById("chatMessages");
+        if (box) box.scrollTop = box.scrollHeight;
+    } else { chatWindowActive = false; }
 }
 
-// =========================================================
-// CARREGAMENTO DE DADOS
-// =========================================================
-
-async function carregarTudo() {
-    await Promise.all([
-        carregarMembros(),
-        carregarEventos(),
-        carregarGaleria(),
-        carregarTransacoes(),
-        carregarMetas(),
-        carregarInfoPublica()
-    ]);
-    renderizarTudo();
+// ========== CHAT ==========
+async function obterFotoDoUtilizador(email) {
+    if (!email) return null;
+    if (email === (utilizadorAtual && utilizadorAtual.email) && minhaFotoCache !== null) {
+        return minhaFotoCache;
+    }
+    try {
+        const r = await db.from("membros").select("foto_perfil").eq("email", email).maybeSingle();
+        const foto = (r.data && r.data.foto_perfil) ? r.data.foto_perfil : null;
+        if (email === (utilizadorAtual && utilizadorAtual.email)) minhaFotoCache = foto;
+        return foto;
+    } catch (e) { return null; }
 }
 
-// =========================================================
-// MEMBROS
-// =========================================================
+async function iniciarChat() {
+    if (!isAdmin || chatChannel) return;
+    await carregarHistoricoChat();
+    chatChannel = db.channel("chat-admins", { config: { presence: { key: utilizadorAtual.id } } });
+    chatChannel.on("postgres_changes", { event: "INSERT", schema: "public", table: "chat_mensagens" }, function(payload) {
+        adicionarMensagemChat(payload.new, true);
+        if (!chatWindowActive) { chatUnreadCount++; actualizarBadgeChat(); }
+    });
+    chatChannel.on("postgres_changes", { event: "DELETE", schema: "public", table: "chat_mensagens" }, function(payload) {
+        const el = document.querySelector('[data-msg-id="' + payload.old.id + '"]');
+        if (el) el.remove();
+    });
+    chatChannel.on("presence", { event: "sync" }, function() {
+        const state = chatChannel.presenceState();
+        chatOnlineUsers = new Set(Object.keys(state));
+        const el = document.getElementById("chatOnlineCount");
+        if (el) el.textContent = chatOnlineUsers.size + " online";
+    });
+    chatChannel.subscribe(async function(status) {
+        const dot = document.getElementById("chatDot");
+        const txt = document.getElementById("chatStatusText");
+        if (status === "SUBSCRIBED") {
+            const fotoUrl = await obterFotoDoUtilizador(utilizadorAtual.email);
+            await chatChannel.track({
+                email: utilizadorAtual.email,
+                foto_url: fotoUrl,
+                online_at: new Date().toISOString()
+            });
+            dot.classList.remove("offline");
+            txt.textContent = "Ligado";
+        } else {
+            dot.classList.add("offline");
+            txt.textContent = "A ligar…";
+        }
+    });
+}
 
+async function carregarHistoricoChat() {
+    const r = await db.from("chat_mensagens").select("*").order("created_at", { ascending: true }).limit(200);
+    if (r.error) { console.error(r.error); return; }
+    const box = document.getElementById("chatMessages");
+    if (!box) return;
+    box.innerHTML = "";
+    (r.data || []).forEach(function(m) { adicionarMensagemChat(m, false); });
+    box.scrollTop = box.scrollHeight;
+}
+
+function adicionarMensagemChat(msg, scroll) {
+    const box = document.getElementById("chatMessages");
+    if (!box) return;
+    const isMe = msg.sender_id === (utilizadorAtual && utilizadorAtual.id);
+
+    const row = document.createElement("div");
+    row.className = "chat-msg-row " + (isMe ? "me" : "other");
+    row.setAttribute("data-msg-id", msg.id);
+
+    const foto = safeUrl(msg.foto_url);
+    const inicial = (msg.sender_email || "?").charAt(0).toUpperCase();
+
+    const avatar = document.createElement("div");
+    avatar.className = "chat-avatar";
+    if (foto) {
+        const img = document.createElement("img");
+        img.src = foto;
+        img.alt = "";
+        img.onerror = function() { img.remove(); avatar.textContent = inicial; };
+        avatar.appendChild(img);
+    } else {
+        avatar.textContent = inicial;
+    }
+
+    const hora = new Date(msg.created_at).toLocaleTimeString("pt-PT", { hour: "2-digit", minute: "2-digit" });
+    const msgDiv = document.createElement("div");
+    msgDiv.className = "chat-msg";
+
+    let html = "";
+    if (!isMe) html += '<span class="sender">' + escapeHtml(msg.sender_email || "Admin") + '</span>';
+    html += '<div class="msg-text">' + escapeHtml(msg.content) + '</div>';
+    html += '<span class="time">' + hora + '</span>';
+    if (isSuperAdmin) {
+        html += '<button class="btn-delete-msg" title="Apagar mensagem" onclick="apagarMensagemChat(\'' + msg.id + '\')">×</button>';
+    }
+    msgDiv.innerHTML = html;
+    row.appendChild(avatar);
+    row.appendChild(msgDiv);
+    box.appendChild(row);
+    if (scroll) box.scrollTop = box.scrollHeight;
+}
+
+async function apagarMensagemChat(id) {
+    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
+    if (!confirm("Apagar esta mensagem?")) return;
+    const r = await db.from("chat_mensagens").delete().eq("id", id);
+    if (r.error) {
+        console.error(r.error);
+        mostrarToast("Erro ao apagar: " + r.error.message, "error");
+        return;
+    }
+    const el = document.querySelector('[data-msg-id="' + id + '"]');
+    if (el) el.remove();
+    mostrarToast("Mensagem apagada.", "success");
+}
+
+document.getElementById("chatForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
+    const input = document.getElementById("chatInput");
+    const content = input.value.trim();
+    if (!content || !isAdmin) return;
+    input.value = "";
+    const foto = await obterFotoDoUtilizador(utilizadorAtual.email);
+    const r = await db.from("chat_mensagens").insert({
+        sender_id: utilizadorAtual.id,
+        sender_email: utilizadorAtual.email,
+        content: content,
+        foto_url: foto || null
+    });
+    if (r.error) {
+        console.error(r.error);
+        mostrarToast("Erro ao enviar mensagem.", "error");
+        input.value = content;
+    }
+});
+
+function actualizarBadgeChat() {
+    const badge = document.getElementById("chatUnread");
+    if (!badge) return;
+    if (chatUnreadCount > 0) {
+        badge.textContent = chatUnreadCount > 99 ? "99+" : chatUnreadCount;
+        badge.style.display = "inline-flex";
+    } else { badge.style.display = "none"; }
+}
+
+function pararChat() {
+    if (chatChannel) { db.removeChannel(chatChannel); chatChannel = null; }
+    chatIniciado = false;
+}
+
+// ========== VIDEO ==========
+function entrarVideochamada() {
+    if (!isAdmin) { mostrarToast("Apenas admins.", "error"); return; }
+    const sala = (document.getElementById("videoRoomName").value || "ojv-admin")
+        .trim().toLowerCase().replace(/[^a-z0-9-]/g, "-");
+    const nome = (document.getElementById("videoDisplayName").value || utilizadorAtual.email).trim();
+    if (!sala) { mostrarToast("Indica o nome da sala.", "error"); return; }
+    const baseUrl = "https://meet.jit.si/OJV-" + sala;
+    const hash = "#userInfo.displayName=" + encodeURIComponent(nome) + "&config.prejoinPageEnabled=false";
+    const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+    if (isMobile) {
+        const nova = window.open(baseUrl + hash, "_blank", "noopener,noreferrer");
+        if (!nova) { mostrarToast("Autoriza pop-ups para abrir a videochamada.", "warning"); return; }
+        mostrarToast("A abrir videochamada numa nova aba...", "success");
+    } else {
+        document.getElementById("videoFrame").src = baseUrl + hash;
+        document.getElementById("videoContainer").classList.remove("hidden");
+        document.getElementById("videoContainer").scrollIntoView({ behavior: "smooth" });
+        mostrarToast("A entrar na videochamada...", "success");
+    }
+}
+function sairVideochamada() {
+    document.getElementById("videoFrame").src = "";
+    document.getElementById("videoContainer").classList.add("hidden");
+}
+function copiarLinkVideo() {
+    const sala = (document.getElementById("videoRoomName").value || "ojv-admin")
+        .trim().toLowerCase().replace(/[^a-z0-9-]/g, "-");
+    const url = "https://meet.jit.si/OJV-" + sala;
+    navigator.clipboard.writeText(url).then(
+        function() { mostrarToast("Link copiado: " + url, "success"); },
+        function() { mostrarToast("Link: " + url, "warning"); }
+    );
+}
+
+// ========== PARTILHA (Facebook, WhatsApp) ==========
+function construirTextoEvento(e, formato) {
+    const dataFmt = formatarDataBr(e.data);
+    const linha1 = (formato === "whatsapp" ? "📅 *" + e.nome + "*" : "📅 " + e.nome);
+    const linhaData = "📆 " + dataFmt + (e.hora ? " às " + formatTime(e.hora) : "");
+    const linhaLocal = "📍 " + (e.local || "Local a confirmar");
+    const link = window.location.origin + window.location.pathname + "#eventosPublicos";
+    const rodape = (formato === "whatsapp" ? "— Organização Jovens Visionários" : "— Organização Jovens Visionários");
+
+    let texto = linha1 + "\n\n" + linhaData + "\n" + linhaLocal + "\n\n";
+    if (e.descricao) texto += e.descricao + "\n\n";
+    texto += "🔗 Mais informações: " + link + "\n\n" + rodape;
+    return texto;
+}
+
+function partilharNoFacebook(id) {
+    const e = eventos.find(function(x) { return x.id === id; });
+    if (!e) { mostrarToast("Evento não encontrado.", "error"); return; }
+
+    const texto = construirTextoEvento(e, "facebook");
+
+    navigator.clipboard.writeText(texto).then(function() {
+        mostrarToast("✅ Texto copiado! Cola no Facebook.", "success");
+    }).catch(function() {
+        prompt("Copia o texto abaixo e cola no Facebook:", texto);
+    });
+
+    setTimeout(function() {
+        window.open("https://www.facebook.com/", "_blank", "noopener,noreferrer");
+    }, 700);
+}
+
+function partilharNoWhatsApp(id) {
+    const e = eventos.find(function(x) { return x.id === id; });
+    if (!e) { mostrarToast("Evento não encontrado.", "error"); return; }
+
+    const texto = construirTextoEvento(e, "whatsapp");
+    const url = "https://wa.me/?text=" + encodeURIComponent(texto);
+    window.open(url, "_blank", "noopener,noreferrer");
+    mostrarToast("A abrir WhatsApp...", "success");
+}
+
+// ========== MEMBROS ==========
 async function carregarMembros() {
-    const {data, error} = await db.from("membros").select("*").order("fundador", {ascending: false}).order("nome", {ascending: true});
-    if (error) { console.error(error); mostrarToast("Erro ao carregar membros.", "error"); return; }
-    membros = data || [];
+    const r = await db.from("membros").select("*").order("fundador", {ascending: false}).order("nome", {ascending: true});
+    if (r.error) { console.error(r.error); mostrarToast("Erro ao carregar membros.", "error"); return; }
+    membros = r.data || [];
 }
-
 async function carregarFundadoresPublicos() {
-    const {data, error} = await db.from("membros").select("*").eq("fundador", true).order("nome", {ascending: true});
-    if (error) { console.error(error); fundadores = []; return; }
-    fundadores = data || [];
+    const r = await db.from("membros").select("*").eq("fundador", true).order("nome", {ascending: true});
+    if (r.error) { console.error(r.error); fundadores = []; return; }
+    fundadores = r.data || [];
 }
-
 function renderizarMembros() {
     const tbody = document.getElementById("membersTable");
     if (!membros.length) {
-        tbody.innerHTML = `<tr><td colspan="9" class="empty-state"><p>Nenhum membro registado.</p></td></tr>`;
+        tbody.innerHTML = '<tr><td colspan="9" class="empty-state"><p>Nenhum membro registado.</p></td></tr>';
         return;
     }
-    tbody.innerHTML = membros.map(m => {
+    tbody.innerHTML = membros.map(function(m) {
         const foto = safeUrl(m.foto_perfil) || "logo.png";
-        const fundador = m.fundador ? `<span class="badge badge-founder">Fundador</span>` : "—";
+        const fundador = m.fundador ? '<span class="badge badge-founder">Fundador</span>' : "—";
         const statusClass = m.status === "Ativo" ? "badge-active" : "badge-inactive";
-        return `<tr>
-            <td>${fundador}</td>
-            <td><div class="member-mini"><img src="${escapeHtml(foto)}" alt=""><strong>${escapeHtml(m.nome)}</strong></div></td>
-            <td>${escapeHtml(m.cargo || "—")}</td>
-            <td>${escapeHtml(m.bi || "—")}</td>
-            <td>${escapeHtml(m.email || "—")}</td>
-            <td>${escapeHtml(m.telefone || "—")}</td>
-            <td>${formatarDataBr(m.data_entrada || m.data_adesao)}</td>
-            <td><span class="badge ${statusClass}">${escapeHtml(m.status)}</span></td>
-            <td class="admin-only">${isAdmin ? `<div class="actions"><button class="btn btn-secondary btn-sm" onclick="editarMembro('${m.id}')">Editar</button><button class="btn btn-danger btn-sm" onclick="apagarMembro('${m.id}')">Apagar</button></div>` : ""}</td>
-        </tr>`;
+        const acoes = isSuperAdmin
+            ? '<div class="actions"><button class="btn btn-secondary btn-sm" onclick="editarMembro(\'' + m.id + '\')">Editar</button><button class="btn btn-danger btn-sm" onclick="apagarMembro(\'' + m.id + '\')">Apagar</button></div>'
+            : '';
+        return '<tr>'
+            + '<td>' + fundador + '</td>'
+            + '<td><div class="member-mini"><img src="' + escapeHtml(foto) + '" alt=""><strong>' + escapeHtml(m.nome) + '</strong></div></td>'
+            + '<td>' + escapeHtml(m.cargo || "—") + '</td>'
+            + '<td>' + escapeHtml(m.bi || "—") + '</td>'
+            + '<td>' + escapeHtml(m.email || "—") + '</td>'
+            + '<td>' + escapeHtml(m.telefone || "—") + '</td>'
+            + '<td>' + formatarDataBr(m.data_entrada || m.data_adesao) + '</td>'
+            + '<td><span class="badge ' + statusClass + '">' + escapeHtml(m.status) + '</span></td>'
+            + '<td class="super-admin-col' + (isSuperAdmin ? '' : ' hidden') + '">' + acoes + '</td>'
+            + '</tr>';
     }).join("");
 }
-
 function renderizarFundadores() {
     const grid = document.getElementById("foundersGrid");
     if (!fundadores.length) {
-        grid.innerHTML = `<div class="empty-state"><span class="icon">👤</span><p>Nenhum fundador publicado.</p></div>`;
+        grid.innerHTML = '<div class="empty-state"><span class="icon">👤</span><p>Nenhum fundador publicado.</p></div>';
         return;
     }
-    grid.innerHTML = fundadores.map(m => {
+    grid.innerHTML = fundadores.map(function(m) {
         const foto = safeUrl(m.foto_perfil) || "logo.png";
-        return `<article class="founder-card"><img class="founder-photo" src="${escapeHtml(foto)}" alt="${escapeHtml(m.nome)}"><h3>${escapeHtml(m.nome)}</h3><p>${escapeHtml(m.cargo || "Fundador")}</p></article>`;
+        return '<article class="founder-card"><img class="founder-photo" src="' + escapeHtml(foto) + '" alt="' + escapeHtml(m.nome) + '"><h3>' + escapeHtml(m.nome) + '</h3><p>' + escapeHtml(m.cargo || "Fundador") + '</p></article>';
     }).join("");
 }
-
-function abrirMembroModal(id = null) {
-    if (!isAdmin) { mostrarToast("Apenas o administrador pode alterar membros.", "error"); return; }
-    editMemberId = id;
+function abrirMembroModal(id) {
+    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
+    editMemberId = id || null;
     document.getElementById("memberModal").classList.add("open");
     document.getElementById("memberForm").reset();
     document.getElementById("memberId").value = "";
     document.getElementById("memberPreview").src = "logo.png";
     document.getElementById("memberModalTitle").textContent = id ? "Editar membro" : "Novo membro";
     if (id) {
-        const m = membros.find(x => x.id === id);
+        const m = membros.find(function(x) { return x.id === id; });
         if (!m) return;
         document.getElementById("memberId").value = m.id;
         document.getElementById("memberNome").value = m.nome || "";
@@ -1819,23 +1357,18 @@ function abrirMembroModal(id = null) {
         if (m.foto_perfil) document.getElementById("memberPreview").src = m.foto_perfil;
     }
 }
-
 function fecharMembroModal() { document.getElementById("memberModal").classList.remove("open"); }
-
-document.getElementById("memberPhoto").addEventListener("change", (e) => {
-    const file = e.target.files?.[0];
+document.getElementById("memberPhoto").addEventListener("change", function(e) {
+    const file = e.target.files && e.target.files[0];
     if (file) document.getElementById("memberPreview").src = URL.createObjectURL(file);
 });
-
-document.getElementById("memberForm").addEventListener("submit", async (e) => {
+document.getElementById("memberForm").addEventListener("submit", async function(e) {
     e.preventDefault();
-    if (!isAdmin) { mostrarToast("Sem permissão.", "error"); return; }
+    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
     const id = document.getElementById("memberId").value || null;
-    
     const aniversario = document.getElementById("memberAniversario").value;
     const dataAdesao = document.getElementById("memberAdesao").value;
     const dataEntrada = document.getElementById("memberEntrada").value;
-    
     const payload = {
         nome: document.getElementById("memberNome").value.trim(),
         cargo: document.getElementById("memberCargo").value.trim(),
@@ -1849,23 +1382,19 @@ document.getElementById("memberForm").addEventListener("submit", async (e) => {
         fundador: document.getElementById("memberFundador").checked,
         bio_publica: document.getElementById("memberBio").value.trim()
     };
-    const file = document.getElementById("memberPhoto").files?.[0];
+    const file = document.getElementById("memberPhoto").files && document.getElementById("memberPhoto").files[0];
     if (file) {
         if (file.size > 10 * 1024 * 1024) { mostrarToast("A foto não pode ultrapassar 10 MB.", "error"); return; }
         const path = gerarNomeArquivo(file.name);
-        const {error: uploadError} = await db.storage.from("ojv-perfis").upload(path, file, {contentType: file.type, upsert: false});
-        if (uploadError) { console.error(uploadError); mostrarToast("Não foi possível enviar a foto.", "error"); return; }
+        const up = await db.storage.from("ojv-perfis").upload(path, file, {contentType: file.type, upsert: false});
+        if (up.error) { console.error(up.error); mostrarToast("Não foi possível enviar a foto.", "error"); return; }
         payload.foto_perfil = publicStorageUrl("ojv-perfis", path);
     }
-    let error;
-    if (id) {
-        const r = await db.from("membros").update(payload).eq("id", id);
-        error = r.error;
-    } else {
-        const r = await db.from("membros").insert(payload);
-        error = r.error;
-    }
-    if (error) { console.error(error); mostrarToast("Erro ao guardar membro: " + error.message, "error"); return; }
+    let r;
+    if (id) { r = await db.from("membros").update(payload).eq("id", id); }
+    else { r = await db.from("membros").insert(payload); }
+    if (r.error) { console.error(r.error); mostrarToast("Erro ao guardar membro: " + r.error.message, "error"); return; }
+    minhaFotoCache = null;
     fecharMembroModal();
     await carregarMembros();
     renderizarMembros();
@@ -1874,15 +1403,14 @@ document.getElementById("memberForm").addEventListener("submit", async (e) => {
     atualizarDashboard();
     mostrarToast("Membro guardado com sucesso.", "success");
 });
-
 function editarMembro(id) { abrirMembroModal(id); }
-
 async function apagarMembro(id) {
-    if (!isAdmin) return;
-    const m = membros.find(x => x.id === id);
-    if (!m || !confirm(`Apagar o membro "${m.nome}"?`)) return;
-    const {error} = await db.from("membros").delete().eq("id", id);
-    if (error) { mostrarToast("Erro ao apagar membro.", "error"); return; }
+    if (!isSuperAdmin) return;
+    const m = membros.find(function(x) { return x.id === id; });
+    if (!m || !confirm('Apagar o membro "' + m.nome + '"?')) return;
+    const r = await db.from("membros").delete().eq("id", id);
+    if (r.error) { mostrarToast("Erro ao apagar membro.", "error"); return; }
+    minhaFotoCache = null;
     await carregarMembros();
     renderizarMembros();
     await carregarFundadoresPublicos();
@@ -1891,45 +1419,48 @@ async function apagarMembro(id) {
     mostrarToast("Membro apagado.", "success");
 }
 
-// =========================================================
-// EVENTOS
-// =========================================================
-
+// ========== EVENTOS ==========
 async function carregarEventos() {
-    const {data, error} = await db.from("eventos").select("*").order("data", {ascending: true}).order("hora", {ascending: true});
-    if (error) { console.error(error); eventos = []; return; }
-    eventos = data || [];
+    const r = await db.from("eventos").select("*").order("data", {ascending: true}).order("hora", {ascending: true});
+    if (r.error) { console.error(r.error); eventos = []; return; }
+    eventos = r.data || [];
 }
-
 function renderizarEventos() {
     const tbody = document.getElementById("eventsTable");
     if (!eventos.length) {
-        tbody.innerHTML = `<tr><td colspan="6" class="empty-state"><p>Nenhum evento registado.</p></td></tr>`;
+        tbody.innerHTML = '<tr><td colspan="6" class="empty-state"><p>Nenhum evento registado.</p></td></tr>';
         return;
     }
-    tbody.innerHTML = eventos.map(e => {
-        const published = e.publicado ? `<span class="badge badge-published">Sim</span>` : `<span class="badge badge-private">Não</span>`;
+    tbody.innerHTML = eventos.map(function(e) {
+        const published = e.publicado ? '<span class="badge badge-published">Sim</span>' : '<span class="badge badge-private">Não</span>';
         const statusClass = e.status === "Cancelado" ? "badge-cancel" : "badge-active";
-        return `<tr>
-            <td>${formatarDataBr(e.data)}${e.hora ? `<br><small>${formatTime(e.hora)}</small>` : ""}</td>
-            <td><strong>${escapeHtml(e.nome)}</strong></td>
-            <td>${escapeHtml(e.local || "—")}</td>
-            <td><span class="badge ${statusClass}">${escapeHtml(e.status)}</span></td>
-            <td>${published}</td>
-            <td class="admin-only">${isAdmin ? `<div class="actions"><button class="btn btn-secondary btn-sm" onclick="editarEvento('${e.id}')">Editar</button><button class="btn btn-danger btn-sm" onclick="apagarEvento('${e.id}')">Apagar</button></div>` : ""}</td>
-        </tr>`;
+        const acoes = isSuperAdmin
+            ? '<div class="actions">'
+                + '<button class="btn btn-fb btn-sm" onclick="partilharNoFacebook(\'' + e.id + '\')" title="Copiar texto e abrir Facebook">📘 Partilhar</button>'
+                + '<button class="btn btn-wa btn-sm" onclick="partilharNoWhatsApp(\'' + e.id + '\')" title="Enviar por WhatsApp">📱 WhatsApp</button>'
+                + '<button class="btn btn-secondary btn-sm" onclick="editarEvento(\'' + e.id + '\')">Editar</button>'
+                + '<button class="btn btn-danger btn-sm" onclick="apagarEvento(\'' + e.id + '\')">Apagar</button>'
+              + '</div>'
+            : '';
+        return '<tr>'
+            + '<td>' + formatarDataBr(e.data) + (e.hora ? '<br><small>' + formatTime(e.hora) + '</small>' : "") + '</td>'
+            + '<td><strong>' + escapeHtml(e.nome) + '</strong></td>'
+            + '<td>' + escapeHtml(e.local || "—") + '</td>'
+            + '<td><span class="badge ' + statusClass + '">' + escapeHtml(e.status) + '</span></td>'
+            + '<td>' + published + '</td>'
+            + '<td class="super-admin-col' + (isSuperAdmin ? '' : ' hidden') + '">' + acoes + '</td>'
+            + '</tr>';
     }).join("");
 }
-
-function abrirEventoModal(id = null) {
-    if (!isAdmin) { mostrarToast("Apenas o administrador pode alterar eventos.", "error"); return; }
-    editEventId = id;
+function abrirEventoModal(id) {
+    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
+    editEventId = id || null;
     document.getElementById("eventForm").reset();
     document.getElementById("eventId").value = "";
     document.getElementById("eventModalTitle").textContent = id ? "Editar evento" : "Novo evento";
     document.getElementById("eventModal").classList.add("open");
     if (id) {
-        const e = eventos.find(x => x.id === id);
+        const e = eventos.find(function(x) { return x.id === id; });
         if (!e) return;
         document.getElementById("eventId").value = e.id;
         document.getElementById("eventNome").value = e.nome || "";
@@ -1943,12 +1474,10 @@ function abrirEventoModal(id = null) {
         document.getElementById("eventPublicado").checked = !!e.publicado;
     }
 }
-
 function fecharEventoModal() { document.getElementById("eventModal").classList.remove("open"); }
-
-document.getElementById("eventForm").addEventListener("submit", async (e) => {
+document.getElementById("eventForm").addEventListener("submit", async function(e) {
     e.preventDefault();
-    if (!isAdmin) return;
+    if (!isSuperAdmin) return;
     const id = document.getElementById("eventId").value || null;
     const dataEvento = document.getElementById("eventData").value;
     const payload = {
@@ -1962,15 +1491,10 @@ document.getElementById("eventForm").addEventListener("submit", async (e) => {
         status: document.getElementById("eventStatus").value,
         publicado: document.getElementById("eventPublicado").checked
     };
-    let error;
-    if (id) {
-        const r = await db.from("eventos").update(payload).eq("id", id);
-        error = r.error;
-    } else {
-        const r = await db.from("eventos").insert(payload);
-        error = r.error;
-    }
-    if (error) { console.error(error); mostrarToast("Erro ao guardar evento: " + error.message, "error"); return; }
+    let r;
+    if (id) { r = await db.from("eventos").update(payload).eq("id", id); }
+    else { r = await db.from("eventos").insert(payload); }
+    if (r.error) { console.error(r.error); mostrarToast("Erro ao guardar evento: " + r.error.message, "error"); return; }
     fecharEventoModal();
     await carregarEventos();
     renderizarEventos();
@@ -1978,15 +1502,13 @@ document.getElementById("eventForm").addEventListener("submit", async (e) => {
     atualizarDashboard();
     mostrarToast("Evento guardado.", "success");
 });
-
 function editarEvento(id) { abrirEventoModal(id); }
-
 async function apagarEvento(id) {
-    if (!isAdmin) return;
-    const e = eventos.find(x => x.id === id);
-    if (!e || !confirm(`Apagar o evento "${e.nome}"?`)) return;
-    const {error} = await db.from("eventos").delete().eq("id", id);
-    if (error) { mostrarToast("Erro ao apagar evento.", "error"); return; }
+    if (!isSuperAdmin) return;
+    const e = eventos.find(function(x) { return x.id === id; });
+    if (!e || !confirm('Apagar o evento "' + e.nome + '"?')) return;
+    const r = await db.from("eventos").delete().eq("id", id);
+    if (r.error) { mostrarToast("Erro ao apagar evento.", "error"); return; }
     await carregarEventos();
     renderizarEventos();
     renderizarEventosPublicos();
@@ -1994,173 +1516,99 @@ async function apagarEvento(id) {
     mostrarToast("Evento apagado.", "success");
 }
 
-// =========================================================
-// GALERIA
-// =========================================================
-
+// ========== GALERIA ==========
 async function carregarGaleria() {
-    const {data, error} = await db.from("galeria").select("*").order("destaque", {ascending: false}).order("created_at", {ascending: false});
-    if (error) { console.error(error); galeria = []; return; }
-    galeria = data || [];
+    const r = await db.from("galeria").select("*").order("destaque", {ascending: false}).order("created_at", {ascending: false});
+    if (r.error) { console.error(r.error); galeria = []; return; }
+    galeria = r.data || [];
 }
-
 function toggleThumbnailField() {
     const tipo = document.getElementById('galleryType').value;
-    const field = document.getElementById('thumbnailField');
-    field.style.display = tipo === 'video' ? 'block' : 'none';
+    document.getElementById('thumbnailField').style.display = tipo === 'video' ? 'block' : 'none';
 }
-
-document.getElementById('galleryThumbnail').addEventListener('change', (e) => {
-    const file = e.target.files?.[0];
+document.getElementById('galleryThumbnail').addEventListener('change', function(e) {
+    const file = e.target.files && e.target.files[0];
     const preview = document.getElementById('thumbnailPreview');
-    if (file) {
-        preview.src = URL.createObjectURL(file);
-        preview.style.display = 'block';
-    } else {
-        preview.style.display = 'none';
-    }
+    if (file) { preview.src = URL.createObjectURL(file); preview.style.display = 'block'; }
+    else { preview.style.display = 'none'; }
 });
-
-document.getElementById("galleryForm").addEventListener("submit", async (e) => {
+document.getElementById("galleryForm").addEventListener("submit", async function(e) {
     e.preventDefault();
-    if (!isAdmin) { 
-        mostrarToast("Apenas o administrador pode adicionar conteúdos.", "error"); 
-        return; 
-    }
-    
+    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
     const titulo = document.getElementById("galleryTitle").value.trim();
     const tipo = document.getElementById("galleryType").value;
     const descricao = document.getElementById("galleryDescription").value.trim();
-    const file = document.getElementById("galleryFile").files?.[0];
+    const file = document.getElementById("galleryFile").files && document.getElementById("galleryFile").files[0];
     const externalUrl = document.getElementById("galleryUrl").value.trim();
     const publicado = document.getElementById("galleryPublished").checked;
     const destaque = document.getElementById("galleryFeatured").checked;
-    const thumbFile = document.getElementById("galleryThumbnail").files?.[0];
-    
+    const thumbFile = document.getElementById("galleryThumbnail").files && document.getElementById("galleryThumbnail").files[0];
     let url = externalUrl;
     let thumbnailUrl = null;
-    
-    // Upload do thumbnail (se for vídeo e tiver ficheiro)
     if (tipo === 'video' && thumbFile) {
-        const isImage = thumbFile.type.startsWith("image/");
-        if (!isImage) {
-            mostrarToast("A thumbnail deve ser uma imagem.", "error");
-            return;
-        }
-        if (thumbFile.size > 5 * 1024 * 1024) {
-            mostrarToast("A thumbnail não pode ultrapassar 5 MB.", "error");
-            return;
-        }
+        if (!thumbFile.type.startsWith("image/")) { mostrarToast("Thumbnail deve ser imagem.", "error"); return; }
+        if (thumbFile.size > 5 * 1024 * 1024) { mostrarToast("Thumbnail > 5 MB.", "error"); return; }
         const thumbPath = gerarNomeArquivo(thumbFile.name);
-        const {error: thumbError} = await db.storage.from("ojv-galeria").upload(thumbPath, thumbFile, {
-            contentType: thumbFile.type,
-            upsert: false
-        });
-        if (thumbError) {
-            console.error(thumbError);
-            mostrarToast("Erro ao enviar thumbnail.", "error");
-            return;
-        }
+        const tu = await db.storage.from("ojv-galeria").upload(thumbPath, thumbFile, {contentType: thumbFile.type, upsert: false});
+        if (tu.error) { console.error(tu.error); mostrarToast("Erro thumbnail.", "error"); return; }
         thumbnailUrl = publicStorageUrl("ojv-galeria", thumbPath);
     }
-    
-    // Upload do ficheiro principal
     if (file) {
         const isImage = file.type.startsWith("image/");
         const isVideo = file.type.startsWith("video/");
-        if (tipo === "foto" && !isImage) { 
-            mostrarToast("Seleciona uma imagem para foto.", "error"); 
-            return; 
-        }
-        if (tipo === "video" && !isVideo) { 
-            mostrarToast("Seleciona um vídeo para vídeo.", "error"); 
-            return; 
-        }
-        if (file.size > 100 * 1024 * 1024) { 
-            mostrarToast("O ficheiro não pode ultrapassar 100 MB.", "error"); 
-            return; 
-        }
+        if (tipo === "foto" && !isImage) { mostrarToast("Seleciona uma imagem.", "error"); return; }
+        if (tipo === "video" && !isVideo) { mostrarToast("Seleciona um vídeo.", "error"); return; }
+        if (file.size > 100 * 1024 * 1024) { mostrarToast("Ficheiro > 100 MB.", "error"); return; }
         const path = gerarNomeArquivo(file.name);
-        const {error: uploadError} = await db.storage.from("ojv-galeria").upload(path, file, {
-            contentType: file.type,
-            upsert: false
-        });
-        if (uploadError) { 
-            console.error(uploadError); 
-            mostrarToast("Erro ao enviar ficheiro.", "error"); 
-            return; 
-        }
+        const up = await db.storage.from("ojv-galeria").upload(path, file, {contentType: file.type, upsert: false});
+        if (up.error) { console.error(up.error); mostrarToast("Erro ao enviar.", "error"); return; }
         url = publicStorageUrl("ojv-galeria", path);
     }
-    
-    if (!url) { 
-        mostrarToast("Escolhe um ficheiro ou informa uma URL.", "error"); 
-        return; 
-    }
-    
-    const payload = {
-        titulo, 
-        descricao, 
-        tipo, 
-        url, 
-        publicado, 
-        destaque,
-        thumbnail_url: thumbnailUrl
-    };
-    
-    const {error} = await db.from("galeria").insert(payload);
-    if (error) { 
-        console.error(error); 
-        mostrarToast("Erro ao guardar publicação: " + error.message, "error"); 
-        return; 
-    }
-    
+    if (!url) { mostrarToast("Escolhe ficheiro ou URL.", "error"); return; }
+    const payload = { titulo: titulo, descricao: descricao, tipo: tipo, url: url, publicado: publicado, destaque: destaque, thumbnail_url: thumbnailUrl };
+    const r = await db.from("galeria").insert(payload);
+    if (r.error) { console.error(r.error); mostrarToast("Erro: " + r.error.message, "error"); return; }
     document.getElementById("galleryForm").reset();
     document.getElementById("thumbnailPreview").style.display = 'none';
     await carregarGaleria();
     renderizarGaleriaAdmin();
     renderizarGaleriaPublica();
     atualizarDashboard();
-    mostrarToast("Conteúdo adicionado à galeria.", "success");
+    mostrarToast("Conteúdo adicionado.", "success");
 });
-
 function renderizarGaleriaAdmin() {
     const grid = document.getElementById("adminGalleryGrid");
     if (!galeria.length) {
-        grid.innerHTML = `<div class="empty-state"><span class="icon">🖼️</span><p>Nenhum conteúdo na galeria.</p></div>`;
+        grid.innerHTML = '<div class="empty-state"><span class="icon">🖼️</span><p>Nenhum conteúdo na galeria.</p></div>';
         return;
     }
-    grid.innerHTML = galeria.map(item => {
+    grid.innerHTML = galeria.map(function(item) {
         const url = safeUrl(item.url);
         const thumb = safeUrl(item.thumbnail_url) || url;
-        
         let media;
         if (item.tipo === "video") {
-            media = `<video src="${escapeHtml(url)}" poster="${escapeHtml(thumb)}" controls preload="metadata" style="width:100%;height:100%;object-fit:cover;background:#1a1a2e;"></video>`;
+            media = '<video src="' + escapeHtml(url) + '" poster="' + escapeHtml(thumb) + '" controls preload="metadata" style="width:100%;height:100%;object-fit:cover;background:#1a1a2e;"></video>';
         } else {
-            media = `<img src="${escapeHtml(url)}" alt="${escapeHtml(item.titulo)}" style="width:100%;height:100%;object-fit:cover;">`;
+            media = '<img src="' + escapeHtml(url) + '" alt="' + escapeHtml(item.titulo) + '" style="width:100%;height:100%;object-fit:cover;">';
         }
-        
-        return `<article class="media-admin-card">
-            <div class="media-preview">${media}</div>
-            <div class="media-admin-body">
-                <strong>${escapeHtml(item.titulo)}</strong>
-                <p class="text-muted" style="font-size:13px;margin:4px 0;">${escapeHtml(item.descricao || "")}</p>
-                <div style="margin:8px 0;display:flex;gap:6px;flex-wrap:wrap;">
-                    ${item.publicado ? `<span class="badge badge-published">Publicado</span>` : `<span class="badge badge-private">Privado</span>`}
-                    ${item.destaque ? `<span class="badge badge-featured">Destaque</span>` : ""}
-                    ${item.tipo === "video" && item.thumbnail_url ? `<span class="badge badge-active">Com capa</span>` : ""}
-                </div>
-                <button class="btn btn-danger btn-sm" onclick="apagarGaleria('${item.id}')">Apagar</button>
-            </div>
-        </article>`;
+        const btnApagar = isSuperAdmin ? '<button class="btn btn-danger btn-sm" onclick="apagarGaleria(\'' + item.id + '\')">Apagar</button>' : '';
+        return '<article class="media-admin-card">'
+            + '<div class="media-preview">' + media + '</div>'
+            + '<div class="media-admin-body">'
+            + '<strong>' + escapeHtml(item.titulo) + '</strong>'
+            + '<p class="text-muted" style="font-size:13px;margin:4px 0;">' + escapeHtml(item.descricao || "") + '</p>'
+            + '<div style="margin:8px 0;display:flex;gap:6px;flex-wrap:wrap;">'
+            + (item.publicado ? '<span class="badge badge-published">Publicado</span>' : '<span class="badge badge-private">Privado</span>')
+            + (item.destaque ? '<span class="badge badge-featured">Destaque</span>' : "")
+            + '</div>'
+            + btnApagar
+            + '</div></article>';
     }).join("");
 }
-
 async function apagarGaleria(id) {
-    if (!isAdmin || !confirm("Apagar este conteúdo da galeria?")) return;
-    const {error} = await db.from("galeria").delete().eq("id", id);
-    if (error) { mostrarToast("Erro ao apagar conteúdo.", "error"); return; }
+    if (!isSuperAdmin || !confirm("Apagar este conteúdo?")) return;
+    const r = await db.from("galeria").delete().eq("id", id);
+    if (r.error) { mostrarToast("Erro ao apagar.", "error"); return; }
     await carregarGaleria();
     renderizarGaleriaAdmin();
     renderizarGaleriaPublica();
@@ -2168,16 +1616,12 @@ async function apagarGaleria(id) {
     mostrarToast("Conteúdo apagado.", "success");
 }
 
-// =========================================================
-// INFORMAÇÕES PÚBLICAS
-// =========================================================
-
+// ========== INFO PÚBLICA ==========
 async function carregarInfoPublica() {
-    const {data, error} = await db.from("informacoes_publicas").select("*").eq("id", 1).maybeSingle();
-    if (error) { console.error(error); return; }
-    infoPublica = data;
+    const r = await db.from("informacoes_publicas").select("*").eq("id", 1).maybeSingle();
+    if (r.error) { console.error(r.error); return; }
+    infoPublica = r.data;
 }
-
 function preencherFormularioInfo() {
     if (!infoPublica) return;
     const map = {
@@ -2187,15 +1631,14 @@ function preencherFormularioInfo() {
         infoEmail: "email_publico", infoWhatsapp: "whatsapp", infoFacebook: "facebook",
         infoInstagram: "instagram", infoYoutube: "youtube"
     };
-    Object.entries(map).forEach(([id, key]) => {
+    Object.keys(map).forEach(function(id) {
         const el = document.getElementById(id);
-        if (el) el.value = infoPublica[key] || "";
+        if (el) el.value = infoPublica[map[id]] || "";
     });
 }
-
-document.getElementById("publicInfoForm").addEventListener("submit", async (e) => {
+document.getElementById("publicInfoForm").addEventListener("submit", async function(e) {
     e.preventDefault();
-    if (!isAdmin) return;
+    if (!isSuperAdmin) return;
     const payload = {
         nome_organizacao: document.getElementById("infoNome").value.trim(),
         slogan: document.getElementById("infoSlogan").value.trim(),
@@ -2213,14 +1656,14 @@ document.getElementById("publicInfoForm").addEventListener("submit", async (e) =
         youtube: document.getElementById("infoYoutube").value.trim(),
         atualizado_em: new Date().toISOString()
     };
-    const {error} = await db.from("informacoes_publicas").upsert({id: 1, ...payload});
-    if (error) { console.error(error); mostrarToast("Erro ao guardar informações.", "error"); return; }
+    payload.id = 1;
+    const r = await db.from("informacoes_publicas").upsert(payload);
+    if (r.error) { console.error(r.error); mostrarToast("Erro ao guardar.", "error"); return; }
     await carregarInfoPublica();
     renderizarInfoPublica();
     preencherFormularioInfo();
-    mostrarToast("Informações públicas atualizadas.", "success");
+    mostrarToast("Informações atualizadas.", "success");
 });
-
 function renderizarInfoPublica() {
     if (!infoPublica) return;
     const nome = infoPublica.nome_organizacao || "O.J.V. - Organização Jovens Visionários";
@@ -2240,148 +1683,95 @@ function renderizarInfoPublica() {
     document.getElementById("contactPhone").textContent = "Telefone: " + (infoPublica.telefone_publico || "Não definido.");
     const emailBox = document.getElementById("contactEmail");
     if (infoPublica.email_publico) {
-        emailBox.innerHTML = `E-mail: <a href="mailto:${escapeHtml(infoPublica.email_publico)}">${escapeHtml(infoPublica.email_publico)}</a>`;
-    } else {
-        emailBox.textContent = "E-mail: Não definido.";
-    }
+        emailBox.innerHTML = 'E-mail: <a href="mailto:' + escapeHtml(infoPublica.email_publico) + '">' + escapeHtml(infoPublica.email_publico) + '</a>';
+    } else { emailBox.textContent = "E-mail: Não definido."; }
     const socials = [];
-    const socialMap = [["Facebook", infoPublica.facebook], ["Instagram", infoPublica.instagram], ["YouTube", infoPublica.youtube]];
-    socialMap.forEach(([label, url]) => {
-        const clean = safeUrl(url);
-        if (clean) socials.push(`<a href="${escapeHtml(clean)}" target="_blank" rel="noopener">${label}</a>`);
+    [["Facebook", infoPublica.facebook], ["Instagram", infoPublica.instagram], ["YouTube", infoPublica.youtube]].forEach(function(pair) {
+        const clean = safeUrl(pair[1]);
+        if (clean) socials.push('<a href="' + escapeHtml(clean) + '" target="_blank" rel="noopener">' + pair[0] + '</a>');
     });
     if (infoPublica.whatsapp) {
         const w = String(infoPublica.whatsapp).replace(/\D/g, "");
-        if (w) socials.push(`<a href="https://wa.me/${escapeHtml(w)}" target="_blank" rel="noopener">WhatsApp</a>`);
+        if (w) socials.push('<a href="https://wa.me/' + escapeHtml(w) + '" target="_blank" rel="noopener">WhatsApp</a>');
     }
     document.getElementById("contactSocial").innerHTML = socials.length ? "Redes sociais: " + socials.join(" · ") : "Redes sociais não definidas.";
 }
 
-// =========================================================
-// METAS
-// =========================================================
-
+// ========== META ==========
 async function carregarMetas() {
-    const {data, error} = await db.from("metas").select("*").order("created_at", {ascending: false}).limit(1).maybeSingle();
-    if (error) { console.error(error); metas = []; return; }
-    metas = data ? [data] : [];
+    const r = await db.from("metas").select("*").order("created_at", {ascending: false}).limit(1).maybeSingle();
+    if (r.error) { console.error(r.error); metas = []; return; }
+    metas = r.data ? [r.data] : [];
     renderizarMeta();
 }
-
 function renderizarMeta() {
     const meta = metas[0];
-    const valor = Number(meta?.valor || 0);
-    const guardado = Number(meta?.guardado || 0);
+    const valor = Number((meta && meta.valor) || 0);
+    const guardado = Number((meta && meta.guardado) || 0);
     document.getElementById("metaValor").value = valor;
     document.getElementById("metaGuardado").value = guardado;
     const percentual = valor > 0 ? Math.min(100, (guardado / valor) * 100) : 0;
     document.getElementById("metaProgress").style.width = percentual + "%";
-    document.getElementById("metaPercentual").textContent = `${percentual.toFixed(1)}% — ${formatMoney(guardado)} / ${formatMoney(valor)}`;
+    document.getElementById("metaPercentual").textContent = percentual.toFixed(1) + "% — " + formatMoney(guardado) + " / " + formatMoney(valor);
 }
-
 async function guardarMeta() {
-    if (!isAdmin) return;
+    if (!isSuperAdmin) return;
     const valor = Number(document.getElementById("metaValor").value) || 0;
     const guardado = Number(document.getElementById("metaGuardado").value) || 0;
     const atual = metas[0];
-    let result;
-    if (atual) {
-        result = await db.from("metas").update({valor, guardado}).eq("id", atual.id);
-    } else {
-        result = await db.from("metas").insert({valor, guardado});
-    }
-    if (result.error) { mostrarToast("Erro ao guardar meta.", "error"); return; }
+    let r;
+    if (atual) r = await db.from("metas").update({valor: valor, guardado: guardado}).eq("id", atual.id);
+    else r = await db.from("metas").insert({valor: valor, guardado: guardado});
+    if (r.error) { mostrarToast("Erro ao guardar meta.", "error"); return; }
     await carregarMetas();
     mostrarToast("Meta atualizada.", "success");
 }
-
 async function redefinirMeta() {
-    if (!isAdmin) {
-        mostrarToast("Apenas o administrador pode redefinir a meta.", "error");
-        return;
-    }
-    
-    if (!confirm("Atenção! Esta ação vai redefinir a meta para zero.\n\nDesejas continuar?")) {
-        return;
-    }
-    
-    try {
-        const atual = metas[0];
-        let result;
-        
-        if (atual) {
-            result = await db
-                .from("metas")
-                .update({ 
-                    valor: 0, 
-                    guardado: 0,
-                    updated_at: new Date().toISOString()
-                })
-                .eq("id", atual.id);
-        } else {
-            result = await db
-                .from("metas")
-                .insert({ 
-                    valor: 0, 
-                    guardado: 0
-                });
-        }
-        
-        if (result.error) {
-            console.error('Erro ao redefinir meta:', result.error);
-            mostrarToast("Erro ao redefinir meta: " + result.error.message, "error");
-            return;
-        }
-        
-        await carregarMetas();
-        renderizarMeta();
-        renderizarFinancas();
-        
-        mostrarToast("Meta redefinida com sucesso!", "success");
-        
-    } catch (error) {
-        console.error('Erro inesperado:', error);
-        mostrarToast("Erro ao redefinir meta: " + error.message, "error");
-    }
+    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
+    if (!confirm("Redefinir a meta para zero. Continuar?")) return;
+    const atual = metas[0];
+    let r;
+    if (atual) r = await db.from("metas").update({ valor: 0, guardado: 0 }).eq("id", atual.id);
+    else r = await db.from("metas").insert({ valor: 0, guardado: 0 });
+    if (r.error) { mostrarToast("Erro: " + r.error.message, "error"); return; }
+    await carregarMetas();
+    renderizarFinancas();
+    mostrarToast("Meta redefinida.", "success");
 }
 
-// =========================================================
-// TRANSAÇÕES
-// =========================================================
-
+// ========== TRANSAÇÕES ==========
 async function carregarTransacoes() {
-    const {data, error} = await db.from("transacoes").select("*").order("data", {ascending: false}).order("created_at", {ascending: false});
-    if (error) { console.error(error); transacoes = []; return; }
-    transacoes = data || [];
+    const r = await db.from("transacoes").select("*").order("data", {ascending: false}).order("created_at", {ascending: false});
+    if (r.error) { console.error(r.error); transacoes = []; return; }
+    transacoes = r.data || [];
 }
-
 function renderizarTransacoes() {
     const tbody = document.getElementById("transactionsTable");
     if (!transacoes.length) {
-        tbody.innerHTML = `<tr><td colspan="6" class="empty-state"><p>Nenhuma transação registada.</p></td></tr>`;
+        tbody.innerHTML = '<tr><td colspan="6" class="empty-state"><p>Nenhuma transação registada.</p></td></tr>';
         return;
     }
-    tbody.innerHTML = transacoes.map(t => `<tr>
-        <td>${formatarDataBr(t.data)}</td>
-        <td>${t.tipo === "Entrada" ? "Entrada" : "Saída"}</td>
-        <td>${escapeHtml(t.categoria || "—")}</td>
-        <td><strong>${formatMoney(t.valor)}</strong></td>
-        <td>${escapeHtml(t.descricao || "—")}</td>
-        <td class="admin-only">${isAdmin ? `<button class="btn btn-danger btn-sm" onclick="apagarTransacao('${t.id}')">Apagar</button>` : ""}</td>
-    </tr>`).join("");
+    tbody.innerHTML = transacoes.map(function(t) {
+        const acoes = isSuperAdmin ? '<button class="btn btn-danger btn-sm" onclick="apagarTransacao(\'' + t.id + '\')">Apagar</button>' : '';
+        return '<tr>'
+            + '<td>' + formatarDataBr(t.data) + '</td>'
+            + '<td>' + (t.tipo === "Entrada" ? "Entrada" : "Saída") + '</td>'
+            + '<td>' + escapeHtml(t.categoria || "—") + '</td>'
+            + '<td><strong>' + formatMoney(t.valor) + '</strong></td>'
+            + '<td>' + escapeHtml(t.descricao || "—") + '</td>'
+            + '<td class="super-admin-col' + (isSuperAdmin ? '' : ' hidden') + '">' + acoes + '</td>'
+            + '</tr>';
+    }).join("");
 }
-
 function abrirTransacaoModal() {
-    if (!isAdmin) { mostrarToast("Apenas o administrador pode criar transações.", "error"); return; }
+    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
     document.getElementById("transactionForm").reset();
     document.getElementById("transactionModal").classList.add("open");
 }
-
 function fecharTransacaoModal() { document.getElementById("transactionModal").classList.remove("open"); }
-
-document.getElementById("transactionForm").addEventListener("submit", async (e) => {
+document.getElementById("transactionForm").addEventListener("submit", async function(e) {
     e.preventDefault();
-    if (!isAdmin) return;
+    if (!isSuperAdmin) return;
     const dataTransacao = document.getElementById("transactionData").value;
     const payload = {
         tipo: document.getElementById("transactionTipo").value,
@@ -2390,130 +1780,109 @@ document.getElementById("transactionForm").addEventListener("submit", async (e) 
         descricao: document.getElementById("transactionDescricao").value.trim(),
         data: dataTransacao ? dataBrParaInput(dataTransacao) : null
     };
-    const {error} = await db.from("transacoes").insert(payload);
-    if (error) { mostrarToast("Erro ao guardar transação.", "error"); return; }
+    const r = await db.from("transacoes").insert(payload);
+    if (r.error) { mostrarToast("Erro ao guardar.", "error"); return; }
     fecharTransacaoModal();
     await carregarTransacoes();
     renderizarTransacoes();
     renderizarFinancas();
     mostrarToast("Transação registada.", "success");
 });
-
 async function apagarTransacao(id) {
-    if (!isAdmin || !confirm("Apagar esta transação?")) return;
-    const {error} = await db.from("transacoes").delete().eq("id", id);
-    if (error) { mostrarToast("Erro ao apagar transação.", "error"); return; }
+    if (!isSuperAdmin || !confirm("Apagar esta transação?")) return;
+    const r = await db.from("transacoes").delete().eq("id", id);
+    if (r.error) { mostrarToast("Erro.", "error"); return; }
     await carregarTransacoes();
     renderizarTransacoes();
     renderizarFinancas();
 }
 
-// =========================================================
-// FINANÇAS
-// =========================================================
-
+// ========== FINANÇAS ==========
 function renderizarFinancas() {
     let entradas = 0, saidas = 0;
-    transacoes.forEach(t => {
+    transacoes.forEach(function(t) {
         if (t.tipo === "Entrada") entradas += Number(t.valor || 0);
         if (t.tipo === "Saída") saidas += Number(t.valor || 0);
     });
     const saldo = entradas - saidas;
-    const meta = Number(metas[0]?.valor || 0);
+    const meta = Number((metas[0] && metas[0].valor) || 0);
     document.getElementById("financeEntradas").textContent = formatMoney(entradas);
     document.getElementById("financeSaidas").textContent = formatMoney(saidas);
     document.getElementById("financeSaldo").textContent = formatMoney(saldo);
     document.getElementById("financeMeta").textContent = formatMoney(meta);
 }
 
-// =========================================================
-// PÚBLICO - GALERIA & EVENTOS
-// =========================================================
-
+// ========== PÚBLICO ==========
 function renderizarGaleriaPublica() {
     const grid = document.getElementById("publicGallery");
-    const publicItems = galeria.filter(item => item.publicado);
+    const publicItems = galeria.filter(function(item) { return item.publicado; });
     if (!publicItems.length) {
-        grid.innerHTML = `<div class="empty-state"><span class="icon">🖼️</span><p>Nenhum conteúdo publicado.</p></div>`;
+        grid.innerHTML = '<div class="empty-state"><span class="icon">🖼️</span><p>Nenhum conteúdo publicado.</p></div>';
         return;
     }
-    grid.innerHTML = publicItems.map(item => {
+    grid.innerHTML = publicItems.map(function(item) {
         const url = safeUrl(item.url);
         if (!url) return "";
         const thumb = safeUrl(item.thumbnail_url) || url;
-        
         let media;
         if (item.tipo === "video") {
-            media = `<video src="${escapeHtml(url)}" poster="${escapeHtml(thumb)}" controls preload="metadata" playsinline style="width:100%;height:100%;object-fit:cover;background:#1a1a2e;"></video>`;
+            media = '<video src="' + escapeHtml(url) + '" poster="' + escapeHtml(thumb) + '" controls preload="metadata" playsinline style="width:100%;height:100%;object-fit:cover;background:#1a1a2e;"></video>';
         } else {
-            media = `<img src="${escapeHtml(url)}" alt="${escapeHtml(item.titulo)}" loading="lazy" style="width:100%;height:100%;object-fit:cover;">`;
+            media = '<img src="' + escapeHtml(url) + '" alt="' + escapeHtml(item.titulo) + '" loading="lazy" style="width:100%;height:100%;object-fit:cover;">';
         }
-        
-        return `<article class="gallery-card">
-            <div class="gallery-media">${media}</div>
-            <div class="gallery-body">
-                <h3>${escapeHtml(item.titulo)}</h3>
-                ${item.descricao ? `<p>${escapeHtml(item.descricao)}</p>` : ""}
-            </div>
-        </article>`;
+        return '<article class="gallery-card">'
+            + '<div class="gallery-media">' + media + '</div>'
+            + '<div class="gallery-body"><h3>' + escapeHtml(item.titulo) + '</h3>'
+            + (item.descricao ? '<p>' + escapeHtml(item.descricao) + '</p>' : "")
+            + '</div></article>';
     }).join("");
 }
-
 function renderizarEventosPublicos() {
     const container = document.getElementById("publicEvents");
-    const publicEvents = eventos.filter(e => e.publicado).sort((a, b) => String(a.data).localeCompare(String(b.data)));
+    const publicEvents = eventos.filter(function(e) { return e.publicado; }).sort(function(a, b) { return String(a.data).localeCompare(String(b.data)); });
     if (!publicEvents.length) {
-        container.innerHTML = `<div class="empty-state"><span class="icon">📅</span><p>Não existem eventos públicos neste momento.</p></div>`;
+        container.innerHTML = '<div class="empty-state"><span class="icon">📅</span><p>Não existem eventos públicos neste momento.</p></div>';
         return;
     }
-    container.innerHTML = publicEvents.map(e => {
+    container.innerHTML = publicEvents.map(function(e) {
         const dataBr = formatarDataBr(e.data);
-        return `<article class="event-public">
-            <div class="event-date">${dataBr}${e.hora ? `<br><small>${formatTime(e.hora)}</small>` : ""}</div>
-            <div style="flex:1;">
-                <h3>${escapeHtml(e.nome)}</h3>
-                ${e.local ? `<p><strong>Local:</strong> ${escapeHtml(e.local)}</p>` : ""}
-                ${e.descricao ? `<p>${escapeHtml(e.descricao)}</p>` : ""}
-            </div>
-        </article>`;
+        return '<article class="event-public">'
+            + '<div class="event-date">' + dataBr + (e.hora ? '<br><small>' + formatTime(e.hora) + '</small>' : "") + '</div>'
+            + '<div style="flex:1;">'
+            + '<h3>' + escapeHtml(e.nome) + '</h3>'
+            + (e.local ? '<p><strong>Local:</strong> ' + escapeHtml(e.local) + '</p>' : "")
+            + (e.descricao ? '<p>' + escapeHtml(e.descricao) + '</p>' : "")
+            + '</div></article>';
     }).join("");
 }
 
-// =========================================================
-// DASHBOARD
-// =========================================================
-
+// ========== DASHBOARD ==========
 function atualizarDashboard() {
     document.getElementById("statMembros").textContent = membros.length;
-    document.getElementById("statFundadores").textContent = membros.filter(m => m.fundador).length;
-    document.getElementById("statEventos").textContent = eventos.filter(e => e.publicado).length;
-    document.getElementById("statGaleria").textContent = galeria.filter(g => g.publicado).length;
+    document.getElementById("statFundadores").textContent = membros.filter(function(m) { return m.fundador; }).length;
+    document.getElementById("statEventos").textContent = eventos.filter(function(e) { return e.publicado; }).length;
+    document.getElementById("statGaleria").textContent = galeria.filter(function(g) { return g.publicado; }).length;
     const tbody = document.getElementById("dashboardMembers");
     const items = membros.slice(0, 10);
     if (!items.length) {
-        tbody.innerHTML = `<tr><td colspan="4" class="empty-state"><p>Nenhum membro registado.</p></td></tr>`;
+        tbody.innerHTML = '<tr><td colspan="4" class="empty-state"><p>Nenhum membro registado.</p></td></tr>';
         return;
     }
-    tbody.innerHTML = items.map(m => `<tr>
-        <td>${m.fundador ? `<span class="badge badge-founder">Fundador</span>` : "—"}</td>
-        <td>${escapeHtml(m.nome)}</td>
-        <td>${escapeHtml(m.cargo || "—")}</td>
-        <td>${escapeHtml(m.status)}</td>
-    </tr>`).join("");
+    tbody.innerHTML = items.map(function(m) {
+        return '<tr>'
+            + '<td>' + (m.fundador ? '<span class="badge badge-founder">Fundador</span>' : "—") + '</td>'
+            + '<td>' + escapeHtml(m.nome) + '</td>'
+            + '<td>' + escapeHtml(m.cargo || "—") + '</td>'
+            + '<td>' + escapeHtml(m.status) + '</td>'
+            + '</tr>';
+    }).join("");
 }
 
-// =========================================================
-// BACKUP
-// =========================================================
-
+// ========== BACKUP ==========
 async function exportarBackup() {
-    if (!isAdmin) { 
-        mostrarToast("Apenas o administrador pode criar backups.", "error"); 
-        return; 
-    }
-    
+    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
     try {
-        const [membrosResult, eventosResult, galeriaResult, infoResult, transResult, metasResult] = await Promise.all([
+        const results = await Promise.all([
             db.from("membros").select("*"),
             db.from("eventos").select("*"),
             db.from("galeria").select("*"),
@@ -2521,166 +1890,53 @@ async function exportarBackup() {
             db.from("transacoes").select("*"),
             db.from("metas").select("*")
         ]);
-        
-        const errors = [];
-        if (membrosResult.error) errors.push('membros: ' + membrosResult.error.message);
-        if (eventosResult.error) errors.push('eventos: ' + eventosResult.error.message);
-        if (galeriaResult.error) errors.push('galeria: ' + galeriaResult.error.message);
-        if (infoResult.error) errors.push('informacoes_publicas: ' + infoResult.error.message);
-        if (transResult.error) errors.push('transacoes: ' + transResult.error.message);
-        if (metasResult.error) errors.push('metas: ' + metasResult.error.message);
-        
-        if (errors.length) {
-            console.error('Erros no backup:', errors);
-            mostrarToast("Erro ao criar backup: " + errors.join('; '), "error");
-            return;
-        }
-        
         const backup = {
-            schema_version: 3,
-            app: "O.J.V.",
-            exported_at: new Date().toISOString(),
+            schema_version: 3, app: "O.J.V.", exported_at: new Date().toISOString(),
             data: {
-                membros: membrosResult.data || [],
-                eventos: eventosResult.data || [],
-                galeria: galeriaResult.data || [],
-                informacoes_publicas: infoResult.data || [],
-                transacoes: transResult.data || [],
-                metas: metasResult.data || []
+                membros: results[0].data || [], eventos: results[1].data || [], galeria: results[2].data || [],
+                informacoes_publicas: results[3].data || [], transacoes: results[4].data || [], metas: results[5].data || []
             }
         };
-        
         const blob = new Blob([JSON.stringify(backup, null, 2)], {type: "application/json"});
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
-        a.href = url;
-        a.download = `ojv-backup-${new Date().toISOString().slice(0,10)}.json`;
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
+        a.href = url; a.download = "ojv-backup-" + new Date().toISOString().slice(0,10) + ".json";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
         URL.revokeObjectURL(url);
-        
-        mostrarToast("Backup criado com sucesso!", "success");
-        
-    } catch (error) {
-        console.error('Erro no backup:', error);
-        mostrarToast("Erro ao criar backup: " + error.message, "error");
-    }
+        mostrarToast("Backup criado.", "success");
+    } catch (error) { console.error(error); mostrarToast("Erro: " + error.message, "error"); }
 }
-
 async function restaurarBackup() {
-    if (!isAdmin) { mostrarToast("Apenas o administrador pode restaurar backups.", "error"); return; }
-    const file = document.getElementById("backupFile").files?.[0];
-    if (!file) { mostrarToast("Seleciona primeiro um ficheiro JSON.", "error"); return; }
-    if (!confirm("ATENÇÃO: a restauração irá substituir os dados atuais. Continuar?")) return;
+    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
+    const file = document.getElementById("backupFile").files && document.getElementById("backupFile").files[0];
+    if (!file) { mostrarToast("Seleciona um ficheiro JSON.", "error"); return; }
+    if (!confirm("ATENÇÃO: substitui os dados actuais. Continuar?")) return;
     try {
         const text = await file.text();
         const backup = JSON.parse(text);
-        if (!backup || !backup.data) throw new Error("Estrutura de backup inválida.");
-        const data = backup.data;
-        const membrosBackup = Array.isArray(data.membros) ? data.membros : [];
-        const eventosBackup = Array.isArray(data.eventos) ? data.eventos : [];
-        const galeriaBackup = Array.isArray(data.galeria) ? data.galeria : [];
-        const infoBackup = Array.isArray(data.informacoes_publicas) ? data.informacoes_publicas : [];
-        const transBackup = Array.isArray(data.transacoes) ? data.transacoes : [];
-        const metasBackup = Array.isArray(data.metas) ? data.metas : [];
-
-        let result;
-        result = await db.from("membros").delete().neq("id", "00000000-0000-0000-0000-000000000000");
-        if (result.error) throw result.error;
-        result = await db.from("eventos").delete().neq("id", "00000000-0000-0000-0000-000000000000");
-        if (result.error) throw result.error;
-        result = await db.from("galeria").delete().neq("id", "00000000-0000-0000-0000-000000000000");
-        if (result.error) throw result.error;
-        result = await db.from("transacoes").delete().neq("id", "00000000-0000-0000-0000-000000000000");
-        if (result.error) throw result.error;
-        result = await db.from("metas").delete().neq("id", "00000000-0000-0000-0000-000000000000");
-        if (result.error) throw result.error;
-
-        if (membrosBackup.length) {
-            const normalized = membrosBackup.map(m => ({
-                id: m.id, nome: m.nome || "Sem nome", cargo: m.cargo || null, bi: m.bi || null,
-                email: m.email || null, telefone: m.telefone || null, aniversario: m.aniversario || null,
-                data_adesao: m.data_adesao || null, data_entrada: m.data_entrada || m.data_adesao || null,
-                foto_perfil: m.foto_perfil || null, bio_publica: m.bio_publica || null,
-                fundador: !!m.fundador, status: m.status || "Ativo",
-                created_at: m.created_at || new Date().toISOString(),
-                updated_at: m.updated_at || new Date().toISOString()
-            }));
-            result = await db.from("membros").insert(normalized);
-            if (result.error) throw result.error;
+        if (!backup || !backup.data) throw new Error("Backup inválido.");
+        const d = backup.data;
+        await db.from("membros").delete().neq("id", "00000000-0000-0000-0000-000000000000");
+        await db.from("eventos").delete().neq("id", "00000000-0000-0000-0000-000000000000");
+        await db.from("galeria").delete().neq("id", "00000000-0000-0000-0000-000000000000");
+        await db.from("transacoes").delete().neq("id", "00000000-0000-0000-0000-000000000000");
+        await db.from("metas").delete().neq("id", "00000000-0000-0000-0000-000000000000");
+        if (Array.isArray(d.membros) && d.membros.length) await db.from("membros").insert(d.membros);
+        if (Array.isArray(d.eventos) && d.eventos.length) await db.from("eventos").insert(d.eventos);
+        if (Array.isArray(d.galeria) && d.galeria.length) await db.from("galeria").insert(d.galeria);
+        if (Array.isArray(d.transacoes) && d.transacoes.length) await db.from("transacoes").insert(d.transacoes);
+        if (Array.isArray(d.metas) && d.metas.length) await db.from("metas").insert(d.metas);
+        if (Array.isArray(d.informacoes_publicas) && d.informacoes_publicas.length) {
+            const info = Object.assign({ id: 1 }, d.informacoes_publicas[0]);
+            await db.from("informacoes_publicas").upsert(info);
         }
-        if (eventosBackup.length) {
-            const normalized = eventosBackup.map(e => ({
-                id: e.id, nome: e.nome || "Sem nome", data: e.data || hojeLocalISO(),
-                hora: e.hora || null, local: e.local || null, responsavel: e.responsavel || null,
-                participantes: Number(e.participantes || 0), descricao: e.descricao || null,
-                status: e.status || "Agendado", publicado: !!e.publicado,
-                created_at: e.created_at || new Date().toISOString(),
-                updated_at: e.updated_at || new Date().toISOString()
-            }));
-            result = await db.from("eventos").insert(normalized);
-            if (result.error) throw result.error;
-        }
-        if (galeriaBackup.length) {
-            const normalized = galeriaBackup.map(g => ({
-                id: g.id, titulo: g.titulo || "Sem título", descricao: g.descricao || null,
-                tipo: g.tipo === "video" ? "video" : "foto", url: g.url || "",
-                thumbnail_url: g.thumbnail_url || null, publicado: !!g.publicado,
-                destaque: !!g.destaque, created_at: g.created_at || new Date().toISOString()
-            }));
-            result = await db.from("galeria").insert(normalized);
-            if (result.error) throw result.error;
-        }
-        if (infoBackup.length) {
-            const info = infoBackup[0];
-            result = await db.from("informacoes_publicas").upsert({
-                id: 1,
-                nome_organizacao: info.nome_organizacao || "O.J.V. - Organização Jovens Visionários",
-                slogan: info.slogan || null, descricao: info.descricao || null,
-                missao: info.missao || null, visao: info.visao || null,
-                valores: info.valores || null, historia: info.historia || null,
-                endereco: info.endereco || null, telefone_publico: info.telefone_publico || null,
-                email_publico: info.email_publico || null, facebook: info.facebook || null,
-                instagram: info.instagram || null, youtube: info.youtube || null,
-                whatsapp: info.whatsapp || null, logo_url: info.logo_url || null,
-                atualizado_em: new Date().toISOString()
-            });
-            if (result.error) throw result.error;
-        }
-        if (transBackup.length) {
-            const normalized = transBackup.map(t => ({
-                id: t.id, tipo: t.tipo === "Saída" ? "Saída" : "Entrada",
-                categoria: t.categoria || null, valor: Number(t.valor || 0),
-                descricao: t.descricao || null, data: t.data || hojeLocalISO(),
-                created_at: t.created_at || new Date().toISOString()
-            }));
-            result = await db.from("transacoes").insert(normalized);
-            if (result.error) throw result.error;
-        }
-        if (metasBackup.length) {
-            const normalized = metasBackup.map(m => ({
-                id: m.id, valor: Number(m.valor || 0), guardado: Number(m.guardado || 0),
-                created_at: m.created_at || new Date().toISOString(),
-                updated_at: m.updated_at || new Date().toISOString()
-            }));
-            result = await db.from("metas").insert(normalized);
-            if (result.error) throw result.error;
-        }
-
         await carregarTudo();
         preencherFormularioInfo();
-        mostrarToast("Backup restaurado com sucesso.", "success");
-    } catch (error) {
-        console.error(error);
-        mostrarToast("Erro ao restaurar backup: " + error.message, "error");
-    }
+        mostrarToast("Backup restaurado.", "success");
+    } catch (error) { console.error(error); mostrarToast("Erro: " + error.message, "error"); }
 }
 
-// =========================================================
-// RENDERIZAÇÃO E CARREGAMENTO
-// =========================================================
-
+// ========== RENDER GERAL ==========
 function renderizarTudo() {
     renderizarMembros();
     renderizarEventos();
@@ -2691,106 +1947,68 @@ function renderizarTudo() {
     renderizarInfoPublica();
     preencherFormularioInfo();
     atualizarDashboard();
-    carregarFundadoresPublicos().then(() => renderizarFundadores());
+    carregarFundadoresPublicos().then(function() { renderizarFundadores(); });
     renderizarGaleriaPublica();
     renderizarEventosPublicos();
+    aplicarPermissoesUI();
 }
-
+async function carregarTudo() {
+    await Promise.all([
+        carregarMembros(), carregarEventos(), carregarGaleria(),
+        carregarTransacoes(), carregarMetas(), carregarInfoPublica()
+    ]);
+    renderizarTudo();
+}
 async function carregarPublico() {
     await Promise.all([
-        carregarInfoPublica(),
-        carregarFundadoresPublicos(),
-        carregarGaleriaPublica(),
-        carregarEventosPublicos()
+        carregarInfoPublica(), carregarFundadoresPublicos(),
+        carregarGaleriaPublica(), carregarEventosPublicos()
     ]);
     renderizarInfoPublica();
     renderizarFundadores();
     renderizarGaleriaPublica();
     renderizarEventosPublicos();
 }
-
 async function carregarGaleriaPublica() {
-    const {data, error} = await db.from("galeria").select("*").eq("publicado", true).order("destaque", {ascending: false}).order("created_at", {ascending: false});
-    if (error) { console.error(error); return; }
-    galeria = data || [];
+    const r = await db.from("galeria").select("*").eq("publicado", true).order("destaque", {ascending: false}).order("created_at", {ascending: false});
+    if (r.error) { console.error(r.error); return; }
+    galeria = r.data || [];
 }
-
 async function carregarEventosPublicos() {
-    const {data, error} = await db.from("eventos").select("*").eq("publicado", true).order("data", {ascending: true});
-    if (error) { console.error(error); return; }
-    eventos = data || [];
+    const r = await db.from("eventos").select("*").eq("publicado", true).order("data", {ascending: true});
+    if (r.error) { console.error(r.error); return; }
+    eventos = r.data || [];
 }
 
-// =========================================================
-// EVENTOS DE FECHO DE MODAIS
-// =========================================================
-
-document.querySelectorAll(".modal").forEach(modal => {
-    modal.addEventListener("click", (e) => {
-        if (e.target === modal) modal.classList.remove("open");
-    });
+document.querySelectorAll(".modal").forEach(function(modal) {
+    modal.addEventListener("click", function(e) { if (e.target === modal) modal.classList.remove("open"); });
 });
 
-// =========================================================
-// ANO NO FOOTER
-// =========================================================
-
+// ========== INICIALIZAÇÃO ==========
 document.getElementById("footerYear").textContent = new Date().getFullYear();
-
-// =========================================================
-// INICIALIZAÇÃO
-// =========================================================
-
-db.auth.onAuthStateChange((event, session) => {
-    if (event === "SIGNED_OUT") { utilizadorAtual = null; isAdmin = false; mostrarPublico(); }
-    if (event === "SIGNED_IN" && session) { utilizadorAtual = session.user; }
-});
 
 document.addEventListener('DOMContentLoaded', async function() {
     inicializarMascarasData();
-    
-    const { data: { session } } = await db.auth.getSession();
-    if (session) {
-        const { data } = await db
-            .from('user_roles')
-            .select('role')
-            .eq('user_id', session.user.id)
-            .maybeSingle();
-        
-        if (data?.role === 'admin') {
-            isAdmin = true;
-            document.querySelectorAll('.admin-only').forEach(el => {
-                el.classList.remove('hidden');
-                el.style.display = '';
-            });
+    await carregarPublico();
+    await verificarSessao();
+});
+
+db.auth.onAuthStateChange(async function(event, session) {
+    if (event === "SIGNED_OUT") {
+        utilizadorAtual = null; isAdmin = false; isSuperAdmin = false;
+        pararChat();
+        mostrarPublico();
+    }
+    if (event === "SIGNED_IN" && session) {
+        utilizadorAtual = session.user;
+        await verificarAdmin();
+        mostrarAreaInterna();
+        if (isAdmin && !chatIniciado) {
+            chatIniciado = true;
+            setTimeout(function() { iniciarChat(); }, 500);
         }
     }
 });
-
-db.auth.onAuthStateChange((event, session) => {
-    if (event === 'SIGNED_IN' && session) {
-        setTimeout(async () => {
-            const { data } = await db
-                .from('user_roles')
-                .select('role')
-                .eq('user_id', session.user.id)
-                .maybeSingle();
-            
-            if (data?.role === 'admin') {
-                isAdmin = true;
-                document.querySelectorAll('.admin-only').forEach(el => {
-                    el.classList.remove('hidden');
-                    el.style.display = '';
-                });
-            }
-        }, 1000);
-    }
-});
-
-(async function() {
-    await carregarPublico();
-    await verificarSessao();
-})();
 </script>
 </body>
 </html>
