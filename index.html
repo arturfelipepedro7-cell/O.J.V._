@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>O.J.V. - Organização Jovens Visionários</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a3a6b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="O.J.V.">
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
@@ -67,7 +74,7 @@ a { text-decoration: none; color: inherit; }
 .badge-private { background: #e9ecef; color: #495057; }
 .badge-featured { background: #fff3cd; color: #856404; }
 
-#toast { position: fixed; bottom: 30px; right: 30px; z-index: 999; padding: 14px 24px; border-radius: var(--radius-sm); background: var(--text); color: #fff; font-weight: 500; font-size: 14px; box-shadow: 0 10px 40px rgba(0,0,0,0.20); transform: translateY(100px); opacity: 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); max-width: 420px; pointer-events: none; }
+#toast { position: fixed; bottom: 30px; right: 30px; z-index: 9999; padding: 14px 24px; border-radius: var(--radius-sm); background: var(--text); color: #fff; font-weight: 500; font-size: 14px; box-shadow: 0 10px 40px rgba(0,0,0,0.20); transform: translateY(100px); opacity: 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); max-width: 420px; pointer-events: none; }
 #toast.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
 #toast.success { background: var(--success); }
 #toast.error { background: var(--danger); }
@@ -108,11 +115,13 @@ a { text-decoration: none; color: inherit; }
 .founder-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin: 20px auto 14px; border: 4px solid var(--accent-light); background: var(--bg); }
 .founder-card h3 { font-size: 18px; }
 .founder-card p { color: var(--muted); font-size: 14px; }
+.founder-bio { font-size: 13px; color: var(--muted); line-height: 1.6; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-style: italic; white-space: pre-line; }
 
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
 .gallery-card { background: var(--card); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
-.gallery-media { aspect-ratio: 16/10; background: #1a1a2e; overflow: hidden; }
-.gallery-media img, .gallery-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gallery-media { aspect-ratio: 16/10; background: #f0f4fa; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.gallery-media img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+.gallery-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
 .gallery-body { padding: 16px 18px; }
 .gallery-body h3 { font-size: 16px; margin-bottom: 4px; }
 .gallery-body p { color: var(--muted); font-size: 14px; line-height: 1.6; }
@@ -177,6 +186,30 @@ a { text-decoration: none; color: inherit; }
 .panel.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
+.notif-wrap { position: relative; display: flex; align-items: center; }
+.notif-bell { position: relative; width: 36px; height: 36px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 18px; transition: var(--transition); flex-shrink: 0; }
+.notif-bell:hover { background: #d4e0f5; transform: translateY(-2px); }
+.notif-count { position: absolute; top: -4px; right: -4px; background: var(--danger); color: #fff; font-size: 10px; font-weight: 700; min-width: 18px; height: 18px; border-radius: 999px; display: flex; align-items: center; justify-content: center; padding: 0 5px; border: 2px solid var(--card); }
+.notif-count.hidden { display: none; }
+
+.notif-panel { position: absolute; top: 52px; right: 0; width: min(360px, calc(100vw - 24px)); max-height: 70vh; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: 0 20px 50px rgba(0,0,0,0.15); z-index: 9999; display: none; flex-direction: column; overflow: hidden; }
+.notif-panel.open { display: flex; animation: slideUp 0.2s ease; }
+.notif-panel-head { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--bg); }
+.notif-panel-head h3 { font-size: 15px; }
+.notif-panel-head button { font-size: 12px; color: var(--primary); font-weight: 600; }
+.notif-list { flex: 1; overflow-y: auto; }
+.notif-item { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; gap: 12px; cursor: pointer; transition: var(--transition); }
+.notif-item:hover { background: var(--bg); }
+.notif-item.unread { background: #eef4fc; }
+.notif-item .icon { font-size: 22px; flex-shrink: 0; width: 32px; text-align: center; }
+.notif-item .info { flex: 1; min-width: 0; }
+.notif-item .titulo { font-weight: 700; font-size: 14px; margin-bottom: 2px; }
+.notif-item .msg { font-size: 13px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.notif-item .tempo { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.notif-empty { padding: 40px 20px; text-align: center; color: var(--muted); font-size: 14px; }
+.notif-panel-foot { padding: 12px 18px; border-top: 1px solid var(--border); background: var(--bg); }
+.notif-panel-foot button { width: 100%; padding: 10px; font-size: 13px; font-weight: 600; background: var(--primary); color: #fff; border-radius: var(--radius-sm); }
+
 .page-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
 .page-head h1 { font-size: 26px; color: var(--primary); }
 .page-head p { color: var(--muted); margin-top: 2px; }
@@ -211,24 +244,20 @@ tr:hover td { background: #fafbfc; }
 
 .media-admin-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
 .media-admin-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
-.media-admin-card .media-preview { aspect-ratio: 16/10; background: #1a1a2e; overflow: hidden; }
-.media-admin-card .media-preview img, .media-admin-card .media-preview video { width: 100%; height: 100%; object-fit: cover; }
+.media-admin-card .media-preview { aspect-ratio: 16/10; background: #f0f4fa; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.media-admin-card .media-preview img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.media-admin-card .media-preview video { width: 100%; height: 100%; object-fit: cover; }
 .media-admin-body { padding: 14px 16px; }
 .media-admin-body strong { font-size: 15px; }
 
 .progress-bar { height: 10px; background: var(--border); border-radius: 999px; overflow: hidden; margin: 8px 0; }
 .progress-bar .fill { height: 100%; background: linear-gradient(90deg, var(--primary2), var(--accent)); border-radius: 999px; transition: width 0.6s ease; }
 
-.backup-box, .integration-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; box-shadow: var(--shadow); max-width: 700px; }
-.backup-box h3, .integration-box h3 { margin-bottom: 4px; }
-.backup-box .help, .integration-box .help { color: var(--muted); font-size: 13px; line-height: 1.7; }
+.backup-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; box-shadow: var(--shadow); max-width: 700px; }
+.backup-box h3 { margin-bottom: 4px; }
+.backup-box .help { color: var(--muted); font-size: 13px; line-height: 1.7; }
 .backup-box hr { margin: 24px 0; border: none; border-top: 1px solid var(--border); }
-.integration-box .help { background: var(--bg); padding: 12px 16px; border-radius: var(--radius-sm); margin: 12px 0 18px; }
-.integration-box .status-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; margin-bottom: 12px; }
-.integration-box .status-pill.on { background: #d4edda; color: #155724; }
-.integration-box .status-pill.off { background: #f8d7da; color: #721c24; }
 
-/* ========== CHAT ========== */
 .chat-layout { display: grid; grid-template-columns: 1fr; gap: 16px; height: calc(100vh - 200px); min-height: 500px; }
 .chat-window { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); display: flex; flex-direction: column; overflow: hidden; }
 .chat-header { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background: var(--bg); }
@@ -237,71 +266,22 @@ tr:hover td { background: #fafbfc; }
 .chat-status .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--success); }
 .chat-status .dot.offline { background: var(--danger); }
 .chat-messages { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 14px; background: linear-gradient(180deg, #fafbfc 0%, #f0f4fa 100%); }
-
 .chat-msg-row { display: flex; gap: 10px; align-items: flex-end; max-width: 80%; animation: msgIn 0.25s ease; }
 .chat-msg-row.me { align-self: flex-end; flex-direction: row-reverse; }
 .chat-msg-row.other { align-self: flex-start; }
-
-.chat-avatar {
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-    background: var(--primary-light);
-    border: 2px solid #fff;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; color: var(--primary); font-size: 14px;
-    overflow: hidden;
-}
+.chat-avatar { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: var(--primary-light); border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--primary); font-size: 14px; overflow: hidden; }
 .chat-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-
-.chat-msg {
-    padding: 10px 14px;
-    border-radius: 14px;
-    font-size: 14px;
-    line-height: 1.5;
-    word-wrap: break-word;
-    position: relative;
-    flex: 1;
-    min-width: 0;
-}
+.chat-msg { padding: 10px 14px; border-radius: 14px; font-size: 14px; line-height: 1.5; word-wrap: break-word; position: relative; flex: 1; min-width: 0; }
 .chat-msg-row.me .chat-msg { background: var(--primary); color: #fff; border-bottom-right-radius: 4px; }
 .chat-msg-row.other .chat-msg { background: #fff; border: 1px solid var(--border); border-bottom-left-radius: 4px; }
-
 .chat-msg .sender { font-size: 11px; font-weight: 700; opacity: 0.75; margin-bottom: 2px; display: block; padding-right: 26px; }
 .chat-msg .time { font-size: 10px; opacity: 0.65; margin-top: 4px; display: block; text-align: right; }
 .chat-msg .msg-text { white-space: pre-wrap; word-break: break-word; padding-right: 20px; }
-
-.chat-msg .btn-delete-msg {
-    position: absolute;
-    top: 6px;
-    right: 6px;
-    background: rgba(0,0,0,0.15);
-    color: #fff;
-    border: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    font-size: 14px;
-    line-height: 1;
-    cursor: pointer;
-    opacity: 0;
-    transition: opacity 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-    font-weight: 700;
-}
+.chat-msg .btn-delete-msg { position: absolute; top: 6px; right: 6px; background: rgba(0,0,0,0.15); color: #fff; border: none; width: 20px; height: 20px; border-radius: 50%; font-size: 14px; line-height: 1; cursor: pointer; opacity: 0; transition: opacity 0.2s; display: flex; align-items: center; justify-content: center; padding: 0; font-weight: 700; }
 .chat-msg-row.other .btn-delete-msg { background: rgba(0,0,0,0.1); color: var(--muted); }
 .chat-msg-row:hover .btn-delete-msg { opacity: 1; }
 .chat-msg .btn-delete-msg:hover { background: var(--danger); color: #fff; }
-
-@media (hover: none) {
-    .chat-msg .btn-delete-msg { opacity: 0.6; }
-}
-
+@media (hover: none) { .chat-msg .btn-delete-msg { opacity: 0.6; } }
 @keyframes msgIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 .chat-input-row { padding: 14px; border-top: 1px solid var(--border); display: flex; gap: 10px; background: var(--card); }
 .chat-input-row input { flex: 1; padding: 10px 14px; border: 1px solid var(--border); border-radius: 999px; outline: none; font-size: 14px; }
@@ -332,13 +312,18 @@ tr:hover td { background: #fafbfc; }
     .sidebar.open { transform: translateX(0); }
     .main { margin-left: 0; width: 100%; }
     .content { padding: 16px; }
-    .topbar { padding: 0 16px; }
+    .topbar { padding: 0 12px; height: 56px; }
+    .topbar-title { font-size: 15px; }
     .contact-box { padding: 28px 20px; }
     .modal-box { padding: 20px; }
     .brand-slogan { display: block; font-size: 11px; }
     .brand-name { font-size: 15px; }
     .brand img { width: 40px; height: 40px; }
     .chat-msg-row { max-width: 90%; }
+    .user-badge { font-size: 11px; }
+    .user-badge .avatar { width: 28px; height: 28px; font-size: 12px; }
+    .role-badge { display: none !important; }
+    .notif-panel { position: fixed; top: 68px; left: 12px; right: 12px; width: auto; max-height: 60vh; }
 }
 @media (max-width: 480px) {
     .founders-grid { grid-template-columns: 1fr; }
@@ -348,6 +333,7 @@ tr:hover td { background: #fafbfc; }
     .hero h1 { font-size: 28px; }
     .section { padding: 40px 16px; }
     .section-heading h2 { font-size: 24px; }
+    .topbar-title { font-size: 14px; }
 }
 .empty-state { text-align: center; padding: 40px 20px; color: var(--muted); }
 .empty-state .icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
@@ -503,14 +489,34 @@ tr:hover td { background: #fafbfc; }
 
 <main class="main">
 <header class="topbar">
-    <div style="display:flex;align-items:center;gap:10px;">
+    <div style="display:flex;align-items:center;gap:8px;min-width:0;">
         <button class="mobile-menu" onclick="toggleSidebar()">☰</button>
         <span class="topbar-title" id="pageTitle">Painel</span>
     </div>
-    <div class="user-badge">
-        <span class="avatar" id="userAvatar">U</span>
-        <span id="currentUser">—</span>
-        <span class="role-badge" id="roleBadge" style="display:none;"></span>
+    <div style="display:flex;align-items:center;gap:8px;">
+        <div class="notif-wrap">
+            <button class="notif-bell" onclick="togglePainelNotif()" title="Notificações">
+                🔔
+                <span class="notif-count hidden" id="notifCount">0</span>
+            </button>
+            <div class="notif-panel" id="notifPanel">
+                <div class="notif-panel-head">
+                    <h3>Notificações</h3>
+                    <button onclick="marcarTodasLidas()">Marcar todas lidas</button>
+                </div>
+                <div class="notif-list" id="notifList">
+                    <div class="notif-empty">A carregar...</div>
+                </div>
+                <div class="notif-panel-foot" id="notifFoot" style="display:none;">
+                    <button onclick="activarPush()">🔔 Activar notificações push</button>
+                </div>
+            </div>
+        </div>
+        <div class="user-badge">
+            <span class="avatar" id="userAvatar">U</span>
+            <span id="currentUser" style="max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">—</span>
+            <span class="role-badge" id="roleBadge" style="display:none;"></span>
+        </div>
     </div>
 </header>
 
@@ -519,12 +525,8 @@ tr:hover td { background: #fafbfc; }
 <section id="panel-dashboard" class="panel active">
     <div class="page-head">
         <div><h1>Painel</h1><p>Visão geral da organização.</p></div>
-        <span style="font-size:13px;color:var(--muted);">Atualizado em tempo real</span>
     </div>
-    <div id="avisoDashboard" class="readonly-notice hidden">
-        <span>👁️</span>
-        <span>Estás em <strong>modo de visualização</strong>. Só podes ver os dados — apenas o Super Admin pode alterar.</span>
-    </div>
+    <div id="avisoDashboard" class="readonly-notice hidden"><span>👁️</span><span>Modo de visualização.</span></div>
     <div class="stats-grid">
         <div class="stat-card"><span class="label">Total de membros</span><div class="value" id="statMembros">0</div></div>
         <div class="stat-card"><span class="label">Fundadores</span><div class="value" id="statFundadores">0</div></div>
@@ -544,13 +546,10 @@ tr:hover td { background: #fafbfc; }
 
 <section id="panel-membros" class="panel">
     <div class="page-head">
-        <div><h1>Membros</h1><p>Fundadores aparecem primeiro. Os restantes ficam somente na área interna.</p></div>
+        <div><h1>Membros</h1><p>Fundadores aparecem primeiro.</p></div>
         <button class="btn btn-primary super-admin-only hidden" onclick="abrirMembroModal()">Novo membro</button>
     </div>
-    <div id="avisoMembros" class="readonly-notice hidden">
-        <span>👁️</span>
-        <span>Estás em <strong>modo de visualização</strong>. Não podes criar, editar ou apagar membros.</span>
-    </div>
+    <div id="avisoMembros" class="readonly-notice hidden"><span>👁️</span><span>Modo de visualização.</span></div>
     <div class="table-card">
         <div class="table-wrapper">
             <table>
@@ -585,9 +584,8 @@ tr:hover td { background: #fafbfc; }
     <div class="page-head"><div><h1>Videochamada</h1><p>Reuniões em vídeo entre administradores (via Jitsi Meet).</p></div></div>
     <div class="table-card" style="padding:24px;">
         <h3 style="margin-bottom:12px;">Iniciar ou entrar numa sala</h3>
-        <p class="text-muted" style="font-size:13px;margin-bottom:16px;">A videochamada usa o Jitsi Meet (gratuito). No telemóvel abre numa nova aba automaticamente.</p>
         <div class="form-grid">
-            <div class="field"><label>Nome da sala</label><input id="videoRoomName" placeholder="ex: reuniao-direcao" value="ojv-admin"></div>
+            <div class="field"><label>Nome da sala</label><input id="videoRoomName" value="ojv-admin"></div>
             <div class="field"><label>Nome a apresentar</label><input id="videoDisplayName" placeholder="O teu nome"></div>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;">
@@ -616,10 +614,7 @@ tr:hover td { background: #fafbfc; }
         <div><h1>Transações</h1><p>Registo financeiro interno.</p></div>
         <button class="btn btn-primary super-admin-only hidden" onclick="abrirTransacaoModal()">Nova transação</button>
     </div>
-    <div id="avisoTransacoes" class="readonly-notice hidden">
-        <span>👁️</span>
-        <span>Estás em <strong>modo de visualização</strong>. Não podes criar ou apagar transações.</span>
-    </div>
+    <div id="avisoTransacoes" class="readonly-notice hidden"><span>👁️</span><span>Modo de visualização.</span></div>
     <div class="table-card">
         <div class="table-wrapper">
             <table>
@@ -632,13 +627,10 @@ tr:hover td { background: #fafbfc; }
 
 <section id="panel-eventos" class="panel">
     <div class="page-head">
-        <div><h1>Eventos</h1><p>Gere os eventos e partilha-os nas redes sociais.</p></div>
+        <div><h1>Eventos</h1><p>Gere os eventos e partilha-os.</p></div>
         <button class="btn btn-primary super-admin-only hidden" onclick="abrirEventoModal()">Novo evento</button>
     </div>
-    <div id="avisoEventos" class="readonly-notice hidden">
-        <span>👁️</span>
-        <span>Estás em <strong>modo de visualização</strong>. Não podes criar, editar ou apagar eventos.</span>
-    </div>
+    <div id="avisoEventos" class="readonly-notice hidden"><span>👁️</span><span>Modo de visualização.</span></div>
     <div class="table-card">
         <div class="table-wrapper">
             <table>
@@ -651,25 +643,22 @@ tr:hover td { background: #fafbfc; }
 
 <section id="panel-galeriaAdmin" class="panel">
     <div class="page-head"><div><h1>Galeria</h1><p>Adiciona fotos ou vídeos.</p></div></div>
-    <div id="avisoGaleria" class="readonly-notice hidden">
-        <span>👁️</span>
-        <span>Estás em <strong>modo de visualização</strong>. Não podes adicionar ou apagar conteúdos.</span>
-    </div>
+    <div id="avisoGaleria" class="readonly-notice hidden"><span>👁️</span><span>Modo de visualização.</span></div>
     <div class="table-card super-admin-only hidden" style="padding:24px;margin-bottom:24px;">
         <h3 style="margin-bottom:12px;">Adicionar conteúdo</h3>
         <form id="galleryForm">
             <div class="form-grid">
-                <div class="field"><label>Título *</label><input id="galleryTitle" required placeholder="Título do conteúdo"></div>
+                <div class="field"><label>Título *</label><input id="galleryTitle" required></div>
                 <div class="field"><label>Tipo</label><select id="galleryType" onchange="toggleThumbnailField()"><option value="foto">Foto</option><option value="video">Vídeo</option></select></div>
             </div>
             <div class="field" id="thumbnailField" style="display:none;">
-                <label>Imagem de capa (thumbnail) - para vídeos</label>
+                <label>Imagem de capa - para vídeos</label>
                 <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
                     <input type="file" id="galleryThumbnail" accept="image/*">
                     <img id="thumbnailPreview" style="width:120px;height:68px;object-fit:cover;border-radius:6px;border:1px solid var(--border);display:none;" alt="Preview">
                 </div>
             </div>
-            <div class="field"><label>Descrição</label><textarea id="galleryDescription" placeholder="Descrição opcional..."></textarea></div>
+            <div class="field"><label>Descrição</label><textarea id="galleryDescription"></textarea></div>
             <div class="form-grid">
                 <div class="field"><label>Ficheiro</label><input type="file" id="galleryFile" accept="image/*,video/*"></div>
                 <div class="field"><label>Ou URL externa</label><input id="galleryUrl" type="url" placeholder="https://..."></div>
@@ -686,31 +675,28 @@ tr:hover td { background: #fafbfc; }
 
 <section id="panel-informacoes" class="panel">
     <div class="page-head"><div><h1>Informações públicas</h1><p>Tudo o que for colocado aqui aparecerá na página pública.</p></div></div>
-    <div id="avisoInformacoes" class="readonly-notice hidden">
-        <span>👁️</span>
-        <span>Estás em <strong>modo de visualização</strong>. Apenas o Super Admin pode editar as informações.</span>
-    </div>
+    <div id="avisoInformacoes" class="readonly-notice hidden"><span>👁️</span><span>Modo de visualização.</span></div>
     <div class="table-card super-admin-only hidden" style="padding:24px;">
         <form id="publicInfoForm">
             <div class="form-grid">
-                <div class="field"><label>Nome da organização</label><input id="infoNome" placeholder="O.J.V."></div>
-                <div class="field"><label>Slogan</label><input id="infoSlogan" placeholder="Jovens com visão..."></div>
+                <div class="field"><label>Nome da organização</label><input id="infoNome"></div>
+                <div class="field"><label>Slogan</label><input id="infoSlogan"></div>
             </div>
-            <div class="field"><label>Descrição</label><textarea id="infoDescricao" placeholder="Descrição da organização..."></textarea></div>
-            <div class="field"><label>História</label><textarea id="infoHistoria" placeholder="História da organização..."></textarea></div>
+            <div class="field"><label>Descrição</label><textarea id="infoDescricao"></textarea></div>
+            <div class="field"><label>História</label><textarea id="infoHistoria"></textarea></div>
             <div class="form-grid">
-                <div class="field"><label>Missão</label><textarea id="infoMissao" placeholder="Nossa missão..."></textarea></div>
-                <div class="field"><label>Visão</label><textarea id="infoVisao" placeholder="Nossa visão..."></textarea></div>
+                <div class="field"><label>Missão</label><textarea id="infoMissao"></textarea></div>
+                <div class="field"><label>Visão</label><textarea id="infoVisao"></textarea></div>
             </div>
-            <div class="field"><label>Valores</label><textarea id="infoValores" placeholder="Nossos valores..."></textarea></div>
+            <div class="field"><label>Valores</label><textarea id="infoValores"></textarea></div>
             <div class="form-grid">
-                <div class="field"><label>Endereço</label><input id="infoEndereco" placeholder="Rua, nº, cidade"></div>
-                <div class="field"><label>Telefone público</label><input id="infoTelefone" placeholder="+244 900 000 000"></div>
-                <div class="field"><label>E-mail público</label><input id="infoEmail" type="email" placeholder="contato@ojv.ao"></div>
-                <div class="field"><label>WhatsApp</label><input id="infoWhatsapp" placeholder="900 000 000"></div>
-                <div class="field"><label>Facebook</label><input id="infoFacebook" type="url" placeholder="https://facebook.com/ojv"></div>
-                <div class="field"><label>Instagram</label><input id="infoInstagram" type="url" placeholder="https://instagram.com/ojv"></div>
-                <div class="field"><label>YouTube</label><input id="infoYoutube" type="url" placeholder="https://youtube.com/ojv"></div>
+                <div class="field"><label>Endereço</label><input id="infoEndereco"></div>
+                <div class="field"><label>Telefone público</label><input id="infoTelefone"></div>
+                <div class="field"><label>E-mail público</label><input id="infoEmail" type="email"></div>
+                <div class="field"><label>WhatsApp</label><input id="infoWhatsapp"></div>
+                <div class="field"><label>Facebook</label><input id="infoFacebook" type="url"></div>
+                <div class="field"><label>Instagram</label><input id="infoInstagram" type="url"></div>
+                <div class="field"><label>YouTube</label><input id="infoYoutube" type="url"></div>
             </div>
             <button class="btn btn-primary">Guardar informações</button>
         </form>
@@ -719,14 +705,11 @@ tr:hover td { background: #fafbfc; }
 
 <section id="panel-meta" class="panel">
     <div class="page-head"><div><h1>Meta financeira</h1><p>Define a meta e acompanha o valor guardado.</p></div></div>
-    <div id="avisoMeta" class="readonly-notice hidden">
-        <span>👁️</span>
-        <span>Estás em <strong>modo de visualização</strong>. Apenas o Super Admin pode alterar a meta.</span>
-    </div>
+    <div id="avisoMeta" class="readonly-notice hidden"><span>👁️</span><span>Modo de visualização.</span></div>
     <div class="backup-box">
         <div class="form-grid">
-            <div class="field"><label>Valor da meta</label><input id="metaValor" type="number" min="0" step="0.01" placeholder="0.00"></div>
-            <div class="field"><label>Valor guardado</label><input id="metaGuardado" type="number" min="0" step="0.01" placeholder="0.00"></div>
+            <div class="field"><label>Valor da meta</label><input id="metaValor" type="number" min="0" step="0.01"></div>
+            <div class="field"><label>Valor guardado</label><input id="metaGuardado" type="number" min="0" step="0.01"></div>
         </div>
         <div style="margin:16px 0;">
             <div class="progress-bar"><div class="fill" id="metaProgress" style="width:0%;"></div></div>
@@ -740,18 +723,14 @@ tr:hover td { background: #fafbfc; }
 </section>
 
 <section id="panel-backup" class="panel">
-    <div class="page-head"><div><h1>Backup</h1><p>Guarda uma cópia JSON dos dados da organização.</p></div></div>
-    <div id="avisoBackup" class="readonly-notice hidden">
-        <span>👁️</span>
-        <span>Estás em <strong>modo de visualização</strong>. Apenas o Super Admin pode fazer backup/restauro.</span>
-    </div>
+    <div class="page-head"><div><h1>Backup</h1><p>Guarda uma cópia JSON dos dados.</p></div></div>
+    <div id="avisoBackup" class="readonly-notice hidden"><span>👁️</span><span>Modo de visualização.</span></div>
     <div class="backup-box super-admin-only hidden">
         <h3>Exportar backup</h3>
-        <p class="help">Inclui membros, eventos, galeria, informações públicas, transações e metas.</p>
+        <p class="help">Inclui membros, eventos, galeria, informações, transações, metas e chat.</p>
         <button class="btn btn-primary" onclick="exportarBackup()">Baixar backup JSON</button>
         <hr>
         <h3>Restaurar backup</h3>
-        <p class="help">Escolhe um ficheiro JSON criado pelo sistema.</p>
         <input type="file" id="backupFile" accept=".json,application/json" style="margin:10px 0 14px;display:block;">
         <button class="btn btn-danger" onclick="restaurarBackup()">Restaurar backup</button>
     </div>
@@ -768,11 +747,11 @@ tr:hover td { background: #fafbfc; }
         <form id="memberForm">
             <input type="hidden" id="memberId">
             <div class="form-grid">
-                <div class="field"><label>Nome *</label><input id="memberNome" required placeholder="Nome completo"></div>
-                <div class="field"><label>Cargo</label><input id="memberCargo" placeholder="Cargo"></div>
-                <div class="field"><label>BI</label><input id="memberBi" placeholder="Nº do BI"></div>
-                <div class="field"><label>E-mail</label><input id="memberEmail" type="email" placeholder="email@exemplo.com"></div>
-                <div class="field"><label>Telefone</label><input id="memberTelefone" placeholder="900 000 000"></div>
+                <div class="field"><label>Nome *</label><input id="memberNome" required></div>
+                <div class="field"><label>Cargo</label><input id="memberCargo"></div>
+                <div class="field"><label>BI</label><input id="memberBi"></div>
+                <div class="field"><label>E-mail</label><input id="memberEmail" type="email"></div>
+                <div class="field"><label>Telefone</label><input id="memberTelefone"></div>
                 <div class="field"><label>Aniversário</label><input id="memberAniversario" class="campo-data-mascara" placeholder="DD/MM/AAAA" maxlength="10"></div>
                 <div class="field"><label>Data de adesão</label><input id="memberAdesao" class="campo-data-mascara" placeholder="DD/MM/AAAA" maxlength="10"></div>
                 <div class="field"><label>Data de entrada</label><input id="memberEntrada" class="campo-data-mascara" placeholder="DD/MM/AAAA" maxlength="10"></div>
@@ -783,8 +762,9 @@ tr:hover td { background: #fafbfc; }
                 <label>Foto de perfil</label>
                 <img id="memberPreview" class="preview-profile" src="logo.png" alt="Pré-visualização">
                 <input type="file" id="memberPhoto" accept="image/png,image/jpeg,image/webp">
+                <button type="button" class="btn btn-danger btn-sm mt-8" id="btnRemoverFoto" onclick="removerFotoMembro()" style="display:none;">🗑️ Remover foto</button>
             </div>
-            <div class="field"><label>Bio pública do fundador</label><textarea id="memberBio" placeholder="Opcional. Usada apenas se for fundador."></textarea></div>
+            <div class="field"><label>Bio pública do fundador</label><textarea id="memberBio"></textarea></div>
             <div class="modal-actions">
                 <button type="button" class="btn btn-ghost" onclick="fecharMembroModal()">Cancelar</button>
                 <button type="submit" class="btn btn-primary">Guardar membro</button>
@@ -800,15 +780,15 @@ tr:hover td { background: #fafbfc; }
         <form id="eventForm">
             <input type="hidden" id="eventId">
             <div class="form-grid">
-                <div class="field"><label>Nome do evento *</label><input id="eventNome" required placeholder="Nome do evento"></div>
+                <div class="field"><label>Nome do evento *</label><input id="eventNome" required></div>
                 <div class="field"><label>Data *</label><input id="eventData" class="campo-data-mascara" required placeholder="DD/MM/AAAA" maxlength="10"></div>
                 <div class="field"><label>Hora</label><input id="eventHora" type="time"></div>
-                <div class="field"><label>Local</label><input id="eventLocal" placeholder="Local do evento"></div>
-                <div class="field"><label>Responsável</label><input id="eventResponsavel" placeholder="Nome do responsável"></div>
+                <div class="field"><label>Local</label><input id="eventLocal"></div>
+                <div class="field"><label>Responsável</label><input id="eventResponsavel"></div>
                 <div class="field"><label>Participantes</label><input id="eventParticipantes" type="number" min="0" value="0"></div>
                 <div class="field"><label>Status</label><select id="eventStatus"><option value="Agendado">Agendado</option><option value="Realizado">Realizado</option><option value="Cancelado">Cancelado</option></select></div>
             </div>
-            <div class="field"><label>Descrição</label><textarea id="eventDescricao" placeholder="Descrição do evento..."></textarea></div>
+            <div class="field"><label>Descrição</label><textarea id="eventDescricao"></textarea></div>
             <label class="check"><input type="checkbox" id="eventPublicado"> Publicar este evento na área pública</label>
             <div class="modal-actions">
                 <button type="button" class="btn btn-ghost" onclick="fecharEventoModal()">Cancelar</button>
@@ -825,11 +805,11 @@ tr:hover td { background: #fafbfc; }
         <form id="transactionForm">
             <div class="form-grid">
                 <div class="field"><label>Tipo</label><select id="transactionTipo"><option value="Entrada">Entrada</option><option value="Saída">Saída</option></select></div>
-                <div class="field"><label>Categoria</label><input id="transactionCategoria" placeholder="Ex: Eventos, Material"></div>
-                <div class="field"><label>Valor *</label><input id="transactionValor" type="number" min="0" step="0.01" required placeholder="0.00"></div>
+                <div class="field"><label>Categoria</label><input id="transactionCategoria"></div>
+                <div class="field"><label>Valor *</label><input id="transactionValor" type="number" min="0" step="0.01" required></div>
                 <div class="field"><label>Data *</label><input id="transactionData" class="campo-data-mascara" required placeholder="DD/MM/AAAA" maxlength="10"></div>
             </div>
-            <div class="field"><label>Descrição</label><textarea id="transactionDescricao" placeholder="Descrição opcional..."></textarea></div>
+            <div class="field"><label>Descrição</label><textarea id="transactionDescricao"></textarea></div>
             <div class="modal-actions">
                 <button type="button" class="btn btn-ghost" onclick="fecharTransacaoModal()">Cancelar</button>
                 <button type="submit" class="btn btn-primary">Guardar</button>
@@ -839,8 +819,13 @@ tr:hover td { background: #fafbfc; }
 </div>
 
 <script>
+// ============================================================
+// CONFIGURAÇÃO
+// ============================================================
 const SUPABASE_URL = "https://rfhbeicvyotqbmndbxhy.supabase.co";
 const SUPABASE_KEY = "sb_publishable_CJSvMF7a_UnoMyWbQvCnIA_IABoU2N0";
+const VAPID_PUBLIC_KEY = "BEl62iUYgUivxIkv69yViEuiBIa-Ib9-SkvMeAtA3LFgDzkrxZJjSgSnfckjBJuBkr3qBUYIHBQFLXYp5Nksh8U";
+
 const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 let utilizadorAtual = null;
@@ -855,110 +840,51 @@ let metas = [];
 let infoPublica = null;
 let editMemberId = null;
 let editEventId = null;
-
 let chatChannel = null;
 let chatOnlineUsers = new Set();
 let chatUnreadCount = 0;
 let chatWindowActive = false;
 let chatIniciado = false;
 let minhaFotoCache = null;
+let notificacoes = [];
+let notifChannel = null;
 
-// ========== HELPERS ==========
-function escapeHtml(v) {
-    if (v == null) return "";
-    return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
-}
+// ============================================================
+// HELPERS
+// ============================================================
+function escapeHtml(v) { if (v == null) return ""; return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;"); }
 function formatMoney(v) { return Number(v || 0).toLocaleString("pt-PT", {minimumFractionDigits:2, maximumFractionDigits:2}); }
 function formatTime(v) { if (!v) return ""; return String(v).slice(0,5); }
-function safeUrl(v) {
-    if (!v) return "";
-    try { const u = new URL(v); if (u.protocol === "http:" || u.protocol === "https:") return u.href; } catch(e) {}
-    return "";
-}
-function gerarNomeArquivo(nome) {
-    const base = String(nome || "ficheiro").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9._-]/g,"-").toLowerCase();
-    return Date.now() + "-" + Math.random().toString(36).slice(2,8) + "-" + base;
-}
-function publicStorageUrl(bucket, path) {
-    const {data} = db.storage.from(bucket).getPublicUrl(path);
-    return data.publicUrl;
-}
-function mostrarToast(msg, type) {
-    const el = document.getElementById("toast");
-    el.textContent = msg;
-    el.className = "show " + (type || "");
-    clearTimeout(window.toastTimer);
-    window.toastTimer = setTimeout(function() { el.className = ""; }, 3500);
-}
-function formatarDataBr(dataStr) {
-    if (!dataStr) return '—';
-    const partes = String(dataStr).slice(0,10).split('-');
-    if (partes.length < 3) return dataStr;
-    return partes[2] + '/' + partes[1] + '/' + partes[0];
-}
-function dataBrParaInput(dataStr) {
-    if (!dataStr) return '';
-    if (/^\d{4}-\d{2}-\d{2}$/.test(dataStr)) return dataStr;
-    const partes = dataStr.split('/');
-    if (partes.length === 3) {
-        return partes[2] + '-' + partes[1].padStart(2,'0') + '-' + partes[0].padStart(2,'0');
-    }
-    return dataStr;
-}
-function aplicarMascaraData(input) {
-    let valor = input.value.replace(/\D/g, '');
-    if (valor.length > 8) valor = valor.slice(0, 8);
-    let formato = '';
-    for (let i = 0; i < valor.length; i++) {
-        if (i === 2 || i === 4) formato += '/';
-        formato += valor[i];
-    }
-    input.value = formato;
-}
-function inicializarMascarasData() {
-    document.querySelectorAll('.campo-data-mascara').forEach(function(input) {
-        input.addEventListener('input', function() { aplicarMascaraData(this); });
-        input.addEventListener('blur', function() { if (!this.value) this.placeholder = 'DD/MM/AAAA'; });
-    });
-}
+function safeUrl(v) { if (!v) return ""; try { const u = new URL(v); if (u.protocol === "http:" || u.protocol === "https:") return u.href; } catch(e) {} return ""; }
+function gerarNomeArquivo(nome) { const base = String(nome || "ficheiro").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-zA-Z0-9._-]/g,"-").toLowerCase(); return Date.now() + "-" + Math.random().toString(36).slice(2,8) + "-" + base; }
+function publicStorageUrl(bucket, path) { const {data} = db.storage.from(bucket).getPublicUrl(path); return data.publicUrl; }
+function mostrarToast(msg, type) { const el = document.getElementById("toast"); el.textContent = msg; el.className = "show " + (type || ""); clearTimeout(window.toastTimer); window.toastTimer = setTimeout(function() { el.className = ""; }, 3500); }
+function formatarDataBr(s) { if (!s) return '—'; const p = String(s).slice(0,10).split('-'); if (p.length < 3) return s; return p[2] + '/' + p[1] + '/' + p[0]; }
+function dataBrParaInput(s) { if (!s) return ''; if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s; const p = s.split('/'); if (p.length === 3) return p[2] + '-' + p[1].padStart(2,'0') + '-' + p[0].padStart(2,'0'); return s; }
+function aplicarMascaraData(input) { let v = input.value.replace(/\D/g, ''); if (v.length > 8) v = v.slice(0, 8); let f = ''; for (let i = 0; i < v.length; i++) { if (i === 2 || i === 4) f += '/'; f += v[i]; } input.value = f; }
+function inicializarMascarasData() { document.querySelectorAll('.campo-data-mascara').forEach(function(input) { input.addEventListener('input', function() { aplicarMascaraData(this); }); input.addEventListener('blur', function() { if (!this.value) this.placeholder = 'DD/MM/AAAA'; }); }); }
+function tempoRelativo(iso) { const dif = Math.floor((Date.now() - new Date(iso).getTime()) / 1000); if (dif < 60) return "agora"; if (dif < 3600) return Math.floor(dif/60) + " min"; if (dif < 86400) return Math.floor(dif/3600) + " h"; if (dif < 604800) return Math.floor(dif/86400) + " d"; return new Date(iso).toLocaleDateString("pt-PT"); }
 
-// ========== PERMISSÕES UI ==========
+// ============================================================
+// PERMISSÕES
+// ============================================================
 function aplicarPermissoesUI() {
-    document.querySelectorAll(".super-admin-only").forEach(function(el) {
-        el.classList.toggle("hidden", !isSuperAdmin);
-    });
-    document.querySelectorAll(".super-admin-col").forEach(function(el) {
-        el.classList.toggle("hidden", !isSuperAdmin);
-    });
-    const avisos = ["avisoDashboard", "avisoMembros", "avisoTransacoes", "avisoEventos",
-                    "avisoGaleria", "avisoInformacoes", "avisoMeta", "avisoBackup"];
-    avisos.forEach(function(id) {
-        const el = document.getElementById(id);
-        if (el) el.classList.toggle("hidden", !(isAdmin && !isSuperAdmin));
-    });
+    document.querySelectorAll(".super-admin-only").forEach(function(el) { el.classList.toggle("hidden", !isSuperAdmin); });
+    document.querySelectorAll(".super-admin-col").forEach(function(el) { el.classList.toggle("hidden", !isSuperAdmin); });
+    const avisos = ["avisoDashboard", "avisoMembros", "avisoTransacoes", "avisoEventos", "avisoGaleria", "avisoInformacoes", "avisoMeta", "avisoBackup"];
+    avisos.forEach(function(id) { const el = document.getElementById(id); if (el) el.classList.toggle("hidden", !(isAdmin && !isSuperAdmin)); });
     const badge = document.getElementById("roleBadge");
     if (badge) {
-        if (isSuperAdmin) {
-            badge.textContent = "Super Admin";
-            badge.style.background = "#d4edda";
-            badge.style.color = "#155724";
-            badge.style.display = "inline-flex";
-        } else if (isAdmin) {
-            badge.textContent = "Visualizador";
-            badge.style.background = "#cfe2ff";
-            badge.style.color = "#084298";
-            badge.style.display = "inline-flex";
-        } else {
-            badge.style.display = "none";
-        }
+        if (isSuperAdmin) { badge.textContent = "Super Admin"; badge.style.background = "#d4edda"; badge.style.color = "#155724"; badge.style.display = "inline-flex"; }
+        else if (isAdmin) { badge.textContent = "Visualizador"; badge.style.background = "#cfe2ff"; badge.style.color = "#084298"; badge.style.display = "inline-flex"; }
+        else { badge.style.display = "none"; }
     }
 }
 
-// ========== LOGIN ==========
-function abrirLogin() {
-    document.getElementById("loginOverlay").classList.remove("hidden");
-    setTimeout(function() { document.getElementById("loginEmail").focus(); }, 100);
-}
+// ============================================================
+// LOGIN
+// ============================================================
+function abrirLogin() { document.getElementById("loginOverlay").classList.remove("hidden"); setTimeout(function() { document.getElementById("loginEmail").focus(); }, 100); }
 function fecharLogin() { document.getElementById("loginOverlay").classList.add("hidden"); }
 
 document.getElementById("loginForm").addEventListener("submit", async function(e) {
@@ -973,10 +899,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
 async function verificarSessao() {
     const s = await db.auth.getSession();
     const session = s.data.session;
-    if (!session) {
-        utilizadorAtual = null; isAdmin = false; isSuperAdmin = false;
-        mostrarPublico(); return;
-    }
+    if (!session) { utilizadorAtual = null; isAdmin = false; isSuperAdmin = false; mostrarPublico(); return; }
     utilizadorAtual = session.user;
     await verificarAdmin();
     mostrarAreaInterna();
@@ -984,8 +907,7 @@ async function verificarSessao() {
 }
 
 async function verificarAdmin() {
-    isAdmin = false;
-    isSuperAdmin = false;
+    isAdmin = false; isSuperAdmin = false;
     if (!utilizadorAtual) return;
     const r = await db.from("user_roles").select("role, tipo").eq("user_id", utilizadorAtual.id).maybeSingle();
     if (r.error) { console.error(r.error); return; }
@@ -993,47 +915,33 @@ async function verificarAdmin() {
     isSuperAdmin = isAdmin && r.data.tipo === "super_admin";
 }
 
-function actualizarVisibilidadeAdmin() {
-    document.querySelectorAll(".admin-only").forEach(function(el) {
-        el.classList.toggle("hidden", !isAdmin);
-    });
-}
+function actualizarVisibilidadeAdmin() { document.querySelectorAll(".admin-only").forEach(function(el) { el.classList.toggle("hidden", !isAdmin); }); }
 
 async function logout() {
-    pararChat();
+    pararChat(); pararNotificacoes();
     await db.auth.signOut();
     utilizadorAtual = null; isAdmin = false; isSuperAdmin = false;
     mostrarPublico();
     mostrarToast("Sessão terminada.", "success");
 }
 
-function mostrarPublico() {
-    document.getElementById("publicArea").style.display = "block";
-    document.getElementById("internalApp").classList.remove("active");
-    window.scrollTo({top: 0, behavior: "smooth"});
-}
+function mostrarPublico() { document.getElementById("publicArea").style.display = "block"; document.getElementById("internalApp").classList.remove("active"); window.scrollTo({top: 0, behavior: "smooth"}); }
 
 function mostrarAreaInterna() {
     document.getElementById("publicArea").style.display = "none";
     document.getElementById("internalApp").classList.add("active");
     const email = (utilizadorAtual && utilizadorAtual.email) || "";
     document.getElementById("currentUser").textContent = email;
-    const avatar = document.getElementById("userAvatar");
-    avatar.textContent = email.charAt(0).toUpperCase() || "U";
+    document.getElementById("userAvatar").textContent = email.charAt(0).toUpperCase() || "U";
     actualizarVisibilidadeAdmin();
     aplicarPermissoesUI();
-    if (isAdmin && !chatIniciado) {
-        chatIniciado = true;
-        setTimeout(function() { iniciarChat(); }, 500);
-    }
+    if (isAdmin && !chatIniciado) { chatIniciado = true; setTimeout(function() { iniciarChat(); }, 500); }
+    setTimeout(function() { iniciarNotificacoes(); }, 800);
 }
 
 function voltarAoPublico() { mostrarPublico(); carregarPublico(); }
 function toggleSidebar() { document.getElementById("sidebar").classList.toggle("open"); }
-function toggleMobileNav() {
-    const links = document.querySelector(".nav-links");
-    if (links) links.style.display = links.style.display === "flex" ? "none" : "flex";
-}
+function toggleMobileNav() { const links = document.querySelector(".nav-links"); if (links) links.style.display = links.style.display === "flex" ? "none" : "flex"; }
 
 function mostrarPainel(name, btn) {
     document.querySelectorAll(".panel").forEach(function(p) { p.classList.remove("active"); });
@@ -1041,26 +949,126 @@ function mostrarPainel(name, btn) {
     if (panel) panel.classList.add("active");
     document.querySelectorAll(".sidebar-nav button").forEach(function(b) { b.classList.remove("active"); });
     if (btn) btn.classList.add("active");
-    const titles = {
-        dashboard: "Painel", membros: "Membros", chat: "Chat", video: "Videochamada",
-        financas: "Finanças", transacoes: "Transações", eventos: "Eventos",
-        galeriaAdmin: "Galeria", informacoes: "Informações", meta: "Meta", backup: "Backup"
-    };
+    const titles = {dashboard:"Painel",membros:"Membros",chat:"Chat",video:"Videochamada",financas:"Finanças",transacoes:"Transações",eventos:"Eventos",galeriaAdmin:"Galeria",informacoes:"Informações",meta:"Meta",backup:"Backup"};
     document.getElementById("pageTitle").textContent = titles[name] || name;
     document.getElementById("sidebar").classList.remove("open");
-    if (name === "chat") {
-        chatWindowActive = true; chatUnreadCount = 0; actualizarBadgeChat();
-        const box = document.getElementById("chatMessages");
-        if (box) box.scrollTop = box.scrollHeight;
-    } else { chatWindowActive = false; }
+    if (name === "chat") { chatWindowActive = true; chatUnreadCount = 0; actualizarBadgeChat(); const box = document.getElementById("chatMessages"); if (box) box.scrollTop = box.scrollHeight; }
+    else { chatWindowActive = false; }
 }
 
-// ========== CHAT ==========
+// ============================================================
+// NOTIFICAÇÕES
+// ============================================================
+function togglePainelNotif() { document.getElementById("notifPanel").classList.toggle("open"); }
+
+async function iniciarNotificacoes() {
+    if (!isAdmin) return;
+    await carregarNotificacoes();
+    if (notifChannel) db.removeChannel(notifChannel);
+    notifChannel = db.channel("notif-" + utilizadorAtual.id);
+    notifChannel.on("postgres_changes", { event: "INSERT", schema: "public", table: "notificacoes", filter: "user_id=eq." + utilizadorAtual.id }, function(payload) {
+        notificacoes.unshift(payload.new);
+        renderizarNotificacoes();
+        mostrarToast(payload.new.titulo + ": " + payload.new.mensagem, "success");
+    });
+    notifChannel.subscribe();
+    verificarEstadoPush();
+}
+
+async function carregarNotificacoes() {
+    const r = await db.from("notificacoes").select("*").eq("user_id", utilizadorAtual.id).order("created_at", {ascending: false}).limit(30);
+    if (r.error) { console.error(r.error); return; }
+    notificacoes = r.data || [];
+    renderizarNotificacoes();
+}
+
+function renderizarNotificacoes() {
+    const lista = document.getElementById("notifList");
+    const badge = document.getElementById("notifCount");
+    const naoLidas = notificacoes.filter(function(n) { return !n.lida; }).length;
+    if (naoLidas > 0) { badge.textContent = naoLidas > 9 ? "9+" : naoLidas; badge.classList.remove("hidden"); }
+    else badge.classList.add("hidden");
+    if (!notificacoes.length) { lista.innerHTML = '<div class="notif-empty">Sem notificações.</div>'; return; }
+    const icons = { chat: "💬", evento: "📅", membro: "👥", transacao: "💰", galeria: "🖼️", sistema: "🔔" };
+    lista.innerHTML = notificacoes.map(function(n) {
+        const icon = icons[n.tipo] || "🔔";
+        return '<div class="notif-item ' + (n.lida ? "" : "unread") + '" onclick="abrirNotificacao(\'' + n.id + '\',\'' + (n.link || "") + '\')">'
+            + '<div class="icon">' + icon + '</div>'
+            + '<div class="info"><div class="titulo">' + escapeHtml(n.titulo) + '</div>'
+            + '<div class="msg">' + escapeHtml(n.mensagem) + '</div>'
+            + '<div class="tempo">' + tempoRelativo(n.created_at) + '</div></div></div>';
+    }).join("");
+}
+
+async function abrirNotificacao(id, link) {
+    await db.from("notificacoes").update({ lida: true }).eq("id", id);
+    const n = notificacoes.find(function(x) { return x.id === id; });
+    if (n) n.lida = true;
+    renderizarNotificacoes();
+    document.getElementById("notifPanel").classList.remove("open");
+    if (link) window.location.hash = link;
+}
+
+async function marcarTodasLidas() {
+    if (!notificacoes.filter(function(n) { return !n.lida; }).length) return;
+    await db.from("notificacoes").update({ lida: true }).eq("user_id", utilizadorAtual.id).eq("lida", false);
+    notificacoes.forEach(function(n) { n.lida = true; });
+    renderizarNotificacoes();
+    mostrarToast("Todas marcadas como lidas.", "success");
+}
+
+function pararNotificacoes() { if (notifChannel) { db.removeChannel(notifChannel); notifChannel = null; } }
+
+// ============================================================
+// PUSH
+// ============================================================
+async function verificarEstadoPush() {
+    const foot = document.getElementById("notifFoot");
+    if (!foot) return;
+    if (!("serviceWorker" in navigator) || !("PushManager" in window)) { foot.style.display = "none"; return; }
+    try {
+        const reg = await navigator.serviceWorker.getRegistration();
+        if (!reg) { foot.style.display = "block"; return; }
+        const sub = await reg.pushManager.getSubscription();
+        foot.style.display = sub ? "none" : "block";
+    } catch (e) { foot.style.display = "block"; }
+}
+
+function urlBase64ToUint8Array(base64String) {
+    const padding = "=".repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding).replace(/\-/g, "+").replace(/_/g, "/");
+    const rawData = atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; ++i) outputArray[i] = rawData.charCodeAt(i);
+    return outputArray;
+}
+
+async function activarPush() {
+    try {
+        if (!("serviceWorker" in navigator) || !("PushManager" in window)) { mostrarToast("Browser não suporta push.", "error"); return; }
+        const permissao = await Notification.requestPermission();
+        if (permissao !== "granted") { mostrarToast("Autoriza notificações.", "warning"); return; }
+        const reg = await navigator.serviceWorker.ready;
+        let sub = await reg.pushManager.getSubscription();
+        if (sub) {
+            await sub.unsubscribe();
+            sub = null;
+        }
+        sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY) });
+        const subJson = sub.toJSON();
+        const r = await db.from("push_subscriptions").upsert({ user_id: utilizadorAtual.id, endpoint: subJson.endpoint, p256dh: subJson.keys.p256dh, auth: subJson.keys.auth }, { onConflict: "endpoint" });
+        if (r.error) throw r.error;
+        mostrarToast("✅ Notificações push ativadas!", "success");
+        verificarEstadoPush();
+    } catch (error) { console.error(error); mostrarToast("Erro: " + error.message, "error"); }
+}
+
+// ============================================================
+// CHAT
+// ============================================================
 async function obterFotoDoUtilizador(email) {
     if (!email) return null;
-    if (email === (utilizadorAtual && utilizadorAtual.email) && minhaFotoCache !== null) {
-        return minhaFotoCache;
-    }
+    if (email === (utilizadorAtual && utilizadorAtual.email) && minhaFotoCache !== null) return minhaFotoCache;
     try {
         const r = await db.from("membros").select("foto_perfil").eq("email", email).maybeSingle();
         const foto = (r.data && r.data.foto_perfil) ? r.data.foto_perfil : null;
@@ -1092,23 +1100,15 @@ async function iniciarChat() {
         const txt = document.getElementById("chatStatusText");
         if (status === "SUBSCRIBED") {
             const fotoUrl = await obterFotoDoUtilizador(utilizadorAtual.email);
-            await chatChannel.track({
-                email: utilizadorAtual.email,
-                foto_url: fotoUrl,
-                online_at: new Date().toISOString()
-            });
-            dot.classList.remove("offline");
-            txt.textContent = "Ligado";
-        } else {
-            dot.classList.add("offline");
-            txt.textContent = "A ligar…";
-        }
+            await chatChannel.track({ email: utilizadorAtual.email, foto_url: fotoUrl, online_at: new Date().toISOString() });
+            dot.classList.remove("offline"); txt.textContent = "Ligado";
+        } else { dot.classList.add("offline"); txt.textContent = "A ligar…"; }
     });
 }
 
 async function carregarHistoricoChat() {
     const r = await db.from("chat_mensagens").select("*").order("created_at", { ascending: true }).limit(200);
-    if (r.error) { console.error(r.error); return; }
+    if (r.error) return;
     const box = document.getElementById("chatMessages");
     if (!box) return;
     box.innerHTML = "";
@@ -1120,53 +1120,36 @@ function adicionarMensagemChat(msg, scroll) {
     const box = document.getElementById("chatMessages");
     if (!box) return;
     const isMe = msg.sender_id === (utilizadorAtual && utilizadorAtual.id);
-
     const row = document.createElement("div");
     row.className = "chat-msg-row " + (isMe ? "me" : "other");
     row.setAttribute("data-msg-id", msg.id);
-
     const foto = safeUrl(msg.foto_url);
     const inicial = (msg.sender_email || "?").charAt(0).toUpperCase();
-
     const avatar = document.createElement("div");
     avatar.className = "chat-avatar";
     if (foto) {
         const img = document.createElement("img");
-        img.src = foto;
-        img.alt = "";
+        img.src = foto; img.alt = "";
         img.onerror = function() { img.remove(); avatar.textContent = inicial; };
         avatar.appendChild(img);
-    } else {
-        avatar.textContent = inicial;
-    }
-
+    } else avatar.textContent = inicial;
     const hora = new Date(msg.created_at).toLocaleTimeString("pt-PT", { hour: "2-digit", minute: "2-digit" });
     const msgDiv = document.createElement("div");
     msgDiv.className = "chat-msg";
-
     let html = "";
     if (!isMe) html += '<span class="sender">' + escapeHtml(msg.sender_email || "Admin") + '</span>';
     html += '<div class="msg-text">' + escapeHtml(msg.content) + '</div>';
     html += '<span class="time">' + hora + '</span>';
-    if (isSuperAdmin) {
-        html += '<button class="btn-delete-msg" title="Apagar mensagem" onclick="apagarMensagemChat(\'' + msg.id + '\')">×</button>';
-    }
+    if (isSuperAdmin) html += '<button class="btn-delete-msg" onclick="apagarMensagemChat(\'' + msg.id + '\')">×</button>';
     msgDiv.innerHTML = html;
-    row.appendChild(avatar);
-    row.appendChild(msgDiv);
+    row.appendChild(avatar); row.appendChild(msgDiv);
     box.appendChild(row);
     if (scroll) box.scrollTop = box.scrollHeight;
 }
 
 async function apagarMensagemChat(id) {
-    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
-    if (!confirm("Apagar esta mensagem?")) return;
-    const r = await db.from("chat_mensagens").delete().eq("id", id);
-    if (r.error) {
-        console.error(r.error);
-        mostrarToast("Erro ao apagar: " + r.error.message, "error");
-        return;
-    }
+    if (!isSuperAdmin || !confirm("Apagar esta mensagem?")) return;
+    await db.from("chat_mensagens").delete().eq("id", id);
     const el = document.querySelector('[data-msg-id="' + id + '"]');
     if (el) el.remove();
     mostrarToast("Mensagem apagada.", "success");
@@ -1179,136 +1162,86 @@ document.getElementById("chatForm").addEventListener("submit", async function(e)
     if (!content || !isAdmin) return;
     input.value = "";
     const foto = await obterFotoDoUtilizador(utilizadorAtual.email);
-    const r = await db.from("chat_mensagens").insert({
-        sender_id: utilizadorAtual.id,
-        sender_email: utilizadorAtual.email,
-        content: content,
-        foto_url: foto || null
-    });
-    if (r.error) {
-        console.error(r.error);
-        mostrarToast("Erro ao enviar mensagem.", "error");
-        input.value = content;
-    }
+    const r = await db.from("chat_mensagens").insert({ sender_id: utilizadorAtual.id, sender_email: utilizadorAtual.email, content: content, foto_url: foto || null });
+    if (r.error) { mostrarToast("Erro ao enviar.", "error"); input.value = content; }
 });
 
 function actualizarBadgeChat() {
     const badge = document.getElementById("chatUnread");
     if (!badge) return;
-    if (chatUnreadCount > 0) {
-        badge.textContent = chatUnreadCount > 99 ? "99+" : chatUnreadCount;
-        badge.style.display = "inline-flex";
-    } else { badge.style.display = "none"; }
+    if (chatUnreadCount > 0) { badge.textContent = chatUnreadCount > 99 ? "99+" : chatUnreadCount; badge.style.display = "inline-flex"; }
+    else badge.style.display = "none";
 }
+function pararChat() { if (chatChannel) { db.removeChannel(chatChannel); chatChannel = null; } chatIniciado = false; }
 
-function pararChat() {
-    if (chatChannel) { db.removeChannel(chatChannel); chatChannel = null; }
-    chatIniciado = false;
-}
-
-// ========== VIDEO ==========
+// ============================================================
+// VIDEO
+// ============================================================
 function entrarVideochamada() {
-    if (!isAdmin) { mostrarToast("Apenas admins.", "error"); return; }
-    const sala = (document.getElementById("videoRoomName").value || "ojv-admin")
-        .trim().toLowerCase().replace(/[^a-z0-9-]/g, "-");
+    if (!isAdmin) return;
+    const sala = (document.getElementById("videoRoomName").value || "ojv-admin").trim().toLowerCase().replace(/[^a-z0-9-]/g, "-");
     const nome = (document.getElementById("videoDisplayName").value || utilizadorAtual.email).trim();
-    if (!sala) { mostrarToast("Indica o nome da sala.", "error"); return; }
+    if (!sala) return;
     const baseUrl = "https://meet.jit.si/OJV-" + sala;
     const hash = "#userInfo.displayName=" + encodeURIComponent(nome) + "&config.prejoinPageEnabled=false";
     const isMobile = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
     if (isMobile) {
         const nova = window.open(baseUrl + hash, "_blank", "noopener,noreferrer");
-        if (!nova) { mostrarToast("Autoriza pop-ups para abrir a videochamada.", "warning"); return; }
-        mostrarToast("A abrir videochamada numa nova aba...", "success");
+        if (!nova) { mostrarToast("Autoriza pop-ups.", "warning"); return; }
+        mostrarToast("A abrir videochamada...", "success");
     } else {
         document.getElementById("videoFrame").src = baseUrl + hash;
         document.getElementById("videoContainer").classList.remove("hidden");
         document.getElementById("videoContainer").scrollIntoView({ behavior: "smooth" });
-        mostrarToast("A entrar na videochamada...", "success");
     }
 }
-function sairVideochamada() {
-    document.getElementById("videoFrame").src = "";
-    document.getElementById("videoContainer").classList.add("hidden");
-}
+function sairVideochamada() { document.getElementById("videoFrame").src = ""; document.getElementById("videoContainer").classList.add("hidden"); }
 function copiarLinkVideo() {
-    const sala = (document.getElementById("videoRoomName").value || "ojv-admin")
-        .trim().toLowerCase().replace(/[^a-z0-9-]/g, "-");
+    const sala = (document.getElementById("videoRoomName").value || "ojv-admin").trim().toLowerCase().replace(/[^a-z0-9-]/g, "-");
     const url = "https://meet.jit.si/OJV-" + sala;
-    navigator.clipboard.writeText(url).then(
-        function() { mostrarToast("Link copiado: " + url, "success"); },
-        function() { mostrarToast("Link: " + url, "warning"); }
-    );
+    navigator.clipboard.writeText(url).then(function() { mostrarToast("Link copiado: " + url, "success"); }, function() { mostrarToast("Link: " + url, "warning"); });
 }
 
-// ========== PARTILHA (Facebook, WhatsApp) ==========
+// ============================================================
+// PARTILHA
+// ============================================================
 function construirTextoEvento(e, formato) {
     const dataFmt = formatarDataBr(e.data);
     const linha1 = (formato === "whatsapp" ? "📅 *" + e.nome + "*" : "📅 " + e.nome);
-    const linhaData = "📆 " + dataFmt + (e.hora ? " às " + formatTime(e.hora) : "");
-    const linhaLocal = "📍 " + (e.local || "Local a confirmar");
     const link = window.location.origin + window.location.pathname + "#eventosPublicos";
-    const rodape = (formato === "whatsapp" ? "— Organização Jovens Visionários" : "— Organização Jovens Visionários");
-
-    let texto = linha1 + "\n\n" + linhaData + "\n" + linhaLocal + "\n\n";
+    let texto = linha1 + "\n\n📆 " + dataFmt + (e.hora ? " às " + formatTime(e.hora) : "") + "\n📍 " + (e.local || "Local a confirmar") + "\n\n";
     if (e.descricao) texto += e.descricao + "\n\n";
-    texto += "🔗 Mais informações: " + link + "\n\n" + rodape;
+    texto += "🔗 Mais informações: " + link + "\n\n— Organização Jovens Visionários";
     return texto;
 }
-
 function partilharNoFacebook(id) {
     const e = eventos.find(function(x) { return x.id === id; });
-    if (!e) { mostrarToast("Evento não encontrado.", "error"); return; }
-
+    if (!e) return;
     const texto = construirTextoEvento(e, "facebook");
-
-    navigator.clipboard.writeText(texto).then(function() {
-        mostrarToast("✅ Texto copiado! Cola no Facebook.", "success");
-    }).catch(function() {
-        prompt("Copia o texto abaixo e cola no Facebook:", texto);
-    });
-
-    setTimeout(function() {
-        window.open("https://www.facebook.com/", "_blank", "noopener,noreferrer");
-    }, 700);
+    navigator.clipboard.writeText(texto).then(function() { mostrarToast("✅ Texto copiado!", "success"); }).catch(function() { prompt("Copia:", texto); });
+    setTimeout(function() { window.open("https://www.facebook.com/", "_blank", "noopener,noreferrer"); }, 700);
 }
-
 function partilharNoWhatsApp(id) {
     const e = eventos.find(function(x) { return x.id === id; });
-    if (!e) { mostrarToast("Evento não encontrado.", "error"); return; }
-
-    const texto = construirTextoEvento(e, "whatsapp");
-    const url = "https://wa.me/?text=" + encodeURIComponent(texto);
-    window.open(url, "_blank", "noopener,noreferrer");
-    mostrarToast("A abrir WhatsApp...", "success");
+    if (!e) return;
+    window.open("https://wa.me/?text=" + encodeURIComponent(construirTextoEvento(e, "whatsapp")), "_blank", "noopener,noreferrer");
 }
 
-// ========== MEMBROS ==========
-async function carregarMembros() {
-    const r = await db.from("membros").select("*").order("fundador", {ascending: false}).order("nome", {ascending: true});
-    if (r.error) { console.error(r.error); mostrarToast("Erro ao carregar membros.", "error"); return; }
-    membros = r.data || [];
-}
-async function carregarFundadoresPublicos() {
-    const r = await db.from("membros").select("*").eq("fundador", true).order("nome", {ascending: true});
-    if (r.error) { console.error(r.error); fundadores = []; return; }
-    fundadores = r.data || [];
-}
+// ============================================================
+// MEMBROS
+// ============================================================
+async function carregarMembros() { const r = await db.from("membros").select("*").order("fundador", {ascending: false}).order("nome", {ascending: true}); if (r.error) return; membros = r.data || []; }
+async function carregarFundadoresPublicos() { const r = await db.from("membros").select("*").eq("fundador", true).order("nome", {ascending: true}); if (r.error) { fundadores = []; return; } fundadores = r.data || []; }
+
 function renderizarMembros() {
     const tbody = document.getElementById("membersTable");
-    if (!membros.length) {
-        tbody.innerHTML = '<tr><td colspan="9" class="empty-state"><p>Nenhum membro registado.</p></td></tr>';
-        return;
-    }
+    if (!membros.length) { tbody.innerHTML = '<tr><td colspan="9" class="empty-state"><p>Nenhum membro.</p></td></tr>'; return; }
     tbody.innerHTML = membros.map(function(m) {
         const foto = safeUrl(m.foto_perfil) || "logo.png";
         const fundador = m.fundador ? '<span class="badge badge-founder">Fundador</span>' : "—";
         const statusClass = m.status === "Ativo" ? "badge-active" : "badge-inactive";
-        const acoes = isSuperAdmin
-            ? '<div class="actions"><button class="btn btn-secondary btn-sm" onclick="editarMembro(\'' + m.id + '\')">Editar</button><button class="btn btn-danger btn-sm" onclick="apagarMembro(\'' + m.id + '\')">Apagar</button></div>'
-            : '';
-        return '<tr>'
-            + '<td>' + fundador + '</td>'
+        const acoes = isSuperAdmin ? '<div class="actions"><button class="btn btn-secondary btn-sm" onclick="editarMembro(\'' + m.id + '\')">Editar</button><button class="btn btn-danger btn-sm" onclick="apagarMembro(\'' + m.id + '\')">Apagar</button></div>' : '';
+        return '<tr><td>' + fundador + '</td>'
             + '<td><div class="member-mini"><img src="' + escapeHtml(foto) + '" alt=""><strong>' + escapeHtml(m.nome) + '</strong></div></td>'
             + '<td>' + escapeHtml(m.cargo || "—") + '</td>'
             + '<td>' + escapeHtml(m.bi || "—") + '</td>'
@@ -1316,29 +1249,28 @@ function renderizarMembros() {
             + '<td>' + escapeHtml(m.telefone || "—") + '</td>'
             + '<td>' + formatarDataBr(m.data_entrada || m.data_adesao) + '</td>'
             + '<td><span class="badge ' + statusClass + '">' + escapeHtml(m.status) + '</span></td>'
-            + '<td class="super-admin-col' + (isSuperAdmin ? '' : ' hidden') + '">' + acoes + '</td>'
-            + '</tr>';
+            + '<td class="super-admin-col' + (isSuperAdmin ? '' : ' hidden') + '">' + acoes + '</td></tr>';
     }).join("");
 }
+
 function renderizarFundadores() {
     const grid = document.getElementById("foundersGrid");
-    if (!fundadores.length) {
-        grid.innerHTML = '<div class="empty-state"><span class="icon">👤</span><p>Nenhum fundador publicado.</p></div>';
-        return;
-    }
+    if (!fundadores.length) { grid.innerHTML = '<div class="empty-state"><span class="icon">👤</span><p>Nenhum fundador.</p></div>'; return; }
     grid.innerHTML = fundadores.map(function(m) {
         const foto = safeUrl(m.foto_perfil) || "logo.png";
-        return '<article class="founder-card"><img class="founder-photo" src="' + escapeHtml(foto) + '" alt="' + escapeHtml(m.nome) + '"><h3>' + escapeHtml(m.nome) + '</h3><p>' + escapeHtml(m.cargo || "Fundador") + '</p></article>';
+        return '<article class="founder-card"><img class="founder-photo" src="' + escapeHtml(foto) + '" alt="' + escapeHtml(m.nome) + '"><h3>' + escapeHtml(m.nome) + '</h3><p>' + escapeHtml(m.cargo || "Fundador") + '</p>' + (m.bio_publica ? '<p class="founder-bio">' + escapeHtml(m.bio_publica) + '</p>' : '') + '</article>';
     }).join("");
 }
+
 function abrirMembroModal(id) {
-    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
+    if (!isSuperAdmin) return;
     editMemberId = id || null;
     document.getElementById("memberModal").classList.add("open");
     document.getElementById("memberForm").reset();
     document.getElementById("memberId").value = "";
     document.getElementById("memberPreview").src = "logo.png";
     document.getElementById("memberModalTitle").textContent = id ? "Editar membro" : "Novo membro";
+    document.getElementById("btnRemoverFoto").style.display = "none";
     if (id) {
         const m = membros.find(function(x) { return x.id === id; });
         if (!m) return;
@@ -1354,106 +1286,101 @@ function abrirMembroModal(id) {
         document.getElementById("memberStatus").value = m.status || "Ativo";
         document.getElementById("memberFundador").checked = !!m.fundador;
         document.getElementById("memberBio").value = m.bio_publica || "";
-        if (m.foto_perfil) document.getElementById("memberPreview").src = m.foto_perfil;
+        if (m.foto_perfil) { document.getElementById("memberPreview").src = m.foto_perfil; document.getElementById("btnRemoverFoto").style.display = "inline-flex"; }
     }
 }
 function fecharMembroModal() { document.getElementById("memberModal").classList.remove("open"); }
+
+async function removerFotoMembro() {
+    if (!isSuperAdmin) return;
+    const id = document.getElementById("memberId").value;
+    if (!id) { mostrarToast("Guarda primeiro.", "error"); return; }
+    if (!confirm("Remover a foto deste membro?")) return;
+    await db.from("membros").update({ foto_perfil: null }).eq("id", id);
+    document.getElementById("memberPreview").src = "logo.png";
+    document.getElementById("btnRemoverFoto").style.display = "none";
+    await carregarMembros(); renderizarMembros(); await carregarFundadoresPublicos(); renderizarFundadores(); atualizarDashboard();
+    minhaFotoCache = null;
+    mostrarToast("Foto removida.", "success");
+}
+
 document.getElementById("memberPhoto").addEventListener("change", function(e) {
     const file = e.target.files && e.target.files[0];
-    if (file) document.getElementById("memberPreview").src = URL.createObjectURL(file);
+    if (file) { document.getElementById("memberPreview").src = URL.createObjectURL(file); document.getElementById("btnRemoverFoto").style.display = "inline-flex"; }
 });
+
 document.getElementById("memberForm").addEventListener("submit", async function(e) {
     e.preventDefault();
-    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
+    if (!isSuperAdmin) return;
     const id = document.getElementById("memberId").value || null;
-    const aniversario = document.getElementById("memberAniversario").value;
-    const dataAdesao = document.getElementById("memberAdesao").value;
-    const dataEntrada = document.getElementById("memberEntrada").value;
     const payload = {
         nome: document.getElementById("memberNome").value.trim(),
         cargo: document.getElementById("memberCargo").value.trim(),
         bi: document.getElementById("memberBi").value.trim(),
         email: document.getElementById("memberEmail").value.trim(),
         telefone: document.getElementById("memberTelefone").value.trim(),
-        aniversario: aniversario ? dataBrParaInput(aniversario) : null,
-        data_adesao: dataAdesao ? dataBrParaInput(dataAdesao) : null,
-        data_entrada: dataEntrada ? dataBrParaInput(dataEntrada) : null,
+        aniversario: document.getElementById("memberAniversario").value ? dataBrParaInput(document.getElementById("memberAniversario").value) : null,
+        data_adesao: document.getElementById("memberAdesao").value ? dataBrParaInput(document.getElementById("memberAdesao").value) : null,
+        data_entrada: document.getElementById("memberEntrada").value ? dataBrParaInput(document.getElementById("memberEntrada").value) : null,
         status: document.getElementById("memberStatus").value,
         fundador: document.getElementById("memberFundador").checked,
         bio_publica: document.getElementById("memberBio").value.trim()
     };
     const file = document.getElementById("memberPhoto").files && document.getElementById("memberPhoto").files[0];
     if (file) {
-        if (file.size > 10 * 1024 * 1024) { mostrarToast("A foto não pode ultrapassar 10 MB.", "error"); return; }
+        if (file.size > 10 * 1024 * 1024) { mostrarToast("Foto > 10 MB.", "error"); return; }
         const path = gerarNomeArquivo(file.name);
         const up = await db.storage.from("ojv-perfis").upload(path, file, {contentType: file.type, upsert: false});
-        if (up.error) { console.error(up.error); mostrarToast("Não foi possível enviar a foto.", "error"); return; }
+        if (up.error) { mostrarToast("Erro foto.", "error"); return; }
         payload.foto_perfil = publicStorageUrl("ojv-perfis", path);
     }
     let r;
-    if (id) { r = await db.from("membros").update(payload).eq("id", id); }
-    else { r = await db.from("membros").insert(payload); }
-    if (r.error) { console.error(r.error); mostrarToast("Erro ao guardar membro: " + r.error.message, "error"); return; }
+    if (id) r = await db.from("membros").update(payload).eq("id", id);
+    else r = await db.from("membros").insert(payload);
+    if (r.error) { mostrarToast("Erro: " + r.error.message, "error"); return; }
     minhaFotoCache = null;
     fecharMembroModal();
-    await carregarMembros();
-    renderizarMembros();
-    await carregarFundadoresPublicos();
-    renderizarFundadores();
-    atualizarDashboard();
-    mostrarToast("Membro guardado com sucesso.", "success");
+    await carregarMembros(); renderizarMembros(); await carregarFundadoresPublicos(); renderizarFundadores(); atualizarDashboard();
+    mostrarToast("Membro guardado.", "success");
 });
 function editarMembro(id) { abrirMembroModal(id); }
 async function apagarMembro(id) {
     if (!isSuperAdmin) return;
     const m = membros.find(function(x) { return x.id === id; });
-    if (!m || !confirm('Apagar o membro "' + m.nome + '"?')) return;
-    const r = await db.from("membros").delete().eq("id", id);
-    if (r.error) { mostrarToast("Erro ao apagar membro.", "error"); return; }
+    if (!m || !confirm('Apagar "' + m.nome + '"?')) return;
+    await db.from("membros").delete().eq("id", id);
     minhaFotoCache = null;
-    await carregarMembros();
-    renderizarMembros();
-    await carregarFundadoresPublicos();
-    renderizarFundadores();
-    atualizarDashboard();
+    await carregarMembros(); renderizarMembros(); await carregarFundadoresPublicos(); renderizarFundadores(); atualizarDashboard();
     mostrarToast("Membro apagado.", "success");
 }
 
-// ========== EVENTOS ==========
-async function carregarEventos() {
-    const r = await db.from("eventos").select("*").order("data", {ascending: true}).order("hora", {ascending: true});
-    if (r.error) { console.error(r.error); eventos = []; return; }
-    eventos = r.data || [];
-}
+// ============================================================
+// EVENTOS
+// ============================================================
+async function carregarEventos() { const r = await db.from("eventos").select("*").order("data", {ascending: true}).order("hora", {ascending: true}); if (r.error) return; eventos = r.data || []; }
+
 function renderizarEventos() {
     const tbody = document.getElementById("eventsTable");
-    if (!eventos.length) {
-        tbody.innerHTML = '<tr><td colspan="6" class="empty-state"><p>Nenhum evento registado.</p></td></tr>';
-        return;
-    }
+    if (!eventos.length) { tbody.innerHTML = '<tr><td colspan="6" class="empty-state"><p>Nenhum evento.</p></td></tr>'; return; }
     tbody.innerHTML = eventos.map(function(e) {
         const published = e.publicado ? '<span class="badge badge-published">Sim</span>' : '<span class="badge badge-private">Não</span>';
         const statusClass = e.status === "Cancelado" ? "badge-cancel" : "badge-active";
-        const acoes = isSuperAdmin
-            ? '<div class="actions">'
-                + '<button class="btn btn-fb btn-sm" onclick="partilharNoFacebook(\'' + e.id + '\')" title="Copiar texto e abrir Facebook">📘 Partilhar</button>'
-                + '<button class="btn btn-wa btn-sm" onclick="partilharNoWhatsApp(\'' + e.id + '\')" title="Enviar por WhatsApp">📱 WhatsApp</button>'
-                + '<button class="btn btn-secondary btn-sm" onclick="editarEvento(\'' + e.id + '\')">Editar</button>'
-                + '<button class="btn btn-danger btn-sm" onclick="apagarEvento(\'' + e.id + '\')">Apagar</button>'
-              + '</div>'
-            : '';
-        return '<tr>'
-            + '<td>' + formatarDataBr(e.data) + (e.hora ? '<br><small>' + formatTime(e.hora) + '</small>' : "") + '</td>'
+        const acoes = isSuperAdmin ? '<div class="actions">'
+            + '<button class="btn btn-fb btn-sm" onclick="partilharNoFacebook(\'' + e.id + '\')">📘</button>'
+            + '<button class="btn btn-wa btn-sm" onclick="partilharNoWhatsApp(\'' + e.id + '\')">📱</button>'
+            + '<button class="btn btn-secondary btn-sm" onclick="editarEvento(\'' + e.id + '\')">Editar</button>'
+            + '<button class="btn btn-danger btn-sm" onclick="apagarEvento(\'' + e.id + '\')">Apagar</button></div>' : '';
+        return '<tr><td>' + formatarDataBr(e.data) + (e.hora ? '<br><small>' + formatTime(e.hora) + '</small>' : "") + '</td>'
             + '<td><strong>' + escapeHtml(e.nome) + '</strong></td>'
             + '<td>' + escapeHtml(e.local || "—") + '</td>'
             + '<td><span class="badge ' + statusClass + '">' + escapeHtml(e.status) + '</span></td>'
             + '<td>' + published + '</td>'
-            + '<td class="super-admin-col' + (isSuperAdmin ? '' : ' hidden') + '">' + acoes + '</td>'
-            + '</tr>';
+            + '<td class="super-admin-col' + (isSuperAdmin ? '' : ' hidden') + '">' + acoes + '</td></tr>';
     }).join("");
 }
+
 function abrirEventoModal(id) {
-    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
+    if (!isSuperAdmin) return;
     editEventId = id || null;
     document.getElementById("eventForm").reset();
     document.getElementById("eventId").value = "";
@@ -1475,14 +1402,14 @@ function abrirEventoModal(id) {
     }
 }
 function fecharEventoModal() { document.getElementById("eventModal").classList.remove("open"); }
+
 document.getElementById("eventForm").addEventListener("submit", async function(e) {
     e.preventDefault();
     if (!isSuperAdmin) return;
     const id = document.getElementById("eventId").value || null;
-    const dataEvento = document.getElementById("eventData").value;
     const payload = {
         nome: document.getElementById("eventNome").value.trim(),
-        data: dataEvento ? dataBrParaInput(dataEvento) : null,
+        data: document.getElementById("eventData").value ? dataBrParaInput(document.getElementById("eventData").value) : null,
         hora: document.getElementById("eventHora").value || null,
         local: document.getElementById("eventLocal").value.trim(),
         responsavel: document.getElementById("eventResponsavel").value.trim(),
@@ -1492,150 +1419,110 @@ document.getElementById("eventForm").addEventListener("submit", async function(e
         publicado: document.getElementById("eventPublicado").checked
     };
     let r;
-    if (id) { r = await db.from("eventos").update(payload).eq("id", id); }
-    else { r = await db.from("eventos").insert(payload); }
-    if (r.error) { console.error(r.error); mostrarToast("Erro ao guardar evento: " + r.error.message, "error"); return; }
+    if (id) r = await db.from("eventos").update(payload).eq("id", id);
+    else r = await db.from("eventos").insert(payload);
+    if (r.error) { mostrarToast("Erro: " + r.error.message, "error"); return; }
     fecharEventoModal();
-    await carregarEventos();
-    renderizarEventos();
-    renderizarEventosPublicos();
-    atualizarDashboard();
+    await carregarEventos(); renderizarEventos(); renderizarEventosPublicos(); atualizarDashboard();
     mostrarToast("Evento guardado.", "success");
 });
 function editarEvento(id) { abrirEventoModal(id); }
 async function apagarEvento(id) {
     if (!isSuperAdmin) return;
     const e = eventos.find(function(x) { return x.id === id; });
-    if (!e || !confirm('Apagar o evento "' + e.nome + '"?')) return;
-    const r = await db.from("eventos").delete().eq("id", id);
-    if (r.error) { mostrarToast("Erro ao apagar evento.", "error"); return; }
-    await carregarEventos();
-    renderizarEventos();
-    renderizarEventosPublicos();
-    atualizarDashboard();
+    if (!e || !confirm('Apagar "' + e.nome + '"?')) return;
+    await db.from("eventos").delete().eq("id", id);
+    await carregarEventos(); renderizarEventos(); renderizarEventosPublicos(); atualizarDashboard();
     mostrarToast("Evento apagado.", "success");
 }
 
-// ========== GALERIA ==========
-async function carregarGaleria() {
-    const r = await db.from("galeria").select("*").order("destaque", {ascending: false}).order("created_at", {ascending: false});
-    if (r.error) { console.error(r.error); galeria = []; return; }
-    galeria = r.data || [];
-}
-function toggleThumbnailField() {
-    const tipo = document.getElementById('galleryType').value;
-    document.getElementById('thumbnailField').style.display = tipo === 'video' ? 'block' : 'none';
-}
-document.getElementById('galleryThumbnail').addEventListener('change', function(e) {
-    const file = e.target.files && e.target.files[0];
-    const preview = document.getElementById('thumbnailPreview');
-    if (file) { preview.src = URL.createObjectURL(file); preview.style.display = 'block'; }
-    else { preview.style.display = 'none'; }
-});
+// ============================================================
+// GALERIA
+// ============================================================
+async function carregarGaleria() { const r = await db.from("galeria").select("*").order("destaque", {ascending: false}).order("created_at", {ascending: false}); if (r.error) return; galeria = r.data || []; }
+function toggleThumbnailField() { const tipo = document.getElementById('galleryType').value; document.getElementById('thumbnailField').style.display = tipo === 'video' ? 'block' : 'none'; }
+document.getElementById('galleryThumbnail').addEventListener('change', function(e) { const file = e.target.files && e.target.files[0]; const p = document.getElementById('thumbnailPreview'); if (file) { p.src = URL.createObjectURL(file); p.style.display = 'block'; } else p.style.display = 'none'; });
+
 document.getElementById("galleryForm").addEventListener("submit", async function(e) {
     e.preventDefault();
-    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
-    const titulo = document.getElementById("galleryTitle").value.trim();
+    if (!isSuperAdmin) return;
     const tipo = document.getElementById("galleryType").value;
-    const descricao = document.getElementById("galleryDescription").value.trim();
     const file = document.getElementById("galleryFile").files && document.getElementById("galleryFile").files[0];
     const externalUrl = document.getElementById("galleryUrl").value.trim();
-    const publicado = document.getElementById("galleryPublished").checked;
-    const destaque = document.getElementById("galleryFeatured").checked;
     const thumbFile = document.getElementById("galleryThumbnail").files && document.getElementById("galleryThumbnail").files[0];
     let url = externalUrl;
     let thumbnailUrl = null;
     if (tipo === 'video' && thumbFile) {
         if (!thumbFile.type.startsWith("image/")) { mostrarToast("Thumbnail deve ser imagem.", "error"); return; }
         if (thumbFile.size > 5 * 1024 * 1024) { mostrarToast("Thumbnail > 5 MB.", "error"); return; }
-        const thumbPath = gerarNomeArquivo(thumbFile.name);
-        const tu = await db.storage.from("ojv-galeria").upload(thumbPath, thumbFile, {contentType: thumbFile.type, upsert: false});
-        if (tu.error) { console.error(tu.error); mostrarToast("Erro thumbnail.", "error"); return; }
-        thumbnailUrl = publicStorageUrl("ojv-galeria", thumbPath);
+        const tp = gerarNomeArquivo(thumbFile.name);
+        const tu = await db.storage.from("ojv-galeria").upload(tp, thumbFile, {contentType: thumbFile.type, upsert: false});
+        if (tu.error) { mostrarToast("Erro thumbnail.", "error"); return; }
+        thumbnailUrl = publicStorageUrl("ojv-galeria", tp);
     }
     if (file) {
         const isImage = file.type.startsWith("image/");
         const isVideo = file.type.startsWith("video/");
-        if (tipo === "foto" && !isImage) { mostrarToast("Seleciona uma imagem.", "error"); return; }
-        if (tipo === "video" && !isVideo) { mostrarToast("Seleciona um vídeo.", "error"); return; }
+        if (tipo === "foto" && !isImage) { mostrarToast("Seleciona imagem.", "error"); return; }
+        if (tipo === "video" && !isVideo) { mostrarToast("Seleciona vídeo.", "error"); return; }
         if (file.size > 100 * 1024 * 1024) { mostrarToast("Ficheiro > 100 MB.", "error"); return; }
-        const path = gerarNomeArquivo(file.name);
-        const up = await db.storage.from("ojv-galeria").upload(path, file, {contentType: file.type, upsert: false});
-        if (up.error) { console.error(up.error); mostrarToast("Erro ao enviar.", "error"); return; }
-        url = publicStorageUrl("ojv-galeria", path);
+        const p = gerarNomeArquivo(file.name);
+        const up = await db.storage.from("ojv-galeria").upload(p, file, {contentType: file.type, upsert: false});
+        if (up.error) { mostrarToast("Erro upload.", "error"); return; }
+        url = publicStorageUrl("ojv-galeria", p);
     }
     if (!url) { mostrarToast("Escolhe ficheiro ou URL.", "error"); return; }
-    const payload = { titulo: titulo, descricao: descricao, tipo: tipo, url: url, publicado: publicado, destaque: destaque, thumbnail_url: thumbnailUrl };
-    const r = await db.from("galeria").insert(payload);
-    if (r.error) { console.error(r.error); mostrarToast("Erro: " + r.error.message, "error"); return; }
+    const r = await db.from("galeria").insert({
+        titulo: document.getElementById("galleryTitle").value.trim(),
+        descricao: document.getElementById("galleryDescription").value.trim(),
+        tipo: tipo, url: url,
+        publicado: document.getElementById("galleryPublished").checked,
+        destaque: document.getElementById("galleryFeatured").checked,
+        thumbnail_url: thumbnailUrl
+    });
+    if (r.error) { mostrarToast("Erro: " + r.error.message, "error"); return; }
     document.getElementById("galleryForm").reset();
     document.getElementById("thumbnailPreview").style.display = 'none';
-    await carregarGaleria();
-    renderizarGaleriaAdmin();
-    renderizarGaleriaPublica();
-    atualizarDashboard();
+    await carregarGaleria(); renderizarGaleriaAdmin(); renderizarGaleriaPublica(); atualizarDashboard();
     mostrarToast("Conteúdo adicionado.", "success");
 });
+
 function renderizarGaleriaAdmin() {
     const grid = document.getElementById("adminGalleryGrid");
-    if (!galeria.length) {
-        grid.innerHTML = '<div class="empty-state"><span class="icon">🖼️</span><p>Nenhum conteúdo na galeria.</p></div>';
-        return;
-    }
+    if (!galeria.length) { grid.innerHTML = '<div class="empty-state"><span class="icon">🖼️</span><p>Nenhum conteúdo.</p></div>'; return; }
     grid.innerHTML = galeria.map(function(item) {
         const url = safeUrl(item.url);
         const thumb = safeUrl(item.thumbnail_url) || url;
         let media;
-        if (item.tipo === "video") {
-            media = '<video src="' + escapeHtml(url) + '" poster="' + escapeHtml(thumb) + '" controls preload="metadata" style="width:100%;height:100%;object-fit:cover;background:#1a1a2e;"></video>';
-        } else {
-            media = '<img src="' + escapeHtml(url) + '" alt="' + escapeHtml(item.titulo) + '" style="width:100%;height:100%;object-fit:cover;">';
-        }
+        if (item.tipo === "video") media = '<video src="' + escapeHtml(url) + '" poster="' + escapeHtml(thumb) + '" controls preload="metadata" style="width:100%;height:100%;object-fit:cover;"></video>';
+        else media = '<img src="' + escapeHtml(url) + '" alt="' + escapeHtml(item.titulo) + '">';
         const btnApagar = isSuperAdmin ? '<button class="btn btn-danger btn-sm" onclick="apagarGaleria(\'' + item.id + '\')">Apagar</button>' : '';
-        return '<article class="media-admin-card">'
-            + '<div class="media-preview">' + media + '</div>'
-            + '<div class="media-admin-body">'
+        return '<article class="media-admin-card"><div class="media-preview">' + media + '</div><div class="media-admin-body">'
             + '<strong>' + escapeHtml(item.titulo) + '</strong>'
             + '<p class="text-muted" style="font-size:13px;margin:4px 0;">' + escapeHtml(item.descricao || "") + '</p>'
             + '<div style="margin:8px 0;display:flex;gap:6px;flex-wrap:wrap;">'
             + (item.publicado ? '<span class="badge badge-published">Publicado</span>' : '<span class="badge badge-private">Privado</span>')
             + (item.destaque ? '<span class="badge badge-featured">Destaque</span>' : "")
-            + '</div>'
-            + btnApagar
-            + '</div></article>';
+            + '</div>' + btnApagar + '</div></article>';
     }).join("");
 }
 async function apagarGaleria(id) {
-    if (!isSuperAdmin || !confirm("Apagar este conteúdo?")) return;
-    const r = await db.from("galeria").delete().eq("id", id);
-    if (r.error) { mostrarToast("Erro ao apagar.", "error"); return; }
-    await carregarGaleria();
-    renderizarGaleriaAdmin();
-    renderizarGaleriaPublica();
-    atualizarDashboard();
+    if (!isSuperAdmin || !confirm("Apagar?")) return;
+    await db.from("galeria").delete().eq("id", id);
+    await carregarGaleria(); renderizarGaleriaAdmin(); renderizarGaleriaPublica(); atualizarDashboard();
     mostrarToast("Conteúdo apagado.", "success");
 }
 
-// ========== INFO PÚBLICA ==========
-async function carregarInfoPublica() {
-    const r = await db.from("informacoes_publicas").select("*").eq("id", 1).maybeSingle();
-    if (r.error) { console.error(r.error); return; }
-    infoPublica = r.data;
-}
+// ============================================================
+// INFO PÚBLICA
+// ============================================================
+async function carregarInfoPublica() { const r = await db.from("informacoes_publicas").select("*").eq("id", 1).maybeSingle(); if (r.error) return; infoPublica = r.data; }
 function preencherFormularioInfo() {
     if (!infoPublica) return;
-    const map = {
-        infoNome: "nome_organizacao", infoSlogan: "slogan", infoDescricao: "descricao",
-        infoHistoria: "historia", infoMissao: "missao", infoVisao: "visao",
-        infoValores: "valores", infoEndereco: "endereco", infoTelefone: "telefone_publico",
-        infoEmail: "email_publico", infoWhatsapp: "whatsapp", infoFacebook: "facebook",
-        infoInstagram: "instagram", infoYoutube: "youtube"
-    };
-    Object.keys(map).forEach(function(id) {
-        const el = document.getElementById(id);
-        if (el) el.value = infoPublica[map[id]] || "";
-    });
+    const map = { infoNome: "nome_organizacao", infoSlogan: "slogan", infoDescricao: "descricao", infoHistoria: "historia", infoMissao: "missao", infoVisao: "visao", infoValores: "valores", infoEndereco: "endereco", infoTelefone: "telefone_publico", infoEmail: "email_publico", infoWhatsapp: "whatsapp", infoFacebook: "facebook", infoInstagram: "instagram", infoYoutube: "youtube" };
+    Object.keys(map).forEach(function(id) { const el = document.getElementById(id); if (el) el.value = infoPublica[map[id]] || ""; });
 }
+
 document.getElementById("publicInfoForm").addEventListener("submit", async function(e) {
     e.preventDefault();
     if (!isSuperAdmin) return;
@@ -1658,16 +1545,15 @@ document.getElementById("publicInfoForm").addEventListener("submit", async funct
     };
     payload.id = 1;
     const r = await db.from("informacoes_publicas").upsert(payload);
-    if (r.error) { console.error(r.error); mostrarToast("Erro ao guardar.", "error"); return; }
-    await carregarInfoPublica();
-    renderizarInfoPublica();
-    preencherFormularioInfo();
+    if (r.error) { mostrarToast("Erro.", "error"); return; }
+    await carregarInfoPublica(); renderizarInfoPublica(); preencherFormularioInfo();
     mostrarToast("Informações atualizadas.", "success");
 });
+
 function renderizarInfoPublica() {
     if (!infoPublica) return;
     const nome = infoPublica.nome_organizacao || "O.J.V. - Organização Jovens Visionários";
-    const slogan = infoPublica.slogan || "Jovens com visão, unidos para transformar.";
+    const slogan = infoPublica.slogan || "Jovens com visão.";
     document.getElementById("publicBrandName").textContent = nome;
     document.getElementById("publicBrandSlogan").textContent = slogan;
     document.getElementById("heroTitle").textContent = nome;
@@ -1682,37 +1568,27 @@ function renderizarInfoPublica() {
     document.getElementById("contactAddress").textContent = "Endereço: " + (infoPublica.endereco || "Não definido.");
     document.getElementById("contactPhone").textContent = "Telefone: " + (infoPublica.telefone_publico || "Não definido.");
     const emailBox = document.getElementById("contactEmail");
-    if (infoPublica.email_publico) {
-        emailBox.innerHTML = 'E-mail: <a href="mailto:' + escapeHtml(infoPublica.email_publico) + '">' + escapeHtml(infoPublica.email_publico) + '</a>';
-    } else { emailBox.textContent = "E-mail: Não definido."; }
+    if (infoPublica.email_publico) emailBox.innerHTML = 'E-mail: <a href="mailto:' + escapeHtml(infoPublica.email_publico) + '">' + escapeHtml(infoPublica.email_publico) + '</a>';
+    else emailBox.textContent = "E-mail: Não definido.";
     const socials = [];
-    [["Facebook", infoPublica.facebook], ["Instagram", infoPublica.instagram], ["YouTube", infoPublica.youtube]].forEach(function(pair) {
-        const clean = safeUrl(pair[1]);
-        if (clean) socials.push('<a href="' + escapeHtml(clean) + '" target="_blank" rel="noopener">' + pair[0] + '</a>');
-    });
-    if (infoPublica.whatsapp) {
-        const w = String(infoPublica.whatsapp).replace(/\D/g, "");
-        if (w) socials.push('<a href="https://wa.me/' + escapeHtml(w) + '" target="_blank" rel="noopener">WhatsApp</a>');
-    }
-    document.getElementById("contactSocial").innerHTML = socials.length ? "Redes sociais: " + socials.join(" · ") : "Redes sociais não definidas.";
+    [["Facebook", infoPublica.facebook], ["Instagram", infoPublica.instagram], ["YouTube", infoPublica.youtube]].forEach(function(p) { const clean = safeUrl(p[1]); if (clean) socials.push('<a href="' + escapeHtml(clean) + '" target="_blank" rel="noopener">' + p[0] + '</a>'); });
+    if (infoPublica.whatsapp) { const w = String(infoPublica.whatsapp).replace(/\D/g, ""); if (w) socials.push('<a href="https://wa.me/' + escapeHtml(w) + '" target="_blank" rel="noopener">WhatsApp</a>'); }
+    document.getElementById("contactSocial").innerHTML = socials.length ? "Redes: " + socials.join(" · ") : "Redes não definidas.";
 }
 
-// ========== META ==========
-async function carregarMetas() {
-    const r = await db.from("metas").select("*").order("created_at", {ascending: false}).limit(1).maybeSingle();
-    if (r.error) { console.error(r.error); metas = []; return; }
-    metas = r.data ? [r.data] : [];
-    renderizarMeta();
-}
+// ============================================================
+// META
+// ============================================================
+async function carregarMetas() { const r = await db.from("metas").select("*").order("created_at", {ascending: false}).limit(1).maybeSingle(); if (r.error) { metas = []; return; } metas = r.data ? [r.data] : []; renderizarMeta(); }
 function renderizarMeta() {
     const meta = metas[0];
     const valor = Number((meta && meta.valor) || 0);
     const guardado = Number((meta && meta.guardado) || 0);
     document.getElementById("metaValor").value = valor;
     document.getElementById("metaGuardado").value = guardado;
-    const percentual = valor > 0 ? Math.min(100, (guardado / valor) * 100) : 0;
-    document.getElementById("metaProgress").style.width = percentual + "%";
-    document.getElementById("metaPercentual").textContent = percentual.toFixed(1) + "% — " + formatMoney(guardado) + " / " + formatMoney(valor);
+    const p = valor > 0 ? Math.min(100, (guardado / valor) * 100) : 0;
+    document.getElementById("metaProgress").style.width = p + "%";
+    document.getElementById("metaPercentual").textContent = p.toFixed(1) + "% — " + formatMoney(guardado) + " / " + formatMoney(valor);
 }
 async function guardarMeta() {
     if (!isSuperAdmin) return;
@@ -1722,141 +1598,95 @@ async function guardarMeta() {
     let r;
     if (atual) r = await db.from("metas").update({valor: valor, guardado: guardado}).eq("id", atual.id);
     else r = await db.from("metas").insert({valor: valor, guardado: guardado});
-    if (r.error) { mostrarToast("Erro ao guardar meta.", "error"); return; }
-    await carregarMetas();
-    mostrarToast("Meta atualizada.", "success");
+    if (r.error) return;
+    await carregarMetas(); mostrarToast("Meta atualizada.", "success");
 }
 async function redefinirMeta() {
-    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
-    if (!confirm("Redefinir a meta para zero. Continuar?")) return;
+    if (!isSuperAdmin || !confirm("Redefinir?")) return;
     const atual = metas[0];
-    let r;
-    if (atual) r = await db.from("metas").update({ valor: 0, guardado: 0 }).eq("id", atual.id);
-    else r = await db.from("metas").insert({ valor: 0, guardado: 0 });
-    if (r.error) { mostrarToast("Erro: " + r.error.message, "error"); return; }
-    await carregarMetas();
-    renderizarFinancas();
+    if (atual) await db.from("metas").update({valor: 0, guardado: 0}).eq("id", atual.id);
+    else await db.from("metas").insert({valor: 0, guardado: 0});
+    await carregarMetas(); renderizarFinancas();
     mostrarToast("Meta redefinida.", "success");
 }
 
-// ========== TRANSAÇÕES ==========
-async function carregarTransacoes() {
-    const r = await db.from("transacoes").select("*").order("data", {ascending: false}).order("created_at", {ascending: false});
-    if (r.error) { console.error(r.error); transacoes = []; return; }
-    transacoes = r.data || [];
-}
+// ============================================================
+// TRANSAÇÕES
+// ============================================================
+async function carregarTransacoes() { const r = await db.from("transacoes").select("*").order("data", {ascending: false}).order("created_at", {ascending: false}); if (r.error) return; transacoes = r.data || []; }
 function renderizarTransacoes() {
     const tbody = document.getElementById("transactionsTable");
-    if (!transacoes.length) {
-        tbody.innerHTML = '<tr><td colspan="6" class="empty-state"><p>Nenhuma transação registada.</p></td></tr>';
-        return;
-    }
+    if (!transacoes.length) { tbody.innerHTML = '<tr><td colspan="6" class="empty-state"><p>Nenhuma transação.</p></td></tr>'; return; }
     tbody.innerHTML = transacoes.map(function(t) {
         const acoes = isSuperAdmin ? '<button class="btn btn-danger btn-sm" onclick="apagarTransacao(\'' + t.id + '\')">Apagar</button>' : '';
-        return '<tr>'
-            + '<td>' + formatarDataBr(t.data) + '</td>'
-            + '<td>' + (t.tipo === "Entrada" ? "Entrada" : "Saída") + '</td>'
-            + '<td>' + escapeHtml(t.categoria || "—") + '</td>'
-            + '<td><strong>' + formatMoney(t.valor) + '</strong></td>'
-            + '<td>' + escapeHtml(t.descricao || "—") + '</td>'
-            + '<td class="super-admin-col' + (isSuperAdmin ? '' : ' hidden') + '">' + acoes + '</td>'
-            + '</tr>';
+        return '<tr><td>' + formatarDataBr(t.data) + '</td><td>' + (t.tipo === "Entrada" ? "Entrada" : "Saída") + '</td><td>' + escapeHtml(t.categoria || "—") + '</td><td><strong>' + formatMoney(t.valor) + '</strong></td><td>' + escapeHtml(t.descricao || "—") + '</td><td class="super-admin-col' + (isSuperAdmin ? '' : ' hidden') + '">' + acoes + '</td></tr>';
     }).join("");
 }
-function abrirTransacaoModal() {
-    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
-    document.getElementById("transactionForm").reset();
-    document.getElementById("transactionModal").classList.add("open");
-}
+function abrirTransacaoModal() { if (!isSuperAdmin) return; document.getElementById("transactionForm").reset(); document.getElementById("transactionModal").classList.add("open"); }
 function fecharTransacaoModal() { document.getElementById("transactionModal").classList.remove("open"); }
+
 document.getElementById("transactionForm").addEventListener("submit", async function(e) {
     e.preventDefault();
     if (!isSuperAdmin) return;
-    const dataTransacao = document.getElementById("transactionData").value;
-    const payload = {
+    const r = await db.from("transacoes").insert({
         tipo: document.getElementById("transactionTipo").value,
         categoria: document.getElementById("transactionCategoria").value.trim(),
         valor: Number(document.getElementById("transactionValor").value) || 0,
         descricao: document.getElementById("transactionDescricao").value.trim(),
-        data: dataTransacao ? dataBrParaInput(dataTransacao) : null
-    };
-    const r = await db.from("transacoes").insert(payload);
-    if (r.error) { mostrarToast("Erro ao guardar.", "error"); return; }
-    fecharTransacaoModal();
-    await carregarTransacoes();
-    renderizarTransacoes();
-    renderizarFinancas();
+        data: document.getElementById("transactionData").value ? dataBrParaInput(document.getElementById("transactionData").value) : null
+    });
+    if (r.error) return;
+    fecharTransacaoModal(); await carregarTransacoes(); renderizarTransacoes(); renderizarFinancas();
     mostrarToast("Transação registada.", "success");
 });
-async function apagarTransacao(id) {
-    if (!isSuperAdmin || !confirm("Apagar esta transação?")) return;
-    const r = await db.from("transacoes").delete().eq("id", id);
-    if (r.error) { mostrarToast("Erro.", "error"); return; }
-    await carregarTransacoes();
-    renderizarTransacoes();
-    renderizarFinancas();
-}
+async function apagarTransacao(id) { if (!isSuperAdmin || !confirm("Apagar?")) return; await db.from("transacoes").delete().eq("id", id); await carregarTransacoes(); renderizarTransacoes(); renderizarFinancas(); }
 
-// ========== FINANÇAS ==========
+// ============================================================
+// FINANÇAS
+// ============================================================
 function renderizarFinancas() {
-    let entradas = 0, saidas = 0;
-    transacoes.forEach(function(t) {
-        if (t.tipo === "Entrada") entradas += Number(t.valor || 0);
-        if (t.tipo === "Saída") saidas += Number(t.valor || 0);
-    });
-    const saldo = entradas - saidas;
-    const meta = Number((metas[0] && metas[0].valor) || 0);
-    document.getElementById("financeEntradas").textContent = formatMoney(entradas);
-    document.getElementById("financeSaidas").textContent = formatMoney(saidas);
-    document.getElementById("financeSaldo").textContent = formatMoney(saldo);
-    document.getElementById("financeMeta").textContent = formatMoney(meta);
+    let e = 0, s = 0;
+    transacoes.forEach(function(t) { if (t.tipo === "Entrada") e += Number(t.valor || 0); if (t.tipo === "Saída") s += Number(t.valor || 0); });
+    document.getElementById("financeEntradas").textContent = formatMoney(e);
+    document.getElementById("financeSaidas").textContent = formatMoney(s);
+    document.getElementById("financeSaldo").textContent = formatMoney(e - s);
+    document.getElementById("financeMeta").textContent = formatMoney((metas[0] && metas[0].valor) || 0);
 }
 
-// ========== PÚBLICO ==========
+// ============================================================
+// PÚBLICO
+// ============================================================
 function renderizarGaleriaPublica() {
     const grid = document.getElementById("publicGallery");
-    const publicItems = galeria.filter(function(item) { return item.publicado; });
-    if (!publicItems.length) {
-        grid.innerHTML = '<div class="empty-state"><span class="icon">🖼️</span><p>Nenhum conteúdo publicado.</p></div>';
-        return;
-    }
+    const publicItems = galeria.filter(function(i) { return i.publicado; });
+    if (!publicItems.length) { grid.innerHTML = '<div class="empty-state"><span class="icon">🖼️</span><p>Nenhum conteúdo.</p></div>'; return; }
     grid.innerHTML = publicItems.map(function(item) {
         const url = safeUrl(item.url);
         if (!url) return "";
         const thumb = safeUrl(item.thumbnail_url) || url;
         let media;
-        if (item.tipo === "video") {
-            media = '<video src="' + escapeHtml(url) + '" poster="' + escapeHtml(thumb) + '" controls preload="metadata" playsinline style="width:100%;height:100%;object-fit:cover;background:#1a1a2e;"></video>';
-        } else {
-            media = '<img src="' + escapeHtml(url) + '" alt="' + escapeHtml(item.titulo) + '" loading="lazy" style="width:100%;height:100%;object-fit:cover;">';
-        }
-        return '<article class="gallery-card">'
-            + '<div class="gallery-media">' + media + '</div>'
-            + '<div class="gallery-body"><h3>' + escapeHtml(item.titulo) + '</h3>'
-            + (item.descricao ? '<p>' + escapeHtml(item.descricao) + '</p>' : "")
-            + '</div></article>';
+        if (item.tipo === "video") media = '<video src="' + escapeHtml(url) + '" poster="' + escapeHtml(thumb) + '" controls preload="metadata" playsinline style="width:100%;height:100%;object-fit:cover;"></video>';
+        else media = '<img src="' + escapeHtml(url) + '" alt="' + escapeHtml(item.titulo) + '" loading="lazy">';
+        return '<article class="gallery-card"><div class="gallery-media">' + media + '</div><div class="gallery-body"><h3>' + escapeHtml(item.titulo) + '</h3>' + (item.descricao ? '<p>' + escapeHtml(item.descricao) + '</p>' : "") + '</div></article>';
     }).join("");
 }
+
 function renderizarEventosPublicos() {
     const container = document.getElementById("publicEvents");
     const publicEvents = eventos.filter(function(e) { return e.publicado; }).sort(function(a, b) { return String(a.data).localeCompare(String(b.data)); });
-    if (!publicEvents.length) {
-        container.innerHTML = '<div class="empty-state"><span class="icon">📅</span><p>Não existem eventos públicos neste momento.</p></div>';
-        return;
-    }
+    if (!publicEvents.length) { container.innerHTML = '<div class="empty-state"><span class="icon">📅</span><p>Sem eventos públicos.</p></div>'; return; }
     container.innerHTML = publicEvents.map(function(e) {
-        const dataBr = formatarDataBr(e.data);
-        return '<article class="event-public">'
-            + '<div class="event-date">' + dataBr + (e.hora ? '<br><small>' + formatTime(e.hora) + '</small>' : "") + '</div>'
-            + '<div style="flex:1;">'
-            + '<h3>' + escapeHtml(e.nome) + '</h3>'
+        return '<article class="event-public"><div class="event-date">' + formatarDataBr(e.data) + (e.hora ? '<br><small>' + formatTime(e.hora) + '</small>' : "") + '</div>'
+            + '<div style="flex:1;"><h3>' + escapeHtml(e.nome) + '</h3>'
             + (e.local ? '<p><strong>Local:</strong> ' + escapeHtml(e.local) + '</p>' : "")
             + (e.descricao ? '<p>' + escapeHtml(e.descricao) + '</p>' : "")
             + '</div></article>';
     }).join("");
 }
 
-// ========== DASHBOARD ==========
+// ============================================================
+// DASHBOARD
+// ============================================================
 function atualizarDashboard() {
     document.getElementById("statMembros").textContent = membros.length;
     document.getElementById("statFundadores").textContent = membros.filter(function(m) { return m.fundador; }).length;
@@ -1864,39 +1694,25 @@ function atualizarDashboard() {
     document.getElementById("statGaleria").textContent = galeria.filter(function(g) { return g.publicado; }).length;
     const tbody = document.getElementById("dashboardMembers");
     const items = membros.slice(0, 10);
-    if (!items.length) {
-        tbody.innerHTML = '<tr><td colspan="4" class="empty-state"><p>Nenhum membro registado.</p></td></tr>';
-        return;
-    }
+    if (!items.length) { tbody.innerHTML = '<tr><td colspan="4" class="empty-state"><p>Nenhum membro.</p></td></tr>'; return; }
     tbody.innerHTML = items.map(function(m) {
-        return '<tr>'
-            + '<td>' + (m.fundador ? '<span class="badge badge-founder">Fundador</span>' : "—") + '</td>'
-            + '<td>' + escapeHtml(m.nome) + '</td>'
-            + '<td>' + escapeHtml(m.cargo || "—") + '</td>'
-            + '<td>' + escapeHtml(m.status) + '</td>'
-            + '</tr>';
+        return '<tr><td>' + (m.fundador ? '<span class="badge badge-founder">Fundador</span>' : "—") + '</td><td>' + escapeHtml(m.nome) + '</td><td>' + escapeHtml(m.cargo || "—") + '</td><td>' + escapeHtml(m.status) + '</td></tr>';
     }).join("");
 }
 
-// ========== BACKUP ==========
+// ============================================================
+// BACKUP
+// ============================================================
 async function exportarBackup() {
-    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
+    if (!isSuperAdmin) return;
     try {
-        const results = await Promise.all([
-            db.from("membros").select("*"),
-            db.from("eventos").select("*"),
-            db.from("galeria").select("*"),
-            db.from("informacoes_publicas").select("*"),
-            db.from("transacoes").select("*"),
-            db.from("metas").select("*")
+        const res = await Promise.all([
+            db.from("membros").select("*"), db.from("eventos").select("*"), db.from("galeria").select("*"),
+            db.from("informacoes_publicas").select("*"), db.from("transacoes").select("*"), db.from("metas").select("*"),
+            db.from("chat_mensagens").select("*")
         ]);
-        const backup = {
-            schema_version: 3, app: "O.J.V.", exported_at: new Date().toISOString(),
-            data: {
-                membros: results[0].data || [], eventos: results[1].data || [], galeria: results[2].data || [],
-                informacoes_publicas: results[3].data || [], transacoes: results[4].data || [], metas: results[5].data || []
-            }
-        };
+        const backup = { schema_version: 4, app: "O.J.V.", exported_at: new Date().toISOString(),
+            data: { membros: res[0].data || [], eventos: res[1].data || [], galeria: res[2].data || [], informacoes_publicas: res[3].data || [], transacoes: res[4].data || [], metas: res[5].data || [], chat_mensagens: res[6].data || [] } };
         const blob = new Blob([JSON.stringify(backup, null, 2)], {type: "application/json"});
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -1904,13 +1720,14 @@ async function exportarBackup() {
         document.body.appendChild(a); a.click(); document.body.removeChild(a);
         URL.revokeObjectURL(url);
         mostrarToast("Backup criado.", "success");
-    } catch (error) { console.error(error); mostrarToast("Erro: " + error.message, "error"); }
+    } catch (error) { mostrarToast("Erro: " + error.message, "error"); }
 }
+
 async function restaurarBackup() {
-    if (!isSuperAdmin) { mostrarToast("Sem permissão.", "error"); return; }
+    if (!isSuperAdmin) return;
     const file = document.getElementById("backupFile").files && document.getElementById("backupFile").files[0];
-    if (!file) { mostrarToast("Seleciona um ficheiro JSON.", "error"); return; }
-    if (!confirm("ATENÇÃO: substitui os dados actuais. Continuar?")) return;
+    if (!file) { mostrarToast("Seleciona JSON.", "error"); return; }
+    if (!confirm("Substitui os dados. Continuar?")) return;
     try {
         const text = await file.text();
         const backup = JSON.parse(text);
@@ -1921,71 +1738,59 @@ async function restaurarBackup() {
         await db.from("galeria").delete().neq("id", "00000000-0000-0000-0000-000000000000");
         await db.from("transacoes").delete().neq("id", "00000000-0000-0000-0000-000000000000");
         await db.from("metas").delete().neq("id", "00000000-0000-0000-0000-000000000000");
-        if (Array.isArray(d.membros) && d.membros.length) await db.from("membros").insert(d.membros);
-        if (Array.isArray(d.eventos) && d.eventos.length) await db.from("eventos").insert(d.eventos);
-        if (Array.isArray(d.galeria) && d.galeria.length) await db.from("galeria").insert(d.galeria);
-        if (Array.isArray(d.transacoes) && d.transacoes.length) await db.from("transacoes").insert(d.transacoes);
-        if (Array.isArray(d.metas) && d.metas.length) await db.from("metas").insert(d.metas);
-        if (Array.isArray(d.informacoes_publicas) && d.informacoes_publicas.length) {
+        await db.from("chat_mensagens").delete().neq("id", "00000000-0000-0000-0000-000000000000");
+        if (d.membros && d.membros.length) await db.from("membros").insert(d.membros);
+        if (d.eventos && d.eventos.length) await db.from("eventos").insert(d.eventos);
+        if (d.galeria && d.galeria.length) await db.from("galeria").insert(d.galeria);
+        if (d.transacoes && d.transacoes.length) await db.from("transacoes").insert(d.transacoes);
+        if (d.metas && d.metas.length) await db.from("metas").insert(d.metas);
+        if (d.chat_mensagens && d.chat_mensagens.length) {
+            const msgs = d.chat_mensagens.map(function(m) { return { id: m.id, sender_id: m.sender_id || null, sender_email: m.sender_email, content: m.content, foto_url: m.foto_url || null, created_at: m.created_at }; });
+            await db.from("chat_mensagens").insert(msgs);
+        }
+        if (d.informacoes_publicas && d.informacoes_publicas.length) {
             const info = Object.assign({ id: 1 }, d.informacoes_publicas[0]);
             await db.from("informacoes_publicas").upsert(info);
         }
-        await carregarTudo();
-        preencherFormularioInfo();
+        await carregarTudo(); preencherFormularioInfo();
         mostrarToast("Backup restaurado.", "success");
-    } catch (error) { console.error(error); mostrarToast("Erro: " + error.message, "error"); }
+    } catch (error) { mostrarToast("Erro: " + error.message, "error"); }
 }
 
-// ========== RENDER GERAL ==========
+// ============================================================
+// RENDER GERAL
+// ============================================================
 function renderizarTudo() {
-    renderizarMembros();
-    renderizarEventos();
-    renderizarTransacoes();
-    renderizarFinancas();
-    renderizarMeta();
-    renderizarGaleriaAdmin();
-    renderizarInfoPublica();
-    preencherFormularioInfo();
-    atualizarDashboard();
+    renderizarMembros(); renderizarEventos(); renderizarTransacoes(); renderizarFinancas(); renderizarMeta();
+    renderizarGaleriaAdmin(); renderizarInfoPublica(); preencherFormularioInfo(); atualizarDashboard();
     carregarFundadoresPublicos().then(function() { renderizarFundadores(); });
-    renderizarGaleriaPublica();
-    renderizarEventosPublicos();
+    renderizarGaleriaPublica(); renderizarEventosPublicos();
     aplicarPermissoesUI();
 }
 async function carregarTudo() {
-    await Promise.all([
-        carregarMembros(), carregarEventos(), carregarGaleria(),
-        carregarTransacoes(), carregarMetas(), carregarInfoPublica()
-    ]);
+    await Promise.all([carregarMembros(), carregarEventos(), carregarGaleria(), carregarTransacoes(), carregarMetas(), carregarInfoPublica()]);
     renderizarTudo();
 }
 async function carregarPublico() {
-    await Promise.all([
-        carregarInfoPublica(), carregarFundadoresPublicos(),
-        carregarGaleriaPublica(), carregarEventosPublicos()
-    ]);
-    renderizarInfoPublica();
-    renderizarFundadores();
-    renderizarGaleriaPublica();
-    renderizarEventosPublicos();
+    await Promise.all([carregarInfoPublica(), carregarFundadoresPublicos(), carregarGaleriaPublica(), carregarEventosPublicos()]);
+    renderizarInfoPublica(); renderizarFundadores(); renderizarGaleriaPublica(); renderizarEventosPublicos();
 }
-async function carregarGaleriaPublica() {
-    const r = await db.from("galeria").select("*").eq("publicado", true).order("destaque", {ascending: false}).order("created_at", {ascending: false});
-    if (r.error) { console.error(r.error); return; }
-    galeria = r.data || [];
-}
-async function carregarEventosPublicos() {
-    const r = await db.from("eventos").select("*").eq("publicado", true).order("data", {ascending: true});
-    if (r.error) { console.error(r.error); return; }
-    eventos = r.data || [];
-}
+async function carregarGaleriaPublica() { const r = await db.from("galeria").select("*").eq("publicado", true).order("destaque", {ascending: false}).order("created_at", {ascending: false}); if (r.error) return; galeria = r.data || []; }
+async function carregarEventosPublicos() { const r = await db.from("eventos").select("*").eq("publicado", true).order("data", {ascending: true}); if (r.error) return; eventos = r.data || []; }
 
-document.querySelectorAll(".modal").forEach(function(modal) {
-    modal.addEventListener("click", function(e) { if (e.target === modal) modal.classList.remove("open"); });
-});
-
-// ========== INICIALIZAÇÃO ==========
+document.querySelectorAll(".modal").forEach(function(modal) { modal.addEventListener("click", function(e) { if (e.target === modal) modal.classList.remove("open"); }); });
 document.getElementById("footerYear").textContent = new Date().getFullYear();
+
+// Registo do Service Worker
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function() {
+        navigator.serviceWorker.register("sw.js").then(function(reg) {
+            console.log("[App] SW registado:", reg.scope);
+        }).catch(function(err) {
+            console.warn("[App] Erro SW:", err);
+        });
+    });
+}
 
 document.addEventListener('DOMContentLoaded', async function() {
     inicializarMascarasData();
@@ -1996,17 +1801,14 @@ document.addEventListener('DOMContentLoaded', async function() {
 db.auth.onAuthStateChange(async function(event, session) {
     if (event === "SIGNED_OUT") {
         utilizadorAtual = null; isAdmin = false; isSuperAdmin = false;
-        pararChat();
+        pararChat(); pararNotificacoes();
         mostrarPublico();
     }
     if (event === "SIGNED_IN" && session) {
         utilizadorAtual = session.user;
         await verificarAdmin();
         mostrarAreaInterna();
-        if (isAdmin && !chatIniciado) {
-            chatIniciado = true;
-            setTimeout(function() { iniciarChat(); }, 500);
-        }
+        if (isAdmin && !chatIniciado) { chatIniciado = true; setTimeout(function() { iniciarChat(); }, 500); }
     }
 });
 </script>
